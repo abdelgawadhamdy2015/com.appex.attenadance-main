@@ -1,0 +1,9 @@
+flutter_native_splash:
+
+  color: "#ffffff"
+  image: images/small_apex.png
+
+  android_12:
+    image: images/small_apex.png
+    color: "#ffffff"
+  
