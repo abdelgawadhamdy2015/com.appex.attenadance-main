@@ -18,7 +18,7 @@ import '../../featchers/login/data/repo/login_repo.dart';
 import '../../featchers/login/logic/cubit/login_cubit.dart';
 import '../networking/api_service.dart';
 import '../networking/dio_factory.dart';
-import '../networking/signalr_service.dart';
+import '../networking/signal_r_service.dart';
 
 final getIt = GetIt.instance;
 
