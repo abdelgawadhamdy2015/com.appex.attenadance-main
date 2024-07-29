@@ -13,10 +13,12 @@ import 'package:ttech_attendance/featchers/request_form/date/repo/request_repo.d
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
 
+import '../../featchers/auth/auth_cubit.dart';
 import '../../featchers/login/data/repo/login_repo.dart';
 import '../../featchers/login/logic/cubit/login_cubit.dart';
-import '../neworking/api_service.dart';
-import '../neworking/dio_factory.dart';
+import '../networking/api_service.dart';
+import '../networking/dio_factory.dart';
+import '../networking/signalr_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -64,4 +66,7 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<SendAttendanceCubit>(
     () => SendAttendanceCubit(getIt()),
   );
+
+  getIt.registerSingleton<SignalRService>(SignalRService());
+  getIt.registerFactory(() => AuthCubit(getIt<SignalRService>()));
 }

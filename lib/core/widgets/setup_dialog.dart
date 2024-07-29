@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
-import 'package:ttech_attendance/core/neworking/api_constants.dart';
+import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 

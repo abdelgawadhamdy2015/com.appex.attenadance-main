@@ -38,7 +38,6 @@ class LoginScreenState extends State<LoginScreen> {
   LoginScreenState({required this.changeLanguage});
 @override
   void initState()  {
-    // TODO: implement initState
     super.initState();
     // final authProvider = Provider.of<AuthProvider>(context);
     // authProvider.clearToken();

@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     getSavedValue();
     Future.delayed(const Duration(seconds: 3), () {
       login
-          ? context.pushReplacementNamed(Routes.attendaceScreen)
+          ? context.pushReplacementNamed(Routes.homeScreen)
           : context.pushReplacementNamed(Routes.loginScreen);
     });
   }
