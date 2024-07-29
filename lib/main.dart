@@ -23,6 +23,7 @@ import 'package:ttech_attendance/generated/l10n.dart';
 
 import 'core/di/dependancy_injection.dart';
 import 'core/routing/routes.dart';
+import 'featchers/auth/auth_cubit.dart';
 import 'featchers/home/logic/cubit/home_cubit.dart';
 import 'featchers/login/logic/cubit/login_cubit.dart';
 import 'featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
@@ -131,13 +132,14 @@ class _MyAppState extends State<MyApp> {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<HomeCubit>(),
-            child: HomeScreen(
-              changeLanguage: _changeLanguage,
-            ),
-          ),
-        );
+          builder: (_) =>MultiBlocProvider(providers: [
+    BlocProvider(
+    create: (context) => getIt<HomeCubit>()),
+            BlocProvider(create: (context) => getIt<AuthCubit>()..connect()),
+
+          ], child: HomeScreen(changeLanguage: _changeLanguage)));
+
+
       case Routes.performancePanelScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(

@@ -1,8 +1,8 @@
 import 'package:ttech_attendance/featchers/request_form/date/models/all_vaccations_model.dart';
 
-import '../../../../core/neworking/api_error_handler.dart';
-import '../../../../core/neworking/api_result.dart';
-import '../../../../core/neworking/api_service.dart';
+import '../../../../core/networking/api_error_handler.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/api_service.dart';
 
 class AllVaccationsRepo {
   final ApiService _apiService;

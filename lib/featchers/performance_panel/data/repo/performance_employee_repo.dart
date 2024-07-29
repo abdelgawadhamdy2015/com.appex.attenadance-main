@@ -1,8 +1,8 @@
-import 'package:ttech_attendance/core/neworking/api_result.dart';
-import 'package:ttech_attendance/core/neworking/api_service.dart';
+import 'package:ttech_attendance/core/networking/api_result.dart';
+import 'package:ttech_attendance/core/networking/api_service.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_model.dart';
 
-import '../../../../core/neworking/api_error_handler.dart';
+import '../../../../core/networking/api_error_handler.dart';
 import '../models/performance_employee_response.dart';
 
 class PerformanceEmployeeRepo {

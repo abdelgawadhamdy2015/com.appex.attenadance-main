@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar_tablet.dart';
@@ -19,6 +21,7 @@ import 'package:ttech_attendance/featchers/home/ui/widgets/quick_access_tablet.d
 import 'package:ttech_attendance/featchers/home/ui/widgets/welcome_widget.dart';
 import 'package:ttech_attendance/featchers/home/ui/widgets/welcome_widget_tablet.dart';
 
+import '../../auth/auth_cubit.dart';
 import 'widgets/attendance_log.dart';
 import 'widgets/events_approvals.dart';
 import 'widgets/quick_access.dart';
@@ -57,75 +60,83 @@ class _HomeScreenState extends State<HomeScreen> {
       body: OfflineBuilderWidget(
         child: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const HeaderBlockListener(),
+            child: BlocListener<AuthCubit,AuthState>(
 
-                BlocBuilder<HomeCubit, HomeState>(
-                  builder: (context, state) {
-                    if (state is Loading) {
-                      return  const HomeShimmer();
-                    }
-                      return Padding(
-                        key: context.read<HomeCubit>().formKey,
-                        padding: EdgeInsets.all(20.0.h),
-                        child: Column(
-                          children: [
-                            verticalSpacing(
-                                MediaQuery.of(context).size.height * .01),
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ? const WelcomeWidget()
-                                : const WelcomeWidgetTablet(),
-                            verticalSpacing(
-                                MediaQuery.of(context).size.height * .01),
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ? const AttendanceLog()
-                                : const AttendanceLogTablet(),
-                            verticalSpacing(
-                                MediaQuery.of(context).size.height * .01),
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ? const QuickAccess()
-                                : const QuickAccessTablet(),
-                            verticalSpacing(
-                                MediaQuery.of(context).size.height * .01),
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ? const EventsApprovals()
-                                : const EventsApprovalsTablet(),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Spacer(),
-                                  SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.width * .1,
-                                    width:
-                                        MediaQuery.of(context).size.height * .1,
-                                    child: FloatingActionButton(
-                                      backgroundColor: Colors.blue,
-                                      onPressed: () {},
-                                      child: Icon(
-                                        Icons.add,
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                .05,
+              listener: (context, state) {
+                if (state is AuthLoggedOut) {
+                  context.pushReplacementNamed(Routes.loginScreen);
+                }
+              },
+              child: Column(
+                children: [
+                  const HeaderBlockListener(),
+
+                  BlocBuilder<HomeCubit, HomeState>(
+                    builder: (context, state) {
+                      if (state is Loading) {
+                        return  const HomeShimmer();
+                      }
+                        return Padding(
+                          key: context.read<HomeCubit>().formKey,
+                          padding: EdgeInsets.all(20.0.h),
+                          child: Column(
+                            children: [
+                              verticalSpacing(
+                                  MediaQuery.of(context).size.height * .01),
+                              ResponsiveBreakpoints.of(context).isMobile
+                                  ? const WelcomeWidget()
+                                  : const WelcomeWidgetTablet(),
+                              verticalSpacing(
+                                  MediaQuery.of(context).size.height * .01),
+                              ResponsiveBreakpoints.of(context).isMobile
+                                  ? const AttendanceLog()
+                                  : const AttendanceLogTablet(),
+                              verticalSpacing(
+                                  MediaQuery.of(context).size.height * .01),
+                              ResponsiveBreakpoints.of(context).isMobile
+                                  ? const QuickAccess()
+                                  : const QuickAccessTablet(),
+                              verticalSpacing(
+                                  MediaQuery.of(context).size.height * .01),
+                              ResponsiveBreakpoints.of(context).isMobile
+                                  ? const EventsApprovals()
+                                  : const EventsApprovalsTablet(),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Spacer(),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width * .1,
+                                      width:
+                                          MediaQuery.of(context).size.height * .1,
+                                      child: FloatingActionButton(
+                                        backgroundColor: Colors.blue,
+                                        onPressed: () {},
+                                        child: Icon(
+                                          Icons.add,
+                                          size:
+                                              MediaQuery.of(context).size.height *
+                                                  .05,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.menu_open_sharp,
-                                    size:
-                                        MediaQuery.of(context).size.height * .1,
-                                    color: Colors.blue,
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      );
-                    }
+                                    const Spacer(),
+                                    Icon(
+                                      Icons.menu_open_sharp,
+                                      size:
+                                          MediaQuery.of(context).size.height * .1,
+                                      color: Colors.blue,
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                        );
+                      }
 
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

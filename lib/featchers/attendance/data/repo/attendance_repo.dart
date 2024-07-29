@@ -1,7 +1,8 @@
-import 'package:ttech_attendance/core/neworking/api_error_handler.dart';
-import 'package:ttech_attendance/core/neworking/api_result.dart';
-import 'package:ttech_attendance/core/neworking/api_service.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
+
+import '../../../../core/networking/api_error_handler.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/api_service.dart';
 
 class AttendanceRepo {
   ApiService apiService;
