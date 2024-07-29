@@ -49,6 +49,17 @@ class _AttendanceScreen extends State<AttendanceScreen> {
 
   String token = '';
 
+
+  @override
+  void dispose() {
+
+
+    _mapController!.dispose();
+    _notesController.dispose();
+    context.read<AttendanceCubit>().close();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();

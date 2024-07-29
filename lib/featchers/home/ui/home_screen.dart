@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
@@ -36,16 +38,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String token = "";
+  String token='';
+
+
+
+
 
   @override
   void initState() {
     super.initState();
     getToken();
+
   }
 
   @override
   Widget build(BuildContext context) {
+    context.read<AuthCubit>().login();
     return Scaffold(
       appBar: ResponsiveBreakpoints.of(context).isMobile
           ? MyAppBar(
@@ -63,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: BlocListener<AuthCubit,AuthState>(
 
               listener: (context, state) {
-                if (state is AuthLoggedOut) {
+                if (ApiConstants.dioExceptionType==DioExceptionType.connectionTimeout) {
                   context.pushReplacementNamed(Routes.loginScreen);
                 }
               },
@@ -147,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
   getToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     token = preferences.getString(myToken)!;
+    context.read<AuthCubit>().login();
     setState(() {
       getHeader(context);
     });

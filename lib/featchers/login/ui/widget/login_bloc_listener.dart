@@ -14,6 +14,7 @@ import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/login/data/models/login_response.dart';
 import 'package:ttech_attendance/featchers/login/logic/cubit/login_state.dart';
 
+import '../../../../core/networking/signal_r_service.dart';
 import '../../logic/cubit/login_cubit.dart';
 
 class LoginBlocListener extends StatefulWidget {
@@ -67,6 +68,7 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
               ApiConstants.authToken=response.data!.authToken!.token!;
               await authProvider.setToken(response.data!.authToken!.token!);
               ApiConstants.authToken=response.data!.authToken!.token!;
+              ApiConstants.signalRService.startConnection(response.data!.authToken!.token!);
               context.pushReplacementNamed(Routes.homeScreen);
                } else {
               context.pop();
