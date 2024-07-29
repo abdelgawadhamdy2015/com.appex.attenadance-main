@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/methods.dart';
-import 'package:ttech_attendance/core/widgets/my_shimmer.dart';
+import 'package:ttech_attendance/core/shimmer_widgets/my_shimmer.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_state.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/send_attendance_cubit.dart';
@@ -38,11 +38,11 @@ class _AttendanceBoard extends State<TestAttendanceBord> {
           if (state is Loading) {
             return  Column(
               children: [
-                ShimmerWidget.circular(width: 30,height: 30,)
+                const ShimmerWidget.circular(width: 30,height: 30,)
                 , verticalSpacing(10),
-                ShimmerWidget.rectangular(height: 400),
-                ShimmerWidget.rectangular(height: 400),
-                ShimmerWidget.rectangular(height: 400)
+                const ShimmerWidget.rectangular(height: 400),
+                const ShimmerWidget.rectangular(height: 400),
+                const ShimmerWidget.rectangular(height: 400)
               ],
             );
           }

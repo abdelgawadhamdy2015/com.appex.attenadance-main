@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 BlocBuilder<HomeCubit, HomeState>(
                   builder: (context, state) {
                     if (state is Loading) {
-                      return  HomeShimmer();
+                      return  const HomeShimmer();
                     }
                       return Padding(
                         key: context.read<HomeCubit>().formKey,

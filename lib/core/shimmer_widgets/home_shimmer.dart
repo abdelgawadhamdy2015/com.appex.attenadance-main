@@ -4,9 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../generated/l10n.dart';
 import '../helpers/methods.dart';
 import '../theming/text_styles.dart';
-import '../widgets/my_shimmer.dart';
+import 'my_shimmer.dart';
 
 class HomeShimmer extends StatelessWidget{
+  const HomeShimmer({super.key});
+
   @override
   Widget build(BuildContext context) {
 

@@ -275,9 +275,6 @@ class RequestFormScreenState extends State<RequestFormScreen> {
     }
   }
 
-  void cleare() {
-    setState(() {
-      notesController.clear();
-    });
-  }
+
+
 }

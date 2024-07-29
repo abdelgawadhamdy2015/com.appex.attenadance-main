@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
+import 'package:ttech_attendance/core/shimmer_widgets/departures_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
@@ -24,17 +25,11 @@ class _PerformanceBlockListener extends State<PerformanceBlockListener> {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            showDialog(
-                context: context,
-                builder: (context) => const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.greenAccent,
-                      ),
-                    ));
+          const  DeparturesShimmer();
           },
           success: (performanceResponse) async {
             PerformanceEmployeeResponse response = performanceResponse;
-            context.pop();
+
 
             response.result == 1
                 ? context.read<PerformanceEmployeeCubit>().datalist =

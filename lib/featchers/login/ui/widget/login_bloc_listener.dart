@@ -64,10 +64,11 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
 
             if (response.result == 1) {
               prefs.setString(myToken, response.data!.authToken!.token!);
-              context.pushReplacementNamed(Routes.attendaceScreen);
               ApiConstants.authToken=response.data!.authToken!.token!;
               await authProvider.setToken(response.data!.authToken!.token!);
-            } else {
+              ApiConstants.authToken=response.data!.authToken!.token!;
+              context.pushReplacementNamed(Routes.homeScreen);
+               } else {
               context.pop();
               setupDialogState(context, response.errorMessageAr!, true);
             }

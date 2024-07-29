@@ -12,10 +12,10 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/shimmer_widgets/attendance_shimmer.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/my_drawer.dart';
-import 'package:ttech_attendance/core/widgets/my_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
@@ -135,18 +135,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                   BlocBuilder<AttendanceCubit, AttendanceState>(
                     builder: (context, state) {
                       if (state is Loading) {
-                        return  Column(
-                           children:[
-                        ShimmerWidget.rectangular(height: 100.h),
-                              verticalSpacing(10),
-                             ShimmerWidget.rectangular(height: 100.h),
-                             verticalSpacing(10),
-
-                             ShimmerWidget.rectangular(height: 100.h),
-                             verticalSpacing(10),
-
-                             ShimmerWidget.rectangular(height: 100.h)
-                           ] );
+                        return const AttendanceShimmer();
                       }
                       return Padding(
                         key: context.read<AttendanceCubit>().formKey,
