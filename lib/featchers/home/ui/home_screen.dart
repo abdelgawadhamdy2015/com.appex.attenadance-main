@@ -5,6 +5,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar_tablet.dart';
 import 'package:ttech_attendance/core/widgets/my_drawer.dart';
@@ -63,11 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 BlocBuilder<HomeCubit, HomeState>(
                   builder: (context, state) {
                     if (state is Loading) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.greenAccent,
-                        ),
-                      );
+                      return  HomeShimmer();
                     }
                       return Padding(
                         key: context.read<HomeCubit>().formKey,

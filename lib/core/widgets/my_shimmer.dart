@@ -1,72 +1,41 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
-class CustomShimmer extends StatefulWidget {
-  static CustomShimmerState? of(BuildContext context) {
-    return context.findAncestorStateOfType<CustomShimmerState>();
-  }
+class ShimmerWidget extends StatelessWidget {
+  final double width;
+  final double height;
+  final ShapeBorder shapeBorder;
 
-  static const _shimmerGradient = LinearGradient(
-    colors: [
-      Color(0xFFEBEBF4),
-      Color(0xFFAF2D2D),
-      Color(0xFFEBEBF4),
-    ],
-    stops: [
-      0.1,
-      0.3,
-      0.4,
-    ],
-    begin: Alignment(-1.0, -0.3),
-    end: Alignment(1.0, 0.3),
-    tileMode: TileMode.clamp,
-  );
+  const ShimmerWidget.rectangular({
+    this.width = double.infinity,
+    required this.height,
+  }) : this.shapeBorder = const RoundedRectangleBorder();
 
-  const CustomShimmer({
-    super.key,
-    this.linearGradient = _shimmerGradient,
-    this.child,
+  const ShimmerWidget.circular({
+    required this.width,
+    required this.height,
+    this.shapeBorder = const CircleBorder(),
   });
-
-  final LinearGradient linearGradient;
-  final Widget? child;
-
-  @override
-  CustomShimmerState createState() => CustomShimmerState();
-}
-
-class CustomShimmerState extends State<CustomShimmer> {
-
-  LinearGradient get gradient => LinearGradient(
-      colors: widget.linearGradient.colors,
-      stops: widget.linearGradient.stops,
-      begin: widget.linearGradient.begin,
-      end: widget.linearGradient.end
-  );
-
-  bool get isSized {
-    if (context.findRenderObject() == null) {
-      return false;
-    }
-    return (context.findRenderObject() as RenderBox).hasSize;
-  }
-
-  Size get size {
-    if (context.findRenderObject() == null) {
-      return const Size(0, 0);
-    }
-    return (context.findRenderObject() as RenderBox).size;
-  }
-
-  Offset getDescendantOffset({
-    required RenderBox descendant,
-    Offset offset = Offset.zero,
-  }) {
-    final shimmerBox = context.findRenderObject() as RenderBox;
-    return descendant.localToGlobal(offset, ancestor: shimmerBox);
-  }
 
   @override
   Widget build(BuildContext context) {
-    return widget.child ?? const SizedBox();
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey,
+        highlightColor: Colors.white,
+
+        child: Container(
+          width: width,
+          height: height,
+          decoration: ShapeDecoration(
+            color: Colors.grey.shade400,
+            shape: shapeBorder,
+          ),
+        ),
+      ),
+    );
   }
 }
