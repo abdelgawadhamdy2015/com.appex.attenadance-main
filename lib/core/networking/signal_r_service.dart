@@ -1,16 +1,21 @@
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'package:signalr_core/signalr_core.dart';
+import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/networking/api_error_model.dart';
+import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 
 class SignalRService {
   HubConnection? hubConnection;
-
+  BuildContext context;
+SignalRService(this.context);
   Future<void> startConnection(String token) async {
    try{
      hubConnection = HubConnectionBuilder().withUrl(
-       '${ApiConstants.apiBaseUrl}NotificationHub',
+       'http://192.168.1.253:60/NotificationHub',
        HttpConnectionOptions(
          accessTokenFactory: () async => token,
        ),
@@ -19,11 +24,15 @@ class SignalRService {
      await hubConnection?.start();
      hubConnection!.on("LogoutNotification",(message){
      ApiConstants.dioExceptionType=DioExceptionType.connectionTimeout;
-        print(message);
+
+        List? listMessage= message;
+        Map<String ,dynamic> map =listMessage!.first;
+      ApiConstants.dioExceptionType= DioExceptionType.badResponse;
+     ApiErrorModel apiErrorModel=ApiErrorModel.fromJson(map);
+        setupDialogState(context,Intl.defaultLocale==arabic? apiErrorModel.errorMessageAr!: apiErrorModel.errorMessageEn!, true);
      });
-     print('SignalR Connected');
    }catch (error){
-     print( "SignalR connection error :  ${error.toString()}");
+    setupDialogState(context, error.toString(), true);
    }
   }
 

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 
 class ApiConstants {
   static const String apiBaseUrl = "http://192.168.1.253:60/";
@@ -15,7 +14,6 @@ class ApiConstants {
   static const String sendAttendance =
       "api/HR/EmployeeFingerprints/CheckValidEmployeeFingerprint";
   static  String authToken = "";
-  static SignalRService signalRService =SignalRService();
   static DioExceptionType dioExceptionType=DioExceptionType.badCertificate;
 }
 

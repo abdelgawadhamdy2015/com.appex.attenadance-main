@@ -31,6 +31,7 @@ class LoginBlocListener extends StatefulWidget {
 }
 
 class _LoginBlocListenerState extends State<LoginBlocListener> {
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +40,8 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
   }
   @override
   Widget build(BuildContext context) {
+    var signalRService =SignalRService(context);
+
     final authProvider = Provider.of<AuthProvider>(context);
 
     return BlocListener<LoginCubit, LoginState>(
@@ -68,7 +71,7 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
               ApiConstants.authToken=response.data!.authToken!.token!;
               await authProvider.setToken(response.data!.authToken!.token!);
               ApiConstants.authToken=response.data!.authToken!.token!;
-              ApiConstants.signalRService.startConnection(response.data!.authToken!.token!);
+            signalRService.startConnection(response.data!.authToken!.token!);
               context.pushReplacementNamed(Routes.homeScreen);
                } else {
               context.pop();
