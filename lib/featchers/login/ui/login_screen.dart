@@ -39,6 +39,7 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    // delete token from shared preference
     clearToken();
   }
 
