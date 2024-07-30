@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -21,38 +20,30 @@ class LoginBlocListener extends StatefulWidget {
   final bool rememberMe;
 
   final Function(Locale) changeLanguage;
+
   const LoginBlocListener(
-      {super.key, required this.rememberMe, required this.changeLanguage});
+      {super.key,  required this.rememberMe, required this.changeLanguage});
 
   @override
   State<LoginBlocListener> createState() => _LoginBlocListenerState();
-
-
 }
 
 class _LoginBlocListenerState extends State<LoginBlocListener> {
 
-  @override
-  void initState() {
-    super.initState();
-    // TODO: implement initState
-    ApiConstants.dioExceptionType=DioExceptionType.unknown;
-  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    var signalRService =SignalRService(context);
 
     final authProvider = Provider.of<AuthProvider>(context);
-
+    SignalRService signalRService =SignalRService(context);
     return BlocListener<LoginCubit, LoginState>(
       listenWhen: (previous, current) =>
           current is Loading || current is Success || current is Error,
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-
-
-
             showDialog(
                 context: context,
                 builder: (context) => const Center(
@@ -68,12 +59,12 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
 
             if (response.result == 1) {
               prefs.setString(myToken, response.data!.authToken!.token!);
-              ApiConstants.authToken=response.data!.authToken!.token!;
+              ApiConstants.authToken = response.data!.authToken!.token!;
               await authProvider.setToken(response.data!.authToken!.token!);
-              ApiConstants.authToken=response.data!.authToken!.token!;
-            signalRService.startConnection(response.data!.authToken!.token!);
+              ApiConstants.authToken = response.data!.authToken!.token!;
+              signalRService.startConnection(response.data!.authToken!.token!);
               context.pushReplacementNamed(Routes.homeScreen);
-               } else {
+            } else {
               context.pop();
               setupDialogState(context, response.errorMessageAr!, true);
             }

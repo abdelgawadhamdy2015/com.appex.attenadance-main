@@ -22,6 +22,7 @@ class LoginScreen extends StatefulWidget {
 
   const LoginScreen({super.key, required this.changeLanguage});
 
+
   @override
   LoginScreenState createState() =>
       // ignore: no_logic_in_create_state
@@ -31,28 +32,25 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
   String selectedLanguage = 'English';
-  bool circaleLoadFlag = false;
-  bool lang = true;
-  bool languageButtonPressed = false;
   final Function(Locale) changeLanguage;
+
   LoginScreenState({required this.changeLanguage});
-@override
-  void initState()  {
+
+  @override
+  void initState() {
     super.initState();
-    // final authProvider = Provider.of<AuthProvider>(context);
-    // authProvider.clearToken();
+    // delete token from shared preference
     clearToken();
+  }
 
-}
 
-clearToken() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.clear();
+  clearToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
 
-}
   @override
   Widget build(BuildContext context) {
-
 
     return ResponsiveBreakpoints.of(context).isMobile
         ? Scaffold(
@@ -228,6 +226,7 @@ clearToken() async{
                                 ),
                               ),
                               LoginBlocListener(
+
                                 rememberMe: rememberMe,
                                 changeLanguage: widget.changeLanguage,
                               ),
@@ -247,5 +246,11 @@ clearToken() async{
     if (context.read<LoginCubit>().formKey.currentState!.validate()) {
       context.read<LoginCubit>().emitLoginStates();
     }
+  }
+
+  @override
+  void dispose() {
+    //context.read<LoginCubit>().close();
+    super.dispose();
   }
 }

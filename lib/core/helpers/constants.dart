@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class Constatnts {
+class Constants {
   String language = "English";
   String getLanguage() {
     return language;

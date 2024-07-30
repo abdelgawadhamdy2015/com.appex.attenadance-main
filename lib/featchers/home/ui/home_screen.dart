@@ -38,7 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
+  @override
+  void dispose() {
 
+    super.dispose();
+  }
 
   @override
   void initState() {
