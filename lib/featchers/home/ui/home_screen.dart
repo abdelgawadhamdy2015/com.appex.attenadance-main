@@ -33,12 +33,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String token = "";
+  String token='';
+//late AuthProvider authProvider;
+
+
+
+  @override
+  void dispose() {
+
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
+   // signalRService.startConnection(ApiConstants.authToken);
+    // authProvider = Provider.of<AuthProvider>(context);
+
     getToken();
+
   }
 
   @override
@@ -57,85 +70,89 @@ class _HomeScreenState extends State<HomeScreen> {
       body: OfflineBuilderWidget(
         child: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const HeaderBlockListener(),
 
-                BlocBuilder<HomeCubit, HomeState>(
-                  builder: (context, state) {
-                    if (state is Loading) {
-                      return  HomeShimmer();
-                    }
-                      return Padding(
-                        key: context.read<HomeCubit>().formKey,
-                        padding: EdgeInsets.all(20.0.h),
-                        child: Column(
-                          children: [
-                            verticalSpacing(
-                                MediaQuery.of(context).size.height * .01),
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ? const WelcomeWidget()
-                                : const WelcomeWidgetTablet(),
-                            verticalSpacing(
-                                MediaQuery.of(context).size.height * .01),
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ? const AttendanceLog()
-                                : const AttendanceLogTablet(),
-                            verticalSpacing(
-                                MediaQuery.of(context).size.height * .01),
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ? const QuickAccess()
-                                : const QuickAccessTablet(),
-                            verticalSpacing(
-                                MediaQuery.of(context).size.height * .01),
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ? const EventsApprovals()
-                                : const EventsApprovalsTablet(),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Spacer(),
-                                  SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.width * .1,
-                                    width:
-                                        MediaQuery.of(context).size.height * .1,
-                                    child: FloatingActionButton(
-                                      backgroundColor: Colors.blue,
-                                      onPressed: () {},
-                                      child: Icon(
-                                        Icons.add,
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                .05,
+              child: Column(
+                children: [
+                  const HeaderBlockListener(),
+
+                  BlocBuilder<HomeCubit, HomeState>(
+                    builder: (context, state) {
+                      if (state is Loading) {
+                        return  const HomeShimmer();
+                      }
+                        return Padding(
+                          key: context.read<HomeCubit>().formKey,
+                          padding: EdgeInsets.all(20.0.h),
+                          child: Column(
+                            children: [
+                              verticalSpacing(
+                                  MediaQuery.of(context).size.height * .01),
+                              ResponsiveBreakpoints.of(context).isMobile
+                                  ? const WelcomeWidget()
+                                  : const WelcomeWidgetTablet(),
+                              verticalSpacing(
+                                  MediaQuery.of(context).size.height * .01),
+                              ResponsiveBreakpoints.of(context).isMobile
+                                  ? const AttendanceLog()
+                                  : const AttendanceLogTablet(),
+                              verticalSpacing(
+                                  MediaQuery.of(context).size.height * .01),
+                              ResponsiveBreakpoints.of(context).isMobile
+                                  ? const QuickAccess()
+                                  : const QuickAccessTablet(),
+                              verticalSpacing(
+                                  MediaQuery.of(context).size.height * .01),
+                              ResponsiveBreakpoints.of(context).isMobile
+                                  ? const EventsApprovals()
+                                  : const EventsApprovalsTablet(),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Spacer(),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width * .1,
+                                      width:
+                                          MediaQuery.of(context).size.height * .1,
+                                      child: FloatingActionButton(
+                                        backgroundColor: Colors.blue,
+                                        onPressed: () {},
+                                        child: Icon(
+                                          Icons.add,
+                                          size:
+                                              MediaQuery.of(context).size.height *
+                                                  .05,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.menu_open_sharp,
-                                    size:
-                                        MediaQuery.of(context).size.height * .1,
-                                    color: Colors.blue,
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      );
-                    }
+                                    const Spacer(),
+                                    Icon(
+                                      Icons.menu_open_sharp,
+                                      size:
+                                          MediaQuery.of(context).size.height * .1,
+                                      color: Colors.blue,
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                        );
+                      }
 
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+
   }
 
   getToken() async {
+
     SharedPreferences preferences = await SharedPreferences.getInstance();
     token = preferences.getString(myToken)!;
+   // context.read<AuthCubit>().login();
     setState(() {
       getHeader(context);
     });

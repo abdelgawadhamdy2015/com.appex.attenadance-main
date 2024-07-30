@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/methods.dart';
 import 'package:ttech_attendance/core/helpers/print_transactions.dart';
+import 'package:ttech_attendance/core/shimmer_widgets/departures_shimmer.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
@@ -208,7 +209,7 @@ class _PerformancePanel extends State<PerformancePanel> {
                           builder: (context, state) {
                             if (state is Loading) {
                               return const Center(
-                                  child: CircularProgressIndicator());
+                                  child: DeparturesShimmer());
                             } else if (state is Success) {
                               days = context
                                   .read<PerformanceEmployeeCubit>()
@@ -221,13 +222,7 @@ class _PerformancePanel extends State<PerformancePanel> {
                                 key: context
                                     .read<PerformanceEmployeeCubit>()
                                     .formKey,
-                                itemCount: context
-                                    .read<PerformanceEmployeeCubit>()
-                                    .datalist
-                                    .first
-                                    .employees!
-                                    .first
-                                    .days!
+                                itemCount: days
                                     .length,
                                 itemBuilder: (context, index) {
                                   return Card(
@@ -236,9 +231,11 @@ class _PerformancePanel extends State<PerformancePanel> {
                                         children: [
                                           const Spacer(),
                                           Text(
+                                            days[index].date!=null?
+
                                             Intl.defaultLocale == arabic
-                                                ? "${context.read<PerformanceEmployeeCubit>().datalist.first.employees!.first.days![index].date!.day} ${context.read<PerformanceEmployeeCubit>().datalist.first.employees!.first.days![index].dayAr!}"
-                                                : "${context.read<PerformanceEmployeeCubit>().datalist.first.employees!.first.days![index].date!.day} ${context.read<PerformanceEmployeeCubit>().datalist.first.employees!.first.days![index].dayEn!}",
+                                                ? "${days[index].date!.day} ${days[index].dayAr!}"
+                                                : "${days[index].date!.day} ${days[index].dayEn!}":"",
                                             style:
                                                 TextStyles.font12black54Reguler,
                                           ),
@@ -274,14 +271,9 @@ class _PerformancePanel extends State<PerformancePanel> {
                                               const Icon(Icons.move_down_sharp)
                                             ],
                                           ),
-                                          Text(context
-                                              .read<PerformanceEmployeeCubit>()
-                                              .datalist
-                                              .first
-                                              .employees!
-                                              .first
-                                              .days![index]
-                                              .shift1TimeIn!),
+                                          Text(
+                                              days[index]
+                                              .shift1TimeIn?? "" ),
                                           verticalSpacing(MediaQuery.of(context)
                                                   .size
                                                   .height *
@@ -299,14 +291,8 @@ class _PerformancePanel extends State<PerformancePanel> {
                                               const Icon(Icons.move_up)
                                             ],
                                           ),
-                                          Text(context
-                                              .read<PerformanceEmployeeCubit>()
-                                              .datalist
-                                              .first
-                                              .employees!
-                                              .first
-                                              .days![index]
-                                              .shift1TimeOut!),
+                                          Text(days[index]
+                                              .shift1TimeOut??""),
                                           verticalSpacing(MediaQuery.of(context)
                                                   .size
                                                   .height *
@@ -325,15 +311,8 @@ class _PerformancePanel extends State<PerformancePanel> {
                                             ],
                                           ),
                                           Text(
-                                              context
-                                                  .read<
-                                                      PerformanceEmployeeCubit>()
-                                                  .datalist
-                                                  .first
-                                                  .employees!
-                                                  .first
-                                                  .days![index]
-                                                  .workingTime!,
+                                              days[index]
+                                                  .workingTime??"",
                                               style: TextStyles
                                                   .font12black54Reguler),
                                         ],

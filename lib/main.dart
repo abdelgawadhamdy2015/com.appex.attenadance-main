@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
-import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart';
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
 import 'package:ttech_attendance/featchers/forget_password/forget_password_screen.dart';
@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale(arabic);
 
   _MyAppState();
+
   void _changeLanguage(Locale locale) {
     setState(() {
       _locale = locale;
@@ -131,13 +132,10 @@ class _MyAppState extends State<MyApp> {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<HomeCubit>(),
-            child: HomeScreen(
-              changeLanguage: _changeLanguage,
-            ),
-          ),
-        );
+            builder: (_) => MultiBlocProvider(providers: [
+                  BlocProvider(create: (context) => getIt<HomeCubit>()),
+                ], child: HomeScreen(changeLanguage: _changeLanguage)));
+
       case Routes.performancePanelScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(

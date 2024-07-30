@@ -6,7 +6,6 @@ part of 'login_request_body.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: unused_element
 LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(
       username: json['username'] as String,
       password: json['password'] as String,
