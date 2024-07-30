@@ -192,11 +192,5 @@ class _AttendanceScreen extends State<AttendanceScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    _mapController!.dispose();
-    _notesController.dispose();
 
-    super.dispose();
-  }
 }
