@@ -1,14 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/methods.dart';
-import 'package:ttech_attendance/core/networking/api_constants.dart';
-import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar_tablet.dart';
@@ -23,7 +19,6 @@ import 'package:ttech_attendance/featchers/home/ui/widgets/quick_access_tablet.d
 import 'package:ttech_attendance/featchers/home/ui/widgets/welcome_widget.dart';
 import 'package:ttech_attendance/featchers/home/ui/widgets/welcome_widget_tablet.dart';
 
-import '../../auth/auth_cubit.dart';
 import 'widgets/attendance_log.dart';
 import 'widgets/events_approvals.dart';
 import 'widgets/quick_access.dart';
@@ -39,6 +34,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String token='';
+//late AuthProvider authProvider;
 
 
 
@@ -47,13 +43,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+   // signalRService.startConnection(ApiConstants.authToken);
+    // authProvider = Provider.of<AuthProvider>(context);
+
     getToken();
 
   }
 
   @override
   Widget build(BuildContext context) {
-    context.read<AuthCubit>().login();
     return Scaffold(
       appBar: ResponsiveBreakpoints.of(context).isMobile
           ? MyAppBar(
@@ -68,13 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: OfflineBuilderWidget(
         child: SafeArea(
           child: SingleChildScrollView(
-            child: BlocListener<AuthCubit,AuthState>(
 
-              listener: (context, state) {
-                if (ApiConstants.dioExceptionType==DioExceptionType.connectionTimeout) {
-                  context.pushReplacementNamed(Routes.loginScreen);
-                }
-              },
               child: Column(
                 children: [
                   const HeaderBlockListener(),
@@ -148,14 +140,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-      ),
-    );
+      );
+
   }
 
   getToken() async {
+
     SharedPreferences preferences = await SharedPreferences.getInstance();
     token = preferences.getString(myToken)!;
-    context.read<AuthCubit>().login();
+   // context.read<AuthCubit>().login();
     setState(() {
       getHeader(context);
     });
