@@ -2,8 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
+		<key>io.flutter.embedded_views_preview</key>
+		<true/>
+		<key>GMSApiKey</key>
+		<string>AIzaSyDcOtmHQ11CTjw_s6DFXH8dwFCOux6CYr8</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>نص الرسالة هنا</string>
+		<string>We need your location to show your position on the map.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>We need your location to show your position on the map.</string>
+
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>

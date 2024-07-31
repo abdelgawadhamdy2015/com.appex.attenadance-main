@@ -60,12 +60,9 @@ class _MyAppBarState extends State<MyAppBar> {
               color: Colors.white,
             ),
             // horozintalSpacing(MediaQuery.of(context).size.width * .05),
-            FittedBox(
-              fit: BoxFit.cover,
-              child: Image.asset(
-                "images/smaller_apex.png",
-                width: MediaQuery.of(context).size.width * .15,
-              ),
+            Image.asset(
+              "images/smaller_apex.png",
+              width: MediaQuery.of(context).size.width * .15,
             ),
             const Spacer(),
             const Icon(Icons.notifications_none_outlined),
