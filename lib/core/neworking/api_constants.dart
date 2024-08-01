@@ -13,8 +13,11 @@ class ApiConstants {
       "api/HR/AttendLeavingDashboard/MobileHeader";
   static const String sendAttendance =
       "api/HR/EmployeeFingerprints/CheckValidEmployeeFingerprint";
-  static  String authToken = "";
-  static DioExceptionType dioExceptionType=DioExceptionType.badCertificate;
+  static String authToken = "";
+  static late double latitude;
+  static late double longitude;
+
+  static DioExceptionType dioExceptionType = DioExceptionType.badCertificate;
 }
 
 class ApiErrors {

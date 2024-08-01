@@ -39,11 +39,11 @@ class _AttendanceBoard extends State<TestAttendanceBord> {
           if (state is Loading) {
             return  Column(
               children: [
-                ShimmerWidget.circular(width: 30,height: 30,)
+                const ShimmerWidget.circular(width: 30,height: 30,)
                 , verticalSpacing(10),
-                ShimmerWidget.rectangular(height: 400),
-                ShimmerWidget.rectangular(height: 400),
-                ShimmerWidget.rectangular(height: 400)
+                const ShimmerWidget.rectangular(height: 400),
+                const ShimmerWidget.rectangular(height: 400),
+                const ShimmerWidget.rectangular(height: 400)
               ],
             );
           }
@@ -72,7 +72,7 @@ class _AttendanceBoard extends State<TestAttendanceBord> {
                         shiftType: data.shiftType!,) : Container(),
                   
                   
-                     data.shift1_TimeIn!=null&& data.shift1_TimeOut!=null&& data.shift2_TimeIn != null &&
+                      data.shift1_TimeIn!=null&& data.shift1_TimeOut!=null&& data.shift2_TimeIn != null &&
                           data.shift2_TimeOut != null &&
                           (data.hasShift3! || data.shiftType == 1) ?
                       AttendanceListItem(

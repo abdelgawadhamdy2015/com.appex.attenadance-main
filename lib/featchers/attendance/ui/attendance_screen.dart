@@ -12,6 +12,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/neworking/api_constants.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/my_drawer.dart';
@@ -19,6 +20,7 @@ import 'package:ttech_attendance/core/widgets/my_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
+import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bloc_listener.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_board_tablet.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/test_attendance_bord.dart';
@@ -44,15 +46,13 @@ class _AttendanceScreen extends State<AttendanceScreen> {
   bool isSignIn = false;
   final TextEditingController _notesController = TextEditingController();
   GoogleMapController? _mapController;
-  final CameraPosition _initialPosition =
-      const CameraPosition(target: LatLng(0.0, 0.0));
+  final LatLng _center = const LatLng(45, -120);
 
   String token = '';
 
   @override
   void initState() {
     super.initState();
-    location = Location();
     location.onLocationChanged.listen((LocationData currentLocation) {
       _mapController?.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
@@ -60,9 +60,10 @@ class _AttendanceScreen extends State<AttendanceScreen> {
           zoom: 16,
         ),
       ));
-     
-      context.read<AttendanceCubit>().locationData = currentLocation;
-      
+      print("currunt location is : $currentLocation");
+      ApiConstants.longitude = currentLocation.longitude!;
+      ApiConstants.latitude = currentLocation.latitude!;
+      context.read<SendAttendanceCubit>().locationData = currentLocation;
     });
     _requestPermissions();
     // fetchLocation();
@@ -84,8 +85,12 @@ class _AttendanceScreen extends State<AttendanceScreen> {
           ),
         );
       });
-       } catch (e) {
-      setupDialogState(context, 'Could not get the location: $e', true, );
+    } catch (e) {
+      setupDialogState(
+        context,
+        'Could not get the location: $e',
+        true,
+      );
     }
   }
 
@@ -119,88 +124,83 @@ class _AttendanceScreen extends State<AttendanceScreen> {
       token = authProvider.token!;
       getAttendance(context);
     }
-      return Scaffold(
-        key: _scaffoldKey,
-        appBar: MyAppBar(
-            changeLanguage: widget.changeLanguage,
-            context: context,
-            title: myTransactions),
-        drawer: const Drawer(child: MyDrawer()),
-        body: OfflineBuilderWidget(
-          child: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const AttendanceBlocListener(),
-                  BlocBuilder<AttendanceCubit, AttendanceState>(
-                    builder: (context, state) {
-                      if (state is Loading) {
-                        return  Column(
-                           children:[
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: MyAppBar(
+          changeLanguage: widget.changeLanguage,
+          context: context,
+          title: myTransactions),
+      drawer: const Drawer(child: MyDrawer()),
+      body: OfflineBuilderWidget(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const AttendanceBlocListener(),
+                BlocBuilder<AttendanceCubit, AttendanceState>(
+                  builder: (context, state) {
+                    if (state is Loading) {
+                      return Column(children: [
                         ShimmerWidget.rectangular(height: 100.h),
-                              verticalSpacing(10),
-                             ShimmerWidget.rectangular(height: 100.h),
-                             verticalSpacing(10),
+                        verticalSpacing(10),
+                        ShimmerWidget.rectangular(height: 100.h),
+                        verticalSpacing(10),
+                        ShimmerWidget.rectangular(height: 100.h),
+                        verticalSpacing(10),
+                        ShimmerWidget.rectangular(height: 100.h)
+                      ]);
+                    }
 
-                             ShimmerWidget.rectangular(height: 100.h),
-                             verticalSpacing(10),
-
-                             ShimmerWidget.rectangular(height: 100.h)
-                           ] );
-                      }
-                      return Padding(
-                        key: context.read<AttendanceCubit>().formKey,
-                        padding: EdgeInsets.all(15.0.h),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ? const TestAttendanceBord()
-                                : const AttendanceBoardTablet(),
-                            verticalSpacing(16),
-                            TextField(
-                              mouseCursor: SystemMouseCursors.basic,
-                              maxLines: 3,
-                              controller: _notesController,
-                              decoration: InputDecoration(
-                                labelStyle: TextStyles.font12black54Reguler,
-                                labelText: S.of(context).notes,
-                                border: const OutlineInputBorder(),
+                    return Padding(
+                      key: context.read<AttendanceCubit>().formKey,
+                      padding: EdgeInsets.all(15.0.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ResponsiveBreakpoints.of(context).isMobile
+                              ? const TestAttendanceBord()
+                              : const AttendanceBoardTablet(),
+                          verticalSpacing(16),
+                          TextField(
+                            mouseCursor: SystemMouseCursors.basic,
+                            maxLines: 3,
+                            controller: _notesController,
+                            decoration: InputDecoration(
+                              labelStyle: TextStyles.font12black54Reguler,
+                              labelText: S.of(context).notes,
+                              border: const OutlineInputBorder(),
+                            ),
+                          ),
+                          verticalSpacing(5),
+                          ResponsiveBreakpoints.of(context).isMobile
+                              ? WorkTimeBoard(
+                                  data: context.read<AttendanceCubit>().data)
+                              : const WorkTimeTablet(),
+                          Container(
+                            height: MediaQuery.of(context).size.height * .3,
+                            padding: EdgeInsets.symmetric(vertical: 10.h),
+                            child: Card(
+                              child: GoogleMap(
+                                initialCameraPosition:
+                                    CameraPosition(target: _center, zoom: 16),
+                                onMapCreated: (controller) {
+                                  _mapController = controller;
+                                },
+                                myLocationEnabled: true,
+                                myLocationButtonEnabled: true,
                               ),
                             ),
-                            verticalSpacing(5),
-                            ResponsiveBreakpoints.of(context).isMobile
-                                ?  WorkTimeBoard(data:context.read<AttendanceCubit>().data)
-                                : const WorkTimeTablet(),
-                            Container(
-                              height: MediaQuery.of(context).size.height * .3,
-                              padding: EdgeInsets.symmetric(vertical: 10.h),
-                              child: Card(
-                                //color: Colors.blue,
-
-                                child: GoogleMap(
-                                  initialCameraPosition: _initialPosition,
-                                  onMapCreated: (controller) {
-                                    _mapController = controller;
-                                  },
-                                  myLocationEnabled: true,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ),
-      );
-    }
-    }
-
-
-
-
+      ),
+    );
+  }
+}

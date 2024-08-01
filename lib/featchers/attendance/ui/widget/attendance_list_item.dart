@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/neworking/api_constants.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/attendance/data/models/attendance_request.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/send_attendance_cubit.dart';
@@ -127,21 +129,25 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
   }
 
   void validateThenRecordAttendance(String token) {
-    context.read<SendAttendanceCubit>().emiteAttendanceRecord(
-        "$myBearer $token",
-        widget.shiftType == 1
-            ? AttendanceRequest(
-                x: context.read<AttendanceCubit>().locationData!.latitude,
-                y: context.read<AttendanceCubit>().locationData!.latitude,
-              )
-            : AttendanceRequest(
-                x: context.read<AttendanceCubit>().locationData!.latitude,
-                y: context.read<AttendanceCubit>().locationData!.latitude,
-                isAttendFingerprint: isAttendance,
-                isShift1Complete: widget.shift1Complete,
-                isShift2Complete: widget.shift2Complete,
-                isShift3Complete: widget.shift3Complete,
-                isShift4Complete: widget.shift4Complete));
+    //if (context.read<SendAttendanceCubit>().locationData!.latitude != null) {
+      context.read<SendAttendanceCubit>().emiteAttendanceRecord(
+          "$myBearer $token",
+          widget.shiftType == 1
+              ? AttendanceRequest(
+                  x: ApiConstants.latitude,
+                  y: ApiConstants.longitude,
+                )
+              : AttendanceRequest(
+                  x: ApiConstants.latitude,
+                  y: ApiConstants.latitude,
+                  isAttendFingerprint: isAttendance,
+                  isShift1Complete: widget.shift1Complete,
+                  isShift2Complete: widget.shift2Complete,
+                  isShift3Complete: widget.shift3Complete,
+                  isShift4Complete: widget.shift4Complete));
+    // } else {
+    //   setupDialogState(context, "datalocation = null", true);
+    // }
   }
 
   String getShift(int shift) {

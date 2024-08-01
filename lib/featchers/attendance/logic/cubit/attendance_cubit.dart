@@ -12,6 +12,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
   AttendanceCubit(this.attendanceRepo) : super(const AttendanceState.initial());
 
   Location location = Location();
+  
   LocationData? locationData = LocationData.fromMap({});
   GlobalKey formKey = GlobalKey<FormState>();
   HeaderData data = HeaderData();
