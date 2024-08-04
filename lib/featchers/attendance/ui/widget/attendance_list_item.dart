@@ -131,12 +131,12 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
         "$myBearer $token",
         widget.shiftType == 1
             ? AttendanceRequest(
-                x: context.read<AttendanceCubit>().locationData!.latitude,
-                y: context.read<AttendanceCubit>().locationData!.latitude,
+                x: context.read<AttendanceCubit>().currentPosition.latitude,
+                y: context.read<AttendanceCubit>().currentPosition.latitude,
               )
             : AttendanceRequest(
-                x: context.read<AttendanceCubit>().locationData!.latitude,
-                y: context.read<AttendanceCubit>().locationData!.latitude,
+                x: context.read<AttendanceCubit>().currentPosition.latitude,
+                y: context.read<AttendanceCubit>().currentPosition.latitude,
                 isAttendFingerprint: isAttendance,
                 isShift1Complete: widget.shift1Complete,
                 isShift2Complete: widget.shift2Complete,
