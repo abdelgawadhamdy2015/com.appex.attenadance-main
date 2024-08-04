@@ -22,6 +22,7 @@ class LoginScreen extends StatefulWidget {
 
   const LoginScreen({super.key, required this.changeLanguage});
 
+
   @override
   LoginScreenState createState() =>
       // ignore: no_logic_in_create_state
@@ -38,6 +39,7 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    // delete token from shared preference
     clearToken();
   }
 
