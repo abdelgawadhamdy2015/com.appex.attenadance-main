@@ -16,8 +16,8 @@ import 'package:ttech_attendance/featchers/performance_panel/data/models/perform
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_state.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/performance_block_listener.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel_tablet.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_block_listener.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_panel_tablet.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class PerformancePanel extends StatefulWidget {

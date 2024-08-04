@@ -16,9 +16,9 @@ import 'package:ttech_attendance/featchers/request_form/date/models/request_mode
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_state.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
-import 'package:ttech_attendance/featchers/request_form/ui/all_vaccations_listener.dart';
-import 'package:ttech_attendance/featchers/request_form/ui/request_block_listener.dart';
-import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen_tablet.dart';
+import 'package:ttech_attendance/featchers/request_form/ui/widget/all_vaccations_listener.dart';
+import 'package:ttech_attendance/featchers/request_form/ui/widget/request_block_listener.dart';
+import 'package:ttech_attendance/featchers/request_form/ui/widget/request_form_screen_tablet.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class RequestFormScreen extends StatefulWidget {

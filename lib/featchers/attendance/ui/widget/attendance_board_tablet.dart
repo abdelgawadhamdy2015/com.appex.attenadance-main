@@ -5,8 +5,8 @@ import 'package:ttech_attendance/core/helpers/methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_state.dart';
-import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/send_attendance_cubit.dart';
-import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/send_attendance_state.dart';
+import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
+import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_state.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class AttendanceBoardTablet extends StatefulWidget {
