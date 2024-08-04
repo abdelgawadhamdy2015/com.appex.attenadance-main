@@ -6,8 +6,6 @@
         <!-- TODO: Add your Google Maps API key here -->
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDcOtmHQ11CTjw_s6DFXH8dwFCOux6CYr8"/>
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
