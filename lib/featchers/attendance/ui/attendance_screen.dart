@@ -41,8 +41,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
   final TextEditingController _notesController = TextEditingController();
   late GoogleMapController controller;
   Location location = Location();
-  final CameraPosition _initialPosition =
-      const CameraPosition(target: LatLng(0.0, 0.0));
+
 
   String token = '';
   late AuthProvider authProvider;
@@ -90,8 +89,9 @@ class _AttendanceScreen extends State<AttendanceScreen> {
 
     location.onLocationChanged.listen((LocationData currentLocation) {
 
-      context.read<AttendanceCubit>().currentPosition =
-          LatLng(currentLocation.latitude!, currentLocation.longitude!);
+        context.read<AttendanceCubit>().currentPosition =
+            LatLng(currentLocation.latitude!, currentLocation.longitude!);
+
 
     });
   }
@@ -144,6 +144,14 @@ class _AttendanceScreen extends State<AttendanceScreen> {
 
   getAttendance(BuildContext context) {
     context.read<AttendanceCubit>().emitAttendanceState("$myBearer $token");
+  }
+
+  @override
+  void dispose() {
+
+    controller.dispose();
+
+    super.dispose();
   }
 
   @override
