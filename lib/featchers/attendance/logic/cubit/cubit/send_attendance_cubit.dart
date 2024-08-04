@@ -16,7 +16,6 @@ class SendAttendanceCubit extends Cubit<SendAttendanceState> {
   bool attendanceRecorded = false;
 
   Location location = Location();
-  LocationData? locationData = LocationData.fromMap({});
   GlobalKey formKey = GlobalKey<FormState>();
   DateTime attendanceTime = DateTime(0);
   HeaderData data = HeaderData();

@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
@@ -18,7 +17,6 @@ import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/my_drawer.dart';
 import 'package:ttech_attendance/core/widgets/my_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
-import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bloc_listener.dart';
@@ -39,66 +37,101 @@ class AttendanceScreen extends StatefulWidget {
 
 class _AttendanceScreen extends State<AttendanceScreen> {
   Constatnts constatnts = Constatnts();
-  // LocationData? currentLocation;
+  late GoogleMapController controller;
   Location location = Location();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateFormat dateFormat = DateFormat('EEE, y,M,d  ');
   bool isSignIn = false;
   final TextEditingController _notesController = TextEditingController();
-  GoogleMapController? _mapController;
-  final LatLng _center = const LatLng(45, -120);
+
+
 
   String token = '';
 
   @override
   void initState() {
     super.initState();
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      _mapController?.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: LatLng(currentLocation.latitude!, currentLocation.longitude!),
-          zoom: 16,
-        ),
-      ));
-      print("currunt location is : $currentLocation");
-      ApiConstants.longitude = currentLocation.longitude!;
-      ApiConstants.latitude = currentLocation.latitude!;
-      context.read<SendAttendanceCubit>().locationData = currentLocation;
-    });
-    _requestPermissions();
-    // fetchLocation();
+    // _requestPermissions();
+    // location.onLocationChanged.listen((LocationData currentLocation) {
+    //   mapController?.animateCamera(CameraUpdate.newCameraPosition(
+    //     CameraPosition(
+    //       target: LatLng(currentLocation.latitude!, currentLocation.longitude!),
+    //       zoom: 16,
+    //     ),
+    //   ));
+    //   setState(() {
+    //     print("currunt location is : $currentLocation");
+
+    //     ApiConstants.longitude = currentLocation.longitude!;
+    //     ApiConstants.latitude = currentLocation.latitude!;
+    //     context.read<SendAttendanceCubit>().locationData = currentLocation;
+    //   });
+    // });
+    // // fetchLocation();
+    initLocation();
   }
 
-  Future<void> fetchLocation() async {
-    try {
-      context.read<AttendanceCubit>().locationData =
-          await location.getLocation();
-      setState(() {
-        _mapController!.animateCamera(
-          CameraUpdate.newCameraPosition(
-            CameraPosition(
-              target: LatLng(
-                  context.read<AttendanceCubit>().locationData!.latitude!,
-                  context.read<AttendanceCubit>().locationData!.longitude!),
-              zoom: 15.0,
-            ),
-          ),
-        );
-      });
-    } catch (e) {
-      setupDialogState(
-        context,
-        'Could not get the location: $e',
-        true,
-      );
+  Future<void> initLocation() async {
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
     }
+
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    final LocationData locationData = await location.getLocation();
+    context.read<AttendanceCubit>().currentPosition = LatLng(locationData.latitude!, locationData.longitude!);
+
+    location.onLocationChanged.listen((LocationData currentLocation) {
+
+        context.read<AttendanceCubit>().currentPosition =
+            LatLng(currentLocation.latitude!, currentLocation.longitude!);
+
+    });
   }
 
-  Future<void> _requestPermissions() async {
-    await Permission.location.request();
-    await Permission.camera.request();
-    await Permission.microphone.request();
-  }
+  // Future<void> fetchLocation() async {
+  //   try {
+  //     context.read<AttendanceCubit>().locationData =
+  //         await location.getLocation();
+  //     setState(() {
+  //       mapController!.animateCamera(
+  //         CameraUpdate.newCameraPosition(
+  //           CameraPosition(
+  //             target: LatLng(
+  //                 context.read<AttendanceCubit>().locationData!.latitude!,
+  //                 context.read<AttendanceCubit>().locationData!.longitude!),
+  //             zoom: 15.0,
+  //           ),
+  //         ),
+  //       );
+  //     });
+  //   } catch (e) {
+  //     setupDialogState(
+  //       context,
+  //       'Could not get the location: $e',
+  //       true,
+  //     );
+  //   }
+  // }
+
+  // Future<void> _requestPermissions() async {
+  //   await Permission.location.request();
+  //   await Permission.camera.request();
+  //   await Permission.microphone.request();
+  // }
 
   // Future<void> _openCamera() async {
   //   final cameras = await availableCameras();
@@ -181,16 +214,23 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                             padding: EdgeInsets.symmetric(vertical: 10.h),
                             child: Card(
                               child: GoogleMap(
-                                initialCameraPosition:
-                                    CameraPosition(target: _center, zoom: 16),
-                                onMapCreated: (controller) {
-                                  _mapController = controller;
-                                },
+                                initialCameraPosition: CameraPosition(
+                                  target: context.read<AttendanceCubit>().currentPosition,
+                                  zoom: 14,
+                                ),
                                 myLocationEnabled: true,
-                                myLocationButtonEnabled: true,
+                                onMapCreated: (GoogleMapController controller) {
+                                  this.controller = controller;
+                                  controller.animateCamera(
+                                    CameraUpdate.newCameraPosition(
+                                      CameraPosition(
+                                          target: context.read<AttendanceCubit>().currentPosition, zoom: 14),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                     );
