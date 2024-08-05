@@ -230,21 +230,31 @@ class S {
     );
   }
 
-  /// `Presence`
-  String get presence {
+  /// `Attendance`
+  String get attendance {
     return Intl.message(
-      'Presence',
-      name: 'presence',
+      'Attendance',
+      name: 'attendance',
       desc: '',
       args: [],
     );
   }
 
-  /// `Leave`
-  String get leave {
+  /// `Leaving`
+  String get leaving {
     return Intl.message(
-      'Leave',
-      name: 'leave',
+      'Leaving',
+      name: 'leaving',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Holiday`
+  String get holiday {
+    return Intl.message(
+      'Holiday',
+      name: 'holiday',
       desc: '',
       args: [],
     );

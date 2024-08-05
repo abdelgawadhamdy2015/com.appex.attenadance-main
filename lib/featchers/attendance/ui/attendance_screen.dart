@@ -10,6 +10,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/attendance_shimmer.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
@@ -17,8 +18,7 @@ import 'package:ttech_attendance/core/widgets/my_drawer.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bloc_listener.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_board_tablet.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/widget/test_attendance_bord.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bord.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/work_time_board.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/work_time_tablet.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
@@ -41,7 +41,6 @@ class _AttendanceScreen extends State<AttendanceScreen> {
   final TextEditingController _notesController = TextEditingController();
   late GoogleMapController controller;
   Location location = Location();
-
 
   String token = '';
   late AuthProvider authProvider;
@@ -85,19 +84,14 @@ class _AttendanceScreen extends State<AttendanceScreen> {
     }
 
     final LocationData locationData = await location.getLocation();
-    context.read<AttendanceCubit>().currentPosition = LatLng(locationData.latitude!, locationData.longitude!);
+    context.read<AttendanceCubit>().currentPosition =
+        LatLng(locationData.latitude!, locationData.longitude!);
 
     location.onLocationChanged.listen((LocationData currentLocation) {
-
-        context.read<AttendanceCubit>().currentPosition =
-            LatLng(currentLocation.latitude!, currentLocation.longitude!);
-
-
+      context.read<AttendanceCubit>().currentPosition =
+          LatLng(currentLocation.latitude!, currentLocation.longitude!);
     });
   }
-
-
-
 
   // Future<void> fetchLocation() async {
   //   try {
@@ -148,7 +142,6 @@ class _AttendanceScreen extends State<AttendanceScreen> {
 
   @override
   void dispose() {
-
     controller.dispose();
 
     super.dispose();
@@ -181,18 +174,14 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                       return const AttendanceShimmer();
                     }
                     return Padding(
-                      key: context
-                          .read<AttendanceCubit>()
-                          .formKey,
+                      key: context.read<AttendanceCubit>().formKey,
                       padding: EdgeInsets.all(15.0.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          ResponsiveBreakpoints
-                              .of(context)
-                              .isMobile
-                              ? const TestAttendanceBord()
-                              : const AttendanceBoardTablet(),
+
+                          const AttendanceBord(),
+
                           verticalSpacing(16),
                           TextField(
                             mouseCursor: SystemMouseCursors.basic,
@@ -200,26 +189,17 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                             controller: _notesController,
                             decoration: InputDecoration(
                               labelStyle: TextStyles.font12black54Reguler,
-                              labelText: S
-                                  .of(context)
-                                  .notes,
+                              labelText: S.of(context).notes,
                               border: const OutlineInputBorder(),
                             ),
                           ),
                           verticalSpacing(5),
-                          ResponsiveBreakpoints
-                              .of(context)
-                              .isMobile
+                          ResponsiveBreakpoints.of(context).isMobile
                               ? WorkTimeBoard(
-                              data: context
-                                  .read<AttendanceCubit>()
-                                  .data)
+                                  data: context.read<AttendanceCubit>().data)
                               : const WorkTimeTablet(),
                           Container(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * .3,
+                            height: SizeConfig.screenHeight! * .3,
                             padding: EdgeInsets.symmetric(vertical: 10.h),
                             child: Card(
                               child: GoogleMap(
@@ -237,7 +217,8 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                       CameraPosition(
                                           target: context
                                               .read<AttendanceCubit>()
-                                              .currentPosition, zoom: 14),
+                                              .currentPosition,
+                                          zoom: 14),
                                     ),
                                   );
                                 },
@@ -255,4 +236,5 @@ class _AttendanceScreen extends State<AttendanceScreen> {
         ),
       ),
     );
-  }}
+  }
+}

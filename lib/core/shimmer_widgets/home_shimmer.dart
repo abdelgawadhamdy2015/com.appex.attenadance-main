@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../generated/l10n.dart';
 import '../helpers/helper_methods.dart';
+import '../helpers/size_config.dart';
 import '../theming/text_styles.dart';
 import 'my_shimmer.dart';
 
@@ -11,24 +10,25 @@ class HomeShimmer extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    double shimmerIconHeight= SizeConfig.screenHeight! * .01 ;
     return SafeArea(child: SingleChildScrollView(
       child: Center(
           child: Column(
             children: [
-              verticalSpacing(30.h),
+              verticalSpacing(SizeConfig.screenHeight! * .03),
               Text(
                 S
                     .of(context)
                     .attendanceMovementsToday,
                 style: TextStyles.font12blackBold,
               ),
-              ShimmerWidget.rectangular(height: 100.h),
-              verticalSpacing(10),
+              ShimmerWidget.rectangular(height:SizeConfig.screenWidth! * .1),
+              verticalSpacing(SizeConfig.screenHeight! * .01),
 
 
               Card(
                 child: Container(
-                  padding: const EdgeInsets.all(16.0),
+                  padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -45,49 +45,44 @@ class HomeShimmer extends StatelessWidget{
                         mainAxisSpacing: 10,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
+
                           Card(child: FittedBox(child: ShimmerWidget.circular(
-                              width: 10.w, height: 10.h))),
+                              width: shimmerIconHeight, height: shimmerIconHeight))),
                           Card(child: FittedBox(child: ShimmerWidget.circular(
-                              width: 10.w, height: 10.h))),
+                              width: shimmerIconHeight, height: shimmerIconHeight))),
                           Card(child: FittedBox(child: ShimmerWidget.circular(
-                              width: 10.w, height: 10.h))),
+                              width: shimmerIconHeight, height: shimmerIconHeight))),
                           Card(child: FittedBox(child: ShimmerWidget.circular(
-                              width: 10.w, height: 10.h))),
+                              width: shimmerIconHeight, height: shimmerIconHeight))),
                           Card(child: FittedBox(child: ShimmerWidget.circular(
-                              width: 10.w, height: 10.h))),
+                              width: shimmerIconHeight, height: shimmerIconHeight))),
                           Card(child: FittedBox(child: ShimmerWidget.circular(
-                              width: 10.w, height: 10.h))),
+                              width: shimmerIconHeight, height: shimmerIconHeight))),
                         ],
                       ),
                     ],
                   ),
                 ),
-              )
-
-
-              ,
+              ),
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth!* .016, vertical: SizeConfig.screenHeight!* .016),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        S
-                            .of(context)
-                            .eventsApprovals,
+                        S.of(context).eventsApprovals,
                         style: TextStyles.font12blackBold,
                       ),
-                      const SizedBox(height: 16),
-                      // هنا يمكنك إضافة منطق عرض التنبيهات الحية من الباك اند
+                       SizedBox(height: SizeConfig.screenHeight! * .05),
                       Card(
                         color: Colors.white,
                         child: ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 2, // هنا يمكنك وضع عدد التنبيهات الفعلية
+                          itemCount: 2,
                           itemBuilder: (context, index) {
-                            return ShimmerWidget.rectangular(height: 50.h);
+                            return ShimmerWidget.rectangular(height: SizeConfig.screenHeight! * .05);
                           },
                         ),
                       ),

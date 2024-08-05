@@ -53,74 +53,41 @@ class _AttendanceLogState extends State<AttendanceLogTablet> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                S
-                    .of(context)
-                    .attendanceMovementsToday,
+                S.of(context).attendanceMovementsToday,
                 style: TextStyles.font30BlackBold,
               ),
               verticalSpacing(10),
-              context
-                  .read<HomeCubit>()
-                  .data
-                  .shift1_TimeIn != "____" &&
-                  context
-                      .read<HomeCubit>()
-                      .data
-                      .shift1_TimeIn != null
+              context.read<HomeCubit>().data.shift1_TimeIn != "____" &&
+                      context.read<HomeCubit>().data.shift1_TimeIn != null
                   ? transactionWidget(
-                  context
-                      .read<HomeCubit>()
-                      .data
-                      .shift1_TimeIn!,
-                  context
-                      .read<HomeCubit>()
-                      .data
-                      .date!,
-                  S
-                      .of(context)
-                      .presence,
-                  Colors.green,
-                  context)
+                      context.read<HomeCubit>().data.shift1_TimeIn!,
+                      context.read<HomeCubit>().data.date!,
+                      S.of(context).attendance,
+                      Colors.green,
+                      context)
                   : Center(
-                child: Text(
-                  S
-                      .of(context)
-                      .notAttendance,
-                  style: TextStyles.font20Black54reguler,
-                ),
-              ),
+                      child: Text(
+                        S.of(context).notAttendance,
+                        style: TextStyles.font20Black54reguler,
+                      ),
+                    ),
               verticalSpacing(10),
-              context
-                  .read<HomeCubit>()
-                  .data
-                  .shift1_TimeOut != "____" &&
-                  context
-                      .read<HomeCubit>()
-                      .data
-                      .shift1_TimeOut != null
+              context.read<HomeCubit>().data.shift1_TimeOut != "____" &&
+                      context.read<HomeCubit>().data.shift1_TimeOut != null
                   ? transactionWidget(
-                  context
-                      .read<HomeCubit>()
-                      .data
-                      .shift1_TimeOut!,
-                  context
-                      .read<HomeCubit>()
-                      .data
-                      .date!,
-                  S
-                      .of(context)
-                      .presence,
-                  Colors.red,
-                  context)
+                      context.read<HomeCubit>().data.shift1_TimeOut!,
+                      context.read<HomeCubit>().data.date!,
+                      S.of(context).leaving,
+                      Colors.red,
+                      context)
                   : Center(
-                child: Text(S
-                    .of(context)
-                    .notLeave,
-                    style: TextStyles.font20Black54reguler),
-              ),
+                      child: Text(S.of(context).notLeave,
+                          style: TextStyles.font20Black54reguler),
+                    ),
             ],
           ),
         ),
       ),
     );
-  }}
+  }
+}

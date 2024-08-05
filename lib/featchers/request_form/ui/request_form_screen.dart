@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
@@ -18,8 +16,9 @@ import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccatio
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/ui/widget/all_vaccations_listener.dart';
 import 'package:ttech_attendance/featchers/request_form/ui/widget/request_block_listener.dart';
-import 'package:ttech_attendance/featchers/request_form/ui/widget/request_form_screen_tablet.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
+
+import '../../../core/helpers/size_config.dart';
 
 class RequestFormScreen extends StatefulWidget {
   final Function(Locale) changeLanguage;
@@ -63,10 +62,8 @@ class RequestFormScreenState extends State<RequestFormScreen> {
         if (_startDate != null && _endDate != null) {
           _startDate!.isBefore(_endDate!)
               ? _duration =
-              (_endDate!.difference(_startDate!).inDays + 1).toString()
-              : _duration = S
-              .of(context)
-              .dateWarning;
+                  (_endDate!.difference(_startDate!).inDays + 1).toString()
+              : _duration = S.of(context).dateWarning;
         }
       });
     }
@@ -83,10 +80,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveBreakpoints
-        .of(context)
-        .isMobile
-        ? Scaffold(
+    return Scaffold(
       appBar: MyAppBar(
           changeLanguage: widget.changeLanguage,
           context: context,
@@ -95,13 +89,15 @@ class RequestFormScreenState extends State<RequestFormScreen> {
       body: OfflineBuilderWidget(
         child: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.symmetric(
+                horizontal: SizeConfig.screenWidth! * .016,
+                vertical: SizeConfig.screenHeight! * .016),
             child: Container(
-              padding: EdgeInsets.all(20.0.h),
+              padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.screenWidth! * .02,
+                  vertical: SizeConfig.screenHeight! * .02),
               child: Form(
-                key: context
-                    .read<RequestVaccationCubit>()
-                    .formKey,
+                key: context.read<RequestVaccationCubit>().formKey,
                 child: Column(
                   children: [
                     BlocBuilder<AllVaccationsCubit, AllVaccationsState>(
@@ -110,17 +106,15 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                           return const CircularProgressIndicator();
                         } else if (state is Success) {
                           return DropdownButtonFormField(
-                            key: context
-                                .read<AllVaccationsCubit>()
-                                .formKey,
+                            key: context.read<AllVaccationsCubit>().formKey,
                             decoration: InputDecoration(
-                                labelText: S
-                                    .of(context)
-                                    .kindOfHoliday,
-                                labelStyle: TextStyles.font12black54Reguler,
-                                border: const OutlineInputBorder(),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 5)),
+                              labelText: S.of(context).kindOfHoliday,
+                              labelStyle: TextStyles.font12black54Reguler,
+                              border: const OutlineInputBorder(),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: SizeConfig.screenWidth! * .02,
+                                  vertical: SizeConfig.screenHeight! * .01),
+                            ),
                             value: _selectedLeaveType,
                             items: context
                                 .read<AllVaccationsCubit>()
@@ -148,9 +142,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                             },
                           );
                         } else {
-                          return Text(S
-                              .of(context)
-                              .noDateFound);
+                          return Text(S.of(context).noDateFound);
                         }
                       },
                     ),
@@ -159,26 +151,19 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                     TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
-                          labelText: S
-                              .of(context)
-                              .fromDate,
+                          labelText: S.of(context).fromDate,
                           labelStyle: TextStyles.font12black54Reguler,
                           border: const OutlineInputBorder(),
                           suffixIcon: Icon(
                             Icons.calendar_month_outlined,
-                            size: MediaQuery
-                                .of(context)
-                                .size
-                                .width * .1,
+                            size: SizeConfig.screenWidth! * .1,
                           )),
                       onTap: () => _pickDate(context, true),
                       controller: TextEditingController(
                         text: _startDate != null
                             ? Intl.defaultLocale == english
-                            ? DateFormat('yyyy-MM-dd')
-                            .format(_startDate!)
-                            : DateFormat("dd-MM-yyyy")
-                            .format(_startDate!)
+                                ? DateFormat('yyyy-MM-dd').format(_startDate!)
+                                : DateFormat("dd-MM-yyyy").format(_startDate!)
                             : '',
                       ),
                       style: TextStyles.font12black54Reguler,
@@ -188,62 +173,42 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                       style: TextStyles.font12black54Reguler,
                       readOnly: true,
                       decoration: InputDecoration(
-                          labelText: S
-                              .of(context)
-                              .toDate,
+                          labelText: S.of(context).toDate,
                           labelStyle: TextStyles.font12black54Reguler,
                           border: const OutlineInputBorder(),
                           suffixIcon: Icon(
                             Icons.calendar_month_outlined,
-                            size: MediaQuery
-                                .of(context)
-                                .size
-                                .width * .1,
+                            size: SizeConfig.screenWidth! * .1,
                           )),
                       onTap: () => _pickDate(context, false),
                       controller: TextEditingController(
                         text: _endDate != null
                             ? Intl.defaultLocale == english
-                            ? DateFormat('yyyy-MM-dd').format(_endDate!)
-                            : DateFormat("dd-MM-yyyy").format(_endDate!)
+                                ? DateFormat('yyyy-MM-dd').format(_endDate!)
+                                : DateFormat("dd-MM-yyyy").format(_endDate!)
                             : '',
                       ),
                     ),
-                    verticalSpacing(
-                        MediaQuery
-                            .of(context)
-                            .size
-                            .height * .02),
+                    verticalSpacing(SizeConfig.screenHeight! * .02),
                     Text(
-                      "$_duration  ${S
-                          .of(context)
-                          .days}",
+                      "$_duration  ${S.of(context).days}",
                       style: TextStyles.font12black54Reguler,
                     ),
-                    verticalSpacing(
-                        MediaQuery
-                            .of(context)
-                            .size
-                            .height * .02),
+                    verticalSpacing(SizeConfig.screenHeight! * .02),
                     TextField(
                       controller: notesController,
                       decoration: InputDecoration(
-                        labelText: S
-                            .of(context)
-                            .notes,
+                        labelText: S.of(context).notes,
                         labelStyle: TextStyles.font12black54Reguler,
                         border: const OutlineInputBorder(),
                       ),
                       maxLines: 3,
                     ),
-                    verticalSpacing(
-                        MediaQuery
-                            .of(context)
-                            .size
-                            .height * .02),
+                    verticalSpacing(SizeConfig.screenHeight! * .02),
                     Container(
                       margin: EdgeInsets.symmetric(
-                          vertical: 30.h, horizontal: 50.w),
+                          horizontal: SizeConfig.screenWidth! * .016,
+                          vertical: SizeConfig.screenHeight! * .016),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -252,21 +217,16 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                               validateThenAddVaccation(context);
                             },
                             child: Text(
-                              S
-                                  .of(context)
-                                  .send,
+                              S.of(context).send,
                               style: TextStyles.font16BlueBold,
                             ),
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              context
-                                  .pushReplacementNamed(Routes.homeScreen);
+                              context.pushReplacementNamed(Routes.homeScreen);
                             },
                             child: Text(
-                              S
-                                  .of(context)
-                                  .cancel,
+                              S.of(context).cancel,
                               style: TextStyles.font16BlueBold,
                             ),
                           ),
@@ -281,9 +241,6 @@ class RequestFormScreenState extends State<RequestFormScreen> {
           ),
         ),
       ),
-    )
-        : RequestFormScreenTablet(
-      changeLanguage: widget.changeLanguage,
     );
   }
 
@@ -318,7 +275,4 @@ class RequestFormScreenState extends State<RequestFormScreen> {
           "Bearer $token");
     }
   }
-
 }
-
-

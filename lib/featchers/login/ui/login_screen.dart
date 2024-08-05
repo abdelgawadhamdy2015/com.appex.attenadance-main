@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/login/logic/cubit/login_cubit.dart';
 import 'package:ttech_attendance/featchers/login/ui/widget/login_bloc_listener.dart';
-import 'package:ttech_attendance/featchers/login/ui/widget/login_screen_tablet.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 import '../../../core/helpers/helper_methods.dart';
@@ -22,19 +21,17 @@ class LoginScreen extends StatefulWidget {
 
   const LoginScreen({super.key, required this.changeLanguage});
 
-
   @override
-  LoginScreenState createState() =>
-      // ignore: no_logic_in_create_state
-      LoginScreenState(changeLanguage: changeLanguage);
+  LoginScreenState createState() => // ignore: no_logic_in_create_state
+      LoginScreenState();
 }
 
 class LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
   String selectedLanguage = 'English';
-  final Function(Locale) changeLanguage;
 
-  LoginScreenState({required this.changeLanguage});
+
+  LoginScreenState();
 
   @override
   void initState() {
@@ -43,7 +40,6 @@ class LoginScreenState extends State<LoginScreen> {
     clearToken();
   }
 
-
   clearToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
@@ -51,32 +47,24 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveBreakpoints
-        .of(context)
-        .isMobile
-        ? Scaffold(
+    // ResponsiveBreakpoints
+    //    .of(context)
+    //    .isMobile
+    //    ?
+    return Scaffold(
         backgroundColor: const Color(0xffffffff),
         body: OfflineBuilderWidget(
           child: SafeArea(
             child: Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: MediaQuery
-                      .of(context)
-                      .size
-                      .width * .03,
-                  vertical: MediaQuery
-                      .of(context)
-                      .size
-                      .height * .03),
+                  horizontal: SizeConfig.screenWidth! * .03,
+                  vertical: SizeConfig.screenHeight! * .03),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height * .07,
+                      height: SizeConfig.screenHeight! * .07,
                       width: double.infinity,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,19 +78,18 @@ class LoginScreenState extends State<LoginScreen> {
                               if (selectedLanguage == "English") {
                                 setState(() {
                                   selectedLanguage = "Arabic";
-                                  changeLanguage(const Locale("ar"));
+                                  widget.changeLanguage(const Locale("ar"));
                                 });
                               } else {
                                 setState(() {
                                   selectedLanguage = "English";
-                                  changeLanguage(const Locale("en"));
+                                  widget.changeLanguage(const Locale("en"));
                                 });
                               }
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(20.r)),
+                                  borderRadius: BorderRadius.circular(20.r)),
                               //Size.fromWidth(110.w),
 
                               backgroundColor: Colors.white,
@@ -120,95 +107,60 @@ class LoginScreenState extends State<LoginScreen> {
                     ),
                     Center(
                       child: Container(
-                        padding: EdgeInsets.only(top: 10.h),
-                        child: Text(S
-                            .of(context)
-                            .login,
+                        padding: EdgeInsets.only(top: SizeConfig.screenHeight!*.01),
+                        child: Text(S.of(context).login,
                             style: TextStyles.font18BlackBold),
                       ),
                     ),
                     Form(
-                      key: context
-                          .read<LoginCubit>()
-                          .formKey,
+                      key: context.read<LoginCubit>().formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding:
-                            const EdgeInsets.only(top: 20, bottom: 15),
+                            padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
                             child: Text(
-                              S
-                                  .of(context)
-                                  .dbName,
+                              S.of(context).dbName,
                               style: TextStyles.font12blackBold,
                             ),
                           ),
                           MyTextForm(
-                              hint: S
-                                  .of(context)
-                                  .dbName,
-                              excep: S
-                                  .of(context)
-                                  .dbName,
-                              control:
-                              context
-                                  .read<LoginCubit>()
-                                  .dbController),
+                              hint: S.of(context).dbName,
+                              excep: S.of(context).dbName,
+                              control: context.read<LoginCubit>().dbController),
                           Container(
-                            padding:
-                            const EdgeInsets.only(top: 20, bottom: 15),
+                            padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
                             child: Text(
-                              S
-                                  .of(context)
-                                  .email,
+                              S.of(context).email,
                               style: TextStyles.font12blackBold,
                             ),
                           ),
                           MyTextForm(
-                            hint: S
-                                .of(context)
-                                .email,
-                            excep: S
-                                .of(context)
-                                .email,
-                            control:
-                            context
-                                .read<LoginCubit>()
-                                .emailController,
+                            hint: S.of(context).email,
+                            excep: S.of(context).email,
+                            control: context.read<LoginCubit>().emailController,
                           ),
                           Container(
-                            padding:
-                            const EdgeInsets.only(top: 20, bottom: 15),
+                            padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
                             child: Text(
-                              S
-                                  .of(context)
-                                  .password,
+                              S.of(context).password,
                               style: TextStyles.font12blackBold,
                             ),
                           ),
                           PasswordText(
-                              hint: S
-                                  .of(context)
-                                  .password,
+                              hint: S.of(context).password,
                               obsecur: true,
                               control: context
                                   .read<LoginCubit>()
                                   .passwordController),
                           verticalSpacing(
-                              MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height * .05),
+                              SizeConfig.screenHeight! * .05),
                           Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
-                                  Text(S
-                                      .of(context)
-                                      .rememberMe),
+                                  Text(S.of(context).rememberMe),
                                   Checkbox(
                                       value: rememberMe,
                                       onChanged: (val) {
@@ -220,9 +172,7 @@ class LoginScreenState extends State<LoginScreen> {
                               ),
                               InkWell(
                                 child: Text(
-                                  S
-                                      .of(context)
-                                      .forgetPassword,
+                                  S.of(context).forgetPassword,
                                   style: const TextStyle(
                                       color: Colors.blue,
                                       decoration: TextDecoration.underline),
@@ -233,25 +183,18 @@ class LoginScreenState extends State<LoginScreen> {
                                       .formKey
                                       .currentState!
                                       .reset();
-                                  context.pushNamed(
-                                      Routes.forgetPasswordSccreen);
+                                  context
+                                      .pushNamed(Routes.forgetPasswordSccreen);
                                 },
                               ),
                             ],
                           ),
-                          verticalSpacing(
-                              MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height * .03),
+                  verticalSpacing(
+                      SizeConfig.screenHeight! * .05),
                           Container(
-                            padding: EdgeInsets.only(top: 10.h),
+                            padding: EdgeInsets.only(top: SizeConfig.screenHeight!* .01),
                             width: double.infinity,
-                            height:
-                            MediaQuery
-                                .of(context)
-                                .size
-                                .height * .08,
+                            height: SizeConfig.screenHeight! * .08,
                             child: ElevatedButton(
                               onPressed: () async {
                                 validateThenDoLogin(context);
@@ -259,23 +202,19 @@ class LoginScreenState extends State<LoginScreen> {
                               style: ElevatedButton.styleFrom(),
                               child: FittedBox(
                                 fit: BoxFit.cover,
-                                child: context
-                                    .read<LoginCubit>()
-                                    .circaleLoadFlag
-                                    ? const CircularProgressIndicator(
-                                  color: Colors.purpleAccent,
-                                )
-                                    : Text(
-                                  S
-                                      .of(context)
-                                      .login,
-                                  style: TextStyles.font16BlueBold,
-                                ),
+                                child:
+                                    context.read<LoginCubit>().circaleLoadFlag
+                                        ? const CircularProgressIndicator(
+                                            color: Colors.purpleAccent,
+                                          )
+                                        : Text(
+                                            S.of(context).login,
+                                            style: TextStyles.font16BlueBold,
+                                          ),
                               ),
                             ),
                           ),
                           LoginBlocListener(
-
                             rememberMe: rememberMe,
                             changeLanguage: widget.changeLanguage,
                           ),
@@ -287,16 +226,12 @@ class LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-        ))
-        : LoginScreenTablet(changeLanguage: changeLanguage);
+        ));
+    // : LoginScreenTablet(changeLanguage: changeLanguage);
   }
 
   void validateThenDoLogin(BuildContext context) {
-    if (context
-        .read<LoginCubit>()
-        .formKey
-        .currentState!
-        .validate()) {
+    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
       context.read<LoginCubit>().emitLoginStates();
     }
   }

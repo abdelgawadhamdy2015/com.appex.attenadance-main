@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/bottom_app_bar.dart';
 
@@ -18,8 +19,8 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => title.isEmpty
-      ? Size.fromHeight(MediaQuery.of(context).size.height * .05)
-      : Size.fromHeight(MediaQuery.of(context).size.height * .12);
+      ? Size.fromHeight(SizeConfig.screenHeight! * .05)
+      : Size.fromHeight(SizeConfig.screenHeight! * .12);
 
   @override
   State<MyAppBar> createState() => _MyAppBarState();
@@ -59,22 +60,14 @@ class _MyAppBarState extends State<MyAppBar> {
               width: 1,
               color: Colors.white,
             ),
-            // horozintalSpacing(MediaQuery.of(context).size.width * .05),
-
             Image.asset(
               "images/smaller_apex.png",
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * .15,
+              width: SizeConfig.screenWidth! * .15,
 
             ),
             const Spacer(),
             const Icon(Icons.notifications_none_outlined),
-            horizontalSpacing(MediaQuery
-                .of(context)
-                .size
-                .width * .05),
+            horizontalSpacing(SizeConfig.screenWidth! * .05),
             DropdownButton(
                 dropdownColor: Colors.blueAccent,
                 alignment: AlignmentDirectional.center,
@@ -95,10 +88,7 @@ class _MyAppBarState extends State<MyAppBar> {
                     });
                   }
                 }),
-            horizontalSpacing(MediaQuery
-                .of(context)
-                .size
-                .width * .05),
+            horizontalSpacing(SizeConfig.screenWidth! * .05),
             const VerticalDivider(
               thickness: 1.5,
               width: 1,
@@ -110,10 +100,7 @@ class _MyAppBarState extends State<MyAppBar> {
                   borderRadius: BorderRadius.circular(40), color: Colors.white),
               child: Image.asset(
                 "assets/man.png",
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * .05,
+                height: SizeConfig.screenHeight! * .05,
               ),
             )
           ],

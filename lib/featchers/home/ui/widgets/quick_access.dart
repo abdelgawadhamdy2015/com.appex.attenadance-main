@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
+
+import '../../../../core/helpers/size_config.dart';
 
 class QuickAccess extends StatelessWidget {
   const QuickAccess({super.key});
@@ -14,7 +15,7 @@ class QuickAccess extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -57,7 +58,7 @@ class QuickAccess extends StatelessWidget {
     return Card(
       color: Colors.white,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .005,vertical: SizeConfig.screenHeight! * .005),
         child: Column(
           children: [
             ElevatedButton(
@@ -78,11 +79,11 @@ class QuickAccess extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.w),
+                padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .005,vertical: SizeConfig.screenHeight! * .005),
               ),
               child: Image.asset(
                 icon,
-                height: 20.h,
+                height: SizeConfig.screenHeight! * .02,
               ),
             ),
             const Spacer(),
