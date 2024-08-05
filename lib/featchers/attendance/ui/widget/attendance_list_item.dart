@@ -3,12 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/attendance/data/models/attendance_request.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
+
+import '../../../../core/helpers/helper_methods.dart';
 
 class AttendanceListItem extends StatefulWidget {
   final String? shiftTimeIn;
@@ -147,14 +148,21 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
   String getShift(int shift) {
     switch (shift) {
       case 1:
-        return S.of(context).shift1;
+        return S
+            .of(context)
+            .shift1;
       case 2:
-        return S.of(context).shift2;
+        return S
+            .of(context)
+            .shift2;
       case 3:
-        return S.of(context).shift3;
+        return S
+            .of(context)
+            .shift3;
       case 4:
-        return S.of(context).shift4;
+        return S
+            .of(context)
+            .shift4;
     }
     return "";
-  }
-}
+  }}

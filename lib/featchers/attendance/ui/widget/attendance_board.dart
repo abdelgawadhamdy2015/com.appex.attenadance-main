@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
@@ -10,6 +9,7 @@ import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendanc
 import 'package:ttech_attendance/featchers/attendance/ui/widget/send_attendance_block_listener.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
+import '../../../../core/helpers/helper_methods.dart';
 import '../../logic/cubit/send_attendance_state.dart';
 
 class AttendanceBoard extends StatefulWidget {

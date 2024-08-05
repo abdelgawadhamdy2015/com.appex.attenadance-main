@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
@@ -53,43 +53,76 @@ class _AttendanceLogState extends State<AttendanceLog> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                S.of(context).attendanceMovementsToday,
+                S
+                    .of(context)
+                    .attendanceMovementsToday,
                 style: TextStyles.font12blackBold,
               ),
               verticalSpacing(10),
-              context.read<HomeCubit>().data.shift1_TimeIn != "____" &&
-                      context.read<HomeCubit>().data.shift1_TimeIn != null
+              context
+                  .read<HomeCubit>()
+                  .data
+                  .shift1_TimeIn != "____" &&
+                  context
+                      .read<HomeCubit>()
+                      .data
+                      .shift1_TimeIn != null
                   ? transactionWidget(
-                      context.read<HomeCubit>().data.shift1_TimeIn!,
-                      context.read<HomeCubit>().data.date!,
-                      S.of(context).presence,
-                      Colors.green,
-                      context)
+                  context
+                      .read<HomeCubit>()
+                      .data
+                      .shift1_TimeIn!,
+                  context
+                      .read<HomeCubit>()
+                      .data
+                      .date!,
+                  S
+                      .of(context)
+                      .presence,
+                  Colors.green,
+                  context)
                   : Center(
-                      child: Text(
-                        S.of(context).notAttendance,
-                        style: TextStyles.font12black54Reguler,
-                      ),
-                    ),
+                child: Text(
+                  S
+                      .of(context)
+                      .notAttendance,
+                  style: TextStyles.font12black54Reguler,
+                ),
+              ),
               verticalSpacing(10),
-              context.read<HomeCubit>().data.shift1_TimeOut != "____" &&
-                      context.read<HomeCubit>().data.shift1_TimeOut != null
+              context
+                  .read<HomeCubit>()
+                  .data
+                  .shift1_TimeOut != "____" &&
+                  context
+                      .read<HomeCubit>()
+                      .data
+                      .shift1_TimeOut != null
                   ? transactionWidget(
-                      context.read<HomeCubit>().data.shift1_TimeOut!,
-                      context.read<HomeCubit>().data.date!,
-                      S.of(context).presence,
-                      Colors.red,
-                      context)
+                  context
+                      .read<HomeCubit>()
+                      .data
+                      .shift1_TimeOut!,
+                  context
+                      .read<HomeCubit>()
+                      .data
+                      .date!,
+                  S
+                      .of(context)
+                      .presence,
+                  Colors.red,
+                  context)
                   : Center(
-                      child: Text(
-                        S.of(context).notLeave,
-                        style: TextStyles.font12black54Reguler,
-                      ),
-                    ),
+                child: Text(
+                  S
+                      .of(context)
+                      .notLeave,
+                  style: TextStyles.font12black54Reguler,
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
-  }
-}
+  }}

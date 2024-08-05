@@ -6,7 +6,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
@@ -38,6 +38,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
   int vaccationId = 1;
   String _duration = "";
   TextEditingController notesController = TextEditingController();
+
   void _pickDate(BuildContext context, bool isStartDate) async {
     DateTime initialDate = isStartDate
         ? (_startDate ?? DateTime.now())
@@ -62,14 +63,17 @@ class RequestFormScreenState extends State<RequestFormScreen> {
         if (_startDate != null && _endDate != null) {
           _startDate!.isBefore(_endDate!)
               ? _duration =
-                  (_endDate!.difference(_startDate!).inDays + 1).toString()
-              : _duration = S.of(context).dateWarning;
+              (_endDate!.difference(_startDate!).inDays + 1).toString()
+              : _duration = S
+              .of(context)
+              .dateWarning;
         }
       });
     }
   }
 
   String token = "";
+
   @override
   void initState() {
     super.initState();
@@ -79,171 +83,208 @@ class RequestFormScreenState extends State<RequestFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveBreakpoints.of(context).isMobile
+    return ResponsiveBreakpoints
+        .of(context)
+        .isMobile
         ? Scaffold(
-            appBar: MyAppBar(
-                changeLanguage: widget.changeLanguage,
-                context: context,
-                title: myRequests),
-            drawer: const Drawer(child: MyDrawer()),
-            body: OfflineBuilderWidget(
-              child: SafeArea(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    padding: EdgeInsets.all(20.0.h),
-                    child: Form(
-                      key: context.read<RequestVaccationCubit>().formKey,
-                      child: Column(
-                        children: [
-                          BlocBuilder<AllVaccationsCubit, AllVaccationsState>(
-                            builder: (context, state) {
-                              if (state is Loading) {
-                                return const CircularProgressIndicator();
-                              } else if (state is Success) {
-                                return DropdownButtonFormField(
-                                  key: context.read<AllVaccationsCubit>().formKey,
-                                  decoration: InputDecoration(
-                                      labelText: S.of(context).kindOfHoliday,
-                                      labelStyle: TextStyles.font12black54Reguler,
-                                      border: const OutlineInputBorder(),
-                                      contentPadding: const EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 5)),
-                                  value: _selectedLeaveType,
-                                  items: context
-                                      .read<AllVaccationsCubit>()
-                                      .vacctionsName
-                                      .map((String type) {
-                                    return DropdownMenuItem<String>(
-                                      value: type,
-                                      child: Text(
-                                        type,
-                                        style: TextStyles.font12black54Reguler,
-                                      ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selectedLeaveType = newValue;
-                                    });
+      appBar: MyAppBar(
+          changeLanguage: widget.changeLanguage,
+          context: context,
+          title: myRequests),
+      drawer: const Drawer(child: MyDrawer()),
+      body: OfflineBuilderWidget(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              padding: EdgeInsets.all(20.0.h),
+              child: Form(
+                key: context
+                    .read<RequestVaccationCubit>()
+                    .formKey,
+                child: Column(
+                  children: [
+                    BlocBuilder<AllVaccationsCubit, AllVaccationsState>(
+                      builder: (context, state) {
+                        if (state is Loading) {
+                          return const CircularProgressIndicator();
+                        } else if (state is Success) {
+                          return DropdownButtonFormField(
+                            key: context
+                                .read<AllVaccationsCubit>()
+                                .formKey,
+                            decoration: InputDecoration(
+                                labelText: S
+                                    .of(context)
+                                    .kindOfHoliday,
+                                labelStyle: TextStyles.font12black54Reguler,
+                                border: const OutlineInputBorder(),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 5)),
+                            value: _selectedLeaveType,
+                            items: context
+                                .read<AllVaccationsCubit>()
+                                .vacctionsName
+                                .map((String type) {
+                              return DropdownMenuItem<String>(
+                                value: type,
+                                child: Text(
+                                  type,
+                                  style: TextStyles.font12black54Reguler,
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                _selectedLeaveType = newValue;
+                              });
 
-                                    vaccationId = context
-                                        .read<AllVaccationsCubit>()
-                                        .vaccations
-                                        .where((v) => v.arabicName == newValue)
-                                        .first
-                                        .id!;
-                                  },
-                                );
-                              } else {
-                                return Text(S.of(context).noDateFound);
-                              }
+                              vaccationId = context
+                                  .read<AllVaccationsCubit>()
+                                  .vaccations
+                                  .where((v) => v.arabicName == newValue)
+                                  .first
+                                  .id!;
                             },
-                          ),
-                          const AllVaccationsListener(),
-                          verticalSpacing(20),
-                          TextFormField(
-                            readOnly: true,
-                            decoration: InputDecoration(
-                                labelText: S.of(context).fromDate,
-                                labelStyle: TextStyles.font12black54Reguler,
-                                border: const OutlineInputBorder(),
-                                suffixIcon: Icon(
-                                  Icons.calendar_month_outlined,
-                                  size: MediaQuery.of(context).size.width * .1,
-                                )),
-                            onTap: () => _pickDate(context, true),
-                            controller: TextEditingController(
-                              text: _startDate != null
-                                  ? Intl.defaultLocale == english
-                                      ? DateFormat('yyyy-MM-dd')
-                                          .format(_startDate!)
-                                      : DateFormat("dd-MM-yyyy")
-                                          .format(_startDate!)
-                                  : '',
+                          );
+                        } else {
+                          return Text(S
+                              .of(context)
+                              .noDateFound);
+                        }
+                      },
+                    ),
+                    const AllVaccationsListener(),
+                    verticalSpacing(20),
+                    TextFormField(
+                      readOnly: true,
+                      decoration: InputDecoration(
+                          labelText: S
+                              .of(context)
+                              .fromDate,
+                          labelStyle: TextStyles.font12black54Reguler,
+                          border: const OutlineInputBorder(),
+                          suffixIcon: Icon(
+                            Icons.calendar_month_outlined,
+                            size: MediaQuery
+                                .of(context)
+                                .size
+                                .width * .1,
+                          )),
+                      onTap: () => _pickDate(context, true),
+                      controller: TextEditingController(
+                        text: _startDate != null
+                            ? Intl.defaultLocale == english
+                            ? DateFormat('yyyy-MM-dd')
+                            .format(_startDate!)
+                            : DateFormat("dd-MM-yyyy")
+                            .format(_startDate!)
+                            : '',
+                      ),
+                      style: TextStyles.font12black54Reguler,
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      style: TextStyles.font12black54Reguler,
+                      readOnly: true,
+                      decoration: InputDecoration(
+                          labelText: S
+                              .of(context)
+                              .toDate,
+                          labelStyle: TextStyles.font12black54Reguler,
+                          border: const OutlineInputBorder(),
+                          suffixIcon: Icon(
+                            Icons.calendar_month_outlined,
+                            size: MediaQuery
+                                .of(context)
+                                .size
+                                .width * .1,
+                          )),
+                      onTap: () => _pickDate(context, false),
+                      controller: TextEditingController(
+                        text: _endDate != null
+                            ? Intl.defaultLocale == english
+                            ? DateFormat('yyyy-MM-dd').format(_endDate!)
+                            : DateFormat("dd-MM-yyyy").format(_endDate!)
+                            : '',
+                      ),
+                    ),
+                    verticalSpacing(
+                        MediaQuery
+                            .of(context)
+                            .size
+                            .height * .02),
+                    Text(
+                      "$_duration  ${S
+                          .of(context)
+                          .days}",
+                      style: TextStyles.font12black54Reguler,
+                    ),
+                    verticalSpacing(
+                        MediaQuery
+                            .of(context)
+                            .size
+                            .height * .02),
+                    TextField(
+                      controller: notesController,
+                      decoration: InputDecoration(
+                        labelText: S
+                            .of(context)
+                            .notes,
+                        labelStyle: TextStyles.font12black54Reguler,
+                        border: const OutlineInputBorder(),
+                      ),
+                      maxLines: 3,
+                    ),
+                    verticalSpacing(
+                        MediaQuery
+                            .of(context)
+                            .size
+                            .height * .02),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: 30.h, horizontal: 50.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              validateThenAddVaccation(context);
+                            },
+                            child: Text(
+                              S
+                                  .of(context)
+                                  .send,
+                              style: TextStyles.font16BlueBold,
                             ),
-                            style: TextStyles.font12black54Reguler,
                           ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            style: TextStyles.font12black54Reguler,
-                            readOnly: true,
-                            decoration: InputDecoration(
-                                labelText: S.of(context).toDate,
-                                labelStyle: TextStyles.font12black54Reguler,
-                                border: const OutlineInputBorder(),
-                                suffixIcon: Icon(
-                                  Icons.calendar_month_outlined,
-                                  size: MediaQuery.of(context).size.width * .1,
-                                )),
-                            onTap: () => _pickDate(context, false),
-                            controller: TextEditingController(
-                              text: _endDate != null
-                                  ? Intl.defaultLocale == english
-                                      ? DateFormat('yyyy-MM-dd').format(_endDate!)
-                                      : DateFormat("dd-MM-yyyy").format(_endDate!)
-                                  : '',
+                          ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .pushReplacementNamed(Routes.homeScreen);
+                            },
+                            child: Text(
+                              S
+                                  .of(context)
+                                  .cancel,
+                              style: TextStyles.font16BlueBold,
                             ),
                           ),
-                          verticalSpacing(
-                              MediaQuery.of(context).size.height * .02),
-                          Text(
-                            "$_duration  ${S.of(context).days}",
-                            style: TextStyles.font12black54Reguler,
-                          ),
-                          verticalSpacing(
-                              MediaQuery.of(context).size.height * .02),
-                          TextField(
-                            controller: notesController,
-                            decoration: InputDecoration(
-                              labelText: S.of(context).notes,
-                              labelStyle: TextStyles.font12black54Reguler,
-                              border: const OutlineInputBorder(),
-                            ),
-                            maxLines: 3,
-                          ),
-                          verticalSpacing(
-                              MediaQuery.of(context).size.height * .02),
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 30.h, horizontal: 50.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    validateThenAddVaccation(context);
-                                  },
-                                  child: Text(
-                                    S.of(context).send,
-                                    style: TextStyles.font16BlueBold,
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    context
-                                        .pushReplacementNamed(Routes.homeScreen);
-                                  },
-                                  child: Text(
-                                    S.of(context).cancel,
-                                    style: TextStyles.font16BlueBold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const RequestBlockListener()
                         ],
                       ),
                     ),
-                  ),
+                    const RequestBlockListener()
+                  ],
                 ),
               ),
             ),
-          )
+          ),
+        ),
+      ),
+    )
         : RequestFormScreenTablet(
-            changeLanguage: widget.changeLanguage,
-          );
+      changeLanguage: widget.changeLanguage,
+    );
   }
 
   getToken() async {
@@ -278,6 +319,6 @@ class RequestFormScreenState extends State<RequestFormScreen> {
     }
   }
 
-
-
 }
+
+

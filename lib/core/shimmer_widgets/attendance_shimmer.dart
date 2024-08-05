@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../helpers/methods.dart';
+import '../helpers/helper_methods.dart';
 import 'my_shimmer.dart';
 
 class AttendanceShimmer extends StatelessWidget {
@@ -11,7 +11,7 @@ class AttendanceShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children:[
+        children: [
           ShimmerWidget.rectangular(height: 100.h),
           verticalSpacing(10),
           ShimmerWidget.rectangular(height: 100.h),
@@ -21,6 +21,6 @@ class AttendanceShimmer extends StatelessWidget {
           verticalSpacing(10),
 
           ShimmerWidget.rectangular(height: 100.h)
-        ] );
+        ]);
   }
 }

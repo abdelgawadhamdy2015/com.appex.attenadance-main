@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar_tablet.dart';
 import 'package:ttech_attendance/core/widgets/my_drawer.dart';
@@ -279,6 +279,4 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
   void cleare() {
     setState(() {
       notesController.clear();
-    });
-  }
-}
+    });}}

@@ -4,7 +4,7 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/bottom_app_bar.dart';
 
-import '../helpers/methods.dart';
+import '../helpers/helper_methods.dart';
 
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Function(Locale) changeLanguage;
@@ -61,14 +61,20 @@ class _MyAppBarState extends State<MyAppBar> {
             ),
             // horozintalSpacing(MediaQuery.of(context).size.width * .05),
 
-               Image.asset(
-                "images/smaller_apex.png",
-                width: MediaQuery.of(context).size.width * .15,
+            Image.asset(
+              "images/smaller_apex.png",
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * .15,
 
             ),
             const Spacer(),
             const Icon(Icons.notifications_none_outlined),
-            horizontalSpacing(MediaQuery.of(context).size.width * .05),
+            horizontalSpacing(MediaQuery
+                .of(context)
+                .size
+                .width * .05),
             DropdownButton(
                 dropdownColor: Colors.blueAccent,
                 alignment: AlignmentDirectional.center,
@@ -89,7 +95,10 @@ class _MyAppBarState extends State<MyAppBar> {
                     });
                   }
                 }),
-            horizontalSpacing(MediaQuery.of(context).size.width * .05),
+            horizontalSpacing(MediaQuery
+                .of(context)
+                .size
+                .width * .05),
             const VerticalDivider(
               thickness: 1.5,
               width: 1,
@@ -101,12 +110,14 @@ class _MyAppBarState extends State<MyAppBar> {
                   borderRadius: BorderRadius.circular(40), color: Colors.white),
               child: Image.asset(
                 "assets/man.png",
-                height: MediaQuery.of(context).size.height * .05,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height * .05,
               ),
             )
           ],
         ),
       ),
     );
-  }
-}
+  }}

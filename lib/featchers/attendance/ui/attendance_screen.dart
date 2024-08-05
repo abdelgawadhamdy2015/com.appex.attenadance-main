@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/attendance_shimmer.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
@@ -181,12 +181,16 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                       return const AttendanceShimmer();
                     }
                     return Padding(
-                      key: context.read<AttendanceCubit>().formKey,
+                      key: context
+                          .read<AttendanceCubit>()
+                          .formKey,
                       padding: EdgeInsets.all(15.0.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          ResponsiveBreakpoints.of(context).isMobile
+                          ResponsiveBreakpoints
+                              .of(context)
+                              .isMobile
                               ? const TestAttendanceBord()
                               : const AttendanceBoardTablet(),
                           verticalSpacing(16),
@@ -196,22 +200,33 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                             controller: _notesController,
                             decoration: InputDecoration(
                               labelStyle: TextStyles.font12black54Reguler,
-                              labelText: S.of(context).notes,
+                              labelText: S
+                                  .of(context)
+                                  .notes,
                               border: const OutlineInputBorder(),
                             ),
                           ),
                           verticalSpacing(5),
-                          ResponsiveBreakpoints.of(context).isMobile
+                          ResponsiveBreakpoints
+                              .of(context)
+                              .isMobile
                               ? WorkTimeBoard(
-                                  data: context.read<AttendanceCubit>().data)
+                              data: context
+                                  .read<AttendanceCubit>()
+                                  .data)
                               : const WorkTimeTablet(),
                           Container(
-                            height: MediaQuery.of(context).size.height * .3,
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * .3,
                             padding: EdgeInsets.symmetric(vertical: 10.h),
                             child: Card(
                               child: GoogleMap(
                                 initialCameraPosition: CameraPosition(
-                                  target: context.read<AttendanceCubit>().currentPosition,
+                                  target: context
+                                      .read<AttendanceCubit>()
+                                      .currentPosition,
                                   zoom: 14,
                                 ),
                                 myLocationEnabled: true,
@@ -220,7 +235,9 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                   controller.animateCamera(
                                     CameraUpdate.newCameraPosition(
                                       CameraPosition(
-                                          target: context.read<AttendanceCubit>().currentPosition, zoom: 14),
+                                          target: context
+                                              .read<AttendanceCubit>()
+                                              .currentPosition, zoom: 14),
                                     ),
                                   );
                                 },
@@ -238,7 +255,4 @@ class _AttendanceScreen extends State<AttendanceScreen> {
         ),
       ),
     );
-  }
-
-
-}
+  }}
