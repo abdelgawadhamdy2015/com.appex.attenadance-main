@@ -4,10 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:ttech_attendance/featchers/attendance/data/models/attendance_request.dart';
 import 'package:ttech_attendance/featchers/attendance/data/repo/send_attendance_repo.dart';
-import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/send_attendance_state.dart';
+import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_state.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 
-import '../../../../../core/helpers/constants.dart';
+import '../../../../core/helpers/constants.dart';
 
 class SendAttendanceCubit extends Cubit<SendAttendanceState> {
   SendAttendanceCubit(this.sendAttendanceRepo)

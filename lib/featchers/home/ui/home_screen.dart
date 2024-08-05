@@ -34,24 +34,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String token='';
-//late AuthProvider authProvider;
 
-
-
-  @override
-  void dispose() {
-
-    super.dispose();
-  }
 
   @override
   void initState() {
     super.initState();
-   // signalRService.startConnection(ApiConstants.authToken);
-    // authProvider = Provider.of<AuthProvider>(context);
-
+    // get token from shared preference and set it on variable token
     getToken();
-
   }
 
   @override
@@ -73,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               child: Column(
                 children: [
+                  // set attendance data on first size box
                   const HeaderBlockListener(),
 
                   BlocBuilder<HomeCubit, HomeState>(
@@ -152,7 +142,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     token = preferences.getString(myToken)!;
-   // context.read<AuthCubit>().login();
     setState(() {
       getHeader(context);
     });

@@ -16,8 +16,8 @@ import 'package:ttech_attendance/featchers/performance_panel/data/models/perform
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_state.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/performance_block_listener.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel_tablet.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_block_listener.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_panel_tablet.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class PerformancePanel extends StatefulWidget {
@@ -34,8 +34,11 @@ class _PerformancePanel extends State<PerformancePanel> {
   List<Day> dataAsString = [];
   DateTime? _startDate;
   DateTime? _endDate;
+  DateFormat format=DateFormat('dd-MMMM-yyyy');
 
   Future<void> _selectDate(BuildContext context, bool isStart) async {
+
+
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate:
@@ -116,17 +119,14 @@ class _PerformancePanel extends State<PerformancePanel> {
                                   style: TextStyles.font12black54Reguler,
                                   controller: TextEditingController(
                                     text: _startDate != null
-                                        ? Intl.defaultLocale == english
-                                            ? DateFormat('dd-MMMM-yyyy')
-                                                .format(_startDate!)
-                                            : DateFormat('dd-MMMM-yyyy')
+                                        ?  format
                                                 .format(_startDate!)
                                         : S.of(context).fromDate,
                                   ),
                                   decoration: InputDecoration(
                                       labelText: S.of(context).fromDate,
                                       hintText: _startDate != null
-                                          ? DateFormat('dd-MMMM-yyyy')
+                                          ? format
                                               .format(_startDate!)
                                           : S.of(context).fromDate,
                                       hintStyle:
@@ -149,20 +149,14 @@ class _PerformancePanel extends State<PerformancePanel> {
                                   style: TextStyles.font12black54Reguler,
                                   controller: TextEditingController(
                                     text: _endDate != null
-                                        ? Intl.defaultLocale == english
-                                            ? DateFormat('dd-MMMM-yyyy')
-                                                .format(_endDate!)
-                                            : DateFormat("dd-MMMM-yyyy")
+                                        ? format
                                                 .format(_endDate!)
                                         : S.of(context).toDate,
                                   ),
                                   decoration: InputDecoration(
                                       labelText: S.of(context).toDate,
                                       hintText: _endDate != null
-                                          ? Intl.defaultLocale == english
-                                              ? DateFormat('dd-MMMM-yyyy')
-                                                  .format(_endDate!)
-                                              : DateFormat("yyyy-MMMM-dd")
+                                          ? format
                                                   .format(_endDate!)
                                           : S.of(context).toDate,
                                       hintStyle:

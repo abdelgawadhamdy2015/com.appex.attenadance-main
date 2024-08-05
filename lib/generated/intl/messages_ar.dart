@@ -69,7 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notAttendance":
             MessageLookupByLibrary.simpleMessage(" لم تقم بتسجيل الحضور بعد"),
         "notLeave":
-            MessageLookupByLibrary.simpleMessage("لم تقم بتسجيل الانصرافبعد"),
+            MessageLookupByLibrary.simpleMessage("لم تقم بتسجيل الانصراف بعد"),
         "notes": MessageLookupByLibrary.simpleMessage("ملاحظات"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "performancePanel": MessageLookupByLibrary.simpleMessage("لوحة الأداء"),

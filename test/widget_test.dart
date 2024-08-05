@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ttech_attendance/featchers/request_form/request_form_screen.dart';
+import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
