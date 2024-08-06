@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar_tablet.dart';
 import 'package:ttech_attendance/core/widgets/my_drawer.dart';
@@ -13,8 +13,8 @@ import 'package:ttech_attendance/featchers/request_form/date/models/request_mode
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_state.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
-import 'package:ttech_attendance/featchers/request_form/ui/all_vaccations_listener.dart';
-import 'package:ttech_attendance/featchers/request_form/ui/request_block_listener.dart';
+import 'package:ttech_attendance/featchers/request_form/ui/widget/all_vaccations_listener.dart';
+import 'package:ttech_attendance/featchers/request_form/ui/widget/request_block_listener.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class RequestFormScreenTablet extends StatefulWidget {
@@ -279,6 +279,4 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
   void cleare() {
     setState(() {
       notesController.clear();
-    });
-  }
-}
+    });}}

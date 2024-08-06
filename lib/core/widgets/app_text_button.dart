@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../helpers/size_config.dart';
 import '../theming/colors.dart';
 
 class AppButtonText extends StatelessWidget {
@@ -32,17 +33,17 @@ class AppButtonText extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
             shape: WidgetStateProperty.all(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 16),
+              borderRadius: BorderRadius.circular(borderRadius ?? 16.r),
             )),
             backgroundColor:
                 WidgetStatePropertyAll(backGroundColor ?? ColorManger.mainBlue),
             padding: WidgetStateProperty.all(
               EdgeInsets.symmetric(
-                  horizontal: horizontalPadding ?? 12.w,
-                  vertical: verticalPadding ?? 14.h),
+                  horizontal: SizeConfig.screenWidth! * .016,
+                  vertical: SizeConfig.screenHeight! * .016),
             ),
             fixedSize: WidgetStateProperty.all(
-                Size(buttonWidth ?? double.maxFinite, buttonHeight ?? 50.h))),
+                Size(buttonWidth ?? double.maxFinite, buttonHeight ?? SizeConfig.screenHeight!*.05))),
         child: Text(
           butonText,
           style: textStyle,

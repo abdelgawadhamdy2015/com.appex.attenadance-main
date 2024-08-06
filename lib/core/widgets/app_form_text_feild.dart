@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../helpers/size_config.dart';
 import '../theming/colors.dart';
 import '../theming/text_styles.dart';
 
@@ -46,7 +47,9 @@ class AppFormTextFeild extends StatelessWidget {
         suffixIcon: suffixIcon,
         isDense: true,
         contentPadding: contentPadding ??
-            EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
+            EdgeInsets.symmetric(
+                horizontal: SizeConfig.screenWidth! * .02,
+                vertical: SizeConfig.screenHeight! * .018),
         focusedBorder: foucesedBorder ??
             OutlineInputBorder(
               borderSide:
@@ -62,8 +65,8 @@ class AppFormTextFeild extends StatelessWidget {
         errorBorder: errorBorder ??
             OutlineInputBorder(
                 borderSide:
-                    const BorderSide(color: ColorManger.mainBlue, width: 1.3),
-                borderRadius: BorderRadius.circular(16)),
+                     BorderSide(color: ColorManger.mainBlue, width: 1.3.w),
+                borderRadius: BorderRadius.circular(16.r)),
       ),
       obscureText: obsecure ?? false,
       validator: (value) {

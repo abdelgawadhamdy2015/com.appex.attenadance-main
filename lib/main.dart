@@ -7,7 +7,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
-import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/send_attendance_cubit.dart';
+import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
 import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart';
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
@@ -15,9 +15,9 @@ import 'package:ttech_attendance/featchers/forget_password/forget_password_scree
 import 'package:ttech_attendance/featchers/home/ui/home_screen.dart';
 import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
-import 'package:ttech_attendance/featchers/performance_panel/performance_panel.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
-import 'package:ttech_attendance/featchers/request_form/request_form_screen.dart';
+import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
 import 'package:ttech_attendance/featchers/splash_screen/splash_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 

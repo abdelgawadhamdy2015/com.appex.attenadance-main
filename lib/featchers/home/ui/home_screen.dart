@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar_tablet.dart';
@@ -12,12 +12,9 @@ import 'package:ttech_attendance/core/widgets/my_drawer.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_state.dart';
-import 'package:ttech_attendance/featchers/home/ui/widgets/attendance_log_tablet.dart';
-import 'package:ttech_attendance/featchers/home/ui/widgets/events_approvals_tablet.dart';
 import 'package:ttech_attendance/featchers/home/ui/widgets/header_block_listener.dart';
 import 'package:ttech_attendance/featchers/home/ui/widgets/quick_access_tablet.dart';
 import 'package:ttech_attendance/featchers/home/ui/widgets/welcome_widget.dart';
-import 'package:ttech_attendance/featchers/home/ui/widgets/welcome_widget_tablet.dart';
 
 import 'widgets/attendance_log.dart';
 import 'widgets/events_approvals.dart';
@@ -34,24 +31,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String token='';
-//late AuthProvider authProvider;
 
-
-
-  @override
-  void dispose() {
-
-    super.dispose();
-  }
 
   @override
   void initState() {
     super.initState();
-   // signalRService.startConnection(ApiConstants.authToken);
-    // authProvider = Provider.of<AuthProvider>(context);
-
+    // get token from shared preference and set it on variable token
     getToken();
-
   }
 
   @override
@@ -73,7 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
               child: Column(
                 children: [
+                  // set attendance data on first size box
                   const HeaderBlockListener(),
+
 
                   BlocBuilder<HomeCubit, HomeState>(
                     builder: (context, state) {
@@ -82,45 +70,42 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                         return Padding(
                           key: context.read<HomeCubit>().formKey,
-                          padding: EdgeInsets.all(20.0.h),
+                          padding: EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth! * .01,vertical: SizeConfig.screenHeight! * .01),
                           child: Column(
                             children: [
                               verticalSpacing(
-                                  MediaQuery.of(context).size.height * .01),
-                              ResponsiveBreakpoints.of(context).isMobile
-                                  ? const WelcomeWidget()
-                                  : const WelcomeWidgetTablet(),
+                                  SizeConfig.screenHeight! * .01),
+                               const WelcomeWidget()
+                                  ,
                               verticalSpacing(
-                                  MediaQuery.of(context).size.height * .01),
-                              ResponsiveBreakpoints.of(context).isMobile
-                                  ? const AttendanceLog()
-                                  : const AttendanceLogTablet(),
+                                  SizeConfig.screenHeight! * .01),
+                              const AttendanceLog()
+                                  ,
                               verticalSpacing(
-                                  MediaQuery.of(context).size.height * .01),
+                                  SizeConfig.screenHeight! * .01),
                               ResponsiveBreakpoints.of(context).isMobile
                                   ? const QuickAccess()
                                   : const QuickAccessTablet(),
                               verticalSpacing(
-                                  MediaQuery.of(context).size.height * .01),
-                              ResponsiveBreakpoints.of(context).isMobile
-                                  ? const EventsApprovals()
-                                  : const EventsApprovalsTablet(),
+                                  SizeConfig.screenHeight! * .01),
+                             const EventsApprovals()
+                                 ,
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     const Spacer(),
                                     SizedBox(
                                       height:
-                                          MediaQuery.of(context).size.width * .1,
+                                      SizeConfig.screenWidth! * .1,
                                       width:
-                                          MediaQuery.of(context).size.height * .1,
+                                      SizeConfig.screenHeight! * .1,
                                       child: FloatingActionButton(
                                         backgroundColor: Colors.blue,
                                         onPressed: () {},
                                         child: Icon(
                                           Icons.add,
                                           size:
-                                              MediaQuery.of(context).size.height *
+                                          SizeConfig.screenHeight! *
                                                   .05,
                                         ),
                                       ),
@@ -129,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Icon(
                                       Icons.menu_open_sharp,
                                       size:
-                                          MediaQuery.of(context).size.height * .1,
+                                         SizeConfig.screenHeight! * .1,
                                       color: Colors.blue,
                                     ),
                                   ]),
@@ -152,7 +137,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     token = preferences.getString(myToken)!;
-   // context.read<AuthCubit>().login();
     setState(() {
       getHeader(context);
     });
@@ -162,3 +146,4 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<HomeCubit>().emitHomeState("$myBearer $token");
   }
 }
+

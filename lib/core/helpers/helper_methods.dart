@@ -3,6 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../generated/l10n.dart';
 
+
+bool checkIfNull(List list){
+  bool isNull=false;
+  for (var element in list) {
+    element ==null? isNull=true: isNull= false;
+  }
+  return isNull;
+}
+
 SizedBox verticalSpacing(double height) => SizedBox(
       height: height.h,
     );
@@ -26,3 +35,5 @@ String getHours(String time,BuildContext context) {
   return "${shiftTime.hour} ${shiftTime.minute!=00? ": ${shiftTime.minute}":"" } ${S.of(context).hours}";
 
 }
+
+
