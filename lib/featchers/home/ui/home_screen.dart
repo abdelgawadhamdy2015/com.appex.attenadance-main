@@ -62,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // set attendance data on first size box
                   const HeaderBlockListener(),
 
+
                   BlocBuilder<HomeCubit, HomeState>(
                     builder: (context, state) {
                       if (state is Loading) {
