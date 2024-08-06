@@ -23,7 +23,7 @@ class QuickAccess extends StatelessWidget {
               S.of(context).quickAccessList,
               style: TextStyles.font12blackBold,
             ),
-            verticalSpacing(16),
+            verticalSpacing(SizeConfig.screenHeight!* .016),
             GridView.count(
               crossAxisCount: 3,
               shrinkWrap: true,
@@ -79,11 +79,11 @@ class QuickAccess extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .005,vertical: SizeConfig.screenHeight! * .005),
+                padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .01,vertical: SizeConfig.screenHeight! * .01),
               ),
               child: Image.asset(
                 icon,
-                height: SizeConfig.screenHeight! * .02,
+                height: SizeConfig.screenHeight! * .04,
               ),
             ),
             const Spacer(),

@@ -1,7 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
-import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
@@ -25,9 +23,7 @@ setupDialogState(BuildContext context, String data, bool isError) {
           onPressed: () {
             context.pop();
 
-            if (ApiConstants.dioExceptionType == DioExceptionType.badResponse) {
-              context.pushReplacementNamed(Routes.loginScreen);
-            }
+
           },
           child: Text(
             'OK',

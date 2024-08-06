@@ -144,7 +144,7 @@ class PrintTransactions {
                                                 : pw.TextDirection.ltr,
                                         child: pw.Text(
                                           style: pdfFontStyle,
-                                          e.shift1TimeOut!,
+                                          e.shift1TimeOut?? "",
                                         ),
                                       )),
                                   pw.Padding(
@@ -156,7 +156,7 @@ class PrintTransactions {
                                                 : pw.TextDirection.ltr,
                                         child: pw.Text(
                                           style: pdfFontStyle,
-                                          e.shift1TimeIn!,
+                                          e.shift1TimeIn??"",
                                         ),
                                       )),
                                   pw.Padding(

@@ -89,9 +89,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
       body: OfflineBuilderWidget(
         child: SafeArea(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
-                horizontal: SizeConfig.screenWidth! * .016,
-                vertical: SizeConfig.screenHeight! * .016),
+            padding: SizeConfig().getScreenPadding(),
             child: Container(
               padding: EdgeInsets.symmetric(
                   horizontal: SizeConfig.screenWidth! * .02,
