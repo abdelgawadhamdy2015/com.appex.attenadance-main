@@ -85,7 +85,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                         vertical: SizeConfig.screenHeight! * .01,
                         horizontal: SizeConfig.screenHeight! * .01),
                     child: Text(
-                      getShift(widget.shift),
+                      getShift(widget.shift,context),
                       style: TextStyles.font12black54Reguler,
                     ))
               ],
@@ -93,7 +93,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
             Visibility(
               visible: widget.shiftTimeOut == null,
               child: Container(
-                height: SizeConfig.screenHeight! * .1,
+               // height: SizeConfig.screenHeight! * .1,
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(
                     vertical: SizeConfig.screenHeight! * .01,
@@ -148,17 +148,5 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                 isShift4Complete: widget.shift4Complete));
   }
 
-  String getShift(int shift) {
-    switch (shift) {
-      case 1:
-        return S.of(context).shift1;
-      case 2:
-        return S.of(context).shift2;
-      case 3:
-        return S.of(context).shift3;
-      case 4:
-        return S.of(context).shift4;
-    }
-    return "";
-  }
+
 }

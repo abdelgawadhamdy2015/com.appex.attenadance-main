@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
+import '../../core/helpers/size_config.dart';
 import '../../core/widgets/mytextfile.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -18,17 +19,17 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class ForgetPasswordState extends State<ForgetPassword> {
-  final TextEditingController companytxt = TextEditingController();
-  final TextEditingController emailtxt = TextEditingController();
+  final TextEditingController companyText = TextEditingController();
+  final TextEditingController emailText = TextEditingController();
   bool lang = true;
-  final formkey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    var sendbutton = _sendbtn();
-    var logopar = logoBar();
+    var sendButton = _sendbtn();
+    var logoPar = logoBar();
     var logoText = myLogoText();
-    var textfield = _alltextfiled(sendbutton);
+    var textField = _alltextfiled(sendButton);
 
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
@@ -38,12 +39,12 @@ class ForgetPasswordState extends State<ForgetPassword> {
       // ),
       body: OfflineBuilderWidget(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: SizeConfig().getScreenPadding(),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                logopar,
+                logoPar,
                 Center(
                   child: logoText,
                 ),
@@ -51,8 +52,8 @@ class ForgetPasswordState extends State<ForgetPassword> {
                   height: 50.h,
                 ),
                 Form(
-                  key: formkey,
-                  child: textfield,
+                  key: formKey,
+                  child: textField,
                 ),
               ],
             ),
@@ -65,13 +66,13 @@ class ForgetPasswordState extends State<ForgetPassword> {
   logoBar() {
     return ListTile(
       leading: Image.asset(
-        "images/logo (1).jpg",
+        "images/small_apex.png",
         fit: BoxFit.fill,
       ),
       trailing: ElevatedButton(
         onPressed: () {
           lang = !lang;
-          formkey.currentState!.reset();
+          formKey.currentState!.reset();
         },
         style: ElevatedButton.styleFrom(
           //shape:OutlineInputBorder(borderRadius: 5),
@@ -114,7 +115,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
         MyTextForm(
             hint: S.of(context).dbName,
             excep: S.of(context).dbName,
-            control: companytxt),
+            control: companyText),
         Container(
           padding: const EdgeInsets.only(top: 25, bottom: 20),
           child: Text(S.of(context).email),
@@ -122,7 +123,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
         MyTextForm(
           hint: S.of(context).email,
           excep: S.of(context).email,
-          control: emailtxt,
+          control: emailText,
         ),
         Container(
           padding: const EdgeInsets.only(top: 20),
@@ -137,7 +138,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
   _sendbtn() {
     return ElevatedButton(
       onPressed: () {
-        if (formkey.currentState!.validate()) {}
+        if (formKey.currentState!.validate()) {}
       },
       child: Text(
         S.of(context).send,

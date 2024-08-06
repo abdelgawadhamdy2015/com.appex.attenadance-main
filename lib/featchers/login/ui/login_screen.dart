@@ -28,7 +28,7 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
-  String selectedLanguage = 'English';
+  String selectedLanguage = 'Arabic';
 
 
   LoginScreenState();
@@ -47,19 +47,15 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ResponsiveBreakpoints
-    //    .of(context)
-    //    .isMobile
-    //    ?
+
     return Scaffold(
         backgroundColor: const Color(0xffffffff),
         body: OfflineBuilderWidget(
           child: SafeArea(
             child: Container(
-              margin: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.screenWidth! * .03,
-                  vertical: SizeConfig.screenHeight! * .03),
-              child: SingleChildScrollView(
+              padding:SizeConfig().getScreenPadding(),
+
+            child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

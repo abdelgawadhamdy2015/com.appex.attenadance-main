@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
@@ -99,15 +100,12 @@ class _PerformancePanel extends State<PerformancePanel> {
           child: SafeArea(
             child: Container(
               color: ColorManger.lightGray,
-              padding: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.screenWidth! * .05,
-                  vertical: SizeConfig.screenHeight! * .01),
+              padding: SizeConfig().getScreenPadding(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      horizontalSpacing(SizeConfig.screenWidth! * .05),
                       Expanded(
                         child: GestureDetector(
                           onTap: () => _selectDate(context, true),
@@ -131,8 +129,7 @@ class _PerformancePanel extends State<PerformancePanel> {
                         ),
                       ),
                       const PerformanceBlockListener(),
-                      horizontalSpacing(SizeConfig.screenWidth! * .05),
-                      horizontalSpacing(10),
+                      horizontalSpacing(SizeConfig.screenWidth! * .1),
                       Expanded(
                         child: GestureDetector(
                           onTap: () => _selectDate(context, false),
@@ -157,7 +154,7 @@ class _PerformancePanel extends State<PerformancePanel> {
                       ),
                     ],
                   ),
-                  verticalSpacing(SizeConfig.screenHeight! * .05),
+                  verticalSpacing(SizeConfig.screenHeight! * .02),
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -167,7 +164,7 @@ class _PerformancePanel extends State<PerformancePanel> {
                               if (days.isNotEmpty) {
                                 PrintTransactions.printEmployeeAttendanceList(
                                     days,
-                                    "transaction from $_startDate to $_endDate",
+                                    "${S.of(context).transaction} ${S.of(context).from} $_startDate ${S.of(context).to} $_endDate",
                                     context);
                               }
                             },
@@ -209,7 +206,27 @@ class _PerformancePanel extends State<PerformancePanel> {
                                 child: ListTile(
                                   title: Row(
                                     children: [
+                                      Text(getFormattedTimeOfDay("04:20", context)),
                                       const Spacer(),
+                                      Container(
+                                        width: SizeConfig.screenWidth! * .4,
+                                        height: SizeConfig.screenHeight! * .01,
+                                        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth!* .3 ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20.r),
+                                          color: Colors.black,
+                                        ),
+                                        //  child: const Divider(
+                                        //    //height: SizeConfig.screenHeight! * .01,
+                                        //    thickness: 10,
+                                        //    indent: 50,
+                                        //    endIndent: 20,
+                                        // color: Colors.black,
+                                        //
+                                        //  ),
+
+                                      ),
+                                      Spacer(),
                                       Text(
                                         days[index].date != null
                                             ? Intl.defaultLocale == arabic
@@ -218,53 +235,56 @@ class _PerformancePanel extends State<PerformancePanel> {
                                             : "",
                                         style: TextStyles.font12black54Reguler,
                                       ),
+
                                     ],
                                   ),
+
                                   subtitle: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Divider(
-                                        height: SizeConfig.screenHeight! * .01,
-                                        thickness: 3,
-                                        indent: 50,
-                                        endIndent: 20,
-                                        color: Colors.black,
-                                      ),
+                                      verticalSpacing(
+                                          SizeConfig.screenHeight! * .005),
+
+                                      verticalSpacing(
+                                          SizeConfig.screenHeight! * .005),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
+
+
+
                                           Text(S.of(context).attendanceTime),
                                           horizontalSpacing(
-                                              SizeConfig.screenWidth! * .01),
+                                              SizeConfig.screenWidth! * .04),
                                           const Icon(Icons.move_down_sharp)
                                         ],
                                       ),
                                       Text(days[index].shift1TimeIn ?? ""),
                                       verticalSpacing(
-                                          SizeConfig.screenHeight! * .01),
+                                          SizeConfig.screenHeight! * .005),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(S.of(context).leaveTime),
                                           horizontalSpacing(
-                                              SizeConfig.screenWidth! * .01),
+                                              SizeConfig.screenWidth! * .04),
                                           const Icon(Icons.move_up)
                                         ],
                                       ),
                                       Text(days[index].shift1TimeOut ?? ""),
                                       verticalSpacing(
-                                          SizeConfig.screenHeight! * .01),
+                                          SizeConfig.screenHeight! * .005),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(S.of(context).workHours),
                                           horizontalSpacing(
-                                              SizeConfig.screenWidth! * .01),
+                                              SizeConfig.screenWidth! * .04),
                                           const Icon(Icons.timer)
                                         ],
                                       ),

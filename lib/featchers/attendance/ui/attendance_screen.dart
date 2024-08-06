@@ -1,12 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
@@ -20,7 +18,6 @@ import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cub
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bloc_listener.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bord.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/work_time_board.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/widget/work_time_tablet.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 import '../logic/cubit/attendance_state.dart';
@@ -175,14 +172,12 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                     }
                     return Padding(
                       key: context.read<AttendanceCubit>().formKey,
-                      padding: EdgeInsets.all(15.0.h),
+                      padding: SizeConfig().getScreenPadding(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-
                           const AttendanceBord(),
-
-                          verticalSpacing(16),
+                          verticalSpacing(SizeConfig.screenHeight!*.01),
                           TextField(
                             mouseCursor: SystemMouseCursors.basic,
                             maxLines: 3,
@@ -193,14 +188,12 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                               border: const OutlineInputBorder(),
                             ),
                           ),
-                          verticalSpacing(5),
-                          ResponsiveBreakpoints.of(context).isMobile
-                              ? WorkTimeBoard(
-                                  data: context.read<AttendanceCubit>().data)
-                              : const WorkTimeTablet(),
+                          verticalSpacing(SizeConfig.screenHeight!*.005),
+                           WorkTimeBoard(
+                                  data: context.read<AttendanceCubit>().data),
                           Container(
                             height: SizeConfig.screenHeight! * .3,
-                            padding: EdgeInsets.symmetric(vertical: 10.h),
+                            padding: EdgeInsets.symmetric(vertical: SizeConfig.screenHeight!*.01),
                             child: Card(
                               child: GoogleMap(
                                 initialCameraPosition: CameraPosition(

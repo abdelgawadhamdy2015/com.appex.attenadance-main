@@ -21,6 +21,7 @@ class AttendanceBord extends StatefulWidget {
 class _AttendanceBoard extends State<AttendanceBord> {
   bool isAttendance = true;
   HeaderData data = HeaderData();
+  Map<String, dynamic> map = {};
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,7 @@ class _AttendanceBoard extends State<AttendanceBord> {
             data = context.read<SendAttendanceCubit>().data;
             return BlocBuilder<SendAttendanceCubit, SendAttendanceState>(
                 builder: (context, state) {
+              map = data.toJson();
               return IntrinsicHeight(
                 child: Column(
                   children: [
@@ -42,7 +44,11 @@ class _AttendanceBoard extends State<AttendanceBord> {
                         shiftTimeOut: data.shift1_TimeOut,
                         shift: 1,
                         shiftType: data.shiftType),
-                    !checkIfNull([data.shift1_TimeIn, data.shift1_TimeOut, data.hasShift2]) &&
+                    !checkIfNull([
+                              data.shift1_TimeIn,
+                              data.shift1_TimeOut,
+                              data.hasShift2
+                            ]) &&
                             (data.hasShift2! || data.shiftType == 1)
                         ? AttendanceListItem(
                             shiftTimeIn: data.shift2_TimeIn,
@@ -56,8 +62,8 @@ class _AttendanceBoard extends State<AttendanceBord> {
                               data.shift1_TimeIn,
                               data.shift1_TimeOut,
                               data.shift2_TimeIn,
-                              data.shift2_TimeOut
-                      ,data.hasShift3
+                              data.shift2_TimeOut,
+                              data.hasShift3
                             ]) &&
                             (data.hasShift3! || data.shiftType == 1)
                         ? AttendanceListItem(
@@ -75,9 +81,9 @@ class _AttendanceBoard extends State<AttendanceBord> {
                               data.shift2_TimeOut,
                               data.shift3_TimeIn,
                               data.shift3_TimeOut,
-                      data.hasShift4
+                              data.hasShift4
                             ]) &&
-                            (data.hasShift4?? false || data.shiftType == 1)
+                            (data.hasShift4 ?? false || data.shiftType == 1)
                         ? AttendanceListItem(
                             shiftTimeIn: data.shift4_TimeIn,
                             shiftTimeOut: data.shift4_TimeOut,
