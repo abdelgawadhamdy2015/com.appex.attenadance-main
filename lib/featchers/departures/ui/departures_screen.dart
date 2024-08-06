@@ -25,9 +25,7 @@ class DeparturesScreen extends StatelessWidget {
       ),
       body: Container(
           color: ColorManger.morelightGray,
-          padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.screenWidth! * .005,
-              vertical: SizeConfig.screenHeight! * .005),
+          padding: SizeConfig().getScreenPadding(),
           child: Card(
             color: ColorManger.morelightGray,
             child: ListView.builder(

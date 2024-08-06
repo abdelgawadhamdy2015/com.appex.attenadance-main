@@ -18,4 +18,9 @@ class SizeConfig {
 
     print('this is the default size $defaultSize');
   }
+  getScreenPadding(){
+   return EdgeInsets.symmetric(horizontal:SizeConfig.screenWidth! * .04,vertical: SizeConfig.screenHeight! * .01);
+  }
+
+
 }
