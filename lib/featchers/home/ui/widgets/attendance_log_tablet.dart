@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
@@ -62,7 +62,7 @@ class _AttendanceLogState extends State<AttendanceLogTablet> {
                   ? transactionWidget(
                       context.read<HomeCubit>().data.shift1_TimeIn!,
                       context.read<HomeCubit>().data.date!,
-                      S.of(context).presence,
+                      S.of(context).attendance,
                       Colors.green,
                       context)
                   : Center(
@@ -77,7 +77,7 @@ class _AttendanceLogState extends State<AttendanceLogTablet> {
                   ? transactionWidget(
                       context.read<HomeCubit>().data.shift1_TimeOut!,
                       context.read<HomeCubit>().data.date!,
-                      S.of(context).presence,
+                      S.of(context).leaving,
                       Colors.red,
                       context)
                   : Center(

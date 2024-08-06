@@ -1,8 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../helpers/methods.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
+import '../helpers/helper_methods.dart';
 import 'my_shimmer.dart';
 
 class AttendanceShimmer extends StatelessWidget {
@@ -10,17 +9,17 @@ class AttendanceShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height=SizeConfig.screenHeight!*.1;
+    double space=SizeConfig.screenHeight!*.01;
     return Column(
-        children:[
-          ShimmerWidget.rectangular(height: 100.h),
-          verticalSpacing(10),
-          ShimmerWidget.rectangular(height: 100.h),
-          verticalSpacing(10),
-
-          ShimmerWidget.rectangular(height: 100.h),
-          verticalSpacing(10),
-
-          ShimmerWidget.rectangular(height: 100.h)
-        ] );
+        children: [
+          ShimmerWidget.rectangular(height: height),
+          verticalSpacing(space),
+          ShimmerWidget.rectangular(height: height),
+          verticalSpacing(space),
+          ShimmerWidget.rectangular(height: height),
+          verticalSpacing(space),
+          ShimmerWidget.rectangular(height: height)
+        ]);
   }
 }

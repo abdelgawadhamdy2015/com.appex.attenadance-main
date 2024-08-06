@@ -11,15 +11,6 @@ class ArrowBackWidget extends StatelessWidget {
     return TextButton(
       onPressed: () => context.pushReplacementNamed(Routes.homeScreen),
       child:
-      // Intl.defaultLocale == arabic
-      //     ? Container(
-      //         // padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
-      //         child:
-      //         Platform.isIOS
-      //             ? const Icon(Icons.arrow_forward)
-      //             :
-      //         const Icon(Icons.arrow_back))
-      //     :
       const Icon((Icons.arrow_back)),
     );
   }

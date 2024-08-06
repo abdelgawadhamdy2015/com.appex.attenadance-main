@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
@@ -14,6 +13,8 @@ import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/perform
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_state.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_block_listener.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
+
+import '../../../../core/helpers/helper_methods.dart';
 
 class PerformancePanelTablet extends StatefulWidget {
   final Function(Locale) changeLanguage;
@@ -283,6 +284,5 @@ class _PerformancePanel extends State<PerformancePanelTablet> {
           ),
         ),
       ),
-    );
-  }
+    );}
 }

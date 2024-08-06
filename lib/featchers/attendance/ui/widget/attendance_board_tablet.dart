@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_state.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_state.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
+
+import '../../../../core/helpers/helper_methods.dart';
 
 class AttendanceBoardTablet extends StatefulWidget {
   const AttendanceBoardTablet({super.key});
@@ -33,12 +34,36 @@ class _AttendanceBoard extends State<AttendanceBoardTablet> {
             child: Column(
               children: [
                 Text(
-                  '${S.of(context).attendanceRecord}  ${context.read<AttendanceCubit>().data.shift1_TimeIn == "____" || context.read<AttendanceCubit>().data.shift1_TimeIn == null ? "____" : getFormattedTimeOfDay(context.read<AttendanceCubit>().data.shift1_TimeIn!, context)}',
+                  '${S
+                      .of(context)
+                      .attendanceRecord}  ${context
+                      .read<AttendanceCubit>()
+                      .data
+                      .shift1_TimeIn == "____" || context
+                      .read<AttendanceCubit>()
+                      .data
+                      .shift1_TimeIn == null ? "____" : getFormattedTimeOfDay(
+                      context
+                          .read<AttendanceCubit>()
+                          .data
+                          .shift1_TimeIn!, context)}',
                   style: TextStyle(fontSize: 16.sp),
                   textAlign: TextAlign.start,
                 ),
                 Text(
-                  '${S.of(context).leaveRecord}  ${context.read<AttendanceCubit>().data.shift1_TimeIn == "____" || context.read<AttendanceCubit>().data.shift1_TimeOut == null ? "____" : getFormattedTimeOfDay(context.read<AttendanceCubit>().data.shift1_TimeOut!, context)}',
+                  '${S
+                      .of(context)
+                      .leaveRecord}  ${context
+                      .read<AttendanceCubit>()
+                      .data
+                      .shift1_TimeIn == "____" || context
+                      .read<AttendanceCubit>()
+                      .data
+                      .shift1_TimeOut == null ? "____" : getFormattedTimeOfDay(
+                      context
+                          .read<AttendanceCubit>()
+                          .data
+                          .shift1_TimeOut!, context)}',
                   style: TextStyle(fontSize: 16.sp),
                   textAlign: TextAlign.start,
                 ),
@@ -65,28 +90,34 @@ class _AttendanceBoard extends State<AttendanceBoardTablet> {
                           fit: BoxFit.cover,
                           child: Text(
                             context
-                                            .read<AttendanceCubit>()
-                                            .data
-                                            .shift1_TimeIn ==
-                                        "____" &&
-                                    context
-                                            .read<AttendanceCubit>()
-                                            .data
-                                            .shift1_TimeIn !=
-                                        null
-                                ? S.of(context).signIn
+                                .read<AttendanceCubit>()
+                                .data
+                                .shift1_TimeIn ==
+                                "____" &&
+                                context
+                                    .read<AttendanceCubit>()
+                                    .data
+                                    .shift1_TimeIn !=
+                                    null
+                                ? S
+                                .of(context)
+                                .signIn
                                 : context
-                                                .read<AttendanceCubit>()
-                                                .data
-                                                .shift1_TimeOut ==
-                                            "____" &&
-                                        context
-                                                .read<AttendanceCubit>()
-                                                .data
-                                                .shift1_TimeOut !=
-                                            null
-                                    ? S.of(context).signOut
-                                    : S.of(context).signIn,
+                                .read<AttendanceCubit>()
+                                .data
+                                .shift1_TimeOut ==
+                                "____" &&
+                                context
+                                    .read<AttendanceCubit>()
+                                    .data
+                                    .shift1_TimeOut !=
+                                    null
+                                ? S
+                                .of(context)
+                                .signOut
+                                : S
+                                .of(context)
+                                .signIn,
                             style: TextStyles.font25WhiteBold,
                           ),
                         ),
@@ -100,5 +131,4 @@ class _AttendanceBoard extends State<AttendanceBoardTablet> {
         );
       },
     );
-  }
-}
+  }}

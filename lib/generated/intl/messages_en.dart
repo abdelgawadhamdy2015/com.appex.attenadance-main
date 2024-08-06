@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "am": MessageLookupByLibrary.simpleMessage("A.M"),
         "annualLeave": MessageLookupByLibrary.simpleMessage("Annual leave"),
+        "attendance": MessageLookupByLibrary.simpleMessage("Attendance"),
         "attendanceAndDepartureReports":
             MessageLookupByLibrary.simpleMessage("Reports"),
         "attendanceMovementsToday":
@@ -58,15 +59,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forget Password?"),
         "from": MessageLookupByLibrary.simpleMessage("from"),
         "fromDate": MessageLookupByLibrary.simpleMessage("From Date "),
+        "holiday": MessageLookupByLibrary.simpleMessage("Holiday"),
         "hours": MessageLookupByLibrary.simpleMessage("Hour"),
         "kindOfHoliday":
             MessageLookupByLibrary.simpleMessage("Kind Of Holiday"),
-        "leave": MessageLookupByLibrary.simpleMessage("Leave"),
         "leaveForReset":
             MessageLookupByLibrary.simpleMessage("Leave for reset"),
         "leaveRecord":
             MessageLookupByLibrary.simpleMessage("Leave recorded at "),
         "leaveTime": MessageLookupByLibrary.simpleMessage("Leave Time"),
+        "leaving": MessageLookupByLibrary.simpleMessage("Leaving"),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out "),
@@ -83,7 +85,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "permission": MessageLookupByLibrary.simpleMessage("Permission"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("please fill "),
         "pm": MessageLookupByLibrary.simpleMessage("P.M"),
-        "presence": MessageLookupByLibrary.simpleMessage("Presence"),
         "quickAccessList":
             MessageLookupByLibrary.simpleMessage("Quick access list"),
         "recordPresenceAndLeave":

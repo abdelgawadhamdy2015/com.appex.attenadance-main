@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/attendance/data/models/attendance_response.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
@@ -18,6 +19,8 @@ class SendAttendanceBlockListener extends StatefulWidget {
 
 class _SendAttendanceBlockListenerState
     extends State<SendAttendanceBlockListener> {
+
+   HeaderData data=HeaderData();
   @override
   Widget build(BuildContext context) {
     return BlocListener<SendAttendanceCubit, SendAttendanceState>(
@@ -35,50 +38,64 @@ class _SendAttendanceBlockListenerState
             },
             sendSuccess: (attendanceResponse) {
               AttendanceResponse response = attendanceResponse;
-              HeaderData data = context.read<SendAttendanceCubit>().data;
+               data = context.read<SendAttendanceCubit>().data;
+
               if (response.result == 1) {
+                List<String?> shiftTimes = [
+                  data.shift1_TimeIn,
+                  data.shift1_TimeOut,
+                  data.shift2_TimeIn,
+                  data.shift2_TimeOut,
+                  data.shift3_TimeIn,
+                  data.shift3_TimeOut,
+                  data.shift4_TimeIn,
+                  data.shift4_TimeOut
+                ];
+                for (int i = 0; i < shiftTimes.length; i += 2) {
+                  if (checkIfNull([shiftTimes[i]])) {
+                    shiftTimes[i] = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                    break;
+                  } else if (!checkIfNull([shiftTimes[i]]) && checkIfNull([shiftTimes[i + 1]])) {
+                    shiftTimes[i + 1] = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                    break;
+                  }
+                }
+
+                // Update the original data object with the modified shift times
+                data.shift1_TimeIn = shiftTimes[0];
+                data.shift1_TimeOut = shiftTimes[1];
+                data.shift2_TimeIn = shiftTimes[2];
+                data.shift2_TimeOut = shiftTimes[3];
+                data.shift3_TimeIn = shiftTimes[4];
+                data.shift3_TimeOut = shiftTimes[5];
+                data.shift4_TimeIn = shiftTimes[6];
+                data.shift4_TimeOut = shiftTimes[7];
 
 
 
-
-
-                if (data.shift1_TimeIn ==
-                        null ) {
-                 data.shift1_TimeIn =
-                      "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                } else if (data.shift1_TimeIn!=null&& data.shift1_TimeOut==null) {
-                  data.shift1_TimeOut =
-                      "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                } else if (data.shift1_TimeIn !=
-                    null && data.shift1_TimeOut!=null && data.shift2_TimeIn==null) {
-                  data.shift2_TimeIn =
-                  "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                } else if (data.shift1_TimeIn!=null&& data.shift1_TimeOut!=null&& data.shift2_TimeIn!=null&&data.shift2_TimeOut==null) {
-
-                  data.shift2_TimeOut =
-                  "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                }else if (data.shift1_TimeIn!=null&& data.shift1_TimeOut!=null&& data.shift2_TimeIn!=null&& data.shift2_TimeOut!=null&&data.shift3_TimeIn==null) {
-                  data.shift3_TimeIn =
-                  "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-
-
-                } else if (data.shift1_TimeIn!=null&& data.shift1_TimeOut!=null&& data.shift2_TimeIn!=null&& data.shift2_TimeOut!=null&& data.shift3_TimeIn!=null&&data.shift3_TimeOut==null) {
-
-
-                  data.shift3_TimeOut =
-                  "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                }else
-                  {if (data.shift1_TimeIn!=null&& data.shift1_TimeOut!=null&& data.shift2_TimeIn!=null&& data.shift2_TimeOut!=null&& data.shift3_TimeIn!=null && data.shift3_TimeOut!=null&&data.shift4_TimeIn==null) {
-
-
-                  data.shift4_TimeIn =
-                  "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                } else if (data.shift1_TimeIn!=null&& data.shift1_TimeOut!=null&& data.shift2_TimeIn!=null&& data.shift2_TimeOut!=null&& data.shift3_TimeIn!=null&&data.shift3_TimeOut!=null&& data.shift4_TimeIn!=null&&data.shift4_TimeOut==null) {
-
-                  data.shift4_TimeOut =
-                  "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                }}
-
+                //use helper method checkIfNull to check each element
+                // if (checkIfNull([data.shift1_TimeIn]) ) {
+                //   data.shift1_TimeIn = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                // } else if (!checkIfNull([data.shift1_TimeIn])&& checkIfNull([data.shift1_TimeOut])) {
+                //   data.shift1_TimeOut = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                // } else if (!checkIfNull([data.shift1_TimeIn,data.shift1_TimeOut]) && checkIfNull([data.shift2_TimeIn])) {
+                //   data.shift2_TimeIn = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                // } else if (!checkIfNull([data.shift1_TimeIn, data.shift1_TimeOut,
+                //   data.shift2_TimeIn])&&checkIfNull([data.shift2_TimeOut])) {
+                //   data.shift2_TimeOut = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                // }else if (!checkIfNull([data.shift1_TimeIn,data.shift1_TimeOut, data.shift2_TimeIn,
+                //   data.shift2_TimeOut])&&checkIfNull([data.shift3_TimeIn])) {
+                //   data.shift3_TimeIn = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                // } else if (checkIfNull([data.shift1_TimeIn,data.shift1_TimeOut, data.shift2_TimeIn,
+                //   data.shift2_TimeOut, data.shift3_TimeIn])&&checkIfNull([data.shift3_TimeOut])) {
+                //   data.shift3_TimeOut = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                // }else if (checkIfNull([data.shift1_TimeIn, data.shift1_TimeOut, data.shift2_TimeIn,
+                //   data.shift2_TimeOut, data.shift3_TimeIn, data.shift3_TimeOut,])&&checkIfNull([data.shift4_TimeIn])) {
+                //   data.shift4_TimeIn = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                // } else if (checkIfNull([data.shift1_TimeIn, data.shift1_TimeOut, data.shift2_TimeIn, data.shift2_TimeOut,
+                //   data.shift3_TimeIn,data.shift3_TimeOut, data.shift4_TimeIn])&&checkIfNull([data.shift4_TimeOut])) {
+                //   data.shift4_TimeOut = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                // }
                 setupDialogState(
                     context,
                     Intl.defaultLocale == arabic
@@ -99,4 +116,9 @@ class _SendAttendanceBlockListenerState
           );
         });
   }
+
+
+
+
+
 }

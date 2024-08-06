@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
+
+import '../../../../core/helpers/size_config.dart';
 
 class EventsApprovals extends StatelessWidget {
   const EventsApprovals({super.key});
@@ -9,7 +12,7 @@ class EventsApprovals extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -17,8 +20,7 @@ class EventsApprovals extends StatelessWidget {
               S.of(context).eventsApprovals,
               style: TextStyles.font12blackBold,
             ),
-            const SizedBox(height: 16),
-            // هنا يمكنك إضافة منطق عرض التنبيهات الحية من الباك اند
+            verticalSpacing(SizeConfig.screenWidth! * .016),
             Card(
               color: Colors.white,
               child: ListView.builder(

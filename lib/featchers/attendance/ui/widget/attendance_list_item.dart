@@ -3,12 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/methods.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/attendance/data/models/attendance_request.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
+
+import '../../../../core/helpers/helper_methods.dart';
 
 class AttendanceListItem extends StatefulWidget {
   final String? shiftTimeIn;
@@ -18,7 +20,7 @@ class AttendanceListItem extends StatefulWidget {
   final bool? shift3Complete;
   final bool? shift4Complete;
   final int shift;
-  final int shiftType;
+  final int? shiftType;
 
   const AttendanceListItem({
     super.key,
@@ -38,87 +40,89 @@ class AttendanceListItem extends StatefulWidget {
 
 class _AttendanceListItemState extends State<AttendanceListItem> {
   bool isAttendance = true;
+
   @override
   Widget build(BuildContext context) {
     context.read<SendAttendanceCubit>().attendanceTime = DateTime(0);
-    widget.shiftTimeIn == null ? isAttendance = true : isAttendance = false;
+    checkIfNull([widget.shiftTimeIn])
+        ? isAttendance = true
+        : isAttendance = false;
     final authProvider = Provider.of<AuthProvider>(context);
     return SizedBox(
       width: double.infinity,
       child: Card(
         child: Column(
           children: [
-            Column(
+            Row(
               children: [
-                Row(
+                Column(
                   children: [
-                    Column(
-                      children: [
-                        Visibility(
-                          visible: widget.shiftTimeIn != null,
-                          child: Text(
-                            widget.shiftTimeIn != null
-                                ? '${S.of(context).attendanceRecord}  ${getFormattedTimeOfDay(widget.shiftTimeIn!, context)}'
-                                : "",
-                            style: TextStyles.font12black54Reguler,
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                        Visibility(
-                          visible: widget.shiftTimeOut != null,
-                          child: Text(
-                            widget.shiftTimeOut != null
-                                ? '${S.of(context).leaveRecord}  ${getFormattedTimeOfDay(widget.shiftTimeOut!, context)}'
-                                : "",
-                            style: TextStyles.font12black54Reguler,
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                      ],
+                    Visibility(
+                      visible: widget.shiftTimeIn != null,
+                      child: Text(
+                        widget.shiftTimeIn != null
+                            ? '${S.of(context).attendanceRecord}  ${getFormattedTimeOfDay(widget.shiftTimeIn!, context)}'
+                            : "",
+                        style: TextStyles.font12black54Reguler,
+                        textAlign: TextAlign.start,
+                      ),
                     ),
-                    const Spacer(),
-                    Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.h, horizontal: 10.w),
-                        child: Text(
-                          getShift(widget.shift),
-                          style: TextStyles.font12black54Reguler,
-                        ))
+                    Visibility(
+                      visible: widget.shiftTimeOut != null,
+                      child: Text(
+                        widget.shiftTimeOut != null
+                            ? '${S.of(context).leaveRecord}  ${getFormattedTimeOfDay(widget.shiftTimeOut!, context)}'
+                            : "",
+                        style: TextStyles.font12black54Reguler,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
                   ],
                 ),
-                Visibility(
-                  visible: widget.shiftTimeOut == null,
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * .1,
-                    width: double.infinity,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        // work with location here and send it to back end
-                        validateThenRecordAttendance(authProvider.token!);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.r)),
-                        backgroundColor: Colors.blueGrey,
-                      ),
-                      child: FittedBox(
-                        fit: BoxFit.cover,
-                        child: Text(
-                          widget.shiftTimeIn != null &&
-                                  widget.shiftTimeOut == null
-                              ? S.of(context).signOut
-                              : S.of(context).signIn,
-                          style: TextStyles.font15WhiteBold,
-                        ),
-                      ),
+                const Spacer(),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: SizeConfig.screenHeight! * .01,
+                        horizontal: SizeConfig.screenHeight! * .01),
+                    child: Text(
+                      getShift(widget.shift),
+                      style: TextStyles.font12black54Reguler,
+                    ))
+              ],
+            ),
+            Visibility(
+              visible: widget.shiftTimeOut == null,
+              child: Container(
+                height: SizeConfig.screenHeight! * .1,
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(
+                    vertical: SizeConfig.screenHeight! * .01,
+                    horizontal: SizeConfig.screenHeight! * .01),
+                padding: EdgeInsets.symmetric(
+                    vertical: SizeConfig.screenHeight! * .01,
+                    horizontal: SizeConfig.screenHeight! * .01),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    // work with location here and send it to back end
+                    validateThenRecordAttendance(authProvider.token!);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.r)),
+                    backgroundColor: Colors.blueGrey,
+                  ),
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: Text(
+                      !checkIfNull([widget.shiftTimeIn]) &&
+                              checkIfNull([widget.shiftTimeOut])
+                          ? S.of(context).signOut
+                          : S.of(context).signIn,
+                      style: TextStyles.font15WhiteBold,
                     ),
                   ),
                 ),
-              ],
+              ),
             )
           ],
         ),

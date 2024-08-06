@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "am": MessageLookupByLibrary.simpleMessage("صباحا"),
         "annualLeave": MessageLookupByLibrary.simpleMessage("إجازة سنوية"),
+        "attendance": MessageLookupByLibrary.simpleMessage("حضور"),
         "attendanceAndDepartureReports":
             MessageLookupByLibrary.simpleMessage("تقارير "),
         "attendanceMovementsToday":
@@ -54,12 +55,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "from": MessageLookupByLibrary.simpleMessage("من"),
         "fromDate": MessageLookupByLibrary.simpleMessage("من تاريخ"),
+        "holiday": MessageLookupByLibrary.simpleMessage("الإجازة"),
         "hours": MessageLookupByLibrary.simpleMessage("ساعة"),
-        "leave": MessageLookupByLibrary.simpleMessage("الإجازة"),
         "leaveForReset": MessageLookupByLibrary.simpleMessage("خروج للراحة"),
         "leaveRecord":
             MessageLookupByLibrary.simpleMessage("تم تسجيل الانصراف في  "),
         "leaveTime": MessageLookupByLibrary.simpleMessage("وقت الانصراف"),
+        "leaving": MessageLookupByLibrary.simpleMessage("انصراف"),
         "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
@@ -76,7 +78,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "permission": MessageLookupByLibrary.simpleMessage("إذن"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("يرجى ملء"),
         "pm": MessageLookupByLibrary.simpleMessage("مساءً"),
-        "presence": MessageLookupByLibrary.simpleMessage("الحضور"),
         "quickAccessList":
             MessageLookupByLibrary.simpleMessage("قائمة الوصول السريع"),
         "recordPresenceAndLeave":

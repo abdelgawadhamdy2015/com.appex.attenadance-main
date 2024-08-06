@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/arrow_back_widget.dart';
@@ -14,7 +15,7 @@ class MyBottomAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<MyBottomAppBar> createState() => BottomAppBarState();
   @override
   Size get preferredSize =>
-      Size.fromHeight(MediaQuery.of(context).size.height * .01);
+      Size.fromHeight(SizeConfig.screenHeight! * .01);
 }
 
 class BottomAppBarState extends State<MyBottomAppBar> {
