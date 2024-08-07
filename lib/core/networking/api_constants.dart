@@ -1,7 +1,7 @@
 
 class ApiConstants {
-  static const String apiBaseUrl = "http://192.168.1.253:9090/";
- // static const String apiBaseUrl = "https://sectestback.apex-program.com/";
+  //static const String apiBaseUrl = "http://192.168.1.253:9090/";
+  static const String apiBaseUrl = "https://sectestback.apex-program.com/";
 
   static const String login = "api/Login";
   static const String addRequest =

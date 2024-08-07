@@ -1,9 +1,10 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
@@ -29,8 +30,13 @@ import 'featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
 
 void main() {
   setupGetIt();
+
   runApp(
-    const MyApp(),
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(), // Wrap your app
+    ),
+
   );
 }
 
@@ -59,6 +65,10 @@ class _MyAppState extends State<MyApp> {
       child: ChangeNotifierProvider(
         create: (context) => AuthProvider(),
         child: MaterialApp(
+          //locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
           debugShowCheckedModeBanner: false,
           locale: _locale,
           localizationsDelegates: const [
@@ -67,15 +77,7 @@ class _MyAppState extends State<MyApp> {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          builder: (context, child) => ResponsiveBreakpoints.builder(
-            child: child!,
-            breakpoints: [
-              const Breakpoint(start: 0, end: 480, name: MOBILE),
-              const Breakpoint(start: 451, end: 800, name: TABLET),
-              const Breakpoint(start: 801, end: 1920, name: DESKTOP),
-              const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
-            ],
-          ),
+
           supportedLocales: S.delegate.supportedLocales,
           onGenerateRoute: generateRoute,
           initialRoute: Routes.splashScreen,

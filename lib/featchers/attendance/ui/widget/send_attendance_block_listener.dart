@@ -71,31 +71,6 @@ class _SendAttendanceBlockListenerState
                 data.shift4_TimeIn = shiftTimes[6];
                 data.shift4_TimeOut = shiftTimes[7];
 
-
-
-                //use helper method checkIfNull to check each element
-                // if (checkIfNull([data.shift1_TimeIn]) ) {
-                //   data.shift1_TimeIn = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                // } else if (!checkIfNull([data.shift1_TimeIn])&& checkIfNull([data.shift1_TimeOut])) {
-                //   data.shift1_TimeOut = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                // } else if (!checkIfNull([data.shift1_TimeIn,data.shift1_TimeOut]) && checkIfNull([data.shift2_TimeIn])) {
-                //   data.shift2_TimeIn = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                // } else if (!checkIfNull([data.shift1_TimeIn, data.shift1_TimeOut,
-                //   data.shift2_TimeIn])&&checkIfNull([data.shift2_TimeOut])) {
-                //   data.shift2_TimeOut = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                // }else if (!checkIfNull([data.shift1_TimeIn,data.shift1_TimeOut, data.shift2_TimeIn,
-                //   data.shift2_TimeOut])&&checkIfNull([data.shift3_TimeIn])) {
-                //   data.shift3_TimeIn = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                // } else if (checkIfNull([data.shift1_TimeIn,data.shift1_TimeOut, data.shift2_TimeIn,
-                //   data.shift2_TimeOut, data.shift3_TimeIn])&&checkIfNull([data.shift3_TimeOut])) {
-                //   data.shift3_TimeOut = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                // }else if (checkIfNull([data.shift1_TimeIn, data.shift1_TimeOut, data.shift2_TimeIn,
-                //   data.shift2_TimeOut, data.shift3_TimeIn, data.shift3_TimeOut,])&&checkIfNull([data.shift4_TimeIn])) {
-                //   data.shift4_TimeIn = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                // } else if (checkIfNull([data.shift1_TimeIn, data.shift1_TimeOut, data.shift2_TimeIn, data.shift2_TimeOut,
-                //   data.shift3_TimeIn,data.shift3_TimeOut, data.shift4_TimeIn])&&checkIfNull([data.shift4_TimeOut])) {
-                //   data.shift4_TimeOut = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
-                // }
                 setupDialogState(
                     context,
                     Intl.defaultLocale == arabic
