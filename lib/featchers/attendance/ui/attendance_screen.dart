@@ -44,19 +44,6 @@ class _AttendanceScreen extends State<AttendanceScreen> {
   @override
   void initState() {
     super.initState();
-    // location = Location();
-    // location.onLocationChanged.listen((LocationData currentLocation) {
-    //   _mapController?.animateCamera(CameraUpdate.newCameraPosition(
-    //     CameraPosition(
-    //       target: LatLng(currentLocation.latitude!, currentLocation.longitude!),
-    //       zoom: 16,
-    //     ),
-    //   ));
-    //
-    //   context.read<AttendanceCubit>().locationData = currentLocation;
-    // });
-    // _requestPermissions();
-    // // fetchLocation();
     initLocation();
   }
 
@@ -90,30 +77,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
     });
   }
 
-  // Future<void> fetchLocation() async {
-  //   try {
-  //     context.read<AttendanceCubit>().locationData =
-  //         await location.getLocation();
-  //     setState(() {
-  //       _mapController!.animateCamera(
-  //         CameraUpdate.newCameraPosition(
-  //           CameraPosition(
-  //             target: LatLng(
-  //                 context.read<AttendanceCubit>().locationData!.latitude!,
-  //                 context.read<AttendanceCubit>().locationData!.longitude!),
-  //             zoom: 15.0,
-  //           ),
-  //         ),
-  //       );
-  //     });
-  //   } catch (e) {
-  //     setupDialogState(
-  //       context,
-  //       'Could not get the location: $e',
-  //       true,
-  //     );
-  //   }
-  // }
+
 
   // Future<void> _requestPermissions() async {
   //   await Permission.location.request();
@@ -203,6 +167,16 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                   zoom: 14,
                                 ),
                                 myLocationEnabled: true,
+                                markers: {
+                                  Marker(
+                                    markerId: const MarkerId('my location'),
+                                    position: context.read<AttendanceCubit>().currentPosition,
+                                    infoWindow: const InfoWindow(
+                                      title: 'My Marker',
+                                      snippet: 'This is a snippet',
+                                    ),
+                                  ),
+                                },
                                 onMapCreated: (GoogleMapController controller) {
                                   this.controller = controller;
                                   controller.animateCamera(

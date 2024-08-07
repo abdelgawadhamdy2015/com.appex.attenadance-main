@@ -70,6 +70,7 @@ dependencies:
   shared_preferences: ^2.2.3
   shimmer: ^3.0.0
   signalr_core: ^1.1.2
+  device_preview: ^1.2.0
 
 
 dev_dependencies:
