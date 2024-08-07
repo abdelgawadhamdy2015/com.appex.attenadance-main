@@ -21,7 +21,6 @@ import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccatio
 import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
 import 'package:ttech_attendance/featchers/splash_screen/splash_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
-
 import 'core/di/dependancy_injection.dart';
 import 'core/routing/routes.dart';
 import 'featchers/home/logic/cubit/home_cubit.dart';
@@ -30,7 +29,6 @@ import 'featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
 
 void main() {
   setupGetIt();
-
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
