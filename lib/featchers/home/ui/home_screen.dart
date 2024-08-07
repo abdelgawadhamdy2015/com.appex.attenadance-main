@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/my_app_bar.dart';
-import 'package:ttech_attendance/core/widgets/my_app_bar_tablet.dart';
 import 'package:ttech_attendance/core/widgets/my_drawer.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
@@ -41,15 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ResponsiveBreakpoints.of(context).isMobile
-          ? MyAppBar(
+      appBar:  MyAppBar(
               changeLanguage: widget.changeLanguage,
               context: context,
-              title: "")
-          : MyAppBarTablet(
-              changeLanguage: widget.changeLanguage,
-              context: context,
-              tiltle: ""),
+              title: ""),
+
       drawer: const Drawer(child: MyDrawer()),
       body: OfflineBuilderWidget(
         child: SafeArea(

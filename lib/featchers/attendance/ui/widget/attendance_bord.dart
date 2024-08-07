@@ -74,7 +74,7 @@ class _AttendanceBoard extends State<AttendanceBord> {
                             shift: 3,
                             shiftType: data.shiftType!)
                         : Container(),
-                    checkIfNull([
+                    !checkIfNull([
                               data.shift1_TimeIn,
                               data.shift1_TimeOut,
                               data.shift2_TimeIn,
@@ -83,7 +83,7 @@ class _AttendanceBoard extends State<AttendanceBord> {
                               data.shift3_TimeOut,
                               data.hasShift4
                             ]) &&
-                            (data.hasShift4 ?? false || data.shiftType == 1)
+                            (data.hasShift4! || data.shiftType == 1)
                         ? AttendanceListItem(
                             shiftTimeIn: data.shift4_TimeIn,
                             shiftTimeOut: data.shift4_TimeOut,

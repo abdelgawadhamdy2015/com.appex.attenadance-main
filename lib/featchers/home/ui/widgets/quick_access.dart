@@ -66,15 +66,12 @@ class QuickAccess extends StatelessWidget {
                 switch (id) {
                   case myTransactions:
                     context.pushReplacementNamed(Routes.attendaceScreen);
-                    break;
                   case myRequests:
                     context.pushReplacementNamed(Routes.requestFormScreen);
                   case attendanceAndDepartureReports:
                     context.pushReplacementNamed(Routes.performancePanelScreen);
                   case credits:
                     context.pushReplacementNamed(Routes.departuresScreen);
-
-                  default:
                 }
               },
               style: ElevatedButton.styleFrom(
