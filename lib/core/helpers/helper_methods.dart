@@ -6,7 +6,7 @@ import '../../generated/l10n.dart';
 
 bool checkIfNull(List list){
   bool isNull=true;
-  list.any((e)=> e==null? isNull=true: isNull=false);
+  list.any((e)=> e==null || e.toString().isEmpty ? isNull=true: isNull=false);
   // for (var element in list) {
   //   element ==null? isNull=true: isNull= false;
   // }
@@ -51,4 +51,11 @@ String getShift(int shift,BuildContext context) {
   return "";
 }
 
+ DateTime convertStringToTime(String shift)
+{
+  return DateTime(
+    DateTime.now().year,DateTime.now().month,DateTime.now().day,
+      int.parse(shift.split(":")[0]),
+       int.parse(shift.split(":")[1]));
+}
 

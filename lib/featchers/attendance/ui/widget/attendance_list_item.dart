@@ -1,8 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
-import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/attendance/data/models/attendance_request.dart';
@@ -40,14 +40,17 @@ class AttendanceListItem extends StatefulWidget {
 
 class _AttendanceListItemState extends State<AttendanceListItem> {
   bool isAttendance = true;
-
+  bool _isButtonVisible = true;
+  int _remainingTime = 0;
+  String lastTime='';
+  Timer? _timer;
   @override
   Widget build(BuildContext context) {
+    checkTime();
     context.read<SendAttendanceCubit>().attendanceTime = DateTime(0);
     checkIfNull([widget.shiftTimeIn])
         ? isAttendance = true
         : isAttendance = false;
-    final authProvider = Provider.of<AuthProvider>(context);
     return SizedBox(
       width: double.infinity,
       child: Card(
@@ -101,10 +104,10 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                 padding: EdgeInsets.symmetric(
                     vertical: SizeConfig.screenHeight! * .01,
                     horizontal: SizeConfig.screenHeight! * .01),
-                child: ElevatedButton(
+                child:_isButtonVisible? ElevatedButton(
                   onPressed: () async {
                     // work with location here and send it to back end
-                    validateThenRecordAttendance(authProvider.token!);
+                    validateThenRecordAttendance();
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -121,7 +124,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                       style: TextStyles.font15WhiteBold,
                     ),
                   ),
-                ),
+                ): Text('Button will be visible in ${_formatTime(_remainingTime)}'),
               ),
             )
           ],
@@ -130,9 +133,48 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
     );
   }
 
-  void validateThenRecordAttendance(String token) {
+
+  checkTime(){
+    for(int i =0; i< context.read<AttendanceCubit>().shifts.length;i++){
+      if(context.read<AttendanceCubit>().shifts[i]!=null){
+        lastTime=context.read<AttendanceCubit>().shifts[i];
+      }
+    }
+    if(DateTime.now().hour - convertStringToTime(lastTime).hour<1&&
+    DateTime.now().minute - convertStringToTime(lastTime).minute <5){
+        int  remainingTimeInMinutes=5 - DateTime.now().difference(convertStringToTime(lastTime)).inMinutes;
+      _startTimer(remainingTimeInMinutes);
+    }
+  }
+
+  void _startTimer(int remainingTimeInMinutes) {
+    setState(() {
+      _isButtonVisible = false;
+      _remainingTime=remainingTimeInMinutes * 60;
+    });
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_remainingTime > 0) {
+          _remainingTime--;
+        } else {
+          _isButtonVisible = true;
+          timer.cancel();
+        }
+      });
+    });
+  }
+
+  String _formatTime(int seconds) {
+    print("seconds is : $seconds");
+    int minutes = seconds ~/ 60;
+    int secs = seconds % 60;
+    return '$minutes:${secs.toString().padLeft(2, '0')}';
+  }
+
+
+  void validateThenRecordAttendance() {
     context.read<SendAttendanceCubit>().emiteAttendanceRecord(
-        "$myBearer $token",
         widget.shiftType == 1
             ? AttendanceRequest(
                 x: context.read<AttendanceCubit>().currentPosition.latitude,
@@ -146,6 +188,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                 isShift2Complete: widget.shift2Complete,
                 isShift3Complete: widget.shift3Complete,
                 isShift4Complete: widget.shift4Complete));
+    checkTime();
   }
 
 

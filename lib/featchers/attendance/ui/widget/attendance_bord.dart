@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_state.dart';
@@ -26,7 +24,6 @@ class _AttendanceBoard extends State<AttendanceBord> {
   @override
   Widget build(BuildContext context) {
     context.read<SendAttendanceCubit>().attendanceTime = DateTime(0);
-    Provider.of<AuthProvider>(context);
     return Column(
       children: [
         const SendAttendanceBlockListener(),

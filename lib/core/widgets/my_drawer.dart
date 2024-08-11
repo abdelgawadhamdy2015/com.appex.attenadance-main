@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
+import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
@@ -32,8 +32,8 @@ class MyDrawer extends StatelessWidget {
           title: Text(S.of(context).logout),
           onTap: () async {
            
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setBool('isLoggedIn', false);
+           SharedPrefHelper.clearAllData();
+           SharedPrefHelper.clearAllSecuredData();
             context.pushReplacementNamed(Routes.loginScreen);
           },
         ),

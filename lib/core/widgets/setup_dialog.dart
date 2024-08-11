@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
+import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
@@ -25,6 +26,9 @@ setupDialogState(BuildContext context, String data, bool isError) {
             context.pop();
             if(ApiConstants.dioExceptionType==DioExceptionType.badResponse){
               ApiConstants.dioExceptionType=DioExceptionType.unknown;
+              SharedPrefHelper.clearAllData();
+              SharedPrefHelper.clearAllSecuredData();
+
               context.pushReplacementNamed(Routes.loginScreen);
             }
 
@@ -59,6 +63,9 @@ setupLogOutDialogState(BuildContext context, String data,
           onPressed: () {
             context.pop();
             signalService.stopConnection();
+            SharedPrefHelper.clearAllData();
+            SharedPrefHelper.clearAllSecuredData();
+
             context.pushReplacementNamed(Routes.loginScreen);
           },
           child: Text(

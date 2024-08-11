@@ -2,12 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
-import 'package:ttech_attendance/core/networking/api_constants.dart';
+import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/login/data/models/login_response.dart';
@@ -36,7 +33,6 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
   @override
   Widget build(BuildContext context) {
 
-    final authProvider = Provider.of<AuthProvider>(context);
     SignalRService signalRService =SignalRService(context);
     return BlocListener<LoginCubit, LoginState>(
       listenWhen: (previous, current) =>
@@ -55,13 +51,11 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
           success: (loginResponse) async {
             LoginResponse response = loginResponse;
 
-            SharedPreferences prefs = await SharedPreferences.getInstance();
+           // SharedPreferences prefs = await SharedPreferences.getInstance();
 
             if (response.result == 1) {
-              prefs.setString(myToken, response.data!.authToken!.token!);
-              ApiConstants.authToken = response.data!.authToken!.token!;
-              await authProvider.setToken(response.data!.authToken!.token!);
-              ApiConstants.authToken = response.data!.authToken!.token!;
+              //prefs.setString(myToken, response.data!.authToken!.token!);
+             //ApiConstants.authToken = response.data!.authToken!.token!;
               signalRService.startConnection(response.data!.authToken!.token!);
               context.pushReplacementNamed(Routes.homeScreen);
             } else {
@@ -70,7 +64,7 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
             }
 
             if (widget.rememberMe) {
-              prefs.setBool(isLoggedIn, true);
+              SharedPrefHelper.setData(isLoggedIn, true);
             }
 
             setState(() {

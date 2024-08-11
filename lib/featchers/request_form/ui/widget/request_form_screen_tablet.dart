@@ -256,7 +256,7 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
   getAllVaccations(BuildContext context) {
     context
         .read<AllVaccationsCubit>()
-        .emitAllVaccationsState("$myBearer $token");
+        .emitAllVaccationsState();
   }
 
   void validateThenAddVaccation(BuildContext context) {
@@ -272,11 +272,11 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
               dateFrom: _startDate.toString(),
               dateTo: _endDate.toString(),
               note: notesController.text),
-          "Bearer $token");
+          );
     }
   }
 
-  void cleare() {
+  void clear() {
     setState(() {
       notesController.clear();
     });}}

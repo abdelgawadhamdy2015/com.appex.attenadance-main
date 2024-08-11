@@ -8,9 +8,9 @@ class AttendanceRepo {
   ApiService apiService;
   AttendanceRepo(this.apiService);
 
-  Future<ApiResult<HeaderResponse>> getAttendance(String token) async {
+  Future<ApiResult<HeaderResponse>> getAttendance() async {
     try {
-      final response = await apiService.getHeaderDashboard(token);
+      final response = await apiService.getHeaderDashboard();
       return ApiResult.success(response);
     } catch (error) {
 

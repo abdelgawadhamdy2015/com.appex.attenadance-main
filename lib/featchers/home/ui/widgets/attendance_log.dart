@@ -44,54 +44,57 @@ class _AttendanceLogState extends State<AttendanceLog> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        color: Colors.white,
-        child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                S.of(context).attendanceMovementsToday,
-                style: TextStyles.font12blackBold,
+
+        return SizedBox(
+          width: double.infinity,
+          child: Card(
+            color: Colors.white,
+            child: Padding(
+              padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    S.of(context).attendanceMovementsToday,
+                    style: TextStyles.font12blackBold,
+                  ),
+                  verticalSpacing(SizeConfig.screenHeight!* .01),
+                  context.read<HomeCubit>().data.shift1_TimeIn != "____" &&
+                          context.read<HomeCubit>().data.shift1_TimeIn != null
+                      ? transactionWidget(
+                          context.read<HomeCubit>().data.shift1_TimeIn!,
+                          context.read<HomeCubit>().data.date!,
+                          S.of(context).attendance,
+                          Colors.green,
+                          context)
+                      : Center(
+                          child: Text(
+                            S.of(context).notAttendance,
+                            style: TextStyles.font12black54Reguler,
+                          ),
+                        ),
+                  verticalSpacing(SizeConfig.screenHeight!* .01),
+                  context.read<HomeCubit>().data.shift1_TimeOut != "____" &&
+                          context.read<HomeCubit>().data.shift1_TimeOut != null
+                      ? transactionWidget(
+                          context.read<HomeCubit>().data.shift1_TimeOut!,
+                          context.read<HomeCubit>().data.date!,
+                          S.of(context).leaving,
+                          Colors.red,
+                          context)
+                      : Center(
+                          child: Text(
+                            S.of(context).notLeave,
+                            style: TextStyles.font12black54Reguler,
+                          ),
+                        ),
+                ],
               ),
-              verticalSpacing(SizeConfig.screenHeight!* .01),
-              context.read<HomeCubit>().data.shift1_TimeIn != "____" &&
-                      context.read<HomeCubit>().data.shift1_TimeIn != null
-                  ? transactionWidget(
-                      context.read<HomeCubit>().data.shift1_TimeIn!,
-                      context.read<HomeCubit>().data.date!,
-                      S.of(context).attendance,
-                      Colors.green,
-                      context)
-                  : Center(
-                      child: Text(
-                        S.of(context).notAttendance,
-                        style: TextStyles.font12black54Reguler,
-                      ),
-                    ),
-              verticalSpacing(SizeConfig.screenHeight!* .01),
-              context.read<HomeCubit>().data.shift1_TimeOut != "____" &&
-                      context.read<HomeCubit>().data.shift1_TimeOut != null
-                  ? transactionWidget(
-                      context.read<HomeCubit>().data.shift1_TimeOut!,
-                      context.read<HomeCubit>().data.date!,
-                      S.of(context).leaving,
-                      Colors.red,
-                      context)
-                  : Center(
-                      child: Text(
-                        S.of(context).notLeave,
-                        style: TextStyles.font12black54Reguler,
-                      ),
-                    ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        );
+
+
   }
 }

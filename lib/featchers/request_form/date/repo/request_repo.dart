@@ -11,9 +11,9 @@ class RequestVaccationRepo {
   RequestVaccationRepo(this._apiService);
 
   Future<ApiResult<AddVaccationResponse>> addVaccation(
-      RequestVaccation requestVaccation, String token) async {
+      RequestVaccation requestVaccation) async {
     try {
-      final response = await _apiService.addVaccation(token, requestVaccation);
+      final response = await _apiService.addVaccation( requestVaccation);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
@@ -28,6 +26,8 @@ import 'featchers/login/logic/cubit/login_cubit.dart';
 import 'featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   setupGetIt();
   runApp(
     DevicePreview(
@@ -51,6 +51,8 @@ class _MyAppState extends State<MyApp> {
 
   _MyAppState();
 
+
+
   void _changeLanguage(Locale locale) {
     setState(() {
       _locale = locale;
@@ -60,26 +62,22 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      child: ChangeNotifierProvider(
-        create: (context) => AuthProvider(),
-        child: MaterialApp(
-          //locale: DevicePreview.locale(context),
-          builder: DevicePreview.appBuilder,
-          theme: ThemeData.light(),
-          darkTheme: ThemeData.dark(),
-          debugShowCheckedModeBanner: false,
-          locale: _locale,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
+      child: MaterialApp(
+        builder: DevicePreview.appBuilder,
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        locale: _locale,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
 
-          supportedLocales: S.delegate.supportedLocales,
-          onGenerateRoute: generateRoute,
-          initialRoute: Routes.splashScreen,
-        ),
+        supportedLocales: S.delegate.supportedLocales,
+        onGenerateRoute: generateRoute,
+        initialRoute: Routes.splashScreen,
       ),
     );
   }

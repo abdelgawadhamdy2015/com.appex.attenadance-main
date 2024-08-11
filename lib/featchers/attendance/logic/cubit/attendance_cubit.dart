@@ -17,17 +17,19 @@ class AttendanceCubit extends Cubit<AttendanceState> {
   LocationData? locationData = LocationData.fromMap({});
   GlobalKey formKey = GlobalKey<FormState>();
   HeaderData data = HeaderData();
+  List shifts= [];
   DateTime attendanceTime = DateTime(0);
-  emitAttendanceState(String token) async {
+  emitAttendanceState() async {
     emit(const AttendanceState.loading());
-    final response = await attendanceRepo.getAttendance(token);
+    final response = await attendanceRepo.getAttendance();
 
     response.when(success: (headerResponse) async {
       emit(AttendanceState.success(headerResponse));
     }, failure: (error) async {
-      emit(AttendanceState.error(error: Intl.defaultLocale== english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
+      emit(AttendanceState.error(
+          error: Intl.defaultLocale == english
+              ? error.apiErrorModel.errorMessageEn!
+              : error.apiErrorModel.errorMessageAr!));
     });
   }
-
-  
 }

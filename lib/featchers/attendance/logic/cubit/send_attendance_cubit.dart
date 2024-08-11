@@ -21,10 +21,10 @@ class SendAttendanceCubit extends Cubit<SendAttendanceState> {
   DateTime attendanceTime = DateTime(0);
   HeaderData data = HeaderData();
   emiteAttendanceRecord(
-      String token, AttendanceRequest attendanceRequest) async {
+       AttendanceRequest attendanceRequest) async {
     emit(const SendAttendanceState.sendLoading());
     final response =
-        await sendAttendanceRepo.sendAttendanceRecord(token, attendanceRequest);
+        await sendAttendanceRepo.sendAttendanceRecord( attendanceRequest);
     response.when(success: (attendanceResponse) async {
       emit(SendAttendanceState.sendSuccess(attendanceResponse));
     }, failure: (error) async {

@@ -8,9 +8,9 @@ class HeaderRepo {
 
   HeaderRepo(this.apiService);
 
-  Future<ApiResult<HeaderResponse>> getHeader(String token) async {
+  Future<ApiResult<HeaderResponse>> getHeader() async {
     try {
-      final response = await apiService.getHeaderDashboard(token);
+      final response = await apiService.getHeaderDashboard();
         return ApiResult.success(response);
     } catch (error) {
      

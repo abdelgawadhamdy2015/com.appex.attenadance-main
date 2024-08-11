@@ -50,13 +50,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<AddVaccationResponse> addVaccation(
-    String token,
-    RequestVaccation requestVaccation,
-  ) async {
+      RequestVaccation requestVaccation) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(requestVaccation.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -81,11 +78,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<AllVaccationsModel> getAllVaccations(String token) async {
+  Future<AllVaccationsModel> getAllVaccations() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AllVaccationsModel>(Options(
@@ -110,7 +106,6 @@ class _ApiService implements ApiService {
 
   @override
   Future<PerformanceEmployeeResponse> getPerformance(
-    String token,
     DateTime dateFrom,
     DateTime dateTo,
     bool isMobile,
@@ -121,8 +116,7 @@ class _ApiService implements ApiService {
       r'dateTo': dateTo.toIso8601String(),
       r'isMobile': isMobile,
     };
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PerformanceEmployeeResponse>(Options(
@@ -146,11 +140,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<HeaderResponse> getHeaderDashboard(String token) async {
+  Future<HeaderResponse> getHeaderDashboard() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<HeaderResponse>(Options(
@@ -174,8 +167,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<AttendanceResponse> sendAttaendanceRecord(
-    String token,
+  Future<AttendanceResponse> sendAttendanceRecord(
     double x,
     double y,
     bool? isAttendFingerprint,
@@ -195,8 +187,7 @@ class _ApiService implements ApiService {
       r'isShift4Complete': isShift4Complete,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AttendanceResponse>(Options(

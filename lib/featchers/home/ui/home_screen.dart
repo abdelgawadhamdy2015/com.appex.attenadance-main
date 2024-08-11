@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
@@ -33,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // get token from shared preference and set it on variable token
-    getToken();
+    getHeader(context);
   }
 
   @override
@@ -105,15 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  getToken() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    token = preferences.getString(myToken)!;
-    setState(() {
-      getHeader(context);
-    });
-  }
 
   getHeader(BuildContext context) {
-    context.read<HomeCubit>().emitHomeState("$myBearer $token");
+    context.read<HomeCubit>().emitHomeState();
   }
 }
