@@ -175,6 +175,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                       title: 'My Marker',
                                       snippet: 'This is a snippet',
                                     ),
+
                                   ),
                                 },
                                 onMapCreated: (GoogleMapController controller) {
