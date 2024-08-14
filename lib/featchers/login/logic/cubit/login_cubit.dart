@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
+import 'package:ttech_attendance/core/networking/dio_factory.dart';
 
 import '../../../../core/helpers/constants.dart';
 import '../../data/models/login_request_body.dart';
@@ -14,7 +16,6 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController dbController = TextEditingController();
-  bool circaleLoadFlag = false;
   final formKey = GlobalKey<FormState>();
 
   void emitLoginStates() async {
@@ -27,6 +28,8 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(success: (loginResponse) async {
+     await  SharedPrefHelper.setSecuredString(myToken, loginResponse.data!.authToken!.token!);
+    DioFactory.setTokenToHeaderAfterLogin(loginResponse.data!.authToken!.token!);
       emit(LoginState.success(loginResponse));
     }, failure: (error) {
       emit(LoginState.error(error: Intl.defaultLocale== english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));

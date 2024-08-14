@@ -13,25 +13,16 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.headerRepo, ) : super(const HomeState.initial());
   final formKey = GlobalKey<FormState>();
   HeaderData data = HeaderData();
- // final WebSocketChannel channel;
 
-  // void _startListening() {
-  //   channel.stream.listen((data) {
-  //     final decodedData = jsonDecode(data);
-  //     final List<HeaderResponse> dataList = (decodedData as List).map((item) => HeaderResponse.fromJson(item)).toList();
-  //     emit(HomeState.success(dataList));
-  //   });
-  // }
-
-  void emitHomeState(String token) async {
+  void emitHomeState() async {
     emit(const HomeState.loading());
-    final response = await headerRepo.getHeader(token);
+    final response = await headerRepo.getHeader();
     
     response.when(
 
-      success: (headerRespons) async {
+      success: (headerResponse) async {
         
-        emit(HomeState.success(headerRespons));
+        emit(HomeState.success(headerResponse));
       },
       failure: (error) async {
 

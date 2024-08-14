@@ -9,6 +9,8 @@ import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendanc
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_state.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 
+import '../../logic/cubit/attendance_cubit.dart';
+
 class SendAttendanceBlockListener extends StatefulWidget {
   const SendAttendanceBlockListener({super.key});
 
@@ -41,7 +43,7 @@ class _SendAttendanceBlockListenerState
                data = context.read<SendAttendanceCubit>().data;
 
               if (response.result == 1) {
-                List<String?> shiftTimes = [
+                context.read<AttendanceCubit>().shifts = [
                   data.shift1_TimeIn,
                   data.shift1_TimeOut,
                   data.shift2_TimeIn,
@@ -51,25 +53,25 @@ class _SendAttendanceBlockListenerState
                   data.shift4_TimeIn,
                   data.shift4_TimeOut
                 ];
-                for (int i = 0; i < shiftTimes.length; i += 2) {
-                  if (checkIfNull([shiftTimes[i]])) {
-                    shiftTimes[i] = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                for (int i = 0; i < context.read<AttendanceCubit>().shifts.length; i += 2) {
+                  if (checkIfNull([context.read<AttendanceCubit>().shifts[i]])) {
+                    context.read<AttendanceCubit>().shifts[i] = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
                     break;
-                  } else if (!checkIfNull([shiftTimes[i]]) && checkIfNull([shiftTimes[i + 1]])) {
-                    shiftTimes[i + 1] = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                  } else if (!checkIfNull([context.read<AttendanceCubit>().shifts[i]]) && checkIfNull([context.read<AttendanceCubit>().shifts[i + 1]])) {
+                    context.read<AttendanceCubit>().shifts[i + 1] = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
                     break;
                   }
                 }
 
                 // Update the original data object with the modified shift times
-                data.shift1_TimeIn = shiftTimes[0];
-                data.shift1_TimeOut = shiftTimes[1];
-                data.shift2_TimeIn = shiftTimes[2];
-                data.shift2_TimeOut = shiftTimes[3];
-                data.shift3_TimeIn = shiftTimes[4];
-                data.shift3_TimeOut = shiftTimes[5];
-                data.shift4_TimeIn = shiftTimes[6];
-                data.shift4_TimeOut = shiftTimes[7];
+                data.shift1_TimeIn = context.read<AttendanceCubit>().shifts[0];
+                data.shift1_TimeOut = context.read<AttendanceCubit>().shifts[1];
+                data.shift2_TimeIn = context.read<AttendanceCubit>().shifts[2];
+                data.shift2_TimeOut = context.read<AttendanceCubit>().shifts[3];
+                data.shift3_TimeIn = context.read<AttendanceCubit>().shifts[4];
+                data.shift3_TimeOut = context.read<AttendanceCubit>().shifts[5];
+                data.shift4_TimeIn = context.read<AttendanceCubit>().shifts[6];
+                data.shift4_TimeOut = context.read<AttendanceCubit>().shifts[7];
 
                 setupDialogState(
                     context,

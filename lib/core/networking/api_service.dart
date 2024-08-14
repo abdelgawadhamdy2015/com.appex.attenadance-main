@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
 import 'package:retrofit/retrofit.dart';
-import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/request_form/date/models/all_vaccations_model.dart';
@@ -27,17 +26,15 @@ abstract class ApiService {
 
   @POST(ApiConstants.addRequest)
   Future<AddVaccationResponse> addVaccation(
-    @Header(authorization) String token,
     @Body() RequestVaccation requestVaccation,
   );
 
   @GET(ApiConstants.allVaccations)
   Future<AllVaccationsModel> getAllVaccations(
-      @Header(authorization) String token);
+     );
 
   @GET(ApiConstants.perfromance)
   Future<PerformanceEmployeeResponse> getPerformance(
-    @Header(authorization) String token,
     @Query("dateFrom") DateTime dateFrom,
     @Query("dateTo") DateTime dateTo,
     @Query("isMobile") bool isMobile,
@@ -45,12 +42,11 @@ abstract class ApiService {
 
   @GET(ApiConstants.dashBoardHeader)
   Future<HeaderResponse> getHeaderDashboard(
-    @Header(authorization) String token,
+   // @Header(authorization) String token,
   );
 
   @POST(ApiConstants.sendAttendance)
-  Future<AttendanceResponse> sendAttaendanceRecord(
-      @Header(authorization) String token,
+  Future<AttendanceResponse> sendAttendanceRecord(
       @Query("x") double x,
       @Query("y") double y,
       @Query("isAttendFingerprint") bool? isAttendFingerprint,

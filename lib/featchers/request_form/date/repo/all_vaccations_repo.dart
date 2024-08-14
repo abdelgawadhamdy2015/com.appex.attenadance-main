@@ -9,9 +9,9 @@ class AllVaccationsRepo {
 
   AllVaccationsRepo(this._apiService);
 
-  Future<ApiResult<AllVaccationsModel>> getVaccations(String token) async {
+  Future<ApiResult<AllVaccationsModel>> getVaccations() async {
     try {
-      final response = await _apiService.getAllVaccations(token);
+      final response = await _apiService.getAllVaccations();
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

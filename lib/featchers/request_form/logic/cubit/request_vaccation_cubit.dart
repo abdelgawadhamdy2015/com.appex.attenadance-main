@@ -17,10 +17,10 @@ class RequestVaccationCubit extends Cubit<RequestVaccationState> {
   final formKey = GlobalKey<FormState>();
 
   void emitRequestVaccationState(
-      RequestVaccation requestVaccation, String token) async {
+      RequestVaccation requestVaccation) async {
     emit(const RequestVaccationState.loading());
     final response =
-        await requestVaccationRepo.addVaccation(requestVaccation, token);
+        await requestVaccationRepo.addVaccation(requestVaccation);
 
     response.when(success: (requestVaccationResponse) async {
       emit(RequestVaccationState.success(requestVaccationResponse));

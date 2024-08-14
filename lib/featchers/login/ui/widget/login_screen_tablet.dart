@@ -175,8 +175,8 @@ class LoginScreenState extends State<LoginScreenTablet> {
                             child: ElevatedButton(
                               onPressed: () async {
                                 setState(() {
-                                  context.read<LoginCubit>().circaleLoadFlag =
-                                      true;
+                                  // context.read<LoginCubit>().circaleLoadFlag =
+                                  //     true;
                                 });
                                 validateThenDoLogin(context);
                               },
@@ -184,11 +184,7 @@ class LoginScreenState extends State<LoginScreenTablet> {
                               child: FittedBox(
                                 fit: BoxFit.cover,
                                 child:
-                                    context.read<LoginCubit>().circaleLoadFlag
-                                        ? const CircularProgressIndicator(
-                                            color: Colors.purpleAccent,
-                                          )
-                                        : Text(
+                                   Text(
                                             S.of(context).login,
                                             style: TextStyles.font22BlueBold,
                                           ),
@@ -214,11 +210,11 @@ class LoginScreenState extends State<LoginScreenTablet> {
     if (context.read<LoginCubit>().formKey.currentState!.validate()) {
       context.read<LoginCubit>().emitLoginStates();
       setState(() {
-        context.read<LoginCubit>().circaleLoadFlag = false;
+      //  context.read<LoginCubit>().circaleLoadFlag = false;
       });
     } else {
       setState(() {
-        context.read<LoginCubit>().circaleLoadFlag = false;
+       // context.read<LoginCubit>().circaleLoadFlag = false;
       });
     }
   }

@@ -17,9 +17,9 @@ class AllVaccationsCubit extends Cubit<AllVaccationsState> {
   List<String> vacctionsName = [];
   List<int> vacctionsIds = [];
 
-  void emitAllVaccationsState(String token) async {
+  void emitAllVaccationsState( ) async {
     emit(const AllVaccationsState.loading());
-    final response = await allVaccationsRepo.getVaccations(token);
+    final response = await allVaccationsRepo.getVaccations();
 
     response.when(success: (allVaccationsModel) async {
       emit(AllVaccationsState.success(allVaccationsModel));

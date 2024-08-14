@@ -199,11 +199,7 @@ class LoginScreenState extends State<LoginScreen> {
                               child: FittedBox(
                                 fit: BoxFit.cover,
                                 child:
-                                    context.read<LoginCubit>().circaleLoadFlag
-                                        ? const CircularProgressIndicator(
-                                            color: Colors.purpleAccent,
-                                          )
-                                        : Text(
+                                      Text(
                                             S.of(context).login,
                                             style: TextStyles.font16BlueBold,
                                           ),

@@ -61,7 +61,6 @@ class _PerformancePanel extends State<PerformancePanelTablet> {
 
   getPerfromanceDate() {
     context.read<PerformanceEmployeeCubit>().emitRPerformanceEmployeeState(
-        "$myBearer $token",
         PerformanceEmployeeModel(
             dateFrom: _startDate != null ? _startDate! : DateTime.now(),
             dateTo: _endDate != null ? _endDate! : DateTime.now(),

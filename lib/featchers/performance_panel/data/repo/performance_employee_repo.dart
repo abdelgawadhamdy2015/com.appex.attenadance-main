@@ -10,9 +10,9 @@ class PerformanceEmployeeRepo {
 
   PerformanceEmployeeRepo(this.apiService);
   Future<ApiResult<PerformanceEmployeeResponse>> getPerfromance(
-      String token, PerformanceEmployeeModel employeeModel) async {
+       PerformanceEmployeeModel employeeModel) async {
     try {
-      final response = await apiService.getPerformance(token,
+      final response = await apiService.getPerformance(
           employeeModel.dateFrom, employeeModel.dateTo, employeeModel.isMobile);
       return ApiResult.success(response);
     } catch (error) {

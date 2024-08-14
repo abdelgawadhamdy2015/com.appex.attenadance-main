@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
-import 'package:provider/provider.dart';
-import 'package:ttech_attendance/core/helpers/auoth_provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
@@ -32,6 +30,8 @@ class AttendanceScreen extends StatefulWidget {
 }
 
 class _AttendanceScreen extends State<AttendanceScreen> {
+ // String apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? 'default_api_key';
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateFormat dateFormat = DateFormat('EEE, y,M,d  ');
   bool isSignIn = false;
@@ -40,7 +40,6 @@ class _AttendanceScreen extends State<AttendanceScreen> {
   Location location = Location();
 
   String token = '';
-  late AuthProvider authProvider;
   @override
   void initState() {
     super.initState();
@@ -98,7 +97,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
   // }
 
   getAttendance(BuildContext context) {
-    context.read<AttendanceCubit>().emitAttendanceState("$myBearer $token");
+    context.read<AttendanceCubit>().emitAttendanceState();
   }
 
   @override
@@ -110,12 +109,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    authProvider = Provider.of<AuthProvider>(context);
-
-    if (authProvider.token != null) {
-      token = authProvider.token!;
-      getAttendance(context);
-    }
+    getAttendance(context);
     return Scaffold(
       key: _scaffoldKey,
       appBar: MyAppBar(

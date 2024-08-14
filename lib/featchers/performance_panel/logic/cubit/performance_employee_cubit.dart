@@ -18,9 +18,9 @@ class PerformanceEmployeeCubit extends Cubit<PerformanceEmployeeState> {
   List<Data> datalist = [];
 
   void emitRPerformanceEmployeeState(
-      String token, PerformanceEmployeeModel employeeModel) async {
+       PerformanceEmployeeModel employeeModel) async {
     emit(const PerformanceEmployeeState.loading());
-    final response = await employeeRepo.getPerfromance(token, employeeModel);
+    final response = await employeeRepo.getPerfromance( employeeModel);
 
     response.when(success: (performanceEmployeeResponse) async {
       emit(PerformanceEmployeeState.success(performanceEmployeeResponse));

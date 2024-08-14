@@ -34,6 +34,16 @@ class _AttendanceBlocListenerState extends State<AttendanceBlocListener> {
               HeaderResponse response = headerResponse;
               if (response.result == 1) {
                 context.read<AttendanceCubit>().data = response.data!;
+                context.read<AttendanceCubit>().shifts=[
+                  response.data!.shift1_TimeIn,
+                  response.data!.shift1_TimeOut,
+                  response.data!.shift2_TimeIn,
+                  response.data!.shift2_TimeOut,
+                  response.data!.shift3_TimeIn,
+                  response.data!.shift3_TimeOut,
+                  response.data!.shift4_TimeIn,
+                  response.data!.shift4_TimeOut,
+                ];
                 context.read<SendAttendanceCubit>().data = response.data!;
               } else {
                 setupDialogState(
