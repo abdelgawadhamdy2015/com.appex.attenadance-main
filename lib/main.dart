@@ -25,7 +25,7 @@ import 'featchers/home/logic/cubit/home_cubit.dart';
 import 'featchers/login/logic/cubit/login_cubit.dart';
 import 'featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   setupGetIt();

@@ -42,11 +42,19 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
   bool isAttendance = true;
   bool _isButtonVisible = true;
   int _remainingTime = 0;
-  String lastTime='';
+  String lastTime = '';
   Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.shiftType == 1) {
+      checkTime();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    checkTime();
     context.read<SendAttendanceCubit>().attendanceTime = DateTime(0);
     checkIfNull([widget.shiftTimeIn])
         ? isAttendance = true
@@ -88,7 +96,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                         vertical: SizeConfig.screenHeight! * .01,
                         horizontal: SizeConfig.screenHeight! * .01),
                     child: Text(
-                      getShift(widget.shift,context),
+                      getShift(widget.shift, context),
                       style: TextStyles.font12black54Reguler,
                     ))
               ],
@@ -96,7 +104,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
             Visibility(
               visible: widget.shiftTimeOut == null,
               child: Container(
-               // height: SizeConfig.screenHeight! * .1,
+                // height: SizeConfig.screenHeight! * .1,
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(
                     vertical: SizeConfig.screenHeight! * .01,
@@ -104,27 +112,31 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                 padding: EdgeInsets.symmetric(
                     vertical: SizeConfig.screenHeight! * .01,
                     horizontal: SizeConfig.screenHeight! * .01),
-                child:_isButtonVisible? ElevatedButton(
-                  onPressed: () async {
-                    // work with location here and send it to back end
-                    validateThenRecordAttendance();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.r)),
-                    backgroundColor: Colors.blueGrey,
-                  ),
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child: Text(
-                      !checkIfNull([widget.shiftTimeIn]) &&
-                              checkIfNull([widget.shiftTimeOut])
-                          ? S.of(context).signOut
-                          : S.of(context).signIn,
-                      style: TextStyles.font15WhiteBold,
-                    ),
-                  ),
-                ): Text('Button will be visible in ${_formatTime(_remainingTime)}'),
+                child: _isButtonVisible
+                    ? ElevatedButton(
+                        onPressed: () async {
+                          // work with location here and send it to back end
+                          validateThenRecordAttendance();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.r)),
+                          backgroundColor: Colors.blueGrey,
+                        ),
+                        child: FittedBox(
+                          fit: BoxFit.cover,
+                          child: Text(
+                            !checkIfNull([widget.shiftTimeIn]) &&
+                                    checkIfNull([widget.shiftTimeOut])
+                                ? S.of(context).signOut
+                                : S.of(context).signIn,
+                            style: TextStyles.font15WhiteBold,
+                          ),
+                        ),
+                      )
+                    : Center(
+                        child: Text(
+                            'you can check in  ${_formatTime(_remainingTime)}')),
               ),
             )
           ],
@@ -133,24 +145,49 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
     );
   }
 
+  checkTime() {
+    int remainingTimeInMinutes = 0, remainingTimeInSeconds = 0;
+    List shifts = context.read<AttendanceCubit>().shifts;
+    lastTime =
+        shifts.lastWhere((element) =>  element != null,orElse: ()=> "" ) ;
+    //print("last time is : ----- $lastTime");
+    // for (int i = 0; i < context.read<AttendanceCubit>().shifts.length; i++) {
+    //   if (context.read<AttendanceCubit>().shifts[i] != null) {
+    //     lastTime = context.read<AttendanceCubit>().shifts[i];
+    //   }
+    // }
+    if (!checkIfNull([lastTime]) &&
+        DateTime.now().isBefore(convertStringToTime(lastTime))) {
+      remainingTimeInMinutes =
+          convertStringToTime(lastTime).minute - DateTime.now().minute;
+      remainingTimeInSeconds =
+          convertStringToTime(lastTime).second + 60 - DateTime.now().second;
+      startTimer(remainingTimeInMinutes, remainingTimeInSeconds);
+    }
 
-  checkTime(){
-    for(int i =0; i< context.read<AttendanceCubit>().shifts.length;i++){
-      if(context.read<AttendanceCubit>().shifts[i]!=null){
-        lastTime=context.read<AttendanceCubit>().shifts[i];
-      }
-    }
-    if(DateTime.now().hour - convertStringToTime(lastTime).hour<1&&
-    DateTime.now().minute - convertStringToTime(lastTime).minute <5){
-        int  remainingTimeInMinutes=5 - DateTime.now().difference(convertStringToTime(lastTime)).inMinutes;
-      _startTimer(remainingTimeInMinutes);
-    }
+    //   if (!checkIfNull([lastTime]) &&
+    //       DateTime.now().hour - convertStringToTime(lastTime).hour < 1 &&
+    //       DateTime.now().minute - convertStringToTime(lastTime).minute < 3) {
+    //     print(DateTime.now().hour - convertStringToTime(lastTime).hour);
+    // if ( DateTime.now().isAfter(convertStringToTime(lastTime))){
+    //   remainingTimeInMinutes = 3 -
+    //       (DateTime.now().minute  - convertStringToTime(lastTime).minute);
+    //   remainingTimeInSeconds =
+    //       60 - (DateTime.now().second - convertStringToTime(lastTime).second);
+    //
+    // }else{
+    //   remainingTimeInMinutes =convertStringToTime(lastTime).minute  -DateTime.now().minute ;
+    //   remainingTimeInSeconds =convertStringToTime(lastTime).second + 30 -DateTime.now().second ;
+    // }
+    //        startTimer(remainingTimeInMinutes, remainingTimeInSeconds);
+    //   }
   }
 
-  void _startTimer(int remainingTimeInMinutes) {
+  void startTimer(int remainingTimeInMinutes, int remainingTimeInSeconds) {
+    _remainingTime = remainingTimeInSeconds + (remainingTimeInMinutes * 60);
+    print(_remainingTime);
     setState(() {
       _isButtonVisible = false;
-      _remainingTime=remainingTimeInMinutes * 60;
     });
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -166,30 +203,31 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
   }
 
   String _formatTime(int seconds) {
-    print("seconds is : $seconds");
     int minutes = seconds ~/ 60;
     int secs = seconds % 60;
     return '$minutes:${secs.toString().padLeft(2, '0')}';
   }
 
-
   void validateThenRecordAttendance() {
     context.read<SendAttendanceCubit>().emiteAttendanceRecord(
-        widget.shiftType == 1
-            ? AttendanceRequest(
-                x: context.read<AttendanceCubit>().currentPosition.latitude,
-                y: context.read<AttendanceCubit>().currentPosition.latitude,
-              )
-            : AttendanceRequest(
-                x: context.read<AttendanceCubit>().currentPosition.latitude,
-                y: context.read<AttendanceCubit>().currentPosition.latitude,
-                isAttendFingerprint: isAttendance,
-                isShift1Complete: widget.shift1Complete,
-                isShift2Complete: widget.shift2Complete,
-                isShift3Complete: widget.shift3Complete,
-                isShift4Complete: widget.shift4Complete));
-    checkTime();
+          widget.shiftType == 1
+              ? AttendanceRequest(
+                  x: context.read<AttendanceCubit>().currentPosition.latitude,
+                  y: context.read<AttendanceCubit>().currentPosition.latitude,
+                )
+              : AttendanceRequest(
+                  x: context.read<AttendanceCubit>().currentPosition.latitude,
+                  y: context.read<AttendanceCubit>().currentPosition.latitude,
+                  isAttendFingerprint: isAttendance,
+                  isShift1Complete: widget.shift1Complete,
+                  isShift2Complete: widget.shift2Complete,
+                  isShift3Complete: widget.shift3Complete),
+        );
+    setState(() {
+      _isButtonVisible = false;
+    });
+    Future.delayed(const Duration(seconds: 3), () {
+      checkTime();
+    });
   }
-
-
 }

@@ -27,12 +27,8 @@ class LoginBlocListener extends StatefulWidget {
 
 class _LoginBlocListenerState extends State<LoginBlocListener> {
 
-
-
-
   @override
   Widget build(BuildContext context) {
-
     SignalRService signalRService =SignalRService(context);
     return BlocListener<LoginCubit, LoginState>(
       listenWhen: (previous, current) =>
@@ -50,12 +46,7 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
           },
           success: (loginResponse) async {
             LoginResponse response = loginResponse;
-
-           // SharedPreferences prefs = await SharedPreferences.getInstance();
-
             if (response.result == 1) {
-              //prefs.setString(myToken, response.data!.authToken!.token!);
-             //ApiConstants.authToken = response.data!.authToken!.token!;
               signalRService.startConnection(response.data!.authToken!.token!);
               context.pushReplacementNamed(Routes.homeScreen);
             } else {
@@ -67,9 +58,7 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
               SharedPrefHelper.setData(isLoggedIn, true);
             }
 
-            setState(() {
-              context.read<LoginCubit>().circaleLoadFlag = false;
-            });
+
           },
           error: (error) {
             setupDialogState(context, error, true);

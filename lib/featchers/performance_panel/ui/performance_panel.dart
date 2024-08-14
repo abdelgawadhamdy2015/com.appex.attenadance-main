@@ -225,7 +225,7 @@ class _PerformancePanel extends State<PerformancePanel> {
                                         //  ),
 
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Text(
                                         days[index].date != null
                                             ? Intl.defaultLocale == arabic

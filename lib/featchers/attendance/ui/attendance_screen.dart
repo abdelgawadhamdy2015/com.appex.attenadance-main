@@ -30,6 +30,8 @@ class AttendanceScreen extends StatefulWidget {
 }
 
 class _AttendanceScreen extends State<AttendanceScreen> {
+ // String apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? 'default_api_key';
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateFormat dateFormat = DateFormat('EEE, y,M,d  ');
   bool isSignIn = false;
