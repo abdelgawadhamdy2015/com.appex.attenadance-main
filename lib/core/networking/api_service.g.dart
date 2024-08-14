@@ -13,7 +13,7 @@ class _ApiService implements ApiService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.1.253:9090/';
+    baseUrl ??= 'https://sectestback.apex-program.com/';
   }
 
   final Dio _dio;

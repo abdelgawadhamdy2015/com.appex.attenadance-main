@@ -161,7 +161,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
       remainingTimeInMinutes =
           convertStringToTime(lastTime).minute - DateTime.now().minute;
       remainingTimeInSeconds =
-          convertStringToTime(lastTime).second + 60 - DateTime.now().second;
+          convertStringToTime(lastTime).second  - DateTime.now().second;
       startTimer(remainingTimeInMinutes, remainingTimeInSeconds);
     }
 
