@@ -5,9 +5,9 @@ import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
-import 'package:ttech_attendance/core/widgets/bottom_app_bar.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/bottom_app_bar.dart';
 
-import '../helpers/helper_methods.dart';
+import '../../helpers/helper_methods.dart';
 
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Function(Locale) changeLanguage;
