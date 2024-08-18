@@ -43,7 +43,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
   bool _isButtonVisible = true;
   int _remainingTime = 0;
   String lastTime = '';
-  Timer? _timer;
+ 
 
   @override
   void initState() {
@@ -178,7 +178,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
       _isButtonVisible = false;
     });
 
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_remainingTime > 0) {
           _remainingTime--;
