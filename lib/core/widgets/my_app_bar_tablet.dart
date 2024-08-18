@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/extensions.dart';
+import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/arrow_back_widget.dart';
 import 'package:ttech_attendance/core/widgets/bottom_app_bar_tablet.dart';
+import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 
 import '../helpers/helper_methods.dart';
-
 
 class MyAppBarTablet extends StatefulWidget implements PreferredSizeWidget {
   final Function(Locale) changeLanguage;
@@ -52,19 +54,16 @@ class _MyAppBarState extends State<MyAppBarTablet> {
       iconTheme: const IconThemeData(color: Colors.white),
       bottom: widget.tiltle.isNotEmpty
           ? AppBar(
-        backgroundColor: ColorManger.morelightGray,
-        title: MyBottomAppBarTablet(
-          title: widget.tiltle,
-        ),
-        leading: const ArrowBackWidget(),
-      )
+              backgroundColor: ColorManger.morelightGray,
+              title: MyBottomAppBarTablet(
+                title: widget.tiltle,
+              ),
+              leading: const ArrowBackWidget(),
+            )
           : null,
       title: SafeArea(
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * .07,
+          height: MediaQuery.of(context).size.height * .07,
           width: double.infinity,
           padding: const EdgeInsets.all(5),
           margin: const EdgeInsets.symmetric(vertical: 10),
@@ -76,10 +75,7 @@ class _MyAppBarState extends State<MyAppBarTablet> {
                   width: 1,
                   color: Colors.white,
                 ),
-                horizontalSpacing(MediaQuery
-                    .of(context)
-                    .size
-                    .width * .01),
+                horizontalSpacing(MediaQuery.of(context).size.width * .01),
                 FittedBox(
                   fit: BoxFit.cover,
                   child: Image.asset(
@@ -88,19 +84,16 @@ class _MyAppBarState extends State<MyAppBarTablet> {
                 ),
                 const Spacer(),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setupDialogState(context, "this notify you", false);
+                    context.pushNamed(Routes.departuresScreen);
+                  },
                   icon: Icon(
                     Icons.notifications_none_outlined,
-                    size: MediaQuery
-                        .of(context)
-                        .size
-                        .width * .07,
+                    size: MediaQuery.of(context).size.width * .07,
                   ),
                 ),
-                horizontalSpacing(MediaQuery
-                    .of(context)
-                    .size
-                    .width * .1),
+                horizontalSpacing(MediaQuery.of(context).size.width * .1),
                 DropdownButton(
                     dropdownColor: Colors.blueAccent,
                     alignment: AlignmentDirectional.center,
@@ -121,19 +114,13 @@ class _MyAppBarState extends State<MyAppBarTablet> {
                         });
                       }
                     }),
-                horizontalSpacing(MediaQuery
-                    .of(context)
-                    .size
-                    .width * .03),
+                horizontalSpacing(MediaQuery.of(context).size.width * .03),
                 const VerticalDivider(
                   thickness: 1.5,
                   width: 1,
                   color: Colors.white,
                 ),
-                horizontalSpacing(MediaQuery
-                    .of(context)
-                    .size
-                    .width * .1),
+                horizontalSpacing(MediaQuery.of(context).size.width * .1),
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
@@ -141,10 +128,7 @@ class _MyAppBarState extends State<MyAppBarTablet> {
                   child: Image.asset(
                     "assets/man.png",
                     //width: MediaQuery.of(context).size.width * .1,
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * .04,
+                    height: MediaQuery.of(context).size.height * .04,
                   ),
                 )
               ],
@@ -153,4 +137,5 @@ class _MyAppBarState extends State<MyAppBarTablet> {
         ),
       ),
     );
-  }}
+  }
+}

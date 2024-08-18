@@ -189,12 +189,17 @@ class _PerformancePanel extends State<PerformancePanel> {
                           return const Center(child: DeparturesShimmer());
                         } else if (state is Success) {
                           days = context
-                              .read<PerformanceEmployeeCubit>()
-                              .datalist
-                              .first
-                              .employees!
-                              .first
-                              .days!;
+                                  .read<PerformanceEmployeeCubit>()
+                                  .datalist
+                                  .isNotEmpty
+                              ? context
+                                  .read<PerformanceEmployeeCubit>()
+                                  .datalist
+                                  .first
+                                  .employees!
+                                  .first
+                                  .days!
+                              : [];
                           return ListView.builder(
                             key: context
                                 .read<PerformanceEmployeeCubit>()
@@ -205,25 +210,20 @@ class _PerformancePanel extends State<PerformancePanel> {
                                 child: ListTile(
                                   title: Row(
                                     children: [
-                                      Text(getFormattedTimeOfDay("04:20", context)),
+                                      Text(getFormattedTimeOfDay(
+                                          "04:20", context)),
                                       const Spacer(),
                                       Container(
                                         width: SizeConfig.screenWidth! * .4,
                                         height: SizeConfig.screenHeight! * .01,
-                                        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth!* .3 ),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal:
+                                                SizeConfig.screenWidth! * .3),
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20.r),
+                                          borderRadius:
+                                              BorderRadius.circular(20.r),
                                           color: Colors.black,
                                         ),
-                                        //  child: const Divider(
-                                        //    //height: SizeConfig.screenHeight! * .01,
-                                        //    thickness: 10,
-                                        //    indent: 50,
-                                        //    endIndent: 20,
-                                        // color: Colors.black,
-                                        //
-                                        //  ),
-
                                       ),
                                       const Spacer(),
                                       Text(
@@ -234,10 +234,8 @@ class _PerformancePanel extends State<PerformancePanel> {
                                             : "",
                                         style: TextStyles.font12black54Reguler,
                                       ),
-
                                     ],
                                   ),
-
                                   subtitle: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -245,16 +243,12 @@ class _PerformancePanel extends State<PerformancePanel> {
                                     children: <Widget>[
                                       verticalSpacing(
                                           SizeConfig.screenHeight! * .005),
-
                                       verticalSpacing(
                                           SizeConfig.screenHeight! * .005),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-
-
-
                                           Text(S.of(context).attendanceTime),
                                           horizontalSpacing(
                                               SizeConfig.screenWidth! * .04),
