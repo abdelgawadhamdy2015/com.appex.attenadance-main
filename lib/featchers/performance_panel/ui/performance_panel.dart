@@ -64,11 +64,6 @@ class _PerformancePanel extends State<PerformancePanel> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     days = context.read<PerformanceEmployeeCubit>().datalist.isNotEmpty
         ? context
@@ -165,7 +160,7 @@ class _PerformancePanel extends State<PerformancePanel> {
                         const Spacer(),
                         IconButton(
                             onPressed: () {},
-                            icon: const Icon(Icons.menu_book)),
+                            icon: const Icon(Icons.filter_alt)),
                         const Spacer(),
                         Text(S.of(context).timesOfWork,
                             style: TextStyles.font12blackBold),

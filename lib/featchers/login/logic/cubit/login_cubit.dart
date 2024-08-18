@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
-import 'package:ttech_attendance/core/networking/dio_factory.dart';
 
 import '../../../../core/helpers/constants.dart';
 import '../../data/models/login_request_body.dart';
@@ -17,9 +15,12 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController dbController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool loadingLogin = false;
 
   void emitLoginStates() async {
     emit(const LoginState.loading());
+    loadingLogin = true;
+
     final response = await _loginRepo.login(
       LoginRequest(
         username: emailController.text,
@@ -28,11 +29,13 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(success: (loginResponse) async {
-    await  SharedPrefHelper.setSecuredString(myToken, loginResponse.data!.authToken!.token!);
-    DioFactory.setTokenToHeaderAfterLogin(loginResponse.data!.authToken!.token!);
+      loadingLogin = false;
       emit(LoginState.success(loginResponse));
     }, failure: (error) {
-      emit(LoginState.error(error: Intl.defaultLocale== english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
+      emit(LoginState.error(
+          error: Intl.defaultLocale == english
+              ? error.apiErrorModel.errorMessageEn!
+              : error.apiErrorModel.errorMessageAr!));
     });
   }
 }

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/core/widgets/indicator/my_progress_indicator.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/login/logic/cubit/login_cubit.dart';
+import 'package:ttech_attendance/featchers/login/logic/cubit/login_state.dart';
 import 'package:ttech_attendance/featchers/login/ui/widget/login_bloc_listener.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
@@ -30,7 +31,6 @@ class LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
   String selectedLanguage = 'Arabic';
 
-
   LoginScreenState();
 
   @override
@@ -47,15 +47,13 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         backgroundColor: const Color(0xffffffff),
         body: OfflineBuilderWidget(
           child: SafeArea(
             child: Container(
-              padding:SizeConfig().getScreenPadding(),
-
-            child: SingleChildScrollView(
+              padding: SizeConfig().getScreenPadding(),
+              child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -103,7 +101,8 @@ class LoginScreenState extends State<LoginScreen> {
                     ),
                     Center(
                       child: Container(
-                        padding: EdgeInsets.only(top: SizeConfig.screenHeight!*.01),
+                        padding: EdgeInsets.only(
+                            top: SizeConfig.screenHeight! * .01),
                         child: Text(S.of(context).login,
                             style: TextStyles.font18BlackBold),
                       ),
@@ -114,7 +113,9 @@ class LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.screenWidth! * .016,
+                                vertical: SizeConfig.screenHeight! * .016),
                             child: Text(
                               S.of(context).dbName,
                               style: TextStyles.font12blackBold,
@@ -125,7 +126,9 @@ class LoginScreenState extends State<LoginScreen> {
                               excep: S.of(context).dbName,
                               control: context.read<LoginCubit>().dbController),
                           Container(
-                            padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.screenWidth! * .016,
+                                vertical: SizeConfig.screenHeight! * .016),
                             child: Text(
                               S.of(context).email,
                               style: TextStyles.font12blackBold,
@@ -137,7 +140,9 @@ class LoginScreenState extends State<LoginScreen> {
                             control: context.read<LoginCubit>().emailController,
                           ),
                           Container(
-                            padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.screenWidth! * .016,
+                                vertical: SizeConfig.screenHeight! * .016),
                             child: Text(
                               S.of(context).password,
                               style: TextStyles.font12blackBold,
@@ -149,8 +154,7 @@ class LoginScreenState extends State<LoginScreen> {
                               control: context
                                   .read<LoginCubit>()
                                   .passwordController),
-                          verticalSpacing(
-                              SizeConfig.screenHeight! * .05),
+                          verticalSpacing(SizeConfig.screenHeight! * .05),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -185,26 +189,33 @@ class LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           ),
-                  verticalSpacing(
-                      SizeConfig.screenHeight! * .05),
-                          Container(
-                            padding: EdgeInsets.only(top: SizeConfig.screenHeight!* .01),
-                            width: double.infinity,
-                            height: SizeConfig.screenHeight! * .08,
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                validateThenDoLogin(context);
-                              },
-                              style: ElevatedButton.styleFrom(),
-                              child: FittedBox(
-                                fit: BoxFit.cover,
-                                child:
-                                      Text(
+                          verticalSpacing(SizeConfig.screenHeight! * .05),
+                          BlocBuilder<LoginCubit, LoginState>(
+                            builder: (context, state) {
+                              return !context.read<LoginCubit>().loadingLogin
+                                  ? Container(
+                                      padding: EdgeInsets.only(
+                                          top: SizeConfig.screenHeight! * .01),
+                                      width: double.infinity,
+                                      height: SizeConfig.screenHeight! * .08,
+                                      child: ElevatedButton(
+                                        onPressed: () async {
+                                          validateThenDoLogin(context);
+                                        },
+                                        style: ElevatedButton.styleFrom(),
+                                        child: FittedBox(
+                                          fit: BoxFit.cover,
+                                          child: Text(
                                             S.of(context).login,
                                             style: TextStyles.font16BlueBold,
                                           ),
-                              ),
-                            ),
+                                        ),
+                                      ),
+                                    )
+                                  : MyProgressIndicator(
+                                      hight: SizeConfig.screenHeight! * .08,
+                                      width: SizeConfig.screenWidth! * .08);
+                            },
                           ),
                           LoginBlocListener(
                             rememberMe: rememberMe,
@@ -223,6 +234,9 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void validateThenDoLogin(BuildContext context) {
+    setState(() {
+      context.read<LoginCubit>().loadingLogin = true;
+    });
     if (context.read<LoginCubit>().formKey.currentState!.validate()) {
       context.read<LoginCubit>().emitLoginStates();
     }

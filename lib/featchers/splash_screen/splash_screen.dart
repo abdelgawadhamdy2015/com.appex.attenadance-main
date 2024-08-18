@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: const Color(0xFF232424),
       body: MyProgressIndicator(
         width: SizeConfig.screenWidth! * .5,
         hight: SizeConfig.screenHeight! * .3,
