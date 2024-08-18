@@ -12,8 +12,9 @@ class Constants {
 }
 
 const List<String> languages = ["English", "العربية"];
-DateFormat dateFormat = DateFormat('EEE, y,M,d  ');
+ DateFormat dayDateFormat = DateFormat('EEE, y,M,d  ');
 DateFormat hoursFormat = DateFormat("hh:nn");
+  DateFormat dateFormat = DateFormat('dd-MMMM-yyyy');
 
 const String myTransactions = "transaction";
 const String credits = "credits";

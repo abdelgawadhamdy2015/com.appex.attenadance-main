@@ -29,8 +29,6 @@ class _PerformanceBlockListener extends State<PerformanceBlockListener> {
           },
           success: (performanceResponse) async {
             PerformanceEmployeeResponse response = performanceResponse;
-
-
             response.result == 1
                 ? context.read<PerformanceEmployeeCubit>().datalist =
                     response.data!

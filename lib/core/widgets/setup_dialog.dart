@@ -24,14 +24,13 @@ setupDialogState(BuildContext context, String data, bool isError) {
         TextButton(
           onPressed: () {
             context.pop();
-            if(ApiConstants.dioExceptionType==DioExceptionType.badResponse){
-              ApiConstants.dioExceptionType=DioExceptionType.unknown;
+            if (ApiConstants.dioExceptionType == DioExceptionType.badResponse) {
+              ApiConstants.dioExceptionType = DioExceptionType.unknown;
               SharedPrefHelper.clearAllData();
               SharedPrefHelper.clearAllSecuredData();
 
               context.pushReplacementNamed(Routes.loginScreen);
             }
-
           },
           child: Text(
             'OK',
@@ -43,15 +42,15 @@ setupDialogState(BuildContext context, String data, bool isError) {
   );
 }
 
-setupLogOutDialogState(BuildContext context, String data,
-    SignalRService signalService) {
+setupLogOutDialogState(
+    BuildContext context, String data, SignalRService signalService) {
   //!loginScreen! ? context.pop() : "";
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
       icon: const Icon(
-         Icons.error ,
-        color:  Colors.red ,
+        Icons.error,
+        color: Colors.red,
         size: 32,
       ),
       content: Text(

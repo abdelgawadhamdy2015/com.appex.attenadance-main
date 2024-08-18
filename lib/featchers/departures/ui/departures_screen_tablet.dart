@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
-import 'package:ttech_attendance/core/widgets/my_app_bar_tablet.dart';
-import 'package:ttech_attendance/core/widgets/my_drawer.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar_tablet.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
 
 class DeparturesScreenTablet extends StatelessWidget {
   final Function(Locale) changeLanguage;

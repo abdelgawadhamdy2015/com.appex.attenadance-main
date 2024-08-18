@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
-import 'package:ttech_attendance/core/widgets/bottom_app_bar.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/bottom_app_bar.dart';
 
-import '../helpers/helper_methods.dart';
+import '../../helpers/helper_methods.dart';
 
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Function(Locale) changeLanguage;
@@ -63,10 +65,17 @@ class _MyAppBarState extends State<MyAppBar> {
             Image.asset(
               "images/smaller_apex.png",
               width: SizeConfig.screenWidth! * .15,
-
             ),
             const Spacer(),
-            const Icon(Icons.notifications_none_outlined),
+            IconButton(
+              onPressed: () {
+                context.pushNamed(Routes.departuresScreen);
+              },
+              icon: Icon(
+                Icons.notifications_none_outlined,
+                size: MediaQuery.of(context).size.width * .07,
+              ),
+            ),
             horizontalSpacing(SizeConfig.screenWidth! * .05),
             DropdownButton(
                 dropdownColor: Colors.blueAccent,
@@ -107,4 +116,5 @@ class _MyAppBarState extends State<MyAppBar> {
         ),
       ),
     );
-  }}
+  }
+}
