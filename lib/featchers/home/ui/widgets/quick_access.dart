@@ -15,7 +15,9 @@ class QuickAccess extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
+        padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.screenWidth! * .016,
+            vertical: SizeConfig.screenHeight! * .016),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -23,7 +25,7 @@ class QuickAccess extends StatelessWidget {
               S.of(context).quickAccessList,
               style: TextStyles.font12blackBold,
             ),
-            verticalSpacing(SizeConfig.screenHeight!* .016),
+            verticalSpacing(SizeConfig.screenHeight! * .016),
             GridView.count(
               crossAxisCount: 3,
               shrinkWrap: true,
@@ -58,7 +60,9 @@ class QuickAccess extends StatelessWidget {
     return Card(
       color: Colors.white,
       child: Container(
-        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .005,vertical: SizeConfig.screenHeight! * .005),
+        padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.screenWidth! * .005,
+            vertical: SizeConfig.screenHeight! * .005),
         child: Column(
           children: [
             ElevatedButton(
@@ -72,11 +76,15 @@ class QuickAccess extends StatelessWidget {
                     context.pushReplacementNamed(Routes.performancePanelScreen);
                   case credits:
                     context.pushReplacementNamed(Routes.departuresScreen);
+                  case salaries:
+                    context.pushReplacementNamed(Routes.permissionScreen);
                 }
               },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .01,vertical: SizeConfig.screenHeight! * .01),
+                padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.screenWidth! * .01,
+                    vertical: SizeConfig.screenHeight! * .01),
               ),
               child: Image.asset(
                 icon,
@@ -98,4 +106,5 @@ class QuickAccess extends StatelessWidget {
         ),
       ),
     );
-  }}
+  }
+}

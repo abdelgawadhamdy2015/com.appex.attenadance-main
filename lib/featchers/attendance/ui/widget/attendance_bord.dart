@@ -19,7 +19,7 @@ class AttendanceBord extends StatefulWidget {
 class _AttendanceBoard extends State<AttendanceBord> {
   bool isAttendance = true;
   HeaderData data = HeaderData();
-  Map<String, dynamic> map = {};
+ // Map<String, dynamic> map = {};
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _AttendanceBoard extends State<AttendanceBord> {
             data = context.read<SendAttendanceCubit>().data;
             return BlocBuilder<SendAttendanceCubit, SendAttendanceState>(
                 builder: (context, state) {
-              map = data.toJson();
+              //map = data.toJson();
               return IntrinsicHeight(
                 child: Column(
                   children: [

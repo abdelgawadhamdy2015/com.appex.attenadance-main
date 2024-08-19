@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
-import 'package:ttech_attendance/featchers/permission/widgets/list_shift_item.dart';
+import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
+import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_state.dart';
+import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
+import 'package:ttech_attendance/featchers/permission/ui/widgets/list_shift_item.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class PermissionScreen extends StatefulWidget {
@@ -27,6 +34,8 @@ class _PermissionScreenState extends State<PermissionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final checkboxState = Provider.of<CheckboxState>(context);
+
     return Scaffold(
         appBar: MyAppBar(
           changeLanguage: widget.changeLanguage,
@@ -122,21 +131,47 @@ class _PermissionScreenState extends State<PermissionScreen> {
                   verticalSpacing(SizeConfig.screenHeight! * .02),
 
                   _permissionType == "Temporary"
-                      ? const Column(
-                          children: [
-                            ListShiftItem(
-                              shift: 1,
-                            ),
-                            ListShiftItem(
-                              shift: 2,
-                            ),
-                            ListShiftItem(
-                              shift: 3,
-                            ),
-                            ListShiftItem(
-                              shift: 4,
-                            ),
-                          ],
+                      ? BlocBuilder<PermissionCubit, PermissionState>(
+                          builder: (context, state) {
+                            return Column(
+                              children: [
+                                const ListShiftItem(
+                                  shift: 1,
+                                  enabled: true,
+                                ),
+                                checkboxState.isChecked1 &&
+                                        !checkboxState.shifttosecond1
+                                    ? const ListShiftItem(
+                                        shift: 2,
+                                        enabled: true,
+                                      )
+                                    : const ListShiftItem(
+                                        shift: 2,
+                                        enabled: false,
+                                      ),
+                                checkboxState.isChecked2 &&
+                                        !checkboxState.shifttosecond2
+                                    ? const ListShiftItem(
+                                        shift: 3,
+                                        enabled: true,
+                                      )
+                                    : const ListShiftItem(
+                                        shift: 3,
+                                        enabled: false,
+                                      ),
+                                checkboxState.isChecked3 &&
+                                        !checkboxState.shifttosecond3
+                                    ? const ListShiftItem(
+                                        shift: 4,
+                                        enabled: true,
+                                      )
+                                    : const ListShiftItem(
+                                        shift: 4,
+                                        enabled: false,
+                                      )
+                              ],
+                            );
+                          },
                         )
                       : Container(),
                   verticalSpacing(SizeConfig.screenHeight! * .02),

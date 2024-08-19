@@ -15,6 +15,8 @@ class ApiConstants {
       "api/HR/EmployeeFingerprints/CheckValidEmployeeFingerprint";
   // static  String authToken = "authToken";
   static DioExceptionType dioExceptionType = DioExceptionType.unknown;
+    static bool shift1Checked = false;
+
 }
 
 class ApiErrors {

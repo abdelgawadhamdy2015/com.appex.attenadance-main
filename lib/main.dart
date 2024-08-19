@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
@@ -15,7 +16,9 @@ import 'package:ttech_attendance/featchers/home/ui/home_screen.dart';
 import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel.dart';
+import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/permission/permission_screen.dart';
+import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
 import 'package:ttech_attendance/featchers/splash_screen/splash_screen.dart';
@@ -150,10 +153,10 @@ class _MyAppState extends State<MyApp> {
                 ));
       case Routes.permissionScreen:
         return MaterialPageRoute(
-          builder: (_) => PermissionScreen(
-              changeLanguage: _changeLanguage,
-              ),
-        );
+            builder: (_) => MultiBlocProvider(providers: [
+                  BlocProvider(create: (context) => getIt<PermissionCubit>()),
+                  ChangeNotifierProvider(create: (context) => CheckboxState()),
+                ], child: PermissionScreen(changeLanguage: _changeLanguage)));
 
       default:
         return MaterialPageRoute(
