@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "myRequests": MessageLookupByLibrary.simpleMessage("طلباتي"),
+        "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "noDateFound": MessageLookupByLibrary.simpleMessage(
             "الرجاء اختيار تاريخ البدء وتاريخ الانتهاء "),
         "notAttendance":

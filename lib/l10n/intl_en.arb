@@ -70,7 +70,9 @@
     "temporary":"temporary",
     "fullDay":"Full Day",
     "date": "Date",
-    "permissionType": "Permission Type"
+    "permissionType": "Permission Type",
+    "name":"Name"
+
 
 
     

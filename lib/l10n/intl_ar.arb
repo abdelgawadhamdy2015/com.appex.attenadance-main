@@ -69,6 +69,7 @@
     "temporary": "مؤقت",
     "fullDay": "يوم كامل",
     "date": "التاريخ",
-    "permissionType": "نوع الإذن"
+    "permissionType": "نوع الإذن",
+    "name":"الاسم"
     
 }

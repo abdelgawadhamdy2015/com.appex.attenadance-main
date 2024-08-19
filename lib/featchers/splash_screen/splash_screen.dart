@@ -29,13 +29,13 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
 
     getSavedValue();
-
     Future.delayed(const Duration(seconds: 3)).whenComplete(() {
-      if (!checkIfNull([token]) && login) {
-        context.pushReplacementNamed(Routes.homeScreen);
-      } else {
-        context.pushReplacementNamed(Routes.loginScreen);
-      }
+      context.pushReplacementNamed(Routes.permissionScreen);
+      // if (!checkIfNull([token]) && login) {
+      //   context.pushReplacementNamed(Routes.homeScreen);
+      // } else {
+      //   context.pushReplacementNamed(Routes.loginScreen);
+      // }
     });
   }
 

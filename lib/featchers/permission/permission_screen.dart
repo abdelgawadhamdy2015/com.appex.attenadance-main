@@ -51,7 +51,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                 children: [
                   // Dropdown for employee names
                   DropdownButtonFormField<String>(
-                    hint: Text(S.of(context).email),
+                    hint: Text(S.of(context).name),
                     value: _selectedEmployee,
                     onChanged: (String? newValue) {
                       setState(() {

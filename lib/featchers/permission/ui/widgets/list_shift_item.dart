@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/featchers/permission/data/models/shift_model.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_state.dart';
 import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as picker;
+import 'package:ttech_attendance/generated/l10n.dart';
 
 class ListShiftItem extends StatefulWidget {
   const ListShiftItem({super.key, required this.shift, required this.enabled});
@@ -17,11 +21,27 @@ class ListShiftItem extends StatefulWidget {
 }
 
 class _ListShiftItemState extends State<ListShiftItem> {
-  // bool _shiftActive = false;
-  bool _shiftToSecondDay = false;
+  TextEditingController startController = TextEditingController();
+  TextEditingController endController = TextEditingController();
 
-  final TextEditingController _startDateController = TextEditingController();
-  final TextEditingController _endDateController = TextEditingController();
+  void selectTime(BuildContext context, bool isStart) async {
+    TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (selectedTime != null) {
+      final now = DateTime.now();
+      final dateTime = DateTime(
+          now.year, now.month, now.day, selectedTime.hour, selectedTime.minute);
+      setState(() {
+        isStart
+            ? startController.text = selectedTime.format(context)
+            : endController.text = selectedTime.format(context);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final checkboxState = Provider.of<CheckboxState>(context);
@@ -37,12 +57,8 @@ class _ListShiftItemState extends State<ListShiftItem> {
                 title: Text(getShift(widget.shift, context)),
                 value: getCheckBoxId(widget.shift, checkboxState),
                 onChanged: (bool? value) {
-                  context.read<PermissionCubit>().shiftChecks.add(ShiftModel(
-                      widget.shift,
-                      value!,
-                      false,
-                      "",
-                      "endTime")); // print(context.read<PermissionCubit>().shiftChecks[0]);
+                  context.read<PermissionCubit>().shiftChecks.add(
+                      ShiftModel(widget.shift, value!, false, "", "endTime"));
                   setState(() {
                     switch (widget.shift) {
                       case 1:
@@ -65,22 +81,33 @@ class _ListShiftItemState extends State<ListShiftItem> {
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          verticalSpacing(SizeConfig.screenHeight! * .02),
                           TextField(
-                            controller: _startDateController,
-                            decoration: const InputDecoration(
-                              labelText: 'Start Date',
+                            controller: startController,
+                            decoration: InputDecoration(
+                              labelText: S.of(context).attendanceTime,
+                              border: const OutlineInputBorder(),
+                              suffixIcon: const Icon(Icons.access_time),
                             ),
-                            keyboardType: TextInputType.datetime,
+                            readOnly: true,
+                            onTap: () {
+                              selectTime(context, true);
+                            },
                           ),
-                          const SizedBox(height: 8.0),
+                          verticalSpacing(SizeConfig.screenHeight! * .02),
                           TextField(
-                            controller: _endDateController,
-                            decoration: const InputDecoration(
-                              labelText: 'End Date',
+                            controller: endController,
+                            decoration: InputDecoration(
+                              labelText: S.of(context).leaveTime,
+                              border: const OutlineInputBorder(),
+                              suffixIcon: const Icon(Icons.access_time),
                             ),
-                            keyboardType: TextInputType.datetime,
+                            readOnly: true,
+                            onTap: () {
+                              selectTime(context, false);
+                            },
                           ),
-                          const SizedBox(height: 8.0),
+                          verticalSpacing(SizeConfig.screenHeight! * .02),
                           CheckboxListTile(
                               title: const Text('Shift to Second Day'),
                               value:

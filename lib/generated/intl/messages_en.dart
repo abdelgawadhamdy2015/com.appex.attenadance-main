@@ -75,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out "),
         "myRequests": MessageLookupByLibrary.simpleMessage("My requests"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "noDateFound": MessageLookupByLibrary.simpleMessage(
             "please choose start date and end date "),
         "notAttendance":
