@@ -15,6 +15,7 @@ import 'package:ttech_attendance/featchers/home/ui/home_screen.dart';
 import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel.dart';
+import 'package:ttech_attendance/featchers/permission/permission_screen.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
 import 'package:ttech_attendance/featchers/splash_screen/splash_screen.dart';
@@ -34,7 +35,6 @@ void main() async {
       enabled: !kReleaseMode,
       builder: (context) => const MyApp(), // Wrap your app
     ),
-
   );
 }
 
@@ -50,8 +50,6 @@ class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale(arabic);
 
   _MyAppState();
-
-
 
   void _changeLanguage(Locale locale) {
     setState(() {
@@ -74,7 +72,6 @@ class _MyAppState extends State<MyApp> {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-
         supportedLocales: S.delegate.supportedLocales,
         onGenerateRoute: generateRoute,
         initialRoute: Routes.splashScreen,
@@ -151,6 +148,12 @@ class _MyAppState extends State<MyApp> {
                     changeLanguage: _changeLanguage,
                   ),
                 ));
+      case Routes.permissionScreen:
+        return MaterialPageRoute(
+          builder: (_) => PermissionScreen(
+              changeLanguage: _changeLanguage,
+              ),
+        );
 
       default:
         return MaterialPageRoute(

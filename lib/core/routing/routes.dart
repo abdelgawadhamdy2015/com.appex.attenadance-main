@@ -10,4 +10,6 @@ class Routes {
   static const String splashScreen = "splashScreen";
   static const String departuresScreen = 'departuresScreen';
   static const String performancePanelScreen = "performancePanelScreen";
+  static const String permissionScreen = "permissionScreen";
+
 }

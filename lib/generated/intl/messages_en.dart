@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "credits": MessageLookupByLibrary.simpleMessage("Credits"),
         "dailyWorkingHours":
             MessageLookupByLibrary.simpleMessage("from 9:00 A.M to 6:00 P.M"),
+        "date": MessageLookupByLibrary.simpleMessage("Date"),
         "dateWarning": MessageLookupByLibrary.simpleMessage(
             "The start date must be before the end date"),
         "day": MessageLookupByLibrary.simpleMessage("Day"),
@@ -59,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forget Password?"),
         "from": MessageLookupByLibrary.simpleMessage("from"),
         "fromDate": MessageLookupByLibrary.simpleMessage("From Date "),
+        "fullDay": MessageLookupByLibrary.simpleMessage("Full Day"),
         "holiday": MessageLookupByLibrary.simpleMessage("Holiday"),
         "hours": MessageLookupByLibrary.simpleMessage("Hour"),
         "kindOfHoliday":
@@ -83,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "performancePanel":
             MessageLookupByLibrary.simpleMessage("Performance Panel"),
         "permission": MessageLookupByLibrary.simpleMessage("Permission"),
+        "permissionType":
+            MessageLookupByLibrary.simpleMessage("Permission Type"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("please fill "),
         "pm": MessageLookupByLibrary.simpleMessage("P.M"),
         "quickAccessList":
@@ -101,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sickLeave": MessageLookupByLibrary.simpleMessage("Sick leave"),
         "signIn": MessageLookupByLibrary.simpleMessage("Check-in "),
         "signOut": MessageLookupByLibrary.simpleMessage("Check-out "),
+        "temporary": MessageLookupByLibrary.simpleMessage("temporary"),
         "timesOfWork": MessageLookupByLibrary.simpleMessage("Times of work"),
         "to": MessageLookupByLibrary.simpleMessage("to"),
         "toDate": MessageLookupByLibrary.simpleMessage(" To Date"),

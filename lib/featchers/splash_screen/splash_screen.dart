@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
-import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
@@ -31,11 +30,12 @@ class _SplashScreenState extends State<SplashScreen>
     getSavedValue();
 
     Future.delayed(const Duration(seconds: 3)).whenComplete(() {
-      if (!checkIfNull([token]) && login) {
-        context.pushReplacementNamed(Routes.homeScreen);
-      } else {
-        context.pushReplacementNamed(Routes.loginScreen);
-      }
+      context.pushReplacementNamed(Routes.permissionScreen);
+      // if (!checkIfNull([token]) && login) {
+      //   context.pushReplacementNamed(Routes.homeScreen);
+      // } else {
+      //   context.pushReplacementNamed(Routes.loginScreen);
+      // }
     });
   }
 

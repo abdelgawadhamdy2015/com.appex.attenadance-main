@@ -10,7 +10,6 @@ class Constants {
     language = lang;
   }
 }
-
 const List<String> languages = ["English", "العربية"];
  DateFormat dayDateFormat = DateFormat('EEE, y,M,d  ');
 DateFormat hoursFormat = DateFormat("hh:nn");

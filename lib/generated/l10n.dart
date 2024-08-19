@@ -709,6 +709,46 @@ class S {
       args: [],
     );
   }
+
+  /// `temporary`
+  String get temporary {
+    return Intl.message(
+      'temporary',
+      name: 'temporary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Day`
+  String get fullDay {
+    return Intl.message(
+      'Full Day',
+      name: 'fullDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Permission Type`
+  String get permissionType {
+    return Intl.message(
+      'Permission Type',
+      name: 'permissionType',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

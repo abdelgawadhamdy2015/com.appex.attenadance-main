@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "credits": MessageLookupByLibrary.simpleMessage("الاعتمادات"),
         "dailyWorkingHours": MessageLookupByLibrary.simpleMessage(
             "من 9:00 صباحًا الي 6:00 مساءً"),
+        "date": MessageLookupByLibrary.simpleMessage("التاريخ"),
         "day": MessageLookupByLibrary.simpleMessage("اليوم"),
         "days": MessageLookupByLibrary.simpleMessage("ايام"),
         "dbName": MessageLookupByLibrary.simpleMessage("اسم قاعدة البيانات"),
@@ -55,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "from": MessageLookupByLibrary.simpleMessage("من"),
         "fromDate": MessageLookupByLibrary.simpleMessage("من تاريخ"),
+        "fullDay": MessageLookupByLibrary.simpleMessage("يوم كامل"),
         "holiday": MessageLookupByLibrary.simpleMessage("الإجازة"),
         "hours": MessageLookupByLibrary.simpleMessage("ساعة"),
         "leaveForReset": MessageLookupByLibrary.simpleMessage("خروج للراحة"),
@@ -76,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "performancePanel": MessageLookupByLibrary.simpleMessage("لوحة الأداء"),
         "permission": MessageLookupByLibrary.simpleMessage("إذن"),
+        "permissionType": MessageLookupByLibrary.simpleMessage("نوع الإذن"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("يرجى ملء"),
         "pm": MessageLookupByLibrary.simpleMessage("مساءً"),
         "quickAccessList":
@@ -94,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sickLeave": MessageLookupByLibrary.simpleMessage("إجازة مرضية"),
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل الحضور"),
         "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الانصراف"),
+        "temporary": MessageLookupByLibrary.simpleMessage("مؤقت"),
         "timesOfWork": MessageLookupByLibrary.simpleMessage("أوقات الدوام"),
         "to": MessageLookupByLibrary.simpleMessage("الي"),
         "toDate": MessageLookupByLibrary.simpleMessage("إلى تاريخ"),
