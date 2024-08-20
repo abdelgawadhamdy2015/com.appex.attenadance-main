@@ -40,7 +40,7 @@ class _MyAppBarState extends State<MyAppBarTablet> {
   @override
   void initState() {
     super.initState();
-    if (Intl.defaultLocale == english) {
+    if (Intl.defaultLocale == MyConstants.english) {
       language = "English";
     } else {
       language = "العربية";

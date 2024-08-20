@@ -28,7 +28,7 @@ class SignalRService {
       ApiErrorModel apiErrorModel = ApiErrorModel.fromJson(map);
       setupLogOutDialogState(
           context,
-          Intl.defaultLocale == arabic
+          Intl.defaultLocale == MyConstants.arabic
               ? apiErrorModel.errorMessageAr!
               : apiErrorModel.errorMessageEn!,
           this);

@@ -33,20 +33,20 @@ class QuickAccess extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 _buildQuickAccessButton("assets/out_in.png",
-                    S.of(context).transaction, context, myTransactions),
+                    S.of(context).transaction, context, MyConstants.myTransactions),
                 _buildQuickAccessButton("assets/credit.png",
-                    S.of(context).credits, context, credits),
+                    S.of(context).credits, context, MyConstants.credits),
                 _buildQuickAccessButton("assets/sallary.png",
-                    S.of(context).salaries, context, salaries),
+                    S.of(context).salaries, context, MyConstants.salaries),
                 _buildQuickAccessButton("assets/work-time.png",
-                    S.of(context).timesOfWork, context, timesOfWork),
+                    S.of(context).timesOfWork, context, MyConstants.timesOfWork),
                 _buildQuickAccessButton(
                     "assets/reports.png",
                     S.of(context).attendanceAndDepartureReports,
                     context,
-                    attendanceAndDepartureReports),
+                    MyConstants.attendanceAndDepartureReports),
                 _buildQuickAccessButton("assets/request.png",
-                    S.of(context).myRequests, context, myRequests),
+                    S.of(context).myRequests, context, MyConstants.myRequests),
               ],
             ),
           ],
@@ -68,15 +68,15 @@ class QuickAccess extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 switch (id) {
-                  case myTransactions:
+                  case MyConstants.myTransactions:
                     context.pushReplacementNamed(Routes.attendaceScreen);
-                  case myRequests:
+                  case MyConstants.myRequests:
                     context.pushReplacementNamed(Routes.requestFormScreen);
-                  case attendanceAndDepartureReports:
+                  case MyConstants.attendanceAndDepartureReports:
                     context.pushReplacementNamed(Routes.performancePanelScreen);
-                  case credits:
+                  case MyConstants.credits:
                     context.pushReplacementNamed(Routes.departuresScreen);
-                  case salaries:
+                  case MyConstants.salaries:
                     context.pushReplacementNamed(Routes.permissionScreen);
                 }
               },

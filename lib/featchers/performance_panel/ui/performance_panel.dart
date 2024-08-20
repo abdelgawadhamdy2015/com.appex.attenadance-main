@@ -78,7 +78,7 @@ class _PerformancePanel extends State<PerformancePanel> {
         appBar: MyAppBar(
           changeLanguage: widget.changeLanguage,
           context: context,
-          title: attendanceAndDepartureReports,
+          title: MyConstants.attendanceAndDepartureReports,
         ),
         drawer: const Drawer(
           child: MyDrawer(),
@@ -102,13 +102,13 @@ class _PerformancePanel extends State<PerformancePanel> {
                               style: TextStyles.font12black54Reguler,
                               controller: TextEditingController(
                                 text: _startDate != null
-                                    ? dateFormat.format(_startDate!)
+                                    ? MyConstants.dateFormat.format(_startDate!)
                                     : S.of(context).fromDate,
                               ),
                               decoration: InputDecoration(
                                   labelText: S.of(context).fromDate,
                                   hintText: _startDate != null
-                                      ? dateFormat.format(_startDate!)
+                                      ? MyConstants.dateFormat.format(_startDate!)
                                       : S.of(context).fromDate,
                                   hintStyle: TextStyles.font12black54Reguler,
                                   labelStyle: TextStyles.font12black54Reguler),
@@ -126,13 +126,13 @@ class _PerformancePanel extends State<PerformancePanel> {
                               style: TextStyles.font12black54Reguler,
                               controller: TextEditingController(
                                 text: _endDate != null
-                                    ? dateFormat.format(_endDate!)
+                                    ? MyConstants.dateFormat.format(_endDate!)
                                     : S.of(context).toDate,
                               ),
                               decoration: InputDecoration(
                                   labelText: S.of(context).toDate,
                                   hintText: _endDate != null
-                                      ? dateFormat.format(_endDate!)
+                                      ? MyConstants.dateFormat.format(_endDate!)
                                       : S.of(context).toDate,
                                   hintStyle: TextStyles.font12black54Reguler,
                                   labelStyle: TextStyles.font12black54Reguler),

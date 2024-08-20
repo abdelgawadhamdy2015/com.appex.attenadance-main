@@ -36,14 +36,14 @@ class _RequestBlockListenerState extends State<RequestBlockListener> {
             response.result == 1
                 ? setupDialogState(
                     context,
-                    Intl.defaultLocale == arabic
+                    Intl.defaultLocale == MyConstants.arabic
                         ? response.alart!.messageAr!
                         : response.alart!.messageEn!,
                     false,
                     )
                 : setupDialogState(
                     context,
-                    Intl.defaultLocale == arabic
+                    Intl.defaultLocale == MyConstants.arabic
                         ? response.alart!.messageAr!
                         : response.alart!.messageEn!,
                     true,

@@ -6,7 +6,7 @@ import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/featchers/permission/data/models/shift_model.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_state.dart';
-import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
+import 'package:ttech_attendance/featchers/permission/logic/cubit/check_box_state.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class ListShiftItem extends StatefulWidget {
@@ -30,7 +30,7 @@ class _ListShiftItemState extends State<ListShiftItem> {
 
     if (selectedTime != null) {
       final now = DateTime.now();
-      final dateTime = DateTime(
+       DateTime(
           now.year, now.month, now.day, selectedTime.hour, selectedTime.minute);
       setState(() {
         isStart

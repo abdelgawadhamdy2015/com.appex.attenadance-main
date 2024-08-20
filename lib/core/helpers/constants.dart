@@ -1,6 +1,26 @@
 import 'package:intl/intl.dart';
 
-class Constants {
+class MyConstants {
+  static const String shiftType = "shiftType";
+static const List<String> languages = ["English", "العربية"];
+static  DateFormat dayDateFormat = DateFormat('EEE, y,M,d  ');
+static  DateFormat hoursFormat = DateFormat("hh:nn");
+static   DateFormat dateFormat = DateFormat('dd-MMMM-yyyy');
+
+static const String myPermission = "permission";
+static const String myTransactions = "transaction";
+static const String credits = "credits";
+static const String salaries = "salaries";
+static const String timesOfWork = "timesOfWork";
+static const String attendanceAndDepartureReports = "attendanceAndDepartureReports";
+static const String myRequests = "myRequests";
+static const String mydepatures = "Departures";
+static const String myToken = "token";
+static const String isLoggedIn = 'isLoggedIn';
+static const String arabic = "ar";
+static const String english = "en";
+static const String myBearer = "Bearer";
+static const String authorization = 'Authorization';
   String language = "English";
   String getLanguage() {
     return language;
@@ -10,22 +30,5 @@ class Constants {
     language = lang;
   }
 }
-const List<String> languages = ["English", "العربية"];
- DateFormat dayDateFormat = DateFormat('EEE, y,M,d  ');
-DateFormat hoursFormat = DateFormat("hh:nn");
-  DateFormat dateFormat = DateFormat('dd-MMMM-yyyy');
 
-const String myTransactions = "transaction";
-const String credits = "credits";
-const String salaries = "salaries";
-const String timesOfWork = "timesOfWork";
-const String attendanceAndDepartureReports = "attendanceAndDepartureReports";
-const String myRequests = "myRequests";
-const String mydepatures = "Departures";
 
-const String myToken = "token";
-const String isLoggedIn = 'isLoggedIn';
-const String arabic = "ar";
-const String english = "en";
-const String myBearer = "Bearer";
-const String authorization = 'Authorization';

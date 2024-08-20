@@ -14,8 +14,7 @@ class MyBottomAppBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   State<MyBottomAppBar> createState() => BottomAppBarState();
   @override
-  Size get preferredSize =>
-      Size.fromHeight(SizeConfig.screenHeight! * .01);
+  Size get preferredSize => Size.fromHeight(SizeConfig.screenHeight! * .01);
 }
 
 class BottomAppBarState extends State<MyBottomAppBar> {
@@ -41,15 +40,17 @@ class BottomAppBarState extends State<MyBottomAppBar> {
 
   String getTitle() {
     switch (widget.title) {
-      case myRequests:
+      case MyConstants.myRequests:
         return S.of(context).requestLeave;
 
-      case myTransactions:
+      case MyConstants.myTransactions:
         return S.of(context).transaction;
-      case attendanceAndDepartureReports:
+      case MyConstants.attendanceAndDepartureReports:
         return S.of(context).performancePanel;
-      case mydepatures:
+      case MyConstants.mydepatures:
         return S.of(context).departures;
+      case MyConstants.myPermission:
+        return S.of(context).permission;
 
       default:
         return "";

@@ -36,7 +36,7 @@ class WorkTimeTablet extends StatelessWidget {
                   .data
                   .dayEn != null
               ? Text(
-            "${Intl.defaultLocale == arabic ? context
+            "${Intl.defaultLocale == MyConstants.arabic ? context
                 .read<AttendanceCubit>()
                 .data
                 .dayAr : context

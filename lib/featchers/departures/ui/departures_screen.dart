@@ -18,7 +18,7 @@ class DeparturesScreen extends StatelessWidget {
       appBar: MyAppBar(
         changeLanguage: changeLanguage,
         context: context,
-        title: mydepatures,
+        title:MyConstants.mydepatures ,
       ),
       drawer: const Drawer(
         child: MyDrawer(),

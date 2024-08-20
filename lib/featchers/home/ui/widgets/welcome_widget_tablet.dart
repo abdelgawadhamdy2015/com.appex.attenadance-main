@@ -17,7 +17,7 @@ class WelcomeWidgetTablet extends StatelessWidget {
             text: "${S.of(context).welcome} , ",
             style: TextStyles.font30BlackBold),
         TextSpan(
-            text: Intl.defaultLocale == arabic
+            text: Intl.defaultLocale == MyConstants.arabic
                 ? context.read<HomeCubit>().data.empArabicName
                 : context.read<HomeCubit>().data.empLatinName,
             style: TextStyles.font22BlueBold)

@@ -1,6 +1,4 @@
-
-     
-    {
+{
     "login":"Login",
     "logout": "Log out ",
     "dbName": "DataBase Name",
@@ -19,9 +17,9 @@
     "myRequests":"My requests",
     "quickAccessList": "Quick access list",
     "eventsApprovals": "Events and approvals",
-        "attendance": "Attendance",
-        "leaving": "Leaving",
-        "holiday": "Holiday",
+    "attendance": "Attendance",
+    "leaving": "Leaving",
+    "holiday": "Holiday",
     "recordPresenceAndLeave": "ٌRecord presence and leave",
     "attendanceRecord": "Attendance recorded at ",
     "leaveRecord": "Leave recorded at ",
@@ -43,7 +41,7 @@
     "annualLeave":"Annual leave",
     "sickLeave": "Sick leave",
     "emergencyLeave":"Emergency leave",
-    "permission":"Permission",
+    "permission":"Request Permission",
     "cancel": "Cancel",
     "dateWarning": "The start date must be before the end date",
     "from": "from",
@@ -72,11 +70,5 @@
     "date": "Date",
     "permissionType": "Permission Type",
     "name":"Name"
-
-
-
-    
-
-
 
 }

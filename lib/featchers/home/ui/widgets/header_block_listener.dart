@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
@@ -20,10 +21,7 @@ class _HeaderBlockListener extends State<HeaderBlockListener> {
     return BlocListener<HomeCubit, HomeState>(
         child: const SizedBox.shrink(),
         listenWhen: (previous, current) =>
-            current is Loading ||
-            current is Success ||
-            current is Error ,
-
+            current is Loading || current is Success || current is Error,
         listener: (context, state) {
           state.whenOrNull(
             loading: () {
@@ -31,21 +29,33 @@ class _HeaderBlockListener extends State<HeaderBlockListener> {
                 child: CircularProgressIndicator(),
               );
             },
-            success: (headerResponse) {
+            success: (headerResponse) async {
               HeaderResponse response = headerResponse;
 
-              response.result == 1
-                  ? context.read<HomeCubit>().data = response.data!
-                  : Intl.defaultLocale == arabic
-                      ? setupDialogState(
-                          context, response.errorMessageAr!, true, )
-                      : setupDialogState(
-                          context, response.errorMessageEn!, true, );
+              if (response.result == 1) {
+                context.read<HomeCubit>().data = response.data!;
+                await SharedPrefHelper.setData(
+                    MyConstants.shiftType, response.data!.shiftType);
+              } else {
+                Intl.defaultLocale == MyConstants.arabic
+                    ? setupDialogState(
+                        context,
+                        response.errorMessageAr!,
+                        true,
+                      )
+                    : setupDialogState(
+                        context,
+                        response.errorMessageEn!,
+                        true,
+                      );
+              }
             },
             error: (error) {
-
-                setupDialogState(context, error, true, );
-
+              setupDialogState(
+                context,
+                error,
+                true,
+              );
             },
           );
         });

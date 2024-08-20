@@ -84,7 +84,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
       appBar: MyAppBar(
           changeLanguage: widget.changeLanguage,
           context: context,
-          title: myRequests),
+          title: MyConstants.myRequests),
       drawer: const Drawer(child: MyDrawer()),
       body: OfflineBuilderWidget(
         child: SafeArea(
@@ -159,7 +159,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                       onTap: () => _pickDate(context, true),
                       controller: TextEditingController(
                         text: _startDate != null
-                            ? Intl.defaultLocale == english
+                            ? Intl.defaultLocale == MyConstants.english
                                 ? DateFormat('yyyy-MM-dd').format(_startDate!)
                                 : DateFormat("dd-MM-yyyy").format(_startDate!)
                             : '',
@@ -181,7 +181,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                       onTap: () => _pickDate(context, false),
                       controller: TextEditingController(
                         text: _endDate != null
-                            ? Intl.defaultLocale == english
+                            ? Intl.defaultLocale == MyConstants.english
                                 ? DateFormat('yyyy-MM-dd').format(_endDate!)
                                 : DateFormat("dd-MM-yyyy").format(_endDate!)
                             : '',
@@ -244,7 +244,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
 
   getToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    token = preferences.getString(myToken)!;
+    token = preferences.getString(MyConstants.myToken)!;
     setState(() {
       //get vaccations types from data base
       getAllVaccations(context);

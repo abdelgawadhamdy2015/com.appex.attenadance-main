@@ -20,7 +20,7 @@ class WorkTimeBoard extends StatelessWidget {
     return Column(children: [
       !checkIfNull([data.date, data.dayAr, data.dayEn])
           ? Text(
-              "${Intl.defaultLocale == arabic ? data.dayAr : data.dayEn}  ${DateFormat(' dd , MMMM , yyyy ').format(data.date!)}",
+              "${Intl.defaultLocale == MyConstants.arabic ? data.dayAr : data.dayEn}  ${DateFormat(' dd , MMMM , yyyy ').format(data.date!)}",
               style: TextStyles.font12black54Reguler,
             )
           : Container(),

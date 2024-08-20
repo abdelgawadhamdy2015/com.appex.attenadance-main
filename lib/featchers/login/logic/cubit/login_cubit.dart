@@ -33,7 +33,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginState.success(loginResponse));
     }, failure: (error) {
       emit(LoginState.error(
-          error: Intl.defaultLocale == english
+          error: Intl.defaultLocale == MyConstants.english
               ? error.apiErrorModel.errorMessageEn!
               : error.apiErrorModel.errorMessageAr!));
     });

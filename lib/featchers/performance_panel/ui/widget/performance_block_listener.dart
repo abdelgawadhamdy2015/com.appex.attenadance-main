@@ -34,7 +34,7 @@ class _PerformanceBlockListener extends State<PerformanceBlockListener> {
                     response.data!
                 : setupDialogState(
                     context,
-                    Intl.defaultLocale == arabic
+                    Intl.defaultLocale == MyConstants.arabic
                         ? response.errorMessageAr!
                         : response.errorMessageEn!,
                     true);

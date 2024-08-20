@@ -115,7 +115,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
       appBar: MyAppBar(
           changeLanguage: widget.changeLanguage,
           context: context,
-          title: myTransactions),
+          title: MyConstants.myTransactions),
       drawer: const Drawer(child: MyDrawer()),
       body: OfflineBuilderWidget(
         child: SafeArea(

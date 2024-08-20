@@ -75,7 +75,7 @@ class _SendAttendanceBlockListenerState
 
                 setupDialogState(
                     context,
-                    Intl.defaultLocale == arabic
+                    Intl.defaultLocale == MyConstants.arabic
                         ? response.errorMessageAr!
                         : response.errorMessageEn!,
                     false,

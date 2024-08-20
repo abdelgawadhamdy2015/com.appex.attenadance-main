@@ -78,7 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notes": MessageLookupByLibrary.simpleMessage("ملاحظات"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "performancePanel": MessageLookupByLibrary.simpleMessage("لوحة الأداء"),
-        "permission": MessageLookupByLibrary.simpleMessage("إذن"),
+        "permission": MessageLookupByLibrary.simpleMessage("طلب إذن"),
         "permissionType": MessageLookupByLibrary.simpleMessage("نوع الإذن"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("يرجى ملء"),
         "pm": MessageLookupByLibrary.simpleMessage("مساءً"),

@@ -24,7 +24,7 @@ class AllVaccationsCubit extends Cubit<AllVaccationsState> {
     response.when(success: (allVaccationsModel) async {
       emit(AllVaccationsState.success(allVaccationsModel));
     }, failure: (error) {
-      emit(AllVaccationsState.error(error: Intl.defaultLocale==english? error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
+      emit(AllVaccationsState.error(error: Intl.defaultLocale==MyConstants.english? error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
     });
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
@@ -65,12 +64,10 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
     }
   }
 
-  String token = "";
   @override
   void initState() {
     super.initState();
     //get Token from shared preferance
-    getToken();
   }
 
   @override
@@ -79,7 +76,7 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
       appBar: MyAppBarTablet(
           changeLanguage: widget.changeLanguage,
           context: context,
-          tiltle: myRequests),
+          tiltle: MyConstants.myRequests),
       drawer: const Drawer(child: MyDrawer()),
       body: OfflineBuilderWidget(
         child: SafeArea(
@@ -162,7 +159,7 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
                     onTap: () => _pickDate(context, true),
                     controller: TextEditingController(
                       text: _startDate != null
-                          ? Intl.defaultLocale == english
+                          ? Intl.defaultLocale == MyConstants.english
                               ? DateFormat('yyyy-MM-dd').format(_startDate!)
                               : DateFormat("dd-MM-yyyy").format(_startDate!)
                           : '',
@@ -184,7 +181,7 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
                     onTap: () => _pickDate(context, false),
                     controller: TextEditingController(
                       text: _endDate != null
-                          ? Intl.defaultLocale == english
+                          ? Intl.defaultLocale == MyConstants.english
                               ? DateFormat('yyyy-MM-dd').format(_endDate!)
                               : DateFormat("dd-MM-yyyy").format(_endDate!)
                           : '',
@@ -244,14 +241,7 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
     );
   }
 
-  getToken() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    token = preferences.getString(myToken)!;
-    setState(() {
-      //get vaccations types from data base
-      getAllVaccations(context);
-    });
-  }
+  
 
   getAllVaccations(BuildContext context) {
     context

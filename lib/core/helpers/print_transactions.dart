@@ -56,7 +56,7 @@ class PrintTransactions {
         pw.Page(
           build: (pw.Context context) {
             return pw.Directionality(
-                textDirection: Intl.defaultLocale == arabic
+                textDirection: Intl.defaultLocale == MyConstants.arabic
                     ? pw.TextDirection.rtl
                     : pw.TextDirection.ltr,
                 child: pw.Column(
@@ -66,7 +66,7 @@ class PrintTransactions {
                         style: pdfFontStyle),
                     pw.SizedBox(height: 20),
                     pw.Directionality(
-                        textDirection: Intl.defaultLocale == arabic
+                        textDirection: Intl.defaultLocale == MyConstants.arabic
                             ? pw.TextDirection.rtl
                             : pw.TextDirection.ltr,
                         child: pw.Table(
@@ -78,7 +78,7 @@ class PrintTransactions {
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
                                       textDirection:
-                                          Intl.defaultLocale == arabic
+                                          Intl.defaultLocale == MyConstants.arabic
                                               ? pw.TextDirection.rtl
                                               : pw.TextDirection.ltr,
                                       child: pw.Text(
@@ -89,7 +89,7 @@ class PrintTransactions {
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
                                       textDirection:
-                                          Intl.defaultLocale == arabic
+                                          Intl.defaultLocale == MyConstants.arabic
                                               ? pw.TextDirection.rtl
                                               : pw.TextDirection.ltr,
                                       child: pw.Text(
@@ -100,7 +100,7 @@ class PrintTransactions {
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
                                       textDirection:
-                                          Intl.defaultLocale == arabic
+                                          Intl.defaultLocale == MyConstants.arabic
                                               ? pw.TextDirection.rtl
                                               : pw.TextDirection.ltr,
                                       child: pw.Text(
@@ -111,7 +111,7 @@ class PrintTransactions {
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
                                       textDirection:
-                                          Intl.defaultLocale == arabic
+                                          Intl.defaultLocale == MyConstants.arabic
                                               ? pw.TextDirection.rtl
                                               : pw.TextDirection.ltr,
                                       child: pw.Text(S.of(buildContext).day,
@@ -126,7 +126,7 @@ class PrintTransactions {
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
                                       textDirection:
-                                          Intl.defaultLocale == arabic
+                                          Intl.defaultLocale == MyConstants.arabic
                                               ? pw.TextDirection.rtl
                                               : pw.TextDirection.ltr,
                                       child: pw.Text(
@@ -139,7 +139,7 @@ class PrintTransactions {
                                       padding: const pw.EdgeInsets.all(8),
                                       child: pw.Directionality(
                                         textDirection:
-                                            Intl.defaultLocale == arabic
+                                            Intl.defaultLocale == MyConstants.arabic
                                                 ? pw.TextDirection.rtl
                                                 : pw.TextDirection.ltr,
                                         child: pw.Text(
@@ -151,7 +151,7 @@ class PrintTransactions {
                                       padding: const pw.EdgeInsets.all(8),
                                       child: pw.Directionality(
                                         textDirection:
-                                            Intl.defaultLocale == arabic
+                                            Intl.defaultLocale == MyConstants.arabic
                                                 ? pw.TextDirection.rtl
                                                 : pw.TextDirection.ltr,
                                         child: pw.Text(
@@ -163,7 +163,7 @@ class PrintTransactions {
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Text(
                                       style: pdfFontStyle,
-                                      "${Intl.defaultLocale == arabic ? e.dayAr : e.dayEn!}  ${e.date!.day}-${e.date!.month}",
+                                      "${Intl.defaultLocale == MyConstants.arabic ? e.dayAr : e.dayEn!}  ${e.date!.day}-${e.date!.month}",
                                     ),
                                   ),
                                 ],

@@ -48,7 +48,7 @@ class _AttendanceBlocListenerState extends State<AttendanceBlocListener> {
               } else {
                 setupDialogState(
                     context,
-                    Intl.defaultLocale == arabic
+                    Intl.defaultLocale == MyConstants.arabic
                         ? response.errorMessageAr!
                         : response.errorMessageEn!,
                     true,

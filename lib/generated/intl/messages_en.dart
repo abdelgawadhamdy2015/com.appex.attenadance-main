@@ -85,7 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "performancePanel":
             MessageLookupByLibrary.simpleMessage("Performance Panel"),
-        "permission": MessageLookupByLibrary.simpleMessage("Permission"),
+        "permission":
+            MessageLookupByLibrary.simpleMessage("Request Permission"),
         "permissionType":
             MessageLookupByLibrary.simpleMessage("Permission Type"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("please fill "),

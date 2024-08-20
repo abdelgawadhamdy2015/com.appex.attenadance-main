@@ -42,7 +42,7 @@
     "annualLeave": "إجازة سنوية",
     "sickLeave": "إجازة مرضية",
     "emergencyLeave": "إجازة طارئة",
-    "permission": "إذن",
+    "permission": "طلب إذن",
     "cancel": " الغاء",
     "dateWarrning":"يجب أن يكون تاريخ البدء قبل تاريخ الانتهاء",
     "from": "من",

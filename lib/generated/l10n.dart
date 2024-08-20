@@ -470,10 +470,10 @@ class S {
     );
   }
 
-  /// `Permission`
+  /// `Request Permission`
   String get permission {
     return Intl.message(
-      'Permission',
+      'Request Permission',
       name: 'permission',
       desc: '',
       args: [],

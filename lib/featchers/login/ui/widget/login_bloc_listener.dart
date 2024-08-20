@@ -49,18 +49,19 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
             context.read<LoginCubit>().loadingLogin = false;
             if (response.result == 1) {
               await SharedPrefHelper.setSecuredString(
-                  myToken, loginResponse.data!.authToken!.token!);
+                  MyConstants.myToken, loginResponse.data!.authToken!.token!);
+             
               DioFactory.setTokenToHeaderAfterLogin(
                   loginResponse.data!.authToken!.token!);
               signalRService.startConnection(response.data!.authToken!.token!);
               context.pushReplacementNamed(Routes.homeScreen);
             } else {
-             // context.pop();
+              // context.pop();
               setupDialogState(context, response.errorMessageAr!, true);
             }
 
             if (widget.rememberMe) {
-              SharedPrefHelper.setData(isLoggedIn, true);
+              SharedPrefHelper.setData(MyConstants.isLoggedIn, true);
             }
           },
           error: (error) {

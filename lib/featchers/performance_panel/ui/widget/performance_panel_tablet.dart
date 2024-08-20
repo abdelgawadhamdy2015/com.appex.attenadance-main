@@ -56,7 +56,7 @@ class _PerformancePanel extends State<PerformancePanelTablet> {
 
   getToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    token = preferences.getString(myToken)!;
+    token = preferences.getString(MyConstants.myToken)!;
   }
 
   getPerfromanceDate() {
@@ -79,7 +79,7 @@ class _PerformancePanel extends State<PerformancePanelTablet> {
       appBar: MyAppBar(
         changeLanguage: widget.changeLanguage,
         context: context,
-        title: attendanceAndDepartureReports,
+        title: MyConstants.attendanceAndDepartureReports,
       ),
       drawer: const Drawer(
         child: MyDrawer(),
@@ -104,7 +104,7 @@ class _PerformancePanel extends State<PerformancePanelTablet> {
                           child: TextFormField(
                             controller: TextEditingController(
                               text: _startDate != null
-                                  ? Intl.defaultLocale == english
+                                  ? Intl.defaultLocale == MyConstants.english
                                       ? DateFormat('dd-MMMM-yyyy')
                                           .format(_startDate!)
                                       : DateFormat('dd-MMMM-yyyy')
@@ -132,7 +132,7 @@ class _PerformancePanel extends State<PerformancePanelTablet> {
                           child: TextFormField(
                             controller: TextEditingController(
                               text: _endDate != null
-                                  ? Intl.defaultLocale == english
+                                  ? Intl.defaultLocale == MyConstants.english
                                       ? DateFormat('dd-MMMM-yyyy')
                                           .format(_endDate!)
                                       : DateFormat("dd-MMMM-yyyy")
@@ -142,7 +142,7 @@ class _PerformancePanel extends State<PerformancePanelTablet> {
                             decoration: InputDecoration(
                               labelText: S.of(context).toDate,
                               hintText: _endDate != null
-                                  ? Intl.defaultLocale == english
+                                  ? Intl.defaultLocale == MyConstants.english
                                       ? DateFormat('dd-MMMM-yyyy')
                                           .format(_endDate!)
                                       : DateFormat("yyyy-MMMM-dd")
@@ -197,7 +197,7 @@ class _PerformancePanel extends State<PerformancePanelTablet> {
                                 title: Row(
                                   children: [
                                     const Spacer(),
-                                    Text(Intl.defaultLocale == arabic
+                                    Text(Intl.defaultLocale == MyConstants.arabic
                                         ? "${context.read<PerformanceEmployeeCubit>().datalist.first.employees!.first.days![index].date!.day} ${context.read<PerformanceEmployeeCubit>().datalist.first.employees!.first.days![index].dayAr!}"
                                         : "${context.read<PerformanceEmployeeCubit>().datalist.first.employees!.first.days![index].date!.day} ${context.read<PerformanceEmployeeCubit>().datalist.first.employees!.first.days![index].dayEn!}"),
                                   ],

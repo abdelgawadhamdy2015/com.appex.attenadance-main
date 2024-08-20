@@ -56,7 +56,7 @@ class PerfromanceListView extends StatelessWidget {
                         const Spacer(),
                         Text(
                           days[index].date != null
-                              ? Intl.defaultLocale == arabic
+                              ? Intl.defaultLocale == MyConstants.arabic
                                   ? "${days[index].date!.day} ${days[index].dayAr!}"
                                   : "${days[index].date!.day} ${days[index].dayEn!}"
                               : "",
