@@ -7,8 +7,6 @@ import 'package:ttech_attendance/featchers/permission/data/models/shift_model.da
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_state.dart';
 import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
-    as picker;
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class ListShiftItem extends StatefulWidget {
