@@ -13,7 +13,7 @@ class _ApiService implements ApiService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.1.253:9090/';
+    baseUrl ??= 'https://sectestback.apex-program.com/';
   }
 
   final Dio _dio;
@@ -207,6 +207,35 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final _value = AttendanceResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<AddVaccationResponse> addAttendancePermission(
+      PermissionModel permissionModel) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(permissionModel.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AddVaccationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/HR/AttendancePermission/AddAttendancePermission',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = AddVaccationResponse.fromJson(_result.data!);
     return _value;
   }
 

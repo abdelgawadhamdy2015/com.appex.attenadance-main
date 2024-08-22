@@ -18,7 +18,7 @@ import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/perform
 import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/permission/permission_screen.dart';
-import 'package:ttech_attendance/featchers/permission/logic/cubit/check_box_state.dart';
+import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
 import 'package:ttech_attendance/featchers/splash_screen/splash_screen.dart';

@@ -23,17 +23,21 @@ class CheckboxState with ChangeNotifier {
 
   set isChecked1(bool value) {
     _isChecked1 = value;
-    // If the first checkbox is unchecked, also uncheck the second one
+    // If the first checkbox is unchecked, also uncheck the others
     if (!value) {
       _isChecked2 = false;
       _isChecked3 = false;
+      _isChecked4 = false;
     }
     notifyListeners();
   }
 
   set isChecked2(bool value) {
     _isChecked2 = value;
-    if (!value) _isChecked3 = false;
+    if (!value) {
+      _isChecked3 = false;
+      _isChecked4 = false;
+    }
     notifyListeners();
   }
 
@@ -55,13 +59,17 @@ class CheckboxState with ChangeNotifier {
     if (value) {
       _isChecked2 = false;
       _isChecked3 = false;
+      _isChecked4 = false;
     }
     notifyListeners();
   }
 
   set shifttosecond2(bool value) {
     _shifttosecond2 = value;
-    if (value) _isChecked3 = false;
+    if (value) {
+      _isChecked3 = false;
+      _isChecked4 = false;
+    }
     notifyListeners();
   }
 

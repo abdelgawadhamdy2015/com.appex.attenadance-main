@@ -69,6 +69,7 @@
     "fullDay":"Full Day",
     "date": "Date",
     "permissionType": "Permission Type",
-    "name":"Name"
+    "name":"Name",
+    "matchTimeFormat": "this field must has time format ex: 7:00 , 12:30"
 
 }

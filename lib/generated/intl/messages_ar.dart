@@ -67,6 +67,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "matchTimeFormat": MessageLookupByLibrary.simpleMessage(
+            "يجب أن يكون هذا الحقل بتنسيق الوقت، على سبيل المثال: 7:00، 12:30"),
         "myRequests": MessageLookupByLibrary.simpleMessage("طلباتي"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "noDateFound": MessageLookupByLibrary.simpleMessage(

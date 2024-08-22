@@ -111,7 +111,7 @@ class LoginScreenState extends State<LoginScreenTablet> {
                           MyTextForm(
                               hint: S.of(context).dbName,
                               excep: S.of(context).dbName,
-                              control: context.read<LoginCubit>().dbController),
+                              controller: context.read<LoginCubit>().dbController),
                           Container(
                             padding: const EdgeInsets.only(top: 25, bottom: 20),
                             child: Text(S.of(context).email),
@@ -119,7 +119,7 @@ class LoginScreenState extends State<LoginScreenTablet> {
                           MyTextForm(
                             hint: S.of(context).email,
                             excep: S.of(context).email,
-                            control: context.read<LoginCubit>().emailController,
+                            controller: context.read<LoginCubit>().emailController,
                           ),
                           Container(
                             padding: const EdgeInsets.only(top: 25, bottom: 20),

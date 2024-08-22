@@ -9,5 +9,5 @@ class PermissionState<T> with _$PermissionState<T> {
   const factory PermissionState.permissionSuccess(T data) =
       PermissionSuccess<T>;
   const factory PermissionState.permissionError({required String error}) =
-      permissionError;
+      PermissionError;
 }

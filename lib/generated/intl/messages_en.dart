@@ -74,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out "),
+        "matchTimeFormat": MessageLookupByLibrary.simpleMessage(
+            "this field must has time format ex: 7:00 , 12:30"),
         "myRequests": MessageLookupByLibrary.simpleMessage("My requests"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "noDateFound": MessageLookupByLibrary.simpleMessage(

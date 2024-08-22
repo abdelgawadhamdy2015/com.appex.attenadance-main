@@ -46,7 +46,7 @@ mixin _$PermissionState<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PermissionLoading<T> value) permissionLoading,
     required TResult Function(PermissionSuccess<T> value) permissionSuccess,
-    required TResult Function(permissionError<T> value) permissionError,
+    required TResult Function(PermissionError<T> value) permissionError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +54,7 @@ mixin _$PermissionState<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PermissionLoading<T> value)? permissionLoading,
     TResult? Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult? Function(permissionError<T> value)? permissionError,
+    TResult? Function(PermissionError<T> value)? permissionError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +62,7 @@ mixin _$PermissionState<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PermissionLoading<T> value)? permissionLoading,
     TResult Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult Function(permissionError<T> value)? permissionError,
+    TResult Function(PermissionError<T> value)? permissionError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -164,7 +164,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PermissionLoading<T> value) permissionLoading,
     required TResult Function(PermissionSuccess<T> value) permissionSuccess,
-    required TResult Function(permissionError<T> value) permissionError,
+    required TResult Function(PermissionError<T> value) permissionError,
   }) {
     return initial(this);
   }
@@ -175,7 +175,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PermissionLoading<T> value)? permissionLoading,
     TResult? Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult? Function(permissionError<T> value)? permissionError,
+    TResult? Function(PermissionError<T> value)? permissionError,
   }) {
     return initial?.call(this);
   }
@@ -186,7 +186,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PermissionLoading<T> value)? permissionLoading,
     TResult Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult Function(permissionError<T> value)? permissionError,
+    TResult Function(PermissionError<T> value)? permissionError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -279,7 +279,7 @@ class _$PermissionLoadingImpl<T> implements PermissionLoading<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PermissionLoading<T> value) permissionLoading,
     required TResult Function(PermissionSuccess<T> value) permissionSuccess,
-    required TResult Function(permissionError<T> value) permissionError,
+    required TResult Function(PermissionError<T> value) permissionError,
   }) {
     return permissionLoading(this);
   }
@@ -290,7 +290,7 @@ class _$PermissionLoadingImpl<T> implements PermissionLoading<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PermissionLoading<T> value)? permissionLoading,
     TResult? Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult? Function(permissionError<T> value)? permissionError,
+    TResult? Function(PermissionError<T> value)? permissionError,
   }) {
     return permissionLoading?.call(this);
   }
@@ -301,7 +301,7 @@ class _$PermissionLoadingImpl<T> implements PermissionLoading<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PermissionLoading<T> value)? permissionLoading,
     TResult Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult Function(permissionError<T> value)? permissionError,
+    TResult Function(PermissionError<T> value)? permissionError,
     required TResult orElse(),
   }) {
     if (permissionLoading != null) {
@@ -422,7 +422,7 @@ class _$PermissionSuccessImpl<T> implements PermissionSuccess<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PermissionLoading<T> value) permissionLoading,
     required TResult Function(PermissionSuccess<T> value) permissionSuccess,
-    required TResult Function(permissionError<T> value) permissionError,
+    required TResult Function(PermissionError<T> value) permissionError,
   }) {
     return permissionSuccess(this);
   }
@@ -433,7 +433,7 @@ class _$PermissionSuccessImpl<T> implements PermissionSuccess<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PermissionLoading<T> value)? permissionLoading,
     TResult? Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult? Function(permissionError<T> value)? permissionError,
+    TResult? Function(PermissionError<T> value)? permissionError,
   }) {
     return permissionSuccess?.call(this);
   }
@@ -444,7 +444,7 @@ class _$PermissionSuccessImpl<T> implements PermissionSuccess<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PermissionLoading<T> value)? permissionLoading,
     TResult Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult Function(permissionError<T> value)? permissionError,
+    TResult Function(PermissionError<T> value)? permissionError,
     required TResult orElse(),
   }) {
     if (permissionSuccess != null) {
@@ -464,20 +464,20 @@ abstract class PermissionSuccess<T> implements PermissionState<T> {
 }
 
 /// @nodoc
-abstract class _$$permissionErrorImplCopyWith<T, $Res> {
-  factory _$$permissionErrorImplCopyWith(_$permissionErrorImpl<T> value,
-          $Res Function(_$permissionErrorImpl<T>) then) =
-      __$$permissionErrorImplCopyWithImpl<T, $Res>;
+abstract class _$$PermissionErrorImplCopyWith<T, $Res> {
+  factory _$$PermissionErrorImplCopyWith(_$PermissionErrorImpl<T> value,
+          $Res Function(_$PermissionErrorImpl<T>) then) =
+      __$$PermissionErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$permissionErrorImplCopyWithImpl<T, $Res>
-    extends _$PermissionStateCopyWithImpl<T, $Res, _$permissionErrorImpl<T>>
-    implements _$$permissionErrorImplCopyWith<T, $Res> {
-  __$$permissionErrorImplCopyWithImpl(_$permissionErrorImpl<T> _value,
-      $Res Function(_$permissionErrorImpl<T>) _then)
+class __$$PermissionErrorImplCopyWithImpl<T, $Res>
+    extends _$PermissionStateCopyWithImpl<T, $Res, _$PermissionErrorImpl<T>>
+    implements _$$PermissionErrorImplCopyWith<T, $Res> {
+  __$$PermissionErrorImplCopyWithImpl(_$PermissionErrorImpl<T> _value,
+      $Res Function(_$PermissionErrorImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -485,7 +485,7 @@ class __$$permissionErrorImplCopyWithImpl<T, $Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$permissionErrorImpl<T>(
+    return _then(_$PermissionErrorImpl<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -496,8 +496,8 @@ class __$$permissionErrorImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$permissionErrorImpl<T> implements permissionError<T> {
-  const _$permissionErrorImpl({required this.error});
+class _$PermissionErrorImpl<T> implements PermissionError<T> {
+  const _$PermissionErrorImpl({required this.error});
 
   @override
   final String error;
@@ -511,7 +511,7 @@ class _$permissionErrorImpl<T> implements permissionError<T> {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$permissionErrorImpl<T> &&
+            other is _$PermissionErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -521,8 +521,8 @@ class _$permissionErrorImpl<T> implements permissionError<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$permissionErrorImplCopyWith<T, _$permissionErrorImpl<T>> get copyWith =>
-      __$$permissionErrorImplCopyWithImpl<T, _$permissionErrorImpl<T>>(
+  _$$PermissionErrorImplCopyWith<T, _$PermissionErrorImpl<T>> get copyWith =>
+      __$$PermissionErrorImplCopyWithImpl<T, _$PermissionErrorImpl<T>>(
           this, _$identity);
 
   @override
@@ -568,7 +568,7 @@ class _$permissionErrorImpl<T> implements permissionError<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PermissionLoading<T> value) permissionLoading,
     required TResult Function(PermissionSuccess<T> value) permissionSuccess,
-    required TResult Function(permissionError<T> value) permissionError,
+    required TResult Function(PermissionError<T> value) permissionError,
   }) {
     return permissionError(this);
   }
@@ -579,7 +579,7 @@ class _$permissionErrorImpl<T> implements permissionError<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PermissionLoading<T> value)? permissionLoading,
     TResult? Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult? Function(permissionError<T> value)? permissionError,
+    TResult? Function(PermissionError<T> value)? permissionError,
   }) {
     return permissionError?.call(this);
   }
@@ -590,7 +590,7 @@ class _$permissionErrorImpl<T> implements permissionError<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PermissionLoading<T> value)? permissionLoading,
     TResult Function(PermissionSuccess<T> value)? permissionSuccess,
-    TResult Function(permissionError<T> value)? permissionError,
+    TResult Function(PermissionError<T> value)? permissionError,
     required TResult orElse(),
   }) {
     if (permissionError != null) {
@@ -600,12 +600,12 @@ class _$permissionErrorImpl<T> implements permissionError<T> {
   }
 }
 
-abstract class permissionError<T> implements PermissionState<T> {
-  const factory permissionError({required final String error}) =
-      _$permissionErrorImpl<T>;
+abstract class PermissionError<T> implements PermissionState<T> {
+  const factory PermissionError({required final String error}) =
+      _$PermissionErrorImpl<T>;
 
   String get error;
   @JsonKey(ignore: true)
-  _$$permissionErrorImplCopyWith<T, _$permissionErrorImpl<T>> get copyWith =>
+  _$$PermissionErrorImplCopyWith<T, _$PermissionErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

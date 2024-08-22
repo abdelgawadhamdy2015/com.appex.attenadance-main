@@ -759,6 +759,16 @@ class S {
       args: [],
     );
   }
+
+  /// `this field must has time format ex: 7:00 , 12:30`
+  String get matchTimeFormat {
+    return Intl.message(
+      'this field must has time format ex: 7:00 , 12:30',
+      name: 'matchTimeFormat',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

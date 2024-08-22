@@ -115,7 +115,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
         MyTextForm(
             hint: S.of(context).dbName,
             excep: S.of(context).dbName,
-            control: companyText),
+            controller: companyText),
         Container(
           padding: const EdgeInsets.only(top: 25, bottom: 20),
           child: Text(S.of(context).email),
@@ -123,7 +123,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
         MyTextForm(
           hint: S.of(context).email,
           excep: S.of(context).email,
-          control: emailText,
+          controller: emailText,
         ),
         Container(
           padding: const EdgeInsets.only(top: 20),

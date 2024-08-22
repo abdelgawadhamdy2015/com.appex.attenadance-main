@@ -3,13 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../generated/l10n.dart';
 
-
-bool checkIfNull(List list){
-  bool isNull=true;
-  list.any((e)=> e==null || e.toString().isEmpty ? isNull=true: isNull=false);
-  // for (var element in list) {
-  //   element ==null? isNull=true: isNull= false;
-  // }
+bool checkIfNull(List list) {
+  bool isNull = true;
+  list.any((e) =>
+      e == null || e.toString().isEmpty ? isNull = true : isNull = false);
   return isNull;
 }
 
@@ -29,15 +26,14 @@ String getFormattedTimeOfDay(String shift, BuildContext context) {
   return formattedTimeOfDay;
 }
 
-String getHours(String time,BuildContext context) {
+String getHours(String time, BuildContext context) {
   TimeOfDay shiftTime = TimeOfDay(
       hour: int.parse(time.split(":")[0]),
       minute: int.parse(time.split(":")[1]));
-  return "${shiftTime.hour} ${shiftTime.minute!=00? ": ${shiftTime.minute}":"" } ${S.of(context).hours}";
-
+  return "${shiftTime.hour} ${shiftTime.minute != 00 ? ": ${shiftTime.minute}" : ""} ${S.of(context).hours}";
 }
 
-String getShift(int shift,BuildContext context) {
+String getShift(int shift, BuildContext context) {
   switch (shift) {
     case 1:
       return S.of(context).shift1;
@@ -51,11 +47,15 @@ String getShift(int shift,BuildContext context) {
   return "";
 }
 
- DateTime convertStringToTime(String shift)
-{
-  return DateTime(
-    DateTime.now().year,DateTime.now().month,DateTime.now().day,
-      int.parse(shift.split(":")[0]),
-       int.parse(shift.split(":")[1]));
+DateTime convertStringToTime(String shift) {
+  return DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day,
+      int.parse(shift.split(":")[0]), int.parse(shift.split(":")[1]));
 }
 
+validate(String value, BuildContext context, String expec) {
+  if (value.isEmpty) {
+    return "\u26A0 ${S.of(context).pleaseFill} $expec ";
+  } else {
+    return null;
+  }
+}

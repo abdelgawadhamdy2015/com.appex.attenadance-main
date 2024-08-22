@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/featchers/permission/data/models/shift_model.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_state.dart';
-import 'package:ttech_attendance/featchers/permission/logic/cubit/check_box_state.dart';
+import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class ListShiftItem extends StatefulWidget {
@@ -19,9 +20,6 @@ class ListShiftItem extends StatefulWidget {
 }
 
 class _ListShiftItemState extends State<ListShiftItem> {
-  TextEditingController startController = TextEditingController();
-  TextEditingController endController = TextEditingController();
-
   void selectTime(BuildContext context, bool isStart) async {
     TimeOfDay? selectedTime = await showTimePicker(
       context: context,
@@ -30,12 +28,38 @@ class _ListShiftItemState extends State<ListShiftItem> {
 
     if (selectedTime != null) {
       final now = DateTime.now();
-       DateTime(
+      DateTime(
           now.year, now.month, now.day, selectedTime.hour, selectedTime.minute);
       setState(() {
-        isStart
-            ? startController.text = selectedTime.format(context)
-            : endController.text = selectedTime.format(context);
+        setTextToController(widget.shift, isStart,
+            "${selectedTime.hour}:${selectedTime.minute.toString().padLeft(2, "0")}");
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final cubit = context.read<PermissionCubit>();
+
+    // List of controllers
+    final controllers = [
+      cubit.attendanceController1,
+      cubit.leaveControoler1,
+      cubit.attendanceController2,
+      cubit.leaveControoler2,
+      cubit.attendanceController3,
+      cubit.leaveControoler3,
+      cubit.attendanceController4,
+      cubit.leaveControoler4,
+    ];
+
+    // Add listeners to all controllers
+    for (final controller in controllers) {
+      controller.addListener(() {
+        if (cubit.formKey.currentState?.validate() ?? false) {
+          setState(() {}); // Trigger a rebuild to clear the error border
+        }
       });
     }
   }
@@ -80,29 +104,38 @@ class _ListShiftItemState extends State<ListShiftItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           verticalSpacing(SizeConfig.screenHeight! * .02),
-                          TextField(
-                            controller: startController,
-                            decoration: InputDecoration(
-                              labelText: S.of(context).attendanceTime,
-                              border: const OutlineInputBorder(),
-                              suffixIcon: const Icon(Icons.access_time),
-                            ),
+                          MyTextForm(
+                            onEditingComplete: () => setState(() {}),
+                            onSaved: (p0) => setState(() {}),
+                            excep: S.of(context).attendanceTime,
+                            onChanged: (value) {
+                              setState(() {});
+                            },
+                            controller: getController(widget.shift, true),
+                            labelText: S.of(context).attendanceTime,
+                            suffixIcon: const Icon(Icons.access_time),
                             readOnly: true,
-                            onTap: () {
+                            onTab: () {
                               selectTime(context, true);
+                            },
+                            validator: (value) {
+                              return validate(value ?? "", context,
+                                  S.of(context).attendanceTime);
                             },
                           ),
                           verticalSpacing(SizeConfig.screenHeight! * .02),
-                          TextField(
-                            controller: endController,
-                            decoration: InputDecoration(
-                              labelText: S.of(context).leaveTime,
-                              border: const OutlineInputBorder(),
-                              suffixIcon: const Icon(Icons.access_time),
-                            ),
+                          MyTextForm(
+                            excep: S.of(context).leaveTime,
+                            controller: getController(widget.shift, false),
+                            labelText: S.of(context).leaveTime,
+                            suffixIcon: const Icon(Icons.access_time),
                             readOnly: true,
-                            onTap: () {
+                            onTab: () {
                               selectTime(context, false);
+                            },
+                            validator: (value) {
+                              return validate(value ?? "", context,
+                                  S.of(context).leaveTime);
                             },
                           ),
                           verticalSpacing(SizeConfig.screenHeight! * .02),
@@ -168,5 +201,50 @@ class _ListShiftItemState extends State<ListShiftItem> {
         return checkboxState.shifttosecond4;
       default:
     }
+  }
+
+  getController(int shift, bool isAttendance) {
+    switch (shift) {
+      case 1:
+        return isAttendance
+            ? context.read<PermissionCubit>().attendanceController1
+            : context.read<PermissionCubit>().leaveControoler1;
+      case 2:
+        return isAttendance
+            ? context.read<PermissionCubit>().attendanceController2
+            : context.read<PermissionCubit>().leaveControoler2;
+      case 3:
+        return isAttendance
+            ? context.read<PermissionCubit>().attendanceController3
+            : context.read<PermissionCubit>().leaveControoler3;
+      case 4:
+        return isAttendance
+            ? context.read<PermissionCubit>().attendanceController4
+            : context.read<PermissionCubit>().leaveControoler4;
+      default:
+    }
+  }
+
+  setTextToController(int shift, bool isAttendance, String time) {
+    switch (shift) {
+      case 1:
+        isAttendance
+            ? context.read<PermissionCubit>().attendanceController1.text = time
+            : context.read<PermissionCubit>().leaveControoler1.text = time;
+      case 2:
+        return isAttendance
+            ? context.read<PermissionCubit>().attendanceController2.text = time
+            : context.read<PermissionCubit>().leaveControoler2.text = time;
+      case 3:
+        return isAttendance
+            ? context.read<PermissionCubit>().attendanceController3.text = time
+            : context.read<PermissionCubit>().leaveControoler3.text = time;
+      case 4:
+        return isAttendance
+            ? context.read<PermissionCubit>().attendanceController4.text = time
+            : context.read<PermissionCubit>().leaveControoler4.text = time;
+      default:
+    }
+    setState(() {});
   }
 }
