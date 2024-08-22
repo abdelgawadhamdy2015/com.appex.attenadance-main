@@ -52,53 +52,56 @@ class MyTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onEditingComplete: onEditingComplete,
-      onSaved: onSaved,
-      readOnly: readOnly ?? false,
-      onTap: onTab,
-      onChanged: onChanged ??
-          (val) {
-            controller!.text = val;
-          },
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: labelText ?? "",
-        fillColor: fillColor ?? ColorManger.morelightGray,
-        filled: true,
-        suffixIcon: suffixIcon,
-        hintText: hint,
-        hintStyle: TextStyle(
-          fontSize: 10.sp,
+        onEditingComplete: onEditingComplete,
+        onSaved: onSaved,
+        readOnly: readOnly ?? false,
+        onTap: onTab,
+        onChanged: onChanged ??
+            (val) {
+              controller!.text = val;
+            },
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: labelText ?? "",
+          fillColor: fillColor ?? ColorManger.morelightGray,
+          filled: true,
+          suffixIcon: suffixIcon,
+          hintText: hint,
+          hintStyle: TextStyle(
+            fontSize: 10.sp,
+          ),
+          focusedBorder: foucesedBorder ??
+              OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: ColorManger.mainBlue, width: 1.3),
+                borderRadius: BorderRadius.circular(16),
+              ),
+          enabledBorder: enabeledBorder ??
+              OutlineInputBorder(
+                borderSide: const BorderSide(
+                    color: ColorManger.lighterGray, width: 1.3),
+                borderRadius: BorderRadius.circular(16),
+              ),
+          errorBorder: errorBorder ??
+              OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 1.3.w),
+                  borderRadius: BorderRadius.circular(16.r)),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red.shade300, width: 1.3.w),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          errorStyle: TextStyle(fontSize: 15.sp),
         ),
-        focusedBorder: foucesedBorder ??
-            OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: ColorManger.mainBlue, width: 1.3),
-              borderRadius: BorderRadius.circular(16),
-            ),
-        enabledBorder: enabeledBorder ??
-            OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: ColorManger.lighterGray, width: 1.3),
-              borderRadius: BorderRadius.circular(16),
-            ),
-        errorBorder: errorBorder ??
-            OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 1.3.w),
-                borderRadius: BorderRadius.circular(16.r)),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red.shade300, width: 1.3.w),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        errorStyle: TextStyle(fontSize: 15.sp),
-      ),
-      validator: (val) {
-        if (val!.isEmpty) {
-          return "\u26A0 ${S.of(context).pleaseFill} $excep";
-        } else {
-          return null;
-        }
-      },
-    );
+        validator: (val) {
+          if (validator == null) {
+            if (val!.isEmpty) {
+              return "\u26A0 ${S.of(context).pleaseFill} $excep";
+            } else {
+              return null;
+            }
+          } else {
+            return validator!(val);
+          }
+        });
   }
 }

@@ -1,4 +1,3 @@
-
 class AppRegex {
   static bool isEmailValid(String email) {
     return RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
@@ -36,7 +35,6 @@ class AppRegex {
   }
 
   static bool hasMatchesTimeFormat(String time) {
-    return RegExp(r'^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)\.(\d{7})$')
-        .hasMatch(time);
+    return RegExp(r'^(?:[0-1]?[0-9]|2[0-3]):[0-5][0-9]$').hasMatch(time);
   }
 }

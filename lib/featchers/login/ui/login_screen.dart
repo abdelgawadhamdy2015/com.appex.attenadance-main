@@ -14,7 +14,6 @@ import 'package:ttech_attendance/featchers/login/logic/cubit/login_state.dart';
 import 'package:ttech_attendance/featchers/login/ui/widget/login_bloc_listener.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 import '../../../core/helpers/helper_methods.dart';
-import '../../../core/widgets/passwordtext.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function(Locale) changeLanguage;
@@ -123,7 +122,8 @@ class LoginScreenState extends State<LoginScreen> {
                           MyTextForm(
                               hint: S.of(context).dbName,
                               excep: S.of(context).dbName,
-                              controller: context.read<LoginCubit>().dbController),
+                              controller:
+                                  context.read<LoginCubit>().dbController),
                           Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: SizeConfig.screenWidth! * .016,
@@ -134,10 +134,10 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           MyTextForm(
-                            
                             hint: S.of(context).email,
                             excep: S.of(context).email,
-                            controller: context.read<LoginCubit>().emailController,
+                            controller:
+                                context.read<LoginCubit>().emailController,
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
@@ -148,10 +148,10 @@ class LoginScreenState extends State<LoginScreen> {
                               style: TextStyles.font12blackBold,
                             ),
                           ),
-                          PasswordText(
+                          MyTextForm(
                               hint: S.of(context).password,
-                              obsecur: true,
-                              control: context
+                              obsecure: true,
+                              controller: context
                                   .read<LoginCubit>()
                                   .passwordController),
                           verticalSpacing(SizeConfig.screenHeight! * .05),
@@ -234,9 +234,6 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void validateThenDoLogin(BuildContext context) {
-    setState(() {
-      context.read<LoginCubit>().loadingLogin = true;
-    });
     if (context.read<LoginCubit>().formKey.currentState!.validate()) {
       context.read<LoginCubit>().emitLoginStates();
     }

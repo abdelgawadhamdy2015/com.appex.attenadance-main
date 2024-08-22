@@ -24,13 +24,6 @@ class _AddPermissionListenerState extends State<AddPermissionListener> {
           current is PermissionError,
       listener: (context, state) {
         state.whenOrNull(
-          permissionLoading: () {
-            const Center(
-              child: CircularProgressIndicator(
-                color: Colors.blue,
-              ),
-            );
-          },
           permissionSuccess: (response) async {
             AddVaccationResponse addVaccationResponse = response;
             addVaccationResponse.result == 1

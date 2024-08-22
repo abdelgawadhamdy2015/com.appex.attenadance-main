@@ -47,6 +47,11 @@ class _PermissionScreenState extends State<PermissionScreen> {
         setState(() {}); // Trigger a rebuild to clear the error border
       }
     });
+    permissionCubit.totalHoursController.addListener(() {
+      if (permissionCubit.formKey.currentState?.validate() ?? false) {
+        setState(() {}); // Trigger a rebuild to clear the error border
+      }
+    });
   }
 
   @override
@@ -245,7 +250,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                       children: [
                         BlocBuilder<PermissionCubit, PermissionState>(
                           builder: (context, state) {
-                            return state is PermissionLoading
+                            return context.read<PermissionCubit>().loading
                                 ? MyProgressIndicator(
                                     hight: SizeConfig.screenHeight! * .08,
                                     width: SizeConfig.screenWidth! * .08)

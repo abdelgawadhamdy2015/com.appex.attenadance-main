@@ -13,7 +13,7 @@ class PermissionCubit extends Cubit<PermissionState> {
       : super(const PermissionState.initial());
   List<ShiftModel> shiftChecks = [];
   final formKey = GlobalKey<FormState>();
-
+  bool loading = false;
   TextEditingController dayController = TextEditingController();
   TextEditingController attendanceController1 = TextEditingController();
   TextEditingController leaveControoler1 = TextEditingController();
@@ -28,18 +28,20 @@ class PermissionCubit extends Cubit<PermissionState> {
 
   void emitAddPermissionState(PermissionModel permissionModel) async {
     emit(const PermissionState.permissionLoading());
+    loading = true;
 
     final response =
         await permissionRepo.addAttendancePermission(permissionModel);
 
     response.when(success: (performanceEmployeeResponse) async {
       emit(PermissionState.permissionSuccess(performanceEmployeeResponse));
+      loading = false;
     }, failure: (error) {
-      
       emit(PermissionState.permissionError(
           error: Intl.defaultLocale == MyConstants.english
               ? error.apiErrorModel.errorMessageEn!
               : error.apiErrorModel.errorMessageAr!));
+      loading = false;
     });
   }
 }
