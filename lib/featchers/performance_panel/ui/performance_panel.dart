@@ -84,8 +84,7 @@ class _PerformancePanel extends State<PerformancePanel> {
           child: MyDrawer(),
         ),
         backgroundColor: ColorManger.lightGray,
-        body: OfflineBuilderWidget(
-          child: SafeArea(
+        body:  SafeArea(
             child: Container(
               color: ColorManger.lightGray,
               padding: SizeConfig().getScreenPadding(),
@@ -175,6 +174,6 @@ class _PerformancePanel extends State<PerformancePanel> {
               ),
             ),
           ),
-        ));
+        );
   }
 }

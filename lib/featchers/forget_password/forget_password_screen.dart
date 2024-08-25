@@ -37,8 +37,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
       // drawer: Drawer(
       //   surfaceTintColor:Colors.red ,
       // ),
-      body: OfflineBuilderWidget(
-        child: Padding(
+      body:  Padding(
           padding: SizeConfig().getScreenPadding(),
           child: SingleChildScrollView(
             child: Column(
@@ -59,7 +58,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
             ),
           ),
         ),
-      ),
+      
     );
   }
 

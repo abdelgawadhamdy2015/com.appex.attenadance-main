@@ -7,9 +7,11 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
+import 'package:ttech_attendance/core/widgets/app_text_button.dart';
 import 'package:ttech_attendance/core/widgets/indicator/my_progress_indicator.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/featchers/permission/data/models/permission_model.dart';
@@ -96,6 +98,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                   ),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
                   MyTextForm(
+                      fillColor: ColorManger.lightGray,
                       readOnly: true,
                       labelText: S.of(context).date,
                       //hint: S.of(context).date,
@@ -131,6 +134,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                         child: ListTile(
                           title: Text(S.of(context).temporary),
                           leading: Radio<String>(
+                            activeColor: ColorManger.mainBlue,
                             value: 'Temporary',
                             groupValue: _permissionType,
                             onChanged: (String? value) {
@@ -146,6 +150,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                         child: ListTile(
                           title: Text(S.of(context).fullDay),
                           leading: Radio<String>(
+                            activeColor: ColorManger.mainBlue,
                             value: 'FullDay',
                             groupValue: _permissionType,
                             onChanged: (String? value) {
@@ -245,28 +250,33 @@ class _PermissionScreenState extends State<PermissionScreen> {
                     margin: EdgeInsets.symmetric(
                         horizontal: SizeConfig.screenWidth! * .016,
                         vertical: SizeConfig.screenHeight! * .016),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        BlocBuilder<PermissionCubit, PermissionState>(
-                          builder: (context, state) {
-                            return context.read<PermissionCubit>().loading
-                                ? MyProgressIndicator(
-                                    hight: SizeConfig.screenHeight! * .08,
-                                    width: SizeConfig.screenWidth! * .08)
-                                : ElevatedButton(
-                                    onPressed: () {
-                                      validateThenAddAttendancePermission(
-                                          context, checkboxState);
-                                    },
-                                    child: Text(
-                                      S.of(context).send,
-                                      style: TextStyles.font16BlueBold,
-                                    ),
-                                  );
-                          },
-                        ),
-                      ],
+                    child: BlocBuilder<PermissionCubit, PermissionState>(
+                      builder: (context, state) {
+                        return context.read<PermissionCubit>().loading
+                            ? MyProgressIndicator(
+                                hight: SizeConfig.screenHeight! * .08,
+                                width: SizeConfig.screenWidth! * .08)
+                            : Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: SizeConfig.screenWidth! * .1),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      AppButtonText(
+                                        buttonWidth:
+                                            SizeConfig.screenWidth! * .3,
+                                        backGroundColor:
+                                            ColorManger.buttonGreen,
+                                        textStyle: TextStyles.font15WhiteBold,
+                                        onPressed: () {
+                                          validateThenAddAttendancePermission(
+                                              context, checkboxState);
+                                        },
+                                        butonText: S.of(context).send,
+                                      ),
+                                    ]),
+                              );
+                      },
                     ),
                   ),
                   const AddPermissionListener()

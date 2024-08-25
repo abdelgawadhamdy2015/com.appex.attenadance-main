@@ -8,6 +8,7 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/attendance_shimmer.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
@@ -30,7 +31,7 @@ class AttendanceScreen extends StatefulWidget {
 }
 
 class _AttendanceScreen extends State<AttendanceScreen> {
- // String apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? 'default_api_key';
+  // String apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? 'default_api_key';
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateFormat dateFormat = DateFormat('EEE, y,M,d  ');
@@ -76,8 +77,6 @@ class _AttendanceScreen extends State<AttendanceScreen> {
     });
   }
 
-
-
   // Future<void> _requestPermissions() async {
   //   await Permission.location.request();
   //   await Permission.camera.request();
@@ -117,83 +116,100 @@ class _AttendanceScreen extends State<AttendanceScreen> {
           context: context,
           title: MyConstants.myTransactions),
       drawer: const Drawer(child: MyDrawer()),
-      body: OfflineBuilderWidget(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const AttendanceBlocListener(),
-                BlocBuilder<AttendanceCubit, AttendanceState>(
-                  builder: (context, state) {
-                    if (state is Loading) {
-                      return const AttendanceShimmer();
-                    }
-                    return Padding(
-                      key: context.read<AttendanceCubit>().formKey,
-                      padding: SizeConfig().getScreenPadding(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const AttendanceBord(),
-                          verticalSpacing(SizeConfig.screenHeight!*.01),
-                          TextField(
-                            mouseCursor: SystemMouseCursors.basic,
-                            maxLines: 3,
-                            controller: _notesController,
-                            decoration: InputDecoration(
-                              labelStyle: TextStyles.font12black54Reguler,
-                              labelText: S.of(context).notes,
-                              border: const OutlineInputBorder(),
-                            ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const AttendanceBlocListener(),
+              BlocBuilder<AttendanceCubit, AttendanceState>(
+                builder: (context, state) {
+                  if (state is Loading) {
+                    return const AttendanceShimmer();
+                  }
+                  return Padding(
+                    key: context.read<AttendanceCubit>().formKey,
+                    padding: SizeConfig().getScreenPadding(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const AttendanceBord(),
+                        verticalSpacing(SizeConfig.screenHeight! * .01),
+                        TextField(
+                          mouseCursor: SystemMouseCursors.basic,
+                          maxLines: 3,
+                          controller: _notesController,
+                          decoration: InputDecoration(
+                            labelStyle: TextStyles.font12black54Reguler,
+                            labelText: S.of(context).notes,
+                            border: const OutlineInputBorder(),
                           ),
-                          verticalSpacing(SizeConfig.screenHeight!*.005),
-                           WorkTimeBoard(
-                                  data: context.read<AttendanceCubit>().data),
-                          Container(
-                            height: SizeConfig.screenHeight! * .3,
-                            padding: EdgeInsets.symmetric(vertical: SizeConfig.screenHeight!*.01),
-                            child: Card(
-                              child: GoogleMap(
-                                initialCameraPosition: CameraPosition(
-                                  target: context
-                                      .read<AttendanceCubit>()
-                                      .currentPosition,
-                                  zoom: 14,
-                                ),
-                                myLocationEnabled: true,
-                                markers: {
-                                  Marker(
-                                    markerId: const MarkerId('my location'),
-                                    position: context.read<AttendanceCubit>().currentPosition,
-                                    infoWindow: const InfoWindow(
-                                      title: 'My Marker',
-                                      snippet: 'This is a snippet',
-                                    ),
-
+                        ),
+                        verticalSpacing(SizeConfig.screenHeight! * .005),
+                        WorkTimeBoard(
+                            data: context.read<AttendanceCubit>().data),
+                        Container(
+                          height: SizeConfig.screenHeight! * .3,
+                          padding: EdgeInsets.symmetric(
+                              vertical: SizeConfig.screenHeight! * .01),
+                          child: Stack(
+                            children: [
+                              Card(
+                                child: GoogleMap(
+                                  initialCameraPosition: CameraPosition(
+                                    target: context
+                                        .read<AttendanceCubit>()
+                                        .currentPosition,
+                                    zoom: 14,
                                   ),
-                                },
-                                onMapCreated: (GoogleMapController controller) {
-                                  this.controller = controller;
-                                  controller.animateCamera(
-                                    CameraUpdate.newCameraPosition(
-                                      CameraPosition(
-                                          target: context
-                                              .read<AttendanceCubit>()
-                                              .currentPosition,
-                                          zoom: 14),
+                                  myLocationEnabled: true,
+                                  markers: {
+                                    Marker(
+                                      markerId: const MarkerId('my location'),
+                                      position: context
+                                          .read<AttendanceCubit>()
+                                          .currentPosition,
+                                      infoWindow: const InfoWindow(
+                                        title: 'My Marker',
+                                        snippet: 'This is a snippet',
+                                      ),
                                     ),
-                                  );
-                                },
+                                  },
+                                  onMapCreated:
+                                      (GoogleMapController controller) {
+                                    this.controller = controller;
+                                    controller.animateCamera(
+                                      CameraUpdate.newCameraPosition(
+                                        CameraPosition(
+                                            target: context
+                                                .read<AttendanceCubit>()
+                                                .currentPosition,
+                                            zoom: 14),
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child: Container(
+                                  //width: double.infinity,
+                                  height: SizeConfig.screenHeight! * .03,
+                                  color: ColorManger.darkBlue,
+                                  alignment: Alignment.center,
+                                  child: Text(S.of(context).location),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),

@@ -550,10 +550,10 @@ class S {
     );
   }
 
-  /// `please choose start date and end date `
+  /// `No Data Found`
   String get noDateFound {
     return Intl.message(
-      'please choose start date and end date ',
+      'No Data Found',
       name: 'noDateFound',
       desc: '',
       args: [],
@@ -760,11 +760,31 @@ class S {
     );
   }
 
-  /// `this field must has time format ex: 7:00 , 12:30`
+  /// ` time format (7:00 , 12:30)`
   String get matchTimeFormat {
     return Intl.message(
-      'this field must has time format ex: 7:00 , 12:30',
+      ' time format (7:00 , 12:30)',
       name: 'matchTimeFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The shift extends to the next day`
+  String get shiftToSecondDay {
+    return Intl.message(
+      'The shift extends to the next day',
+      name: 'shiftToSecondDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duration`
+  String get duration {
+    return Intl.message(
+      'Duration',
+      name: 'duration',
       desc: '',
       args: [],
     );

@@ -23,7 +23,7 @@ class QuickAccess extends StatelessWidget {
           children: [
             Text(
               S.of(context).quickAccessList,
-              style: TextStyles.font12blackBold,
+              style: TextStyles.font15BlueBold,
             ),
             verticalSpacing(SizeConfig.screenHeight! * .016),
             GridView.count(
@@ -108,7 +108,7 @@ class QuickAccess extends StatelessWidget {
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyles.font12black54Reguler,
+                style: TextStyles.font12blackBold,
               ),
             ),
           ],

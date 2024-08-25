@@ -59,6 +59,7 @@ class _PasswordTextState extends State<PasswordText> {
           ),
           errorStyle: TextStyle(fontSize: 15.sp),
           suffixIcon: IconButton(
+            color: ColorManger.loginButtonColorBlue,
             icon: obsecured
                 ? const Icon(Icons.visibility)
                 : const Icon(Icons.visibility_off),

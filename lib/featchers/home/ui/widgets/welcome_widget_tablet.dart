@@ -20,7 +20,7 @@ class WelcomeWidgetTablet extends StatelessWidget {
             text: Intl.defaultLocale == MyConstants.arabic
                 ? context.read<HomeCubit>().data.empArabicName
                 : context.read<HomeCubit>().data.empLatinName,
-            style: TextStyles.font22BlueBold)
+            style: TextStyles.font30BlackBold)
       ]),
     );
   }

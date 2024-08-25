@@ -78,8 +78,8 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
           context: context,
           tiltle: MyConstants.myRequests),
       drawer: const Drawer(child: MyDrawer()),
-      body: OfflineBuilderWidget(
-        child: SafeArea(
+      body: 
+     SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Form(
@@ -237,8 +237,8 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
             ),
           ),
         ),
-      ),
-    );
+      )
+    ;
   }
 
   

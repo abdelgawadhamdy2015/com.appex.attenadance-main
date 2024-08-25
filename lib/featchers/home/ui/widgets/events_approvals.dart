@@ -12,13 +12,15 @@ class EventsApprovals extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
+        padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.screenWidth! * .016,
+            vertical: SizeConfig.screenHeight! * .016),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               S.of(context).eventsApprovals,
-              style: TextStyles.font12blackBold,
+              style: TextStyles.font15BlueBold,
             ),
             verticalSpacing(SizeConfig.screenWidth! * .016),
             Card(

@@ -1,18 +1,16 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'font_weight_helper.dart';
 
 class TextStyles {
-
-
   static TextStyle font22BlueBold = TextStyle(
       fontSize: 22.sp, fontWeight: FontWeightHelper.bold, color: Colors.blue);
 
-  static TextStyle font16BlueBold = TextStyle(
-      fontSize: 16.sp, fontWeight: FontWeightHelper.bold, color: Colors.blue);
+  static TextStyle font15BlueBold = TextStyle(
+      fontSize: 15.sp,
+      fontWeight: FontWeightHelper.bold,
+      color: ColorManger.darkBlue);
 
   static TextStyle font15WhiteBold = TextStyle(
       fontSize: 15.sp, fontWeight: FontWeightHelper.bold, color: Colors.white);

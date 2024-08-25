@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
@@ -63,21 +64,23 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      child: MaterialApp(
-        builder: DevicePreview.appBuilder,
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        debugShowCheckedModeBanner: false,
-        locale: _locale,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        onGenerateRoute: generateRoute,
-        initialRoute: Routes.splashScreen,
+      child: OfflineBuilderWidget(
+        materialApp: MaterialApp(
+          builder: DevicePreview.appBuilder,
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          debugShowCheckedModeBanner: false,
+          locale: _locale,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          onGenerateRoute: generateRoute,
+          initialRoute: Routes.splashScreen,
+        ),
       ),
     );
   }

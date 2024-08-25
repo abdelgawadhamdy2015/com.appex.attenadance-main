@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/attendance/data/models/attendance_request.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
@@ -43,7 +44,6 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
   bool _isButtonVisible = true;
   int _remainingTime = 0;
   String lastTime = '';
- 
 
   @override
   void initState() {
@@ -121,7 +121,10 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.r)),
-                          backgroundColor: Colors.blueGrey,
+                          backgroundColor: !checkIfNull([widget.shiftTimeIn]) &&
+                                  checkIfNull([widget.shiftTimeOut])
+                              ? ColorManger.moreLightred
+                              : ColorManger.moreLightGreen,
                         ),
                         child: FittedBox(
                           fit: BoxFit.cover,

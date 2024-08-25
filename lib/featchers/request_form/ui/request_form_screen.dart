@@ -6,10 +6,12 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
-import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
+import 'package:ttech_attendance/core/widgets/app_text_button.dart';
+import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/featchers/request_form/date/models/request_model.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_state.dart';
@@ -60,7 +62,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
           _endDate = pickedDate;
         }
         if (_startDate != null && _endDate != null) {
-          _startDate!.isBefore(_endDate!)
+          _startDate!.isBefore(_endDate!) || _startDate == _endDate
               ? _duration =
                   (_endDate!.difference(_startDate!).inDays + 1).toString()
               : _duration = S.of(context).dateWarning;
@@ -69,13 +71,11 @@ class RequestFormScreenState extends State<RequestFormScreen> {
     }
   }
 
-  String token = "";
-
   @override
   void initState() {
     super.initState();
     //get Token from shared preference
-    getToken();
+    getAllVaccations(context);
   }
 
   @override
@@ -86,154 +86,162 @@ class RequestFormScreenState extends State<RequestFormScreen> {
           context: context,
           title: MyConstants.myRequests),
       drawer: const Drawer(child: MyDrawer()),
-      body: OfflineBuilderWidget(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: SizeConfig().getScreenPadding(),
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.screenWidth! * .02,
-                  vertical: SizeConfig.screenHeight! * .02),
-              child: Form(
-                key: context.read<RequestVaccationCubit>().formKey,
-                child: Column(
-                  children: [
-                    BlocBuilder<AllVaccationsCubit, AllVaccationsState>(
-                      builder: (context, state) {
-                        if (state is Loading) {
-                          return const CircularProgressIndicator();
-                        } else if (state is Success) {
-                          return DropdownButtonFormField(
-                            key: context.read<AllVaccationsCubit>().formKey,
-                            decoration: InputDecoration(
-                              labelText: S.of(context).kindOfHoliday,
-                              labelStyle: TextStyles.font12black54Reguler,
-                              border: const OutlineInputBorder(),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: SizeConfig.screenWidth! * .02,
-                                  vertical: SizeConfig.screenHeight! * .01),
-                            ),
-                            value: _selectedLeaveType,
-                            items: context
-                                .read<AllVaccationsCubit>()
-                                .vacctionsName
-                                .map((String type) {
-                              return DropdownMenuItem<String>(
-                                value: type,
-                                child: Text(
-                                  type,
-                                  style: TextStyles.font12black54Reguler,
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                _selectedLeaveType = newValue;
-                              });
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: SizeConfig().getScreenPadding(),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: SizeConfig.screenWidth! * .02,
+                vertical: SizeConfig.screenHeight! * .02),
+            child: Form(
+              key: context.read<RequestVaccationCubit>().formKey,
+              child: Column(
+                children: [
+                  const AllVaccationsListener(),
+                  BlocBuilder<AllVaccationsCubit, AllVaccationsState>(
+                    builder: (context, state) {
+                      if (state is Loading) {
+                        return const CircularProgressIndicator();
+                      } else if (state is Success) {
+                        return DropdownButtonFormField(
+                          key: context.read<AllVaccationsCubit>().formKey,
+                          decoration: InputDecoration(
+                            labelText: S.of(context).kindOfHoliday,
+                            labelStyle: TextStyles.font14blackReguler,
+                            border: const OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.screenWidth! * .02,
+                                vertical: SizeConfig.screenHeight! * .01),
+                          ),
+                          value: _selectedLeaveType,
+                          items: context
+                              .read<AllVaccationsCubit>()
+                              .vacctionsName
+                              .map((String type) {
+                            return DropdownMenuItem<String>(
+                              value: type,
+                              child: Text(
+                                type,
+                                style: TextStyles.font14blackReguler,
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedLeaveType = newValue;
+                            });
 
-                              vaccationId = context
-                                  .read<AllVaccationsCubit>()
-                                  .vaccations
-                                  .where((v) => v.arabicName == newValue)
-                                  .first
-                                  .id!;
-                            },
-                          );
-                        } else {
-                          return Text(S.of(context).noDateFound);
-                        }
-                      },
-                    ),
-                    const AllVaccationsListener(),
-                    verticalSpacing(20),
-                    TextFormField(
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: S.of(context).fromDate,
-                          labelStyle: TextStyles.font12black54Reguler,
-                          border: const OutlineInputBorder(),
-                          suffixIcon: Icon(
-                            Icons.calendar_month_outlined,
-                            size: SizeConfig.screenWidth! * .1,
-                          )),
-                      onTap: () => _pickDate(context, true),
-                      controller: TextEditingController(
-                        text: _startDate != null
-                            ? Intl.defaultLocale == MyConstants.english
-                                ? DateFormat('yyyy-MM-dd').format(_startDate!)
-                                : DateFormat("dd-MM-yyyy").format(_startDate!)
-                            : '',
-                      ),
-                      style: TextStyles.font12black54Reguler,
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      style: TextStyles.font12black54Reguler,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: S.of(context).toDate,
-                          labelStyle: TextStyles.font12black54Reguler,
-                          border: const OutlineInputBorder(),
-                          suffixIcon: Icon(
-                            Icons.calendar_month_outlined,
-                            size: SizeConfig.screenWidth! * .1,
-                          )),
-                      onTap: () => _pickDate(context, false),
-                      controller: TextEditingController(
-                        text: _endDate != null
-                            ? Intl.defaultLocale == MyConstants.english
-                                ? DateFormat('yyyy-MM-dd').format(_endDate!)
-                                : DateFormat("dd-MM-yyyy").format(_endDate!)
-                            : '',
+                            vaccationId = context
+                                .read<AllVaccationsCubit>()
+                                .vaccations
+                                .where((v) => v.arabicName == newValue)
+                                .first
+                                .id!;
+                          },
+                        );
+                      } else {
+                        return Text(S.of(context).noDateFound);
+                      }
+                    },
+                  ),
+                  verticalSpacing(20),
+                  MyTextForm(
+                    fillColor: Colors.transparent,
+                    readOnly: true,
+                    labelText: S.of(context).fromDate,
+                    suffixIcon: Container(
+                      color: ColorManger.moreMutedBlue,
+                      height: SizeConfig.screenHeight! * .07,
+                      child: Icon(
+                        Icons.calendar_month_outlined,
+                        size: SizeConfig.screenWidth! * .1,
+                        color: Colors.blueGrey,
                       ),
                     ),
-                    verticalSpacing(SizeConfig.screenHeight! * .02),
-                    Text(
-                      "$_duration  ${S.of(context).days}",
-                      style: TextStyles.font12black54Reguler,
+                    onTab: () => _pickDate(context, true),
+                    controller: TextEditingController(
+                      text: _startDate != null
+                          ? Intl.defaultLocale == MyConstants.english
+                              ? DateFormat('yyyy-MM-dd').format(_startDate!)
+                              : DateFormat("dd-MM-yyyy").format(_startDate!)
+                          : '',
                     ),
-                    verticalSpacing(SizeConfig.screenHeight! * .02),
-                    TextField(
-                      controller: notesController,
-                      decoration: InputDecoration(
-                        labelText: S.of(context).notes,
-                        labelStyle: TextStyles.font12black54Reguler,
-                        border: const OutlineInputBorder(),
-                      ),
-                      maxLines: 3,
-                    ),
-                    verticalSpacing(SizeConfig.screenHeight! * .02),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: SizeConfig.screenWidth! * .016,
-                          vertical: SizeConfig.screenHeight! * .016),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              validateThenAddVaccation(context);
-                            },
-                            child: Text(
-                              S.of(context).send,
-                              style: TextStyles.font16BlueBold,
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              context.pushReplacementNamed(Routes.homeScreen);
-                            },
-                            child: Text(
-                              S.of(context).cancel,
-                              style: TextStyles.font16BlueBold,
-                            ),
-                          ),
-                        ],
+                    inputTextStyle: TextStyles.font12black54Reguler,
+                  ),
+                  verticalSpacing(SizeConfig.screenHeight! * .02),
+                  MyTextForm(
+                    fillColor: Colors.transparent,
+                    readOnly: true,
+                    labelText: S.of(context).fromDate,
+                    suffixIcon: Container(
+                      color: ColorManger.moreMutedBlue,
+                      height: SizeConfig.screenHeight! * .07,
+                      child: Icon(
+                        Icons.calendar_month_outlined,
+                        size: SizeConfig.screenWidth! * .1,
+                        color: Colors.blueGrey,
                       ),
                     ),
-                    const RequestBlockListener()
-                  ],
-                ),
+                    onTab: () => _pickDate(context, false),
+                    controller: TextEditingController(
+                      text: _endDate != null
+                          ? Intl.defaultLocale == MyConstants.english
+                              ? DateFormat('yyyy-MM-dd').format(_endDate!)
+                              : DateFormat("dd-MM-yyyy").format(_endDate!)
+                          : '',
+                    ),
+                  ),
+                  verticalSpacing(SizeConfig.screenHeight! * .02),
+                  MyTextForm(
+                    enabled: false,
+                    onTab: null,
+                    fillColor: Colors.transparent,
+                    readOnly: true,
+                    hint:
+                        " ${S.of(context).duration} $_duration  ${S.of(context).days}",
+                    hintStyle: TextStyles.font15Black54reguler,
+                  ),
+                  verticalSpacing(SizeConfig.screenHeight! * .02),
+                  TextField(
+                    controller: notesController,
+                    decoration: InputDecoration(
+                      labelText: S.of(context).notes,
+                      labelStyle: TextStyles.font15Black54reguler,
+                      border: const OutlineInputBorder(),
+                    ),
+                    maxLines: 3,
+                  ),
+                  verticalSpacing(SizeConfig.screenHeight! * .02),
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: SizeConfig.screenWidth! * .016,
+                        vertical: SizeConfig.screenHeight! * .016),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppButtonText(
+                          backGroundColor: ColorManger.lighterGreen,
+                          buttonWidth: SizeConfig.screenWidth! * .3,
+                          butonText: S.of(context).send,
+                          textStyle: TextStyles.font15WhiteBold,
+                          onPressed: () {
+                            validateThenAddVaccation(context);
+                          },
+                        ),
+                        AppButtonText(
+                          backGroundColor: ColorManger.lighterRed,
+                          buttonWidth: SizeConfig.screenWidth! * .3,
+                          butonText: S.of(context).cancel,
+                          textStyle: TextStyles.font15WhiteBold,
+                          onPressed: () {
+                            context.pushReplacementNamed(Routes.homeScreen);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  const RequestBlockListener()
+                ],
               ),
             ),
           ),
@@ -242,19 +250,8 @@ class RequestFormScreenState extends State<RequestFormScreen> {
     );
   }
 
-  getToken() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    token = preferences.getString(MyConstants.myToken)!;
-    setState(() {
-      //get vaccations types from data base
-      getAllVaccations(context);
-    });
-  }
-
   getAllVaccations(BuildContext context) {
-    context
-        .read<AllVaccationsCubit>()
-        .emitAllVaccationsState();
+    context.read<AllVaccationsCubit>().emitAllVaccationsState();
   }
 
   void validateThenAddVaccation(BuildContext context) {
@@ -264,12 +261,13 @@ class RequestFormScreenState extends State<RequestFormScreen> {
         .currentState!
         .validate()) {
       context.read<RequestVaccationCubit>().emitRequestVaccationState(
-          RequestVaccation(
-              vaccationId: vaccationId,
-              isMobile: true,
-              dateFrom: _startDate.toString(),
-              dateTo: _endDate.toString(),
-              note: notesController.text),);
+            RequestVaccation(
+                vaccationId: vaccationId,
+                isMobile: true,
+                dateFrom: _startDate.toString(),
+                dateTo: _endDate.toString(),
+                note: notesController.text),
+          );
     }
   }
 }

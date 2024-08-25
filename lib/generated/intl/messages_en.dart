@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "days": MessageLookupByLibrary.simpleMessage("Days"),
         "dbName": MessageLookupByLibrary.simpleMessage("DataBase Name"),
         "departures": MessageLookupByLibrary.simpleMessage("Departures"),
+        "duration": MessageLookupByLibrary.simpleMessage("Duration"),
         "email": MessageLookupByLibrary.simpleMessage(" Email"),
         "emergencyLeave":
             MessageLookupByLibrary.simpleMessage("Emergency leave"),
@@ -74,12 +75,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out "),
-        "matchTimeFormat": MessageLookupByLibrary.simpleMessage(
-            "this field must has time format ex: 7:00 , 12:30"),
+        "matchTimeFormat":
+            MessageLookupByLibrary.simpleMessage(" time format (7:00 , 12:30)"),
         "myRequests": MessageLookupByLibrary.simpleMessage("My requests"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
-        "noDateFound": MessageLookupByLibrary.simpleMessage(
-            "please choose start date and end date "),
+        "noDateFound": MessageLookupByLibrary.simpleMessage("No Data Found"),
         "notAttendance":
             MessageLookupByLibrary.simpleMessage(" you not signIn yet"),
         "notLeave": MessageLookupByLibrary.simpleMessage("you not signOut yet"),
@@ -106,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shift2": MessageLookupByLibrary.simpleMessage("second shift"),
         "shift3": MessageLookupByLibrary.simpleMessage("third shift"),
         "shift4": MessageLookupByLibrary.simpleMessage("fourth shift"),
+        "shiftToSecondDay": MessageLookupByLibrary.simpleMessage(
+            "The shift extends to the next day"),
         "sickLeave": MessageLookupByLibrary.simpleMessage("Sick leave"),
         "signIn": MessageLookupByLibrary.simpleMessage("Check-in "),
         "signOut": MessageLookupByLibrary.simpleMessage("Check-out "),

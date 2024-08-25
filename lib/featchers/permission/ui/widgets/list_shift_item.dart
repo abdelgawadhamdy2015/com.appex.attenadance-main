@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/featchers/permission/data/models/shift_model.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
@@ -74,39 +75,46 @@ class _ListShiftItemState extends State<ListShiftItem> {
         builder: (context, state) {
           return Column(
             children: [
-              CheckboxListTile(
-                enabled: widget.enabled,
-                title: Text(getShift(widget.shift, context)),
-                value: getCheckBoxId(widget.shift, checkboxState),
-                onChanged: (bool? value) {
-                  context.read<PermissionCubit>().shiftChecks.add(
-                      ShiftModel(widget.shift, value!, false, "", "endTime"));
-                  setState(() {
-                    switch (widget.shift) {
-                      case 1:
-                        checkboxState.isChecked1 = value;
-                        break;
-                      case 2:
-                        checkboxState.isChecked2 = value;
-                        break;
-                      case 3:
-                        checkboxState.isChecked3 = value;
-                        break;
-                      case 4:
-                        checkboxState.isChecked4 = value;
-                        break;
-                      default:
-                    }
-                  });
-                },
-                subtitle: getCheckBoxId(widget.shift, checkboxState)
-                    ? Column(
+              Row(children: [
+                Checkbox(
+                  fillColor: WidgetStatePropertyAll(
+                      widget.enabled ? null : ColorManger.gray),
+                  activeColor: ColorManger.checkBoxGreen,
+                  value: getCheckBoxId(widget.shift, checkboxState),
+                  onChanged: (bool? value) {
+                    widget.enabled
+                        ? setState(() {
+                            switch (widget.shift) {
+                              case 1:
+                                checkboxState.isChecked1 = value!;
+                                break;
+                              case 2:
+                                checkboxState.isChecked2 = value!;
+                                break;
+                              case 3:
+                                checkboxState.isChecked3 = value!;
+                                break;
+                              case 4:
+                                checkboxState.isChecked4 = value!;
+                                break;
+                              default:
+                            }
+                          })
+                        : null;
+                  },
+                ),
+                Text(getShift(widget.shift, context)),
+              ]),
+              getCheckBoxId(widget.shift, checkboxState)
+                  ? Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: SizeConfig.screenWidth! * .06),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           verticalSpacing(SizeConfig.screenHeight! * .02),
                           MyTextForm(
-                            onEditingComplete: () => setState(() {}),
-                            onSaved: (p0) => setState(() {}),
+                            fillColor: ColorManger.lightGray,
                             excep: S.of(context).attendanceTime,
                             onChanged: (value) {
                               setState(() {});
@@ -125,6 +133,7 @@ class _ListShiftItemState extends State<ListShiftItem> {
                           ),
                           verticalSpacing(SizeConfig.screenHeight! * .02),
                           MyTextForm(
+                            fillColor: ColorManger.lightGray,
                             excep: S.of(context).leaveTime,
                             controller: getController(widget.shift, false),
                             labelText: S.of(context).leaveTime,
@@ -139,35 +148,40 @@ class _ListShiftItemState extends State<ListShiftItem> {
                             },
                           ),
                           verticalSpacing(SizeConfig.screenHeight! * .02),
-                          CheckboxListTile(
-                              title: const Text('Shift to Second Day'),
-                              value:
-                                  getShiftToSecond(widget.shift, checkboxState),
-                              onChanged: (bool? value) {
-                                setState(
-                                  () {
-                                    switch (widget.shift) {
-                                      case 1:
-                                        checkboxState.shifttosecond1 = value!;
-                                        break;
-                                      case 2:
-                                        checkboxState.shifttosecond2 = value!;
-                                        break;
-                                      case 3:
-                                        checkboxState.shifttosecond3 = value!;
-                                        break;
-                                      case 4:
-                                        checkboxState.shifttosecond4 = value!;
-                                        break;
-                                      default:
-                                    }
-                                  },
-                                );
-                              })
+                          Row(children: [
+                            Checkbox(
+                                fillColor: WidgetStatePropertyAll(
+                                    widget.enabled ? null : ColorManger.gray),
+                                activeColor: ColorManger.checkBoxGreen,
+                                value: getShiftToSecond(
+                                    widget.shift, checkboxState),
+                                onChanged: (bool? value) {
+                                  setState(
+                                    () {
+                                      switch (widget.shift) {
+                                        case 1:
+                                          checkboxState.shifttosecond1 = value!;
+                                          break;
+                                        case 2:
+                                          checkboxState.shifttosecond2 = value!;
+                                          break;
+                                        case 3:
+                                          checkboxState.shifttosecond3 = value!;
+                                          break;
+                                        case 4:
+                                          checkboxState.shifttosecond4 = value!;
+                                          break;
+                                        default:
+                                      }
+                                    },
+                                  );
+                                }),
+                            Text(S.of(context).shiftToSecondDay),
+                          ])
                         ],
-                      )
-                    : null,
-              )
+                      ),
+                    )
+                  : Container()
             ],
           );
         },

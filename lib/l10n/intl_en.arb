@@ -49,7 +49,7 @@
     "attendanceTime":"Attendance Time",
     "leaveTime":"Leave Time",
     "workHours": "Work Hours",
-    "noDateFound" : "please choose start date and end date ",
+    "noDateFound" : "No Data Found",
     "performancePanel": "Performance Panel",
     "days": "Days",
     "am": "A.M",
@@ -70,6 +70,8 @@
     "date": "Date",
     "permissionType": "Permission Type",
     "name":"Name",
-    "matchTimeFormat": "this field must has time format ex: 7:00 , 12:30"
+    "matchTimeFormat": " time format (7:00 , 12:30)",
+    "shiftToSecondDay": "The shift extends to the next day",
+    "duration": "Duration"
 
 }

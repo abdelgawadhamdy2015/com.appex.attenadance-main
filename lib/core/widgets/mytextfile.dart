@@ -23,6 +23,7 @@ class MyTextForm extends StatelessWidget {
   final Function()? onTab;
   final bool? readOnly;
   final Function(String?)? onSaved;
+  final bool? enabled;
 
   final Function()? onEditingComplete;
 
@@ -47,11 +48,13 @@ class MyTextForm extends StatelessWidget {
       this.onTab,
       this.readOnly,
       this.onSaved,
-      this.onEditingComplete});
+      this.onEditingComplete,
+      this.enabled});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        enabled: enabled ?? true,
         onEditingComplete: onEditingComplete,
         onSaved: onSaved,
         readOnly: readOnly ?? false,
@@ -62,35 +65,43 @@ class MyTextForm extends StatelessWidget {
             },
         controller: controller,
         decoration: InputDecoration(
-          labelText: labelText ?? "",
+          labelText: labelText,
           fillColor: fillColor ?? ColorManger.morelightGray,
           filled: true,
           suffixIcon: suffixIcon,
           hintText: hint,
-          hintStyle: TextStyle(
-            fontSize: 10.sp,
-          ),
+          hintStyle: hintStyle ??
+              TextStyle(
+                fontSize: 10.sp,
+              ),
           focusedBorder: foucesedBorder ??
               OutlineInputBorder(
                 borderSide:
-                    const BorderSide(color: ColorManger.mainBlue, width: 1.3),
-                borderRadius: BorderRadius.circular(16),
+                    BorderSide(color: ColorManger.mainBlue, width: .6.w),
+                //borderRadius: BorderRadius.circular(16),
               ),
           enabledBorder: enabeledBorder ??
               OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: ColorManger.lighterGray, width: 1.3),
-                borderRadius: BorderRadius.circular(16),
+                borderSide:
+                    BorderSide(color: ColorManger.lighterGray, width: 0.6.w),
+                // borderRadius: BorderRadius.circular(16),
               ),
           errorBorder: errorBorder ??
               OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 1.3.w),
-                  borderRadius: BorderRadius.circular(16.r)),
+                borderSide: BorderSide(color: Colors.red, width: 0.6.w),
+                // borderRadius: BorderRadius.circular(16.r),
+              ),
           focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red.shade300, width: 1.3.w),
-            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: Colors.red.shade300, width: 0.6.w),
+            //borderRadius: BorderRadius.circular(16),
           ),
           errorStyle: TextStyle(fontSize: 15.sp),
+          disabledBorder: enabeledBorder ??
+              OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: ColorManger.lighterGray, width: 0.6.w),
+                // borderRadius: BorderRadius.circular(16),
+              ),
         ),
         validator: (val) {
           if (validator == null) {
