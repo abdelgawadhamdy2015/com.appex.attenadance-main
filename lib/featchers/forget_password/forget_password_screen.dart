@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 //import 'passwordtext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 import '../../core/helpers/size_config.dart';

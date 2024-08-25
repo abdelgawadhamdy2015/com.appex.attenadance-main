@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 
 class ArrowBackWidget extends StatelessWidget {
   const ArrowBackWidget({super.key});
@@ -10,8 +10,10 @@ class ArrowBackWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () => context.pushReplacementNamed(Routes.homeScreen),
-      child:
-      const Icon((Icons.arrow_back)),
+      child: const Icon(
+        (Icons.arrow_back),
+        color: ColorManger.darkBlue,
+      ),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/core/widgets/app_text_button.dart';
 import 'package:ttech_attendance/featchers/attendance/data/models/attendance_request.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
@@ -113,29 +113,22 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                     vertical: SizeConfig.screenHeight! * .01,
                     horizontal: SizeConfig.screenHeight! * .01),
                 child: _isButtonVisible
-                    ? ElevatedButton(
+                    ? AppButtonText(
+                        verticalPadding: 0,
+                        buttonHeight: SizeConfig.screenHeight! * .05,
                         onPressed: () async {
                           // work with location here and send it to back end
                           validateThenRecordAttendance();
                         },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.r)),
-                          backgroundColor: !checkIfNull([widget.shiftTimeIn]) &&
-                                  checkIfNull([widget.shiftTimeOut])
-                              ? ColorManger.moreLightred
-                              : ColorManger.moreLightGreen,
-                        ),
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: Text(
-                            !checkIfNull([widget.shiftTimeIn]) &&
-                                    checkIfNull([widget.shiftTimeOut])
-                                ? S.of(context).signOut
-                                : S.of(context).signIn,
-                            style: TextStyles.font15WhiteBold,
-                          ),
-                        ),
+                        backGroundColor: !checkIfNull([widget.shiftTimeIn]) &&
+                                checkIfNull([widget.shiftTimeOut])
+                            ? ColorManger.moreLightred
+                            : ColorManger.moreLightGreen,
+                        butonText: !checkIfNull([widget.shiftTimeIn]) &&
+                                checkIfNull([widget.shiftTimeOut])
+                            ? S.of(context).signOut
+                            : S.of(context).signIn,
+                        textStyle: TextStyles.font15WhiteBold,
                       )
                     : Center(
                         child: Text(

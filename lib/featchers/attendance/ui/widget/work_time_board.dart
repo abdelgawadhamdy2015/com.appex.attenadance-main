@@ -32,20 +32,24 @@ class WorkTimeBoard extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: EdgeInsets.only(
-                right: SizeConfig.screenWidth! * .01,
-                left: SizeConfig.screenWidth! * .01,
+                right: SizeConfig.screenWidth! * .05,
+                left: SizeConfig.screenWidth! * .05,
                 top: SizeConfig.screenHeight! * .01,
                 bottom: SizeConfig.screenHeight! * .01),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppButtonText(
-                    verticalPadding: SizeConfig.screenHeight! * .0,
-                    buttonHeight: SizeConfig.screenHeight! * .01,
-                    buttonWidth: SizeConfig.screenWidth! * .3,
-                    backGroundColor: ColorManger.mutedBlue,
-                    textStyle: TextStyles.font12WhiteBold,
-                    butonText: S.of(context).timesOfWork,
-                    onPressed: () {}),
+                  verticalPadding: SizeConfig.screenHeight! * .0,
+                  buttonHeight: SizeConfig.screenHeight! * .01,
+                  buttonWidth: SizeConfig.screenWidth! * .3,
+                  backGroundColor: ColorManger.mutedBlue,
+                  textStyle: TextStyles.font12WhiteBold,
+                  butonText: S.of(context).timesOfWork,
+                  borderRadius: 20.r,
+                  onPressed: () {},
+                ),
                 // Container(
                 //   padding: EdgeInsets.only(
                 //       right: SizeConfig.screenWidth! * .05,
@@ -70,8 +74,8 @@ class WorkTimeBoard extends StatelessWidget {
                         style: TextStyles.font12black54Reguler,
                       )
                     : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           for (int i = 1; i <= 4; i++)
                             if (!checkIfNull([
@@ -110,7 +114,9 @@ class WorkTimeBoard extends StatelessWidget {
                           //         "${S.of(context).shift4} ${S.of(context).from} ${getFormattedTimeOfDay(data.shift4_Start!, context)} ${S.of(context).to} ${getFormattedTimeOfDay(data.shift4_End!, context)}",
                           //         style: TextStyles.font12black54Reguler,
                           //       )
-                          //     : Container(),
+                          //
+                          //   : Container(),
+                          verticalSpacing(SizeConfig.screenHeight! * .01),
                           Text(
                             S.of(context).restMinutes,
                             style: TextStyles.font12WhiteBold,

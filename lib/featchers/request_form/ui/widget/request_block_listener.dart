@@ -21,16 +21,18 @@ class _RequestBlockListenerState extends State<RequestBlockListener> {
   Widget build(BuildContext context) {
     return BlocListener<RequestVaccationCubit, RequestVaccationState>(
       listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
+          current is RequestLoading ||
+          current is RequestSuccess ||
+          current is RequestError,
       listener: (context, state) {
         state.whenOrNull(
-          loading: () {
+          requestLoading: () {
             const Center(
                 child: CircularProgressIndicator(
               color: Colors.blue,
             ));
           },
-          success: (addVaccationResponse) async {
+          requestSuccess: (addVaccationResponse) async {
             AddVaccationResponse response = addVaccationResponse;
 
             response.result == 1
@@ -40,17 +42,21 @@ class _RequestBlockListenerState extends State<RequestBlockListener> {
                         ? response.alart!.messageAr!
                         : response.alart!.messageEn!,
                     false,
-                    )
+                  )
                 : setupDialogState(
                     context,
                     Intl.defaultLocale == MyConstants.arabic
                         ? response.alart!.messageAr!
                         : response.alart!.messageEn!,
                     true,
-                    );
+                  );
           },
-          error: (error) {
-            setupDialogState(context, error, true, );
+          requestError: (error) {
+            setupDialogState(
+              context,
+              error,
+              true,
+            );
           },
         );
       },

@@ -5,7 +5,9 @@ part 'request_vaccation_state.freezed.dart';
 @freezed
 class RequestVaccationState<T> with _$RequestVaccationState<T> {
   const factory RequestVaccationState.initial() = _Initial;
-  const factory RequestVaccationState.loading() = Loading;
-  const factory RequestVaccationState.success(T data) = Success<T>;
-  const factory RequestVaccationState.error({required String error}) = Error;
+  const factory RequestVaccationState.requestLoading() = RequestLoading;
+  const factory RequestVaccationState.requestSuccess(T data) =
+      RequestSuccess<T>;
+  const factory RequestVaccationState.requestError({required String error}) =
+      RequestError;
 }

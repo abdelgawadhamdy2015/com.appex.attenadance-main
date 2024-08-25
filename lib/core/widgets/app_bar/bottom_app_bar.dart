@@ -21,7 +21,7 @@ class BottomAppBarState extends State<MyBottomAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: ColorManger.morelightGray,
+      backgroundColor: ColorManger.backGroundGray,
       leading: const ArrowBackWidget(),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -30,7 +30,7 @@ class BottomAppBarState extends State<MyBottomAppBar> {
           Center(
             child: Text(
               getTitle(),
-              style: TextStyles.font14blackReguler,
+              style: TextStyles.font20BlueBold,
             ),
           ),
         ],

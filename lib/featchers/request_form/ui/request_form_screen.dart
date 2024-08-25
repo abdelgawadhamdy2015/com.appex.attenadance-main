@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
@@ -11,11 +11,13 @@ import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
 import 'package:ttech_attendance/core/widgets/app_text_button.dart';
+import 'package:ttech_attendance/core/widgets/indicator/my_progress_indicator.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/featchers/request_form/date/models/request_model.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_state.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
+import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_state.dart';
 import 'package:ttech_attendance/featchers/request_form/ui/widget/all_vaccations_listener.dart';
 import 'package:ttech_attendance/featchers/request_form/ui/widget/request_block_listener.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
@@ -74,7 +76,6 @@ class RequestFormScreenState extends State<RequestFormScreen> {
   @override
   void initState() {
     super.initState();
-    //get Token from shared preference
     getAllVaccations(context);
   }
 
@@ -104,6 +105,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                         return const CircularProgressIndicator();
                       } else if (state is Success) {
                         return DropdownButtonFormField(
+                          borderRadius: BorderRadius.all(Radius.circular(.8.r)),
                           key: context.read<AllVaccationsCubit>().formKey,
                           decoration: InputDecoration(
                             labelText: S.of(context).kindOfHoliday,
@@ -193,13 +195,14 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                   ),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
                   MyTextForm(
+                    validator: (p0) {},
                     enabled: false,
                     onTab: null,
                     fillColor: Colors.transparent,
                     readOnly: true,
                     hint:
-                        " ${S.of(context).duration} $_duration  ${S.of(context).days}",
-                    hintStyle: TextStyles.font15Black54reguler,
+                        "${S.of(context).duration} ${_duration.isNotEmpty ? "$_duration ${S.of(context).days}" : ""}",
+                    hintStyle: TextStyles.font14blackReguler,
                   ),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
                   TextField(
@@ -219,13 +222,22 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AppButtonText(
-                          backGroundColor: ColorManger.lighterGreen,
-                          buttonWidth: SizeConfig.screenWidth! * .3,
-                          butonText: S.of(context).send,
-                          textStyle: TextStyles.font15WhiteBold,
-                          onPressed: () {
-                            validateThenAddVaccation(context);
+                        BlocBuilder<RequestVaccationCubit,
+                            RequestVaccationState>(
+                          builder: (context, state) {
+                            return context.read<RequestVaccationCubit>().loading
+                                ? MyProgressIndicator(
+                                    hight: SizeConfig.screenHeight! * .05,
+                                    width: SizeConfig.screenWidth! * .3)
+                                : AppButtonText(
+                                    backGroundColor: ColorManger.lighterGreen,
+                                    buttonWidth: SizeConfig.screenWidth! * .3,
+                                    butonText: S.of(context).send,
+                                    textStyle: TextStyles.font15WhiteBold,
+                                    onPressed: () {
+                                      validateThenAddVaccation(context);
+                                    },
+                                  );
                           },
                         ),
                         AppButtonText(

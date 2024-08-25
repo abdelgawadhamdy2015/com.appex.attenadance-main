@@ -10,7 +10,6 @@ import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_text_button.dart';
 import 'package:ttech_attendance/core/widgets/indicator/my_progress_indicator.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
-import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/core/widgets/passwordtext.dart';
 import 'package:ttech_attendance/featchers/login/logic/cubit/login_cubit.dart';
 import 'package:ttech_attendance/featchers/login/logic/cubit/login_state.dart';

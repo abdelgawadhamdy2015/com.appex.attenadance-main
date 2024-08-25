@@ -7,7 +7,6 @@ import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
-import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_model.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';

@@ -5,7 +5,6 @@ import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
-import 'package:ttech_attendance/featchers/permission/data/models/shift_model.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_state.dart';
 import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
@@ -78,7 +77,7 @@ class _ListShiftItemState extends State<ListShiftItem> {
               Row(children: [
                 Checkbox(
                   fillColor: WidgetStatePropertyAll(
-                      widget.enabled ? null : ColorManger.gray),
+                      widget.enabled ? null : ColorManger.backGroundGray),
                   activeColor: ColorManger.checkBoxGreen,
                   value: getCheckBoxId(widget.shift, checkboxState),
                   onChanged: (bool? value) {

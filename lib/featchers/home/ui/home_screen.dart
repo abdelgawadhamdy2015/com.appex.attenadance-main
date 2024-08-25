@@ -6,7 +6,6 @@ import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
-import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_state.dart';
 import 'package:ttech_attendance/featchers/home/ui/widgets/header_block_listener.dart';

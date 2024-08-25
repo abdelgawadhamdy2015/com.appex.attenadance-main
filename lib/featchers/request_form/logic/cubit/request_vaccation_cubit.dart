@@ -15,18 +15,21 @@ class RequestVaccationCubit extends Cubit<RequestVaccationState> {
       : super(const RequestVaccationState.initial());
 
   final formKey = GlobalKey<FormState>();
-
+  bool loading = false;
   void emitRequestVaccationState(RequestVaccation requestVaccation) async {
-    emit(const RequestVaccationState.loading());
+    emit(const RequestVaccationState.requestLoading());
+    loading = true;
     final response = await requestVaccationRepo.addVaccation(requestVaccation);
 
     response.when(success: (requestVaccationResponse) async {
-      emit(RequestVaccationState.success(requestVaccationResponse));
+      emit(RequestVaccationState.requestSuccess(requestVaccationResponse));
+      loading = false;
     }, failure: (error) {
-      emit(RequestVaccationState.error(
+      emit(RequestVaccationState.requestError(
           error: Intl.defaultLocale == MyConstants.english
               ? error.apiErrorModel.errorMessageEn!
               : error.apiErrorModel.errorMessageAr!));
+      loading = false;
     });
   }
 }
