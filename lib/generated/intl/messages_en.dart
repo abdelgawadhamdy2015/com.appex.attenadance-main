@@ -84,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(" you not signIn yet"),
         "notLeave": MessageLookupByLibrary.simpleMessage("you not signOut yet"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
+        "okDialog": MessageLookupByLibrary.simpleMessage("OK"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "performancePanel":
             MessageLookupByLibrary.simpleMessage("Performance Panel"),

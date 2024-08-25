@@ -42,10 +42,14 @@ class TextStyles {
       fontSize: 15.sp,
       fontWeight: FontWeightHelper.reguler,
       color: Colors.black54);
-  static TextStyle font15Green54reguler = TextStyle(
+  static TextStyle font15lightGreen54reguler = TextStyle(
       fontSize: 15.sp,
       fontWeight: FontWeightHelper.reguler,
       color: ColorManger.lightGreen);
+       static TextStyle font15lightred54reguler = TextStyle(
+      fontSize: 15.sp,
+      fontWeight: FontWeightHelper.reguler,
+      color: ColorManger.lightred);
   static TextStyle font15Red54reguler = TextStyle(
       fontSize: 15.sp,
       fontWeight: FontWeightHelper.reguler,

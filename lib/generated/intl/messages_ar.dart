@@ -81,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notLeave":
             MessageLookupByLibrary.simpleMessage("لم تقم بتسجيل الانصراف بعد"),
         "notes": MessageLookupByLibrary.simpleMessage("ملاحظات"),
+        "okDialog": MessageLookupByLibrary.simpleMessage("موافق"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "performancePanel": MessageLookupByLibrary.simpleMessage("لوحة الأداء"),
         "permission": MessageLookupByLibrary.simpleMessage("طلب إذن"),

@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
@@ -67,7 +68,7 @@ class _MyAppState extends State<MyApp> {
       child: OfflineBuilderWidget(
         materialApp: MaterialApp(
           builder: DevicePreview.appBuilder,
-          theme: ThemeData.light(),
+          theme: ThemeData(scaffoldBackgroundColor: ColorManger.backGroundGray),
           darkTheme: ThemeData.dark(),
           debugShowCheckedModeBanner: false,
           locale: _locale,

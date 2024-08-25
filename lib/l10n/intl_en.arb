@@ -72,6 +72,7 @@
     "name":"Name",
     "matchTimeFormat": " time format (7:00 , 12:30)",
     "shiftToSecondDay": "The shift extends to the next day",
-    "duration": "Duration"
+    "duration": "Duration",
+    "okDialog":"OK"
 
 }

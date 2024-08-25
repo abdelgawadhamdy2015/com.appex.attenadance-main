@@ -37,7 +37,11 @@ class _AttendanceLogState extends State<AttendanceLog> {
             text: "$formattedTimeOfDay  ",
             style: TextStyles.font15Black54reguler,
           ),
-          TextSpan(text: transaction, style: TextStyles.font15Black54reguler)
+          TextSpan(
+              text: transaction,
+              style: textColor == ColorManger.lightred
+                  ? TextStyles.font15lightred54reguler
+                  : TextStyles.font15lightGreen54reguler)
         ],
       ),
     );

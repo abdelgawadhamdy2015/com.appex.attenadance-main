@@ -245,6 +245,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                     ),
                     maxLines: 3,
                   ),
+                  const AddPermissionListener(),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
                   Container(
                     margin: EdgeInsets.symmetric(
@@ -279,7 +280,6 @@ class _PermissionScreenState extends State<PermissionScreen> {
                       },
                     ),
                   ),
-                  const AddPermissionListener()
                 ],
               ),
             ),

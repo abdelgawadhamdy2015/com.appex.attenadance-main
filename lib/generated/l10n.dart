@@ -789,6 +789,16 @@ class S {
       args: [],
     );
   }
+
+  /// `OK`
+  String get okDialog {
+    return Intl.message(
+      'OK',
+      name: 'okDialog',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

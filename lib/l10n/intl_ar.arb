@@ -74,7 +74,7 @@
     "matchTimeFormat": "تنسيق الوقت، 7:00، 12:30",
     "shiftToSecondDay": "الشفت ممتد لليوم التالي",
     "duration": "المدة",
-    "kindOfHoliday": "نوع الإجازة"
+    "kindOfHoliday": "نوع الإجازة",
+    "okDialog":"موافق"
 
-    
 }

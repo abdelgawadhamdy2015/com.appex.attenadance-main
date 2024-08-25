@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/request_form/date/models/all_vaccations_model.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
@@ -32,18 +34,29 @@ class _RequestBlockListenerState extends State<AllVaccationsListener> {
           success: (allvaccations) async {
             AllVaccationsModel response = allvaccations;
             context.read<AllVaccationsCubit>().vaccations = response.data!;
-
-            for (var name in response.data!) {
-              context.read<AllVaccationsCubit>().vacctionsName.add(
-                  //Intl.defaultLocale == arabic
-                  //   name.arabicName!
-                  name.arabicName!);
-              context.read<AllVaccationsCubit>().vacctionsIds.add(name.id!);
+            if (response.result == 1) {
+              for (var name in response.data!) {
+                context.read<AllVaccationsCubit>().vacctionsName.add(
+                    Intl.defaultLocale == MyConstants.arabic
+                        ? name.arabicName!
+                        : name.latinName!);
+                context.read<AllVaccationsCubit>().vacctionsIds.add(name.id!);
+              }
+            } else {
+              setupDialogState(
+                  context,
+                  Intl.defaultLocale == MyConstants.arabic
+                      ? response.errorMessageAr!
+                      : response.errorMessageEn!,
+                  true);
             }
-            //context.pop();
           },
           error: (error) {
-            setupDialogState(context, error, true, );
+            setupDialogState(
+              context,
+              error,
+              true,
+            );
           },
         );
       },

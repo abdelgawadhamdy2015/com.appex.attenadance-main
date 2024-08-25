@@ -4,6 +4,7 @@ import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 setupDialogState(BuildContext context, String data, bool isError) {
   showDialog(
@@ -14,10 +15,12 @@ setupDialogState(BuildContext context, String data, bool isError) {
         color: isError ? Colors.red : Colors.green,
         size: 32,
       ),
-      content: Text(
-        data,
-        style: TextStyles.font16BlackBold,
-      ),
+      content: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text(
+          data,
+          style: TextStyles.font16BlackBold,
+        )
+      ]),
       actions: [
         TextButton(
           onPressed: () {
@@ -28,7 +31,9 @@ setupDialogState(BuildContext context, String data, bool isError) {
             // context.pushReplacementNamed(Routes.loginScreen);
           },
           child: Text(
-            'OK',
+            textAlign: TextAlign.center,
+            "ok",
+            // S.of(context).okDialog,
             style: TextStyles.font16BlackBold,
           ),
         ),
@@ -39,7 +44,6 @@ setupDialogState(BuildContext context, String data, bool isError) {
 
 setupLogOutDialogState(
     BuildContext context, String data, SignalRService signalService) {
-  //!loginScreen! ? context.pop() : "";
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -49,6 +53,7 @@ setupLogOutDialogState(
         size: 32,
       ),
       content: Text(
+        textAlign: TextAlign.center,
         data,
         style: TextStyles.font16BlackBold,
       ),
@@ -63,7 +68,8 @@ setupLogOutDialogState(
             context.pushReplacementNamed(Routes.loginScreen);
           },
           child: Text(
-            'OK',
+            "ok",
+            // S.of(context).okDialog,
             style: TextStyles.font16BlackBold,
           ),
         ),
