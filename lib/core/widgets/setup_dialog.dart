@@ -1,8 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
+import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
@@ -29,17 +29,18 @@ setupDialogState(
       ]),
       actions: [
         Row(
-          mainAxisAlignment: Intl.defaultLocale == MyConstants.arabic
-              ? MainAxisAlignment.start
-              : MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
               onPressed: () {
                 context.pop();
-                //SharedPrefHelper.clearAllData();
-                // SharedPrefHelper.clearAllSecuredData();
-
-                // context.pushReplacementNamed(Routes.loginScreen);
+                if (ApiConstants.dioExceptionType ==
+                    DioExceptionType.badResponse) {
+                  ApiConstants.dioExceptionType = DioExceptionType.unknown;
+                  SharedPrefHelper.clearAllData();
+                  SharedPrefHelper.clearAllSecuredData();
+                  context.pushReplacementNamed(Routes.loginScreen);
+                }
               },
               child: Text(
                 textAlign: TextAlign.center,
@@ -55,13 +56,13 @@ setupDialogState(
 }
 
 setupLogOutDialogState(BuildContext context, String data, List<String> actions,
-    SignalRService signalService) {
+    SignalRService? signalService) {
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
       icon: const Icon(
-        Icons.error,
-        color: Colors.red,
+        Icons.logout_outlined,
+        color: Colors.amber,
         size: 32,
       ),
       content: Text(
@@ -70,20 +71,40 @@ setupLogOutDialogState(BuildContext context, String data, List<String> actions,
         style: TextStyles.font16BlackBold,
       ),
       actions: [
-        TextButton(
-          onPressed: () {
-            context.pop();
-            signalService.stopConnection();
-            SharedPrefHelper.clearAllData();
-            SharedPrefHelper.clearAllSecuredData();
-
-            context.pushReplacementNamed(Routes.loginScreen);
-          },
-          child: Text(
-            //"ok",
-            actions[0],
-            style: TextStyles.font16BlackBold,
-          ),
+        Row(
+          mainAxisAlignment: actions.length > 1
+              ? MainAxisAlignment.spaceBetween
+              : MainAxisAlignment.end,
+          children: [
+            actions.length > 1
+                ? TextButton(
+                    onPressed: () {
+                      context.pop();
+                    },
+                    child: Text(
+                      //cancel
+                      actions[1],
+                      style: TextStyles.font16BlackBold,
+                    ),
+                  )
+                : Container(),
+            TextButton(
+              onPressed: () {
+                context.pop();
+                if (signalService != null) {
+                  signalService.stopConnection();
+                }
+                SharedPrefHelper.clearAllData();
+                SharedPrefHelper.clearAllSecuredData();
+                context.pushReplacementNamed(Routes.loginScreen);
+              },
+              child: Text(
+                //"ok",
+                actions[0],
+                style: TextStyles.font16BlackBold,
+              ),
+            ),
+          ],
         ),
       ],
     ),

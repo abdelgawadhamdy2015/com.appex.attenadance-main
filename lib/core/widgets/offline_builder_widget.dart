@@ -1,40 +1,8 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_offline/flutter_offline.dart';
-
-// class OfflineBuilderWidget extends StatelessWidget {
-//   final Widget child;
-//   const OfflineBuilderWidget({super.key, required this.child});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return OfflineBuilder(
-//       connectivityBuilder: (BuildContext context,
-//           List<ConnectivityResult> connectivity, Widget child2) {
-//         final bool connected = !connectivity.contains(ConnectivityResult.none);
-//         return SafeArea(
-//           child: Stack(
-//             children: [
-//               connected ? child : child2,
-//             ],
-//           ),
-//         );
-//       },
-//       child: SizedBox(
-//         width: double.infinity,
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Flexible(flex: 2, child: Image.asset("images/no_internet.gif")),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 import 'package:flutter/material.dart';
 import 'package:flutter_no_internet_widget/flutter_no_internet_widget.dart';
+import 'package:intl/intl.dart';
+import 'package:ttech_attendance/core/helpers/constants.dart';
 
 class OfflineBuilderWidget extends StatelessWidget {
   final MaterialApp materialApp;
@@ -44,9 +12,21 @@ class OfflineBuilderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InternetWidget(
-        offline: const FullScreenWidget(
+        offline: FullScreenWidget(
           child: Scaffold(
-            body: const Center(child: Text('No Internet')),
+            body: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "images/no-wifi.png",
+                  scale: 3,
+                ),
+                Text(Intl.defaultLocale == MyConstants.arabic
+                    ? "لا يوجد اتصال بالإنترنت، تحقق من الاتصال وحاول مرة أخرى."
+                    : "No internet , check your connection and try again"),
+              ],
+            )),
           ),
         ),
         // ignore: avoid_print
@@ -54,7 +34,6 @@ class OfflineBuilderWidget extends StatelessWidget {
         // ignore: avoid_print
         whenOnline: () => print('Connected to internet'),
         loadingWidget: const Center(child: Text('Loading')),
-        //offline: const Center(child: Text('No Internet')),
         online: materialApp);
   }
 }

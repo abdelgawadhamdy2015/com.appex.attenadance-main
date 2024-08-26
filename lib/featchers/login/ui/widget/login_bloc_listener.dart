@@ -30,7 +30,6 @@ class LoginBlocListener extends StatefulWidget {
 class _LoginBlocListenerState extends State<LoginBlocListener> {
   @override
   Widget build(BuildContext context) {
-    SignalRService signalRService = SignalRService(context);
     return BlocListener<LoginCubit, LoginState>(
       listenWhen: (previous, current) =>
           current is Loading || current is Success || current is Error,
@@ -49,16 +48,18 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
             LoginResponse response = loginResponse;
             context.read<LoginCubit>().loadingLogin = false;
             if (response.result == 1) {
+              SignalRService()
+                  .startConnection(response.data!.authToken!.token!);
               await SharedPrefHelper.setSecuredString(
                   MyConstants.myToken, loginResponse.data!.authToken!.token!);
-             
               DioFactory.setTokenToHeaderAfterLogin(
                   loginResponse.data!.authToken!.token!);
-              signalRService.startConnection(response.data!.authToken!.token!);
+
               context.pushReplacementNamed(Routes.homeScreen);
             } else {
               // context.pop();
-              setupDialogState(context, response.errorMessageAr!,[S.of(context).okDialog], true);
+              setupDialogState(context, response.errorMessageAr!,
+                  [S.of(context).okDialog], true);
             }
 
             if (widget.rememberMe) {
@@ -66,7 +67,7 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
             }
           },
           error: (error) {
-            setupDialogState(context, error,[S.of(context).okDialog], true);
+            setupDialogState(context, error, [S.of(context).okDialog], true);
           },
         );
       },

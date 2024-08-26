@@ -1,38 +1,49 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:signalr_core/signalr_core.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/networking/api_error_model.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class SignalRService {
   HubConnection? hubConnection;
-  BuildContext context;
-  SignalRService(this.context);
+
+  SignalRService();
   Future<void> startConnection(String token) async {
     hubConnection = HubConnectionBuilder()
         .withUrl(
-          'http://192.168.1.253:60/NotificationHub',
+          '${ApiConstants.apiBaseUrl}NotificationHub',
           HttpConnectionOptions(
             accessTokenFactory: () async => token,
           ),
         )
         .build();
-
+    print("connected to signal service");
     await hubConnection?.start();
-    hubConnection!.on("LogoutNotification", (message) {
+    hubConnection!.on('LogoutNotification', (message) {
       List? listMessage = message;
       Map<String, dynamic> map = listMessage!.first;
+      final context = navigatorKey.currentContext;
       ApiErrorModel apiErrorModel = ApiErrorModel.fromJson(map);
-      setupLogOutDialogState(
-          context,
-          Intl.defaultLocale == MyConstants.arabic
-              ? apiErrorModel.errorMessageAr!
-              : apiErrorModel.errorMessageEn!,[S.of(context).okDialog],
-          this);
+      try {
+        setupLogOutDialogState(
+            context!,
+            Intl.defaultLocale == MyConstants.arabic
+                ? apiErrorModel.errorMessageAr!
+                : apiErrorModel.errorMessageEn!,
+            [S.of(context).okDialog],
+            this);
+        print(map);
+      } catch (error) {
+        print(error);
+      }
     });
   }
 

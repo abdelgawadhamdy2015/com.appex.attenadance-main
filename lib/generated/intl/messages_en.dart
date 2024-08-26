@@ -81,7 +81,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(" time format (7:00 , 12:30)"),
         "myRequests": MessageLookupByLibrary.simpleMessage("My requests"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "needSignOut": MessageLookupByLibrary.simpleMessage(
+            "Are you shure you need log signOut? "),
         "noDateFound": MessageLookupByLibrary.simpleMessage("No Data Found"),
+        "noInternet": MessageLookupByLibrary.simpleMessage(
+            " No internet , check your connection and try again"),
         "notAttendance":
             MessageLookupByLibrary.simpleMessage(" you not signIn yet"),
         "notLeave": MessageLookupByLibrary.simpleMessage("you not signOut yet"),

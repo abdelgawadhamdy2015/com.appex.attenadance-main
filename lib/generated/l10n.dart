@@ -809,6 +809,26 @@ class S {
       args: [],
     );
   }
+
+  /// ` No internet , check your connection and try again`
+  String get noInternet {
+    return Intl.message(
+      ' No internet , check your connection and try again',
+      name: 'noInternet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you shure you need log signOut? `
+  String get needSignOut {
+    return Intl.message(
+      'Are you shure you need log signOut? ',
+      name: 'needSignOut',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

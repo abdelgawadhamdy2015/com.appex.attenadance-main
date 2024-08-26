@@ -104,7 +104,6 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
             Visibility(
               visible: widget.shiftTimeOut == null,
               child: Container(
-                // height: SizeConfig.screenHeight! * .1,
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(
                     vertical: SizeConfig.screenHeight! * .01,
@@ -122,17 +121,15 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                         },
                         backGroundColor: !checkIfNull([widget.shiftTimeIn]) &&
                                 checkIfNull([widget.shiftTimeOut])
-                            ? ColorManger.moreLightred
-                            : ColorManger.moreLightGreen,
+                            ? ColorManger.lightred
+                            : ColorManger.lightGreen,
                         butonText: !checkIfNull([widget.shiftTimeIn]) &&
                                 checkIfNull([widget.shiftTimeOut])
                             ? S.of(context).signOut
                             : S.of(context).signIn,
                         textStyle: TextStyles.font15WhiteBold,
                       )
-                    : Center(
-                        child: Text(
-                            'you can check in  ${_formatTime(_remainingTime)}')),
+                    : Center(child: Text(_formatTime(_remainingTime))),
               ),
             )
           ],

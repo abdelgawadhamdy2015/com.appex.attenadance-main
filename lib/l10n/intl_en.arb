@@ -74,7 +74,9 @@
     "shiftToSecondDay": "The shift extends to the next day",
     "duration": "Duration",
     "okDialog":"OK",
-    "holidayNotSelected": "Please select your holiday type "
+    "holidayNotSelected": "Please select your holiday type ",
+    "noInternet": " No internet , check your connection and try again",
+    "needSignOut" :"Are you shure you need log signOut? "
 
 
 }

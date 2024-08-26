@@ -77,7 +77,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تنسيق الوقت، 7:00، 12:30"),
         "myRequests": MessageLookupByLibrary.simpleMessage("طلباتي"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
+        "needSignOut": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك بحاجة إلى تسجيل الخروج"),
         "noDateFound": MessageLookupByLibrary.simpleMessage("لا يوجد بيانات"),
+        "noInternet": MessageLookupByLibrary.simpleMessage(
+            "لا يوجد اتصال بالإنترنت، تحقق من الاتصال وحاول مرة أخرى."),
         "notAttendance":
             MessageLookupByLibrary.simpleMessage(" لم تقم بتسجيل الحضور بعد"),
         "notLeave":

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
@@ -52,7 +54,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale = const Locale(MyConstants.arabic);
+  Locale _locale = Locale(Intl.defaultLocale ?? MyConstants.arabic);
 
   _MyAppState();
 
@@ -67,6 +69,7 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       child: OfflineBuilderWidget(
         materialApp: MaterialApp(
+          navigatorKey: navigatorKey,
           builder: DevicePreview.appBuilder,
           theme: ThemeData(scaffoldBackgroundColor: ColorManger.backGroundGray),
           darkTheme: ThemeData.dark(),

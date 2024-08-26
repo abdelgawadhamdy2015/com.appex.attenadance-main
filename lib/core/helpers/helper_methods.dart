@@ -19,8 +19,8 @@ SizedBox horizontalSpacing(double width) => SizedBox(
 
 String getFormattedTimeOfDay(String shift, BuildContext context) {
   TimeOfDay shiftTime = TimeOfDay(
-      hour: int.parse(shift.split(":")[0]),
-      minute: int.parse(shift.split(":")[1]));
+      hour: int.parse(shift.split(":")[0].padLeft(2, "0")),
+      minute: int.parse(shift.split(":")[1].padLeft(2, "0")));
   final localizations = MaterialLocalizations.of(context);
   String formattedTimeOfDay = localizations.formatTimeOfDay(shiftTime);
   return formattedTimeOfDay;
@@ -59,4 +59,3 @@ validate(String value, BuildContext context, String expec) {
     return null;
   }
 }
-

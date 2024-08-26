@@ -22,8 +22,7 @@ class SendAttendanceBlockListener extends StatefulWidget {
 
 class _SendAttendanceBlockListenerState
     extends State<SendAttendanceBlockListener> {
-
-   HeaderData data=HeaderData();
+  HeaderData data = HeaderData();
   @override
   Widget build(BuildContext context) {
     return BlocListener<SendAttendanceCubit, SendAttendanceState>(
@@ -41,7 +40,7 @@ class _SendAttendanceBlockListenerState
             },
             sendSuccess: (attendanceResponse) {
               AttendanceResponse response = attendanceResponse;
-               data = context.read<SendAttendanceCubit>().data;
+              data = context.read<SendAttendanceCubit>().data;
 
               if (response.result == 1) {
                 context.read<AttendanceCubit>().shifts = [
@@ -54,12 +53,20 @@ class _SendAttendanceBlockListenerState
                   data.shift4_TimeIn,
                   data.shift4_TimeOut
                 ];
-                for (int i = 0; i < context.read<AttendanceCubit>().shifts.length; i += 2) {
-                  if (checkIfNull([context.read<AttendanceCubit>().shifts[i]])) {
-                    context.read<AttendanceCubit>().shifts[i] = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                for (int i = 0;
+                    i < context.read<AttendanceCubit>().shifts.length;
+                    i += 2) {
+                  if (checkIfNull(
+                      [context.read<AttendanceCubit>().shifts[i]])) {
+                    context.read<AttendanceCubit>().shifts[i] =
+                        "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
                     break;
-                  } else if (!checkIfNull([context.read<AttendanceCubit>().shifts[i]]) && checkIfNull([context.read<AttendanceCubit>().shifts[i + 1]])) {
-                    context.read<AttendanceCubit>().shifts[i + 1] = "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
+                  } else if (!checkIfNull(
+                          [context.read<AttendanceCubit>().shifts[i]]) &&
+                      checkIfNull(
+                          [context.read<AttendanceCubit>().shifts[i + 1]])) {
+                    context.read<AttendanceCubit>().shifts[i + 1] =
+                        "${response.dateTimeNow!.hour}:${response.dateTimeNow!.minute}";
                     break;
                   }
                 }
@@ -75,28 +82,35 @@ class _SendAttendanceBlockListenerState
                 data.shift4_TimeOut = context.read<AttendanceCubit>().shifts[7];
 
                 setupDialogState(
-                    context,
-                    Intl.defaultLocale == MyConstants.arabic
-                        ? response.errorMessageAr!
-                        : response.errorMessageEn!,
-                   [S.of(context).okDialog], false,
-                    );
+                  context,
+                  Intl.defaultLocale == MyConstants.arabic
+                      ? response.errorMessageAr!
+                      : response.errorMessageEn!,
+                  [S.of(context).okDialog],
+                  false,
+                );
               } else if (response.result == 0) {
                 context.read<SendAttendanceCubit>().attendanceTime =
                     DateTime(0);
                 setupDialogState(
-                    context, response.errorMessageAr.toString(),[S.of(context).okDialog], true, );
+                  context,
+                  Intl.defaultLocale == MyConstants.arabic
+                      ? response.errorMessageAr!
+                      : response.errorMessageEn!,
+                  [S.of(context).okDialog],
+                  true,
+                );
               }
             },
             sendError: (error) {
-              setupDialogState(context, error,[S.of(context).okDialog], true, );
+              setupDialogState(
+                context,
+                error,
+                [S.of(context).okDialog],
+                true,
+              );
             },
           );
         });
   }
-
-
-
-
-
 }
