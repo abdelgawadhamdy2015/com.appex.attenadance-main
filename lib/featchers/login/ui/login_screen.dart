@@ -48,7 +48,6 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffffffff),
       body: SafeArea(
         child: Container(
           padding: SizeConfig().getScreenPadding(),

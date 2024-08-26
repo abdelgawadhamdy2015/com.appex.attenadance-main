@@ -8,6 +8,7 @@ import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/request_form/date/models/add_vaccation_response.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_state.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 class RequestBlockListener extends StatefulWidget {
   const RequestBlockListener({super.key});
@@ -41,6 +42,7 @@ class _RequestBlockListenerState extends State<RequestBlockListener> {
                     Intl.defaultLocale == MyConstants.arabic
                         ? response.alart!.messageAr!
                         : response.alart!.messageEn!,
+                    [S.of(context).okDialog],
                     false,
                   )
                 : setupDialogState(
@@ -48,13 +50,14 @@ class _RequestBlockListenerState extends State<RequestBlockListener> {
                     Intl.defaultLocale == MyConstants.arabic
                         ? response.alart!.messageAr!
                         : response.alart!.messageEn!,
-                    true,
-                  );
+                    [S.of(context).okDialog],
+                    true);
           },
           requestError: (error) {
             setupDialogState(
               context,
               error,
+              [S.of(context).okDialog],
               true,
             );
           },

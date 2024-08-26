@@ -6,6 +6,7 @@ import 'package:signalr_core/signalr_core.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/networking/api_error_model.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 class SignalRService {
   HubConnection? hubConnection;
@@ -30,7 +31,7 @@ class SignalRService {
           context,
           Intl.defaultLocale == MyConstants.arabic
               ? apiErrorModel.errorMessageAr!
-              : apiErrorModel.errorMessageEn!,
+              : apiErrorModel.errorMessageEn!,[S.of(context).okDialog],
           this);
     });
   }

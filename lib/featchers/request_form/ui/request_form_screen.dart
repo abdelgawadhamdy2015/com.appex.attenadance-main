@@ -66,7 +66,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
         if (_startDate != null && _endDate != null) {
           _startDate!.isBefore(_endDate!) || _startDate == _endDate
               ? _duration =
-                  (_endDate!.difference(_startDate!).inDays + 1).toString()
+                  "${S.of(context).duration} ${_endDate!.difference(_startDate!).inDays + 1} ${S.of(context).days}"
               : _duration = S.of(context).dateWarning;
         }
       });
@@ -105,6 +105,12 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                         return const CircularProgressIndicator();
                       } else if (state is Success) {
                         return DropdownButtonFormField(
+                          onSaved: (newValue) => _selectedLeaveType = newValue,
+                          validator: (value) {
+                            return value == null || value.isEmpty
+                                ? S.of(context).holidayNotSelected
+                                : null;
+                          },
                           borderRadius: BorderRadius.all(Radius.circular(.8.r)),
                           key: context.read<AllVaccationsCubit>().formKey,
                           decoration: InputDecoration(
@@ -131,14 +137,13 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                           onChanged: (newValue) {
                             setState(() {
                               _selectedLeaveType = newValue;
+                              vaccationId = context
+                                  .read<AllVaccationsCubit>()
+                                  .vaccations
+                                  .where((v) => v.arabicName == newValue)
+                                  .first
+                                  .id!;
                             });
-
-                            vaccationId = context
-                                .read<AllVaccationsCubit>()
-                                .vaccations
-                                .where((v) => v.arabicName == newValue)
-                                .first
-                                .id!;
                           },
                         );
                       } else {
@@ -148,6 +153,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                   ),
                   verticalSpacing(20),
                   MyTextForm(
+                    excep: S.of(context).fromDate,
                     fillColor: Colors.transparent,
                     readOnly: true,
                     labelText: S.of(context).fromDate,
@@ -172,9 +178,10 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                   ),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
                   MyTextForm(
+                    excep: S.of(context).toDate,
                     fillColor: Colors.transparent,
                     readOnly: true,
-                    labelText: S.of(context).fromDate,
+                    labelText: S.of(context).toDate,
                     suffixIcon: Container(
                       color: ColorManger.moreMutedBlue,
                       height: SizeConfig.screenHeight! * .07,
@@ -201,17 +208,15 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                     fillColor: Colors.transparent,
                     readOnly: true,
                     hint:
-                        "${S.of(context).duration} ${_duration.isNotEmpty ? "$_duration ${S.of(context).days}" : ""}",
+                        " ${_duration.isNotEmpty ? "  $_duration " : S.of(context).duration}",
                     hintStyle: TextStyles.font14blackReguler,
                   ),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
-                  TextField(
+                  MyTextForm(
+                    fillColor: Colors.transparent,
                     controller: notesController,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).notes,
-                      labelStyle: TextStyles.font15Black54reguler,
-                      border: const OutlineInputBorder(),
-                    ),
+                    labelText: S.of(context).notes,
+                    hintStyle: TextStyles.font15Black54reguler,
                     maxLines: 3,
                   ),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
@@ -241,7 +246,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                           },
                         ),
                         AppButtonText(
-                          backGroundColor: ColorManger.lighterRed,
+                          backGroundColor: ColorManger.darkRed,
                           buttonWidth: SizeConfig.screenWidth! * .3,
                           butonText: S.of(context).cancel,
                           textStyle: TextStyles.font15WhiteBold,

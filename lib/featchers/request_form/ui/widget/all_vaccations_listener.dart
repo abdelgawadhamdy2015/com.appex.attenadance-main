@@ -6,6 +6,7 @@ import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/request_form/date/models/all_vaccations_model.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_state.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 class AllVaccationsListener extends StatefulWidget {
   const AllVaccationsListener({
@@ -48,14 +49,14 @@ class _RequestBlockListenerState extends State<AllVaccationsListener> {
                   Intl.defaultLocale == MyConstants.arabic
                       ? response.errorMessageAr!
                       : response.errorMessageEn!,
-                  true);
+                  [S.of(context).okDialog],true);
             }
           },
           error: (error) {
             setupDialogState(
               context,
               error,
-              true,
+             [S.of(context).okDialog], true,
             );
           },
         );

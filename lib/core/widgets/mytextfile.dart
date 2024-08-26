@@ -24,6 +24,7 @@ class MyTextForm extends StatelessWidget {
   final bool? readOnly;
   final Function(String?)? onSaved;
   final bool? enabled;
+  final int? maxLines;
 
   final Function()? onEditingComplete;
 
@@ -49,11 +50,13 @@ class MyTextForm extends StatelessWidget {
       this.readOnly,
       this.onSaved,
       this.onEditingComplete,
-      this.enabled});
+      this.enabled,
+      this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        maxLines: maxLines?? 1,
         enabled: enabled ?? true,
         onEditingComplete: onEditingComplete,
         onSaved: onSaved,

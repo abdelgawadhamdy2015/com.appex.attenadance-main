@@ -23,11 +23,10 @@ class ColorManger {
   static const Color darkBlue = Color(0xff2C7BBF);
   static const Color mutedBlue = Color(0xff57D6F2);
   static const Color moreLiteBlue = Color(0xff306EBF);
-    static const Color moreMutedBlue = Color(0xff05C7F2);
-
-  
+  static const Color moreMutedBlue = Color(0xff05C7F2);
 
   static const Color lightred = Color(0xffF2522E);
   static const Color moreLightred = Color(0xffF25C5C);
   static const Color lighterRed = Color(0xffF21D2F);
+  static const Color darkRed = Color(0xffbf0000);
 }

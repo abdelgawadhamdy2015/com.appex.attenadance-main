@@ -10,6 +10,7 @@ import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/login/data/models/login_response.dart';
 import 'package:ttech_attendance/featchers/login/logic/cubit/login_state.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 import '../../../../core/networking/signal_r_service.dart';
 import '../../logic/cubit/login_cubit.dart';
@@ -57,7 +58,7 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
               context.pushReplacementNamed(Routes.homeScreen);
             } else {
               // context.pop();
-              setupDialogState(context, response.errorMessageAr!, true);
+              setupDialogState(context, response.errorMessageAr!,[S.of(context).okDialog], true);
             }
 
             if (widget.rememberMe) {
@@ -65,7 +66,7 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
             }
           },
           error: (error) {
-            setupDialogState(context, error, true);
+            setupDialogState(context, error,[S.of(context).okDialog], true);
           },
         );
       },

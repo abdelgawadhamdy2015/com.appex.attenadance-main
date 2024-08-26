@@ -61,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fromDate": MessageLookupByLibrary.simpleMessage("من تاريخ"),
         "fullDay": MessageLookupByLibrary.simpleMessage("يوم كامل"),
         "holiday": MessageLookupByLibrary.simpleMessage("الإجازة"),
+        "holidayNotSelected":
+            MessageLookupByLibrary.simpleMessage("برجاء اختيار نوع الإجازة"),
         "hours": MessageLookupByLibrary.simpleMessage("ساعة"),
         "kindOfHoliday": MessageLookupByLibrary.simpleMessage("نوع الإجازة"),
         "leaveForReset": MessageLookupByLibrary.simpleMessage("خروج للراحة"),

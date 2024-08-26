@@ -31,7 +31,6 @@ class ForgetPasswordState extends State<ForgetPassword> {
     var textField = _alltextfiled(sendButton);
 
     return Scaffold(
-      backgroundColor: const Color(0xffffffff),
       appBar: AppBar(),
       // drawer: Drawer(
       //   surfaceTintColor:Colors.red ,

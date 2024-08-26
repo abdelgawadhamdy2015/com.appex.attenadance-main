@@ -77,7 +77,7 @@ class _ListShiftItemState extends State<ListShiftItem> {
               Row(children: [
                 Checkbox(
                   fillColor: WidgetStatePropertyAll(
-                      widget.enabled ? null : ColorManger.backGroundGray),
+                      widget.enabled ? null : ColorManger.morelightGray),
                   activeColor: ColorManger.checkBoxGreen,
                   value: getCheckBoxId(widget.shift, checkboxState),
                   onChanged: (bool? value) {

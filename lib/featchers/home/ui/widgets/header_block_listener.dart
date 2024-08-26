@@ -7,6 +7,7 @@ import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_state.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 class HeaderBlockListener extends StatefulWidget {
   const HeaderBlockListener({super.key});
@@ -41,12 +42,12 @@ class _HeaderBlockListener extends State<HeaderBlockListener> {
                     ? setupDialogState(
                         context,
                         response.errorMessageAr!,
-                        true,
+                       [S.of(context).okDialog], true,
                       )
                     : setupDialogState(
                         context,
                         response.errorMessageEn!,
-                        true,
+                        [S.of(context).okDialog],true,
                       );
               }
             },
@@ -54,7 +55,7 @@ class _HeaderBlockListener extends State<HeaderBlockListener> {
               setupDialogState(
                 context,
                 error,
-                true,
+               [S.of(context).okDialog], true,
               );
             },
           );

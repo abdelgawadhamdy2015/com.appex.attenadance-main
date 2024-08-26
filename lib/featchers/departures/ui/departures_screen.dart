@@ -14,74 +14,70 @@ class DeparturesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManger.morelightGray,
       appBar: MyAppBar(
         changeLanguage: changeLanguage,
         context: context,
-        title:MyConstants.mydepatures ,
+        title: MyConstants.mydepatures,
       ),
       drawer: const Drawer(
         child: MyDrawer(),
       ),
       body: Container(
-          color: ColorManger.morelightGray,
           padding: SizeConfig().getScreenPadding(),
-          child: Card(
-            color: ColorManger.morelightGray,
-            child: ListView.builder(
-                itemCount: 15,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "request number : 22288272",
-                            textAlign: TextAlign.center,
-                            style: TextStyles.font12black54Reguler,
-                          ),
-                          const Spacer(),
-                          Text(
-                            "Status",
-                            style: TextStyles.font12black54Reguler,
-                            textScaler: MediaQuery.textScalerOf(context),
-                          ),
-                        ],
-                      ),
-                      subtitle: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "date : from date to date ",
-                            style: TextStyles.font12black54Reguler,
-                          ),
-                          Text(
-                            " duration : one day",
-                            style: TextStyles.font12black54Reguler,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Request Date:14-10-2023",
-                                style: TextStyles.font12black54Reguler,
-                              ),
-                              const Spacer(),
-                              Text(
-                                maxLines: 2,
-                                "annual leave",
-                                style: TextStyles.font12black54Reguler,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+          child: ListView.builder(
+              itemCount: 15,
+              itemBuilder: (context, index) {
+                return Card(
+                  color: ColorManger.morelightGray,
+                  child: ListTile(
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "request number : 22288272",
+                          textAlign: TextAlign.center,
+                          style: TextStyles.font12black54Reguler,
+                        ),
+                        const Spacer(),
+                        Text(
+                          "Status",
+                          style: TextStyles.font12black54Reguler,
+                          textScaler: MediaQuery.textScalerOf(context),
+                        ),
+                      ],
                     ),
-                  );
-                }),
-          )),
+                    subtitle: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "date : from date to date ",
+                          style: TextStyles.font12black54Reguler,
+                        ),
+                        Text(
+                          " duration : one day",
+                          style: TextStyles.font12black54Reguler,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Request Date:14-10-2023",
+                              style: TextStyles.font12black54Reguler,
+                            ),
+                            const Spacer(),
+                            Text(
+                              maxLines: 2,
+                              "annual leave",
+                              style: TextStyles.font12black54Reguler,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              })),
     );
   }
 }

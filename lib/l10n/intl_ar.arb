@@ -75,6 +75,8 @@
     "shiftToSecondDay": "الشفت ممتد لليوم التالي",
     "duration": "المدة",
     "kindOfHoliday": "نوع الإجازة",
-    "okDialog":"موافق"
+    "okDialog":"موافق",
+    "holidayNotSelected": "برجاء اختيار نوع الإجازة"
+    
 
 }

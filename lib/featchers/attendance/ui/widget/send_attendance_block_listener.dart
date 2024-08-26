@@ -8,6 +8,7 @@ import 'package:ttech_attendance/featchers/attendance/data/models/attendance_res
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_state.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 import '../../logic/cubit/attendance_cubit.dart';
 
@@ -78,17 +79,17 @@ class _SendAttendanceBlockListenerState
                     Intl.defaultLocale == MyConstants.arabic
                         ? response.errorMessageAr!
                         : response.errorMessageEn!,
-                    false,
+                   [S.of(context).okDialog], false,
                     );
               } else if (response.result == 0) {
                 context.read<SendAttendanceCubit>().attendanceTime =
                     DateTime(0);
                 setupDialogState(
-                    context, response.errorMessageAr.toString(), true, );
+                    context, response.errorMessageAr.toString(),[S.of(context).okDialog], true, );
               }
             },
             sendError: (error) {
-              setupDialogState(context, error, true, );
+              setupDialogState(context, error,[S.of(context).okDialog], true, );
             },
           );
         });

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +32,7 @@ class PermissionScreen extends StatefulWidget {
 class _PermissionScreenState extends State<PermissionScreen> {
   String? _selectedEmployee;
   DateTime _selectedDate = DateTime.now();
-  String _permissionType = 'Temporary';
+  String _permissionType = MyConstants.temporary;
   int shiftType = 0;
 
   final List<String> _employees = ['Alice', 'Bob', 'Charlie', 'David'];
@@ -59,9 +58,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
   @override
   Widget build(BuildContext context) {
     final checkboxState = Provider.of<CheckboxState>(context);
-    if (kDebugMode) {
-      print("Shift type is : --- $shiftType");
-    }
+
     return Scaffold(
       appBar: MyAppBar(
           changeLanguage: widget.changeLanguage,
@@ -124,7 +121,10 @@ class _PermissionScreenState extends State<PermissionScreen> {
                       }),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
 
-                  Text(S.of(context).permissionType),
+                  Text(
+                    S.of(context).permissionType,
+                    style: TextStyles.font16BlackBold,
+                  ),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
 
                   // Radio buttons for permission type
@@ -132,10 +132,11 @@ class _PermissionScreenState extends State<PermissionScreen> {
                     children: [
                       Expanded(
                         child: ListTile(
-                          title: Text(S.of(context).temporary),
+                          title:
+                              FittedBox(child: Text(S.of(context).temporary)),
                           leading: Radio<String>(
                             activeColor: ColorManger.mainBlue,
-                            value: 'Temporary',
+                            value: MyConstants.temporary,
                             groupValue: _permissionType,
                             onChanged: (String? value) {
                               setState(() {
@@ -148,10 +149,12 @@ class _PermissionScreenState extends State<PermissionScreen> {
                       verticalSpacing(SizeConfig.screenHeight! * .02),
                       Expanded(
                         child: ListTile(
-                          title: Text(S.of(context).fullDay),
+                          title: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(S.of(context).fullDay)),
                           leading: Radio<String>(
                             activeColor: ColorManger.mainBlue,
-                            value: 'FullDay',
+                            value: MyConstants.fullDay,
                             groupValue: _permissionType,
                             onChanged: (String? value) {
                               setState(() {
@@ -165,7 +168,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                   ),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
 
-                  _permissionType == "Temporary"
+                  _permissionType == MyConstants.temporary
                       ? shiftType != 1
                           ? BlocBuilder<PermissionCubit, PermissionState>(
                               builder: (context, state) {
@@ -236,13 +239,11 @@ class _PermissionScreenState extends State<PermissionScreen> {
                             )
                       : Container(),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
-                  TextField(
+                  MyTextForm(
+                    fillColor: Colors.white,
                     controller: permissionCubit.noteController,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).notes,
-                      labelStyle: TextStyles.font12black54Reguler,
-                      border: const OutlineInputBorder(),
-                    ),
+                    labelText: S.of(context).notes,
+                    hintStyle: TextStyles.font12black54Reguler,
                     maxLines: 3,
                   ),
                   const AddPermissionListener(),

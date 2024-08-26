@@ -799,6 +799,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please select your holiday type `
+  String get holidayNotSelected {
+    return Intl.message(
+      'Please select your holiday type ',
+      name: 'holidayNotSelected',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

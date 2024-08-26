@@ -8,6 +8,7 @@ import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_state.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 class PerformanceBlockListener extends StatefulWidget {
   const PerformanceBlockListener({super.key});
@@ -37,11 +38,11 @@ class _PerformanceBlockListener extends State<PerformanceBlockListener> {
                     Intl.defaultLocale == MyConstants.arabic
                         ? response.errorMessageAr!
                         : response.errorMessageEn!,
-                    true);
+                   [S.of(context).okDialog], true);
           },
           error: (error) {
             context.pop();
-            setupDialogState(context, error, true);
+            setupDialogState(context, error,[S.of(context).okDialog], true);
           },
         );
       },
