@@ -31,6 +31,11 @@ class TextStyles {
       fontWeight: FontWeightHelper.bold,
       color: ColorManger.lightGray);
 
+      static TextStyle font14blueNormal = TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeightHelper.bold,
+      color: ColorManger.darkBlue);
+
   static TextStyle font14blackReguler = TextStyle(
       fontSize: 14.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);
   static TextStyle font30BlackBold = TextStyle(

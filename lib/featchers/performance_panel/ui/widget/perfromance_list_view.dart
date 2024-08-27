@@ -57,31 +57,40 @@ class PerfromanceListView extends StatelessWidget {
                         getFormattedTimeOfDay(
                                     days[index].shift1TimeIn!, context) !=
                                 null
-                            ? Text(
-                                getFormattedTimeOfDay(
-                                    days[index].shift1TimeIn!, context)!,
-                                style: TextStyles.font15BlueBold,
+                            ? Expanded(
+                                flex: 3,
+                                child: Text(
+                                  getFormattedTimeOfDay(
+                                      days[index].shift1TimeIn!, context)!,
+                                  style: TextStyles.font14blueNormal,
+                                ),
                               )
                             : Container(),
-                        const Spacer(),
-                        Container(
-                          width: SizeConfig.screenWidth! * .4,
-                          height: SizeConfig.screenHeight! * .01,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: SizeConfig.screenWidth! * .3),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.r),
-                            color: ColorManger.lighterGreen,
+                        horizontalSpacing(SizeConfig.screenWidth! * .1),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            width: SizeConfig.screenWidth! * .4,
+                            height: SizeConfig.screenHeight! * .01,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.screenWidth! * .3),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.r),
+                              color: ColorManger.lighterGreen,
+                            ),
                           ),
                         ),
-                        const Spacer(),
-                        Text(
-                          days[index].date != null
-                              ? Intl.defaultLocale == MyConstants.arabic
-                                  ? "${days[index].date!.day} ${days[index].dayAr!}"
-                                  : "${days[index].date!.day} ${days[index].dayEn!}"
-                              : "",
-                          style: TextStyles.font15BlueBold,
+                        horizontalSpacing(SizeConfig.screenWidth! * .1),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            days[index].date != null
+                                ? Intl.defaultLocale == MyConstants.arabic
+                                    ? "${days[index].date!.day} ${days[index].dayAr!}"
+                                    : "${days[index].date!.day} ${days[index].dayEn!}"
+                                : "",
+                            style: TextStyles.font14blueNormal,
+                          ),
                         ),
                       ],
                     ),

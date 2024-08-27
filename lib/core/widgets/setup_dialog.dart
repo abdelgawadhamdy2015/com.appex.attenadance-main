@@ -39,7 +39,7 @@ setupDialogState(
                   ApiConstants.dioExceptionType = DioExceptionType.unknown;
                   SharedPrefHelper.clearAllData();
                   SharedPrefHelper.clearAllSecuredData();
-                  context.pushReplacementNamed(Routes.loginScreen);
+                  context.pushReplacementNamed("/");
                 }
               },
               child: Text(

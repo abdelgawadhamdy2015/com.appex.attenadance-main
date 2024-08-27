@@ -33,8 +33,8 @@ class DayPanel extends StatelessWidget {
                 _buildShiftWidgets(context),
                 _buildWorkDetails(
                     S.of(context).workHours, day.totalShiftTime, Icons.timer),
-                _buildWorkDetails(S.of(context).workTime, day.workingTime,
-                    Icons.hourglass_bottom),
+                _buildWorkDetails(
+                    S.of(context).workTime, day.workingTime, Icons.timer),
                 _buildWorkDetails(
                     S.of(context).lateTime, day.lateTime, Icons.timer),
                 _buildWorkDetails(

@@ -19,6 +19,7 @@ class HeaderBlockListener extends StatefulWidget {
 class _HeaderBlockListener extends State<HeaderBlockListener> {
   @override
   Widget build(BuildContext context) {
+    
     return BlocListener<HomeCubit, HomeState>(
         child: const SizedBox.shrink(),
         listenWhen: (previous, current) =>
