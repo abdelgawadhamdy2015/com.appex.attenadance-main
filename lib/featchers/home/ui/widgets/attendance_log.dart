@@ -22,7 +22,7 @@ class _AttendanceLogState extends State<AttendanceLog> {
   Widget transactionWidget(String shift, DateTime date, String transaction,
       Color textColor, BuildContext context) {
     if (shift != "____") {
-      formattedTimeOfDay = getFormattedTimeOfDay(shift, context);
+      formattedTimeOfDay = getFormattedTimeOfDay(shift, context)!;
     }
 
     return RichText(

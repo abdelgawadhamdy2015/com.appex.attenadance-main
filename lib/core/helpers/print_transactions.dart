@@ -77,10 +77,10 @@ class PrintTransactions {
                                 pw.Padding(
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == MyConstants.arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
+                                      textDirection: Intl.defaultLocale ==
+                                              MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
                                       child: pw.Text(
                                           S.of(buildContext).workHours,
                                           style: pdfFontStyle),
@@ -88,10 +88,10 @@ class PrintTransactions {
                                 pw.Padding(
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == MyConstants.arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
+                                      textDirection: Intl.defaultLocale ==
+                                              MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
                                       child: pw.Text(
                                           S.of(buildContext).leaveTime,
                                           style: pdfFontStyle),
@@ -99,10 +99,10 @@ class PrintTransactions {
                                 pw.Padding(
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == MyConstants.arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
+                                      textDirection: Intl.defaultLocale ==
+                                              MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
                                       child: pw.Text(
                                           S.of(buildContext).attendanceTime,
                                           style: pdfFontStyle),
@@ -110,10 +110,10 @@ class PrintTransactions {
                                 pw.Padding(
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == MyConstants.arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
+                                      textDirection: Intl.defaultLocale ==
+                                              MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
                                       child: pw.Text(S.of(buildContext).day,
                                           style: pdfFontStyle),
                                     )),
@@ -125,10 +125,10 @@ class PrintTransactions {
                                   pw.Padding(
                                     padding: const pw.EdgeInsets.all(8),
                                     child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == MyConstants.arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
+                                      textDirection: Intl.defaultLocale ==
+                                              MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
                                       child: pw.Text(
                                         style: pdfFontStyle,
                                         e.workingTime!,
@@ -138,25 +138,25 @@ class PrintTransactions {
                                   pw.Padding(
                                       padding: const pw.EdgeInsets.all(8),
                                       child: pw.Directionality(
-                                        textDirection:
-                                            Intl.defaultLocale == MyConstants.arabic
-                                                ? pw.TextDirection.rtl
-                                                : pw.TextDirection.ltr,
+                                        textDirection: Intl.defaultLocale ==
+                                                MyConstants.arabic
+                                            ? pw.TextDirection.rtl
+                                            : pw.TextDirection.ltr,
                                         child: pw.Text(
                                           style: pdfFontStyle,
-                                          e.shift1TimeOut?? "",
+                                          e.shift1TimeOut ?? "",
                                         ),
                                       )),
                                   pw.Padding(
                                       padding: const pw.EdgeInsets.all(8),
                                       child: pw.Directionality(
-                                        textDirection:
-                                            Intl.defaultLocale == MyConstants.arabic
-                                                ? pw.TextDirection.rtl
-                                                : pw.TextDirection.ltr,
+                                        textDirection: Intl.defaultLocale ==
+                                                MyConstants.arabic
+                                            ? pw.TextDirection.rtl
+                                            : pw.TextDirection.ltr,
                                         child: pw.Text(
                                           style: pdfFontStyle,
-                                          e.shift1TimeIn??"",
+                                          e.shift1TimeIn ?? "",
                                         ),
                                       )),
                                   pw.Padding(

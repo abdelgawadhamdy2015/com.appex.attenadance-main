@@ -96,7 +96,7 @@ setupLogOutDialogState(BuildContext context, String data, List<String> actions,
                 }
                 SharedPrefHelper.clearAllData();
                 SharedPrefHelper.clearAllSecuredData();
-                context.pushReplacementNamed(Routes.loginScreen);
+                context.pushReplacementNamed("/");
               },
               child: Text(
                 //"ok",

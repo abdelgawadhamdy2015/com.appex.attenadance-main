@@ -6,15 +6,18 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/departures_shimmer.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_state.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/widget/day_panel.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 // ignore: must_be_immutable
 class PerfromanceListView extends StatelessWidget {
   PerfromanceListView({super.key});
-  List days=[];
+  List<Day> days = [];
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +42,27 @@ class PerfromanceListView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DayPanel(
+                            day: days[index],
+                          ),
+                        ),
+                      );
+                    },
                     title: Row(
                       children: [
-                        Text(getFormattedTimeOfDay("04:20", context)),
+                        getFormattedTimeOfDay(
+                                    days[index].shift1TimeIn!, context) !=
+                                null
+                            ? Text(
+                                getFormattedTimeOfDay(
+                                    days[index].shift1TimeIn!, context)!,
+                                style: TextStyles.font15BlueBold,
+                              )
+                            : Container(),
                         const Spacer(),
                         Container(
                           width: SizeConfig.screenWidth! * .4,
@@ -50,7 +71,7 @@ class PerfromanceListView extends StatelessWidget {
                               horizontal: SizeConfig.screenWidth! * .3),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.r),
-                            color: Colors.black,
+                            color: ColorManger.lighterGreen,
                           ),
                         ),
                         const Spacer(),
@@ -60,7 +81,7 @@ class PerfromanceListView extends StatelessWidget {
                                   ? "${days[index].date!.day} ${days[index].dayAr!}"
                                   : "${days[index].date!.day} ${days[index].dayEn!}"
                               : "",
-                          style: TextStyles.font12black54Reguler,
+                          style: TextStyles.font15BlueBold,
                         ),
                       ],
                     ),

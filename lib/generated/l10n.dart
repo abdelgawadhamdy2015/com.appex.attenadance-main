@@ -829,6 +829,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Late time `
+  String get lateTime {
+    return Intl.message(
+      'Late time ',
+      name: 'lateTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Extra Time`
+  String get extraTime {
+    return Intl.message(
+      'Extra Time',
+      name: 'extraTime',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

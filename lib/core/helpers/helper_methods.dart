@@ -17,13 +17,17 @@ SizedBox horizontalSpacing(double width) => SizedBox(
       width: width.w,
     );
 
-String getFormattedTimeOfDay(String shift, BuildContext context) {
-  TimeOfDay shiftTime = TimeOfDay(
-      hour: int.parse(shift.split(":")[0].padLeft(2, "0")),
-      minute: int.parse(shift.split(":")[1].padLeft(2, "0")));
-  final localizations = MaterialLocalizations.of(context);
-  String formattedTimeOfDay = localizations.formatTimeOfDay(shiftTime);
-  return formattedTimeOfDay;
+String? getFormattedTimeOfDay(String shift, BuildContext context) {
+  if (shift.isNotEmpty && shift != "____") {
+    TimeOfDay shiftTime = TimeOfDay(
+        hour: int.parse(shift.split(":")[0].padLeft(2, "0")),
+        minute: int.parse(shift.split(":")[1].padLeft(2, "0")));
+    final localizations = MaterialLocalizations.of(context);
+    String formattedTimeOfDay = localizations.formatTimeOfDay(shiftTime);
+    return formattedTimeOfDay;
+  } else {
+    return null;
+  }
 }
 
 String getHours(String time, BuildContext context) {

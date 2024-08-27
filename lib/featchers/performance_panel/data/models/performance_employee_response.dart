@@ -126,15 +126,21 @@ class Day {
   String? dayAr;
   String? dayEn;
   DateTime? date;
-  @Key("shift1_TimeIn")
+  @JsonKey(name: 'shift1_TimeIn')
   String? shift1TimeIn;
-  @Key("shift1_TimeOut")
+  @JsonKey(name: 'shift1_TimeOut')
   String? shift1TimeOut;
+  @JsonKey(name: 'shift2_TimeIn')
   String? shift2TimeIn;
+  @JsonKey(name: "shift2_TimeOut")
   String? shift2TimeOut;
+  @JsonKey(name: "shift3_TimeIn")
   String? shift3TimeIn;
+  @JsonKey(name: "shift3_TimeOut")
   String? shift3TimeOut;
+  @JsonKey(name: "shift4_TimeIn")
   String? shift4TimeIn;
+  @JsonKey(name: "shift4_TimeOut")
   String? shift4TimeOut;
   String? totalShiftTime;
   String? lateTime;

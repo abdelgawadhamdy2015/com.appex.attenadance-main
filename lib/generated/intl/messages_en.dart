@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Emergency leave"),
         "eventsApprovals":
             MessageLookupByLibrary.simpleMessage("Events and approvals"),
+        "extraTime": MessageLookupByLibrary.simpleMessage("Extra Time"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password?"),
         "from": MessageLookupByLibrary.simpleMessage("from"),
@@ -68,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hours": MessageLookupByLibrary.simpleMessage("Hour"),
         "kindOfHoliday":
             MessageLookupByLibrary.simpleMessage("Kind Of Holiday"),
+        "lateTime": MessageLookupByLibrary.simpleMessage("Late time "),
         "leaveForReset":
             MessageLookupByLibrary.simpleMessage("Leave for reset"),
         "leaveRecord":

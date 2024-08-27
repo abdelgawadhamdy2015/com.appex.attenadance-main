@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emergencyLeave": MessageLookupByLibrary.simpleMessage("إجازة طارئة"),
         "eventsApprovals":
             MessageLookupByLibrary.simpleMessage("الأحداث والموافقات"),
+        "extraTime": MessageLookupByLibrary.simpleMessage("وقت إضافي "),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "from": MessageLookupByLibrary.simpleMessage("من"),
@@ -65,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("برجاء اختيار نوع الإجازة"),
         "hours": MessageLookupByLibrary.simpleMessage("ساعة"),
         "kindOfHoliday": MessageLookupByLibrary.simpleMessage("نوع الإجازة"),
+        "lateTime": MessageLookupByLibrary.simpleMessage("وقت التأخير "),
         "leaveForReset": MessageLookupByLibrary.simpleMessage("خروج للراحة"),
         "leaveRecord":
             MessageLookupByLibrary.simpleMessage("تم تسجيل الانصراف في  "),
