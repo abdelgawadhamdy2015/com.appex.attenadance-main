@@ -218,44 +218,39 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                     labelText: S.of(context).notes,
                     hintStyle: TextStyles.font15Black54reguler,
                     maxLines: 3,
+                    validator: (p0) => null,
                   ),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: SizeConfig.screenWidth! * .016,
-                        vertical: SizeConfig.screenHeight! * .016),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        BlocBuilder<RequestVaccationCubit,
-                            RequestVaccationState>(
-                          builder: (context, state) {
-                            return context.read<RequestVaccationCubit>().loading
-                                ? MyProgressIndicator(
-                                    hight: SizeConfig.screenHeight! * .05,
-                                    width: SizeConfig.screenWidth! * .3)
-                                : AppButtonText(
-                                    backGroundColor: ColorManger.lighterGreen,
-                                    buttonWidth: SizeConfig.screenWidth! * .3,
-                                    butonText: S.of(context).send,
-                                    textStyle: TextStyles.font15WhiteBold,
-                                    onPressed: () {
-                                      validateThenAddVaccation(context);
-                                    },
-                                  );
-                          },
-                        ),
-                        AppButtonText(
-                          backGroundColor: ColorManger.darkRed,
-                          buttonWidth: SizeConfig.screenWidth! * .3,
-                          butonText: S.of(context).cancel,
-                          textStyle: TextStyles.font15WhiteBold,
-                          onPressed: () {
-                            context.pushReplacementNamed(Routes.homeScreen);
-                          },
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      BlocBuilder<RequestVaccationCubit, RequestVaccationState>(
+                        builder: (context, state) {
+                          return context.read<RequestVaccationCubit>().loading
+                              ? MyProgressIndicator(
+                                  hight: SizeConfig.screenHeight! * .05,
+                                  width: SizeConfig.screenWidth! * .3)
+                              : AppButtonText(
+                                  backGroundColor: ColorManger.lighterGreen,
+                                  buttonWidth: SizeConfig.screenWidth! * .3,
+                                  butonText: S.of(context).send,
+                                  textStyle: TextStyles.font15WhiteBold,
+                                  onPressed: () {
+                                    validateThenAddVaccation(context);
+                                  },
+                                );
+                        },
+                      ),
+                      AppButtonText(
+                        backGroundColor: ColorManger.darkRed,
+                        buttonWidth: SizeConfig.screenWidth! * .3,
+                        butonText: S.of(context).cancel,
+                        textStyle: TextStyles.font15WhiteBold,
+                        onPressed: () {
+                          context.pushReplacementNamed(Routes.homeScreen);
+                        },
+                      ),
+                    ],
                   ),
                   const RequestBlockListener()
                 ],

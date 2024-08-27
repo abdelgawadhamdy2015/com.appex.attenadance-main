@@ -174,7 +174,9 @@ ApiErrorModel _handleError(DioException error) {
       if (error.response != null &&
           error.response?.statusCode != null &&
           error.response?.statusMessage != null) {
-        if (error.response!.statusCode == ResponseCode.UNAUTORISED) {
+        if (error.response!.statusCode == ResponseCode.UNAUTORISED ||
+            error.response!.statusCode == ResponseCode.CONFLICT) {
+          print("handle error is : ______${error.response!.statusMessage}");
           ApiConstants.dioExceptionType = DioExceptionType.badResponse;
         }
         return ApiErrorModel.fromJson(error.response!.data);

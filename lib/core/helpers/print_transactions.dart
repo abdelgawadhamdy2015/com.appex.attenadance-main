@@ -8,7 +8,6 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 

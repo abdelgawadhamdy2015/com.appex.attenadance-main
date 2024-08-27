@@ -245,41 +245,35 @@ class _PermissionScreenState extends State<PermissionScreen> {
                     labelText: S.of(context).notes,
                     hintStyle: TextStyles.font12black54Reguler,
                     maxLines: 3,
+                    validator: (p0) => null,
                   ),
                   const AddPermissionListener(),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: SizeConfig.screenWidth! * .016,
-                        vertical: SizeConfig.screenHeight! * .016),
-                    child: BlocBuilder<PermissionCubit, PermissionState>(
-                      builder: (context, state) {
-                        return context.read<PermissionCubit>().loading
-                            ? MyProgressIndicator(
-                                hight: SizeConfig.screenHeight! * .08,
-                                width: SizeConfig.screenWidth! * .08)
-                            : Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: SizeConfig.screenWidth! * .1),
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      AppButtonText(
-                                        buttonWidth:
-                                            SizeConfig.screenWidth! * .3,
-                                        backGroundColor:
-                                            ColorManger.buttonGreen,
-                                        textStyle: TextStyles.font15WhiteBold,
-                                        onPressed: () {
-                                          validateThenAddAttendancePermission(
-                                              context, checkboxState);
-                                        },
-                                        butonText: S.of(context).send,
-                                      ),
-                                    ]),
-                              );
-                      },
-                    ),
+                  BlocBuilder<PermissionCubit, PermissionState>(
+                    builder: (context, state) {
+                      return context.read<PermissionCubit>().loading
+                          ? MyProgressIndicator(
+                              hight: SizeConfig.screenHeight! * .08,
+                              width: SizeConfig.screenWidth! * .08)
+                          : Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: SizeConfig.screenWidth! * .1),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    AppButtonText(
+                                      buttonWidth: SizeConfig.screenWidth! * .3,
+                                      backGroundColor: ColorManger.buttonGreen,
+                                      textStyle: TextStyles.font15WhiteBold,
+                                      onPressed: () {
+                                        validateThenAddAttendancePermission(
+                                            context, checkboxState);
+                                      },
+                                      butonText: S.of(context).send,
+                                    ),
+                                  ]),
+                            );
+                    },
                   ),
                 ],
               ),

@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/networking/api_constants.dart';
@@ -10,7 +12,7 @@ import 'package:ttech_attendance/core/theming/text_styles.dart';
 setupDialogState(
     BuildContext context, String data, List<String> actions, bool isError) {
   showDialog(
-    context: context,
+    context: navigatorKey.currentContext!,
     builder: (context) => AlertDialog(
       icon: Icon(
         isError ? Icons.error : Icons.done,
@@ -29,7 +31,9 @@ setupDialogState(
       ]),
       actions: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: Intl.defaultLocale == MyConstants.arabic
+              ? MainAxisAlignment.start
+              : MainAxisAlignment.end,
           children: [
             TextButton(
               onPressed: () {
@@ -39,7 +43,8 @@ setupDialogState(
                   ApiConstants.dioExceptionType = DioExceptionType.unknown;
                   SharedPrefHelper.clearAllData();
                   SharedPrefHelper.clearAllSecuredData();
-                  context.pushReplacementNamed("/");
+                  navigatorKey.currentContext!
+                      .pushReplacementNamed(Routes.loginScreen);
                 }
               },
               child: Text(
@@ -58,7 +63,7 @@ setupDialogState(
 setupLogOutDialogState(BuildContext context, String data, List<String> actions,
     SignalRService? signalService) {
   showDialog(
-    context: context,
+    context: navigatorKey.currentContext!,
     builder: (context) => AlertDialog(
       icon: const Icon(
         Icons.logout_outlined,
@@ -72,9 +77,9 @@ setupLogOutDialogState(BuildContext context, String data, List<String> actions,
       ),
       actions: [
         Row(
-          mainAxisAlignment: actions.length > 1
-              ? MainAxisAlignment.spaceBetween
-              : MainAxisAlignment.end,
+          mainAxisAlignment: Intl.defaultLocale == MyConstants.arabic
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
           children: [
             actions.length > 1
                 ? TextButton(
@@ -88,6 +93,7 @@ setupLogOutDialogState(BuildContext context, String data, List<String> actions,
                     ),
                   )
                 : Container(),
+            actions.length > 1 ? const Spacer() : Container(),
             TextButton(
               onPressed: () {
                 context.pop();
@@ -96,7 +102,8 @@ setupLogOutDialogState(BuildContext context, String data, List<String> actions,
                 }
                 SharedPrefHelper.clearAllData();
                 SharedPrefHelper.clearAllSecuredData();
-                context.pushReplacementNamed("/");
+                navigatorKey.currentContext!
+                    .pushReplacementNamed(Routes.loginScreen);
               },
               child: Text(
                 //"ok",
