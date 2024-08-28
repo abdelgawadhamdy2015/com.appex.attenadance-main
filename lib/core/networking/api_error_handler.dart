@@ -154,7 +154,6 @@ class ErrorHandler implements Exception {
     if (error is DioException) {
       // dio error so its an error from response of the API or from dio itself
       apiErrorModel = _handleError(error);
-      //apiErrorModel = DataSource.DEFAULT.getFailure();
     } else {
       // default error
       apiErrorModel = DataSource.DEFAULT.getFailure();
