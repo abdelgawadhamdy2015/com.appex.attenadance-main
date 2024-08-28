@@ -30,14 +30,16 @@ class DioFactory {
     dio?.options.headers = {
       'Accept': 'application/json',
       'Authorization':
-      'Bearer ${await SharedPrefHelper.getSecuredString(MyConstants.myToken)}',
+          'Bearer ${await SharedPrefHelper.getSecuredString(MyConstants.myToken)}',
     };
   }
 
- static setTokenToHeaderAfterLogin(String token){
-    dio?.options.headers={
-      'Authorization': 'Bearer $token'
-    };
+  static setTokenToHeaderAfterLogin(String token) {
+    dio?.options.headers = {'Authorization': 'Bearer $token'};
+  }
+
+  static deletTokenHeaderAfterLogOut() {
+    dio?.options.headers = {'Authorization': ''};
   }
 
   static void addDioInterceptor() {
@@ -48,7 +50,5 @@ class DioFactory {
         responseHeader: true,
       ),
     );
-
-
   }
 }

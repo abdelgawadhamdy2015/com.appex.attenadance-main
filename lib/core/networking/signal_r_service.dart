@@ -8,6 +8,7 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/networking/api_error_model.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
+import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -38,13 +39,15 @@ class SignalRService {
             Intl.defaultLocale == MyConstants.arabic
                 ? apiErrorModel.errorMessageAr!
                 : apiErrorModel.errorMessageEn!,
-            [S.of(context).okDialog],
-            this);
+            [S.of(context).okDialog]
+            );
         print(map);
+        stopConnection();
       } catch (error) {
         print(error);
       }
     });
+    mySignalRService = this;
   }
 
   void stopConnection() {

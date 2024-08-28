@@ -219,6 +219,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                                     SizeConfig.screenWidth! * .02),
                                 Expanded(
                                   child: MyTextForm(
+                                    fillColor: ColorManger.lightGray,
                                     controller:
                                         permissionCubit.totalHoursController,
                                     labelText: S.of(context).timesOfWork,
@@ -240,7 +241,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                       : Container(),
                   verticalSpacing(SizeConfig.screenHeight! * .02),
                   MyTextForm(
-                    fillColor: Colors.white,
+                    fillColor: ColorManger.lightGray,
                     controller: permissionCubit.noteController,
                     labelText: S.of(context).notes,
                     hintStyle: TextStyles.font12black54Reguler,

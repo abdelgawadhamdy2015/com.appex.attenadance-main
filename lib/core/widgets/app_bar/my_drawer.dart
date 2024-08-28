@@ -36,7 +36,7 @@ class MyDrawer extends StatelessWidget {
             child: Text(S.of(context).logout),
             onTap: () {
               setupLogOutDialogState(context, S.of(context).needSignOut,
-                  [S.of(context).okDialog, S.of(context).cancel], null);
+                  [S.of(context).okDialog, S.of(context).cancel]);
             },
           ),
           horizontalSpacing(SizeConfig.screenWidth! * .1),

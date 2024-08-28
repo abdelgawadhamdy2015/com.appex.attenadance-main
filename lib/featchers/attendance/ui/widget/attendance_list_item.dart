@@ -59,80 +59,83 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
     checkIfNull([widget.shiftTimeIn])
         ? isAttendance = true
         : isAttendance = false;
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Visibility(
-                      visible: widget.shiftTimeIn != null,
-                      child: Text(
-                        widget.shiftTimeIn != null
-                            ? '${S.of(context).attendanceRecord}  ${getFormattedTimeOfDay(widget.shiftTimeIn!, context)}'
-                            : "",
-                        style: TextStyles.font12black54Reguler,
-                        textAlign: TextAlign.start,
+    return Padding(
+      padding: SizeConfig().getScreenPadding(),
+      child: SizedBox(
+        width: double.infinity,
+        child: Card(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Visibility(
+                        visible: widget.shiftTimeIn != null,
+                        child: Text(
+                          widget.shiftTimeIn != null
+                              ? '${S.of(context).attendanceRecord}  ${getFormattedTimeOfDay(widget.shiftTimeIn!, context)}'
+                              : "",
+                          style: TextStyles.font12black54Reguler,
+                          textAlign: TextAlign.start,
+                        ),
                       ),
-                    ),
-                    Visibility(
-                      visible: widget.shiftTimeOut != null,
-                      child: Text(
-                        widget.shiftTimeOut != null
-                            ? '${S.of(context).leaveRecord}  ${getFormattedTimeOfDay(widget.shiftTimeOut!, context)}'
-                            : "",
-                        style: TextStyles.font12black54Reguler,
-                        textAlign: TextAlign.start,
+                      Visibility(
+                        visible: widget.shiftTimeOut != null,
+                        child: Text(
+                          widget.shiftTimeOut != null
+                              ? '${S.of(context).leaveRecord}  ${getFormattedTimeOfDay(widget.shiftTimeOut!, context)}'
+                              : "",
+                          style: TextStyles.font12black54Reguler,
+                          textAlign: TextAlign.start,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: SizeConfig.screenHeight! * .01,
-                        horizontal: SizeConfig.screenHeight! * .01),
-                    child: Text(
-                      getShift(widget.shift, context),
-                      style: TextStyles.font12black54Reguler,
-                    ))
-              ],
-            ),
-            Visibility(
-              visible: widget.shiftTimeOut == null,
-              child: Container(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(
-                    vertical: SizeConfig.screenHeight! * .01,
-                    horizontal: SizeConfig.screenHeight! * .01),
-                padding: EdgeInsets.symmetric(
-                    vertical: SizeConfig.screenHeight! * .01,
-                    horizontal: SizeConfig.screenHeight! * .01),
-                child: _isButtonVisible
-                    ? AppButtonText(
-                        verticalPadding: 0,
-                        buttonHeight: SizeConfig.screenHeight! * .05,
-                        onPressed: () async {
-                          // work with location here and send it to back end
-                          validateThenRecordAttendance();
-                        },
-                        backGroundColor: !checkIfNull([widget.shiftTimeIn]) &&
-                                checkIfNull([widget.shiftTimeOut])
-                            ? ColorManger.lightred
-                            : ColorManger.lightGreen,
-                        butonText: !checkIfNull([widget.shiftTimeIn]) &&
-                                checkIfNull([widget.shiftTimeOut])
-                            ? S.of(context).signOut
-                            : S.of(context).signIn,
-                        textStyle: TextStyles.font15WhiteBold,
-                      )
-                    : Center(child: Text(_formatTime(_remainingTime))),
+                    ],
+                  ),
+                  const Spacer(),
+                  Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: SizeConfig.screenHeight! * .01,
+                          horizontal: SizeConfig.screenHeight! * .01),
+                      child: Text(
+                        getShift(widget.shift, context),
+                        style: TextStyles.font12black54Reguler,
+                      ))
+                ],
               ),
-            )
-          ],
+              Visibility(
+                visible: widget.shiftTimeOut == null,
+                child: Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(
+                      vertical: SizeConfig.screenHeight! * .01,
+                      horizontal: SizeConfig.screenHeight! * .01),
+                  padding: EdgeInsets.symmetric(
+                      vertical: SizeConfig.screenHeight! * .01,
+                      horizontal: SizeConfig.screenHeight! * .01),
+                  child: _isButtonVisible
+                      ? AppButtonText(
+                          verticalPadding: 0,
+                          buttonHeight: SizeConfig.screenHeight! * .05,
+                          onPressed: () async {
+                            // work with location here and send it to back end
+                            validateThenRecordAttendance();
+                          },
+                          backGroundColor: !checkIfNull([widget.shiftTimeIn]) &&
+                                  checkIfNull([widget.shiftTimeOut])
+                              ? ColorManger.lightred
+                              : ColorManger.lightGreen,
+                          butonText: !checkIfNull([widget.shiftTimeIn]) &&
+                                  checkIfNull([widget.shiftTimeOut])
+                              ? S.of(context).signOut
+                              : S.of(context).signIn,
+                          textStyle: TextStyles.font15WhiteBold,
+                        )
+                      : Center(child: Text(_formatTime(_remainingTime))),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

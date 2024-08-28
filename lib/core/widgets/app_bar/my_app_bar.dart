@@ -22,7 +22,7 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => title.isEmpty
-      ? Size.fromHeight(SizeConfig.screenHeight! * .05)
+      ? Size.fromHeight(SizeConfig.screenHeight! * .07)
       : Size.fromHeight(SizeConfig.screenHeight! * .12);
 
   @override

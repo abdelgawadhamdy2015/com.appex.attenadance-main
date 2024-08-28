@@ -25,7 +25,7 @@ import 'package:ttech_attendance/featchers/permission/permission_screen.dart';
 import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
-import 'package:ttech_attendance/featchers/splash_screen/splash_screen.dart';
+import 'package:ttech_attendance/featchers/splash/splash_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 import 'core/di/dependancy_injection.dart';
 import 'core/routing/routes.dart';
@@ -69,6 +69,7 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       child: OfflineBuilderWidget(
         materialApp: MaterialApp(
+          themeMode: ThemeMode.light,
           navigatorKey: navigatorKey,
           builder: DevicePreview.appBuilder,
           theme: ThemeData(scaffoldBackgroundColor: ColorManger.backGroundGray),

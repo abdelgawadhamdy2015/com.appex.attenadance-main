@@ -5,9 +5,11 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/networking/api_constants.dart';
+import 'package:ttech_attendance/core/networking/dio_factory.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 
 setupDialogState(
     BuildContext context, String data, List<String> actions, bool isError) {
@@ -36,13 +38,14 @@ setupDialogState(
               : MainAxisAlignment.end,
           children: [
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 context.pop();
                 if (ApiConstants.dioExceptionType ==
                     DioExceptionType.badResponse) {
                   ApiConstants.dioExceptionType = DioExceptionType.unknown;
-                  SharedPrefHelper.clearAllData();
-                  SharedPrefHelper.clearAllSecuredData();
+                  await SharedPrefHelper.clearAllData();
+                  await SharedPrefHelper.clearAllSecuredData();
+                  DioFactory.deletTokenHeaderAfterLogOut();
                   navigatorKey.currentContext!
                       .pushReplacementNamed(Routes.loginScreen);
                 }
@@ -61,7 +64,7 @@ setupDialogState(
 }
 
 setupLogOutDialogState(BuildContext context, String data, List<String> actions,
-    SignalRService? signalService) {
+    ) {
   showDialog(
     context: navigatorKey.currentContext!,
     builder: (context) => AlertDialog(
@@ -95,13 +98,15 @@ setupLogOutDialogState(BuildContext context, String data, List<String> actions,
                 : Container(),
             actions.length > 1 ? const Spacer() : Container(),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 context.pop();
-                if (signalService != null) {
-                  signalService.stopConnection();
-                }
+
+                mySignalRService.stopConnection();
+
                 SharedPrefHelper.clearAllData();
                 SharedPrefHelper.clearAllSecuredData();
+                DioFactory.deletTokenHeaderAfterLogOut();
+
                 navigatorKey.currentContext!
                     .pushReplacementNamed(Routes.loginScreen);
               },
