@@ -63,8 +63,11 @@ setupDialogState(
   );
 }
 
-setupLogOutDialogState(BuildContext context, String data, List<String> actions,
-    ) {
+setupLogOutDialogState(
+  BuildContext context,
+  String data,
+  List<String> actions,
+) {
   showDialog(
     context: navigatorKey.currentContext!,
     builder: (context) => AlertDialog(
