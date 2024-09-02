@@ -1,10 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
-import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
@@ -33,10 +32,12 @@ class MyDrawer extends StatelessWidget {
         verticalSpacing(SizeConfig.screenHeight! * .03),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           InkWell(
-            child: Text(S.of(context).logout),
+            child: Text(S.of(navigatorKey.currentContext!).logout),
             onTap: () {
-              setupLogOutDialogState(context, S.of(context).needSignOut,
-                  [S.of(context).okDialog, S.of(context).cancel]);
+              setupLogOutDialogState(context, S.of(context).needSignOut, [
+                S.of(navigatorKey.currentContext!).okDialog,
+                S.of(navigatorKey.currentContext!).cancel
+              ]);
             },
           ),
           horizontalSpacing(SizeConfig.screenWidth! * .1),
@@ -49,6 +50,4 @@ class MyDrawer extends StatelessWidget {
       ],
     );
   }
-
-  
 }

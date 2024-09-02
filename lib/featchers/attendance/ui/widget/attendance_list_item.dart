@@ -6,6 +6,7 @@ import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_text_button.dart';
+import 'package:ttech_attendance/core/widgets/indicator/my_progress_indicator.dart';
 import 'package:ttech_attendance/featchers/attendance/data/models/attendance_request.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
@@ -105,34 +106,39 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
               ),
               Visibility(
                 visible: widget.shiftTimeOut == null,
-                child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(
-                      vertical: SizeConfig.screenHeight! * .01,
-                      horizontal: SizeConfig.screenHeight! * .01),
-                  padding: EdgeInsets.symmetric(
-                      vertical: SizeConfig.screenHeight! * .01,
-                      horizontal: SizeConfig.screenHeight! * .01),
-                  child: _isButtonVisible
-                      ? AppButtonText(
-                          verticalPadding: 0,
-                          buttonHeight: SizeConfig.screenHeight! * .05,
-                          onPressed: () async {
-                            // work with location here and send it to back end
-                            validateThenRecordAttendance();
-                          },
-                          backGroundColor: !checkIfNull([widget.shiftTimeIn]) &&
-                                  checkIfNull([widget.shiftTimeOut])
-                              ? ColorManger.lightred
-                              : ColorManger.lightGreen,
-                          butonText: !checkIfNull([widget.shiftTimeIn]) &&
-                                  checkIfNull([widget.shiftTimeOut])
-                              ? S.of(context).signOut
-                              : S.of(context).signIn,
-                          textStyle: TextStyles.font15WhiteBold,
-                        )
-                      : Center(child: Text(_formatTime(_remainingTime))),
-                ),
+                child: context.read<SendAttendanceCubit>().attendanceLoading
+                    ? MyProgressIndicator(
+                        hight: SizeConfig.screenHeight! * .1,
+                        width: SizeConfig.screenWidth! * .1)
+                    : Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.symmetric(
+                            vertical: SizeConfig.screenHeight! * .01,
+                            horizontal: SizeConfig.screenHeight! * .01),
+                        padding: EdgeInsets.symmetric(
+                            vertical: SizeConfig.screenHeight! * .01,
+                            horizontal: SizeConfig.screenHeight! * .01),
+                        child: _isButtonVisible
+                            ? AppButtonText(
+                                verticalPadding: 0,
+                                buttonHeight: SizeConfig.screenHeight! * .05,
+                                onPressed: () async {
+                                  // work with location here and send it to back end
+                                  validateThenRecordAttendance();
+                                },
+                                backGroundColor:
+                                    !checkIfNull([widget.shiftTimeIn]) &&
+                                            checkIfNull([widget.shiftTimeOut])
+                                        ? ColorManger.lightred
+                                        : ColorManger.lightGreen,
+                                butonText: !checkIfNull([widget.shiftTimeIn]) &&
+                                        checkIfNull([widget.shiftTimeOut])
+                                    ? S.of(context).signOut
+                                    : S.of(context).signIn,
+                                textStyle: TextStyles.font15WhiteBold,
+                              )
+                            : Center(child: Text(_formatTime(_remainingTime))),
+                      ),
               )
             ],
           ),
@@ -211,11 +217,9 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
       setState(() {
         _isButtonVisible = false;
       });
-       Future.delayed(const Duration(seconds: 2), () {
-      checkTime();
-    });
+      Future.delayed(const Duration(seconds: 2), () {
+        checkTime();
+      });
     }
-
-   
   }
 }

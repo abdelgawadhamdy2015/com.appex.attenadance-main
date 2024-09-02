@@ -7,12 +7,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
+import 'package:ttech_attendance/featchers/home/ui/home_screen.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(RequestFormScreen(
+    await tester.pumpWidget(HomeScreen(
       changeLanguage: (locale) {},
     ));
 

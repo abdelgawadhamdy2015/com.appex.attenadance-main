@@ -34,6 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
     getHeader(context);
   }
 
+  Future<void> _refreshData() async {
+    // Simulate a network request or other asynchronous task
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      getHeader(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,57 +49,60 @@ class _HomeScreenState extends State<HomeScreen> {
           changeLanguage: widget.changeLanguage, context: context, title: ""),
       drawer: const Drawer(child: MyDrawer()),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // set attendance data on first size box
-              const HeaderBlockListener(),
+        child: RefreshIndicator(
+          onRefresh: _refreshData,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // set attendance data on first size box
+                const HeaderBlockListener(),
 
-              BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-                if (state is Loading) {
-                  return const HomeShimmer();
-                }
-                return Padding(
-                  key: context.read<HomeCubit>().formKey,
-                  padding: SizeConfig().getScreenPadding(),
-                  child: Column(
-                    children: [
-                      verticalSpacing(SizeConfig.screenHeight! * .01),
-                      const WelcomeWidget(),
-                      verticalSpacing(SizeConfig.screenHeight! * .01),
-                      const AttendanceLog(),
-                      verticalSpacing(SizeConfig.screenHeight! * .01),
-                      const QuickAccess(),
-                      verticalSpacing(SizeConfig.screenHeight! * .01),
-                      const EventsApprovals(),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Spacer(),
-                            SizedBox(
-                              height: SizeConfig.screenWidth! * .1,
-                              width: SizeConfig.screenHeight! * .1,
-                              child: FloatingActionButton(
-                                backgroundColor: ColorManger.darkBlue,
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.add,
-                                  size: SizeConfig.screenHeight! * .05,
+                BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+                  if (state is Loading) {
+                    return const HomeShimmer();
+                  }
+                  return Padding(
+                    key: context.read<HomeCubit>().formKey,
+                    padding: SizeConfig().getScreenPadding(),
+                    child: Column(
+                      children: [
+                        verticalSpacing(SizeConfig.screenHeight! * .01),
+                        const WelcomeWidget(),
+                        verticalSpacing(SizeConfig.screenHeight! * .01),
+                        const AttendanceLog(),
+                        verticalSpacing(SizeConfig.screenHeight! * .01),
+                        const QuickAccess(),
+                        verticalSpacing(SizeConfig.screenHeight! * .01),
+                        const EventsApprovals(),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Spacer(),
+                              SizedBox(
+                                height: SizeConfig.screenWidth! * .1,
+                                width: SizeConfig.screenHeight! * .1,
+                                child: FloatingActionButton(
+                                  backgroundColor: ColorManger.darkBlue,
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.add,
+                                    size: SizeConfig.screenHeight! * .05,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const Spacer(),
-                            Icon(
-                              Icons.menu_open_sharp,
-                              size: SizeConfig.screenHeight! * .1,
-                              color: ColorManger.darkBlue,
-                            ),
-                          ]),
-                    ],
-                  ),
-                );
-              }),
-            ],
+                              const Spacer(),
+                              Icon(
+                                Icons.menu_open_sharp,
+                                size: SizeConfig.screenHeight! * .1,
+                                color: ColorManger.darkBlue,
+                              ),
+                            ]),
+                      ],
+                    ),
+                  );
+                }),
+              ],
+            ),
           ),
         ),
       ),

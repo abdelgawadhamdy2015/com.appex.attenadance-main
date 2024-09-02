@@ -105,12 +105,9 @@ class _MyAppBarState extends State<MyAppBar> {
               color: Colors.white,
             ),
             const Spacer(),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40), color: Colors.white),
+            CircleAvatar(
               child: Image.asset(
                 "assets/man.png",
-                height: SizeConfig.screenHeight! * .05,
               ),
             )
           ],

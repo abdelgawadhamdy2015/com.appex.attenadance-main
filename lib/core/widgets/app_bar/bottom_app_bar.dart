@@ -3,7 +3,7 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
-import 'package:ttech_attendance/core/widgets/arrow_back_widget.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/arrow_back_widget.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class MyBottomAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -49,8 +49,8 @@ class BottomAppBarState extends State<MyBottomAppBar> {
         return S.of(context).performancePanel;
       case MyConstants.mydepatures:
         return S.of(context).departures;
-      case MyConstants.myPermission:
-        return S.of(context).permission;
+      case MyConstants.permission:
+        return S.of(context).RequestPermission;
 
       default:
         return "";

@@ -22,7 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "RequestPermission": MessageLookupByLibrary.simpleMessage("طلب إذن"),
         "am": MessageLookupByLibrary.simpleMessage("صباحا"),
+        "annual": MessageLookupByLibrary.simpleMessage("إجازة"),
         "annualLeave": MessageLookupByLibrary.simpleMessage("إجازة سنوية"),
         "attendance": MessageLookupByLibrary.simpleMessage("حضور"),
         "attendanceAndDepartureReports":
@@ -61,7 +63,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "from": MessageLookupByLibrary.simpleMessage("من"),
         "fromDate": MessageLookupByLibrary.simpleMessage("من تاريخ"),
         "fullDay": MessageLookupByLibrary.simpleMessage("يوم كامل"),
-        "holiday": MessageLookupByLibrary.simpleMessage("الإجازة"),
         "holidayNotSelected":
             MessageLookupByLibrary.simpleMessage("برجاء اختيار نوع الإجازة"),
         "hours": MessageLookupByLibrary.simpleMessage("ساعة"),
@@ -92,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "okDialog": MessageLookupByLibrary.simpleMessage("موافق"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "performancePanel": MessageLookupByLibrary.simpleMessage("لوحة الأداء"),
-        "permission": MessageLookupByLibrary.simpleMessage("طلب إذن"),
+        "permission": MessageLookupByLibrary.simpleMessage("إذن"),
         "permissionType": MessageLookupByLibrary.simpleMessage("نوع الإذن"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("يرجى ملء"),
         "pm": MessageLookupByLibrary.simpleMessage("مساءً"),

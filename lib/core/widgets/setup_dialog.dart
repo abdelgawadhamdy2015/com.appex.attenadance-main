@@ -14,7 +14,7 @@ import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 setupDialogState(
     BuildContext context, String data, List<String> actions, bool isError) {
   showDialog(
-    context: navigatorKey.currentContext!,
+    context: context,
     builder: (context) => AlertDialog(
       icon: Icon(
         isError ? Icons.error : Icons.done,

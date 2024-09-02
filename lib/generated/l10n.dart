@@ -250,11 +250,11 @@ class S {
     );
   }
 
-  /// `Holiday`
-  String get holiday {
+  /// `Annual`
+  String get annual {
     return Intl.message(
-      'Holiday',
-      name: 'holiday',
+      'Annual',
+      name: 'annual',
       desc: '',
       args: [],
     );
@@ -471,9 +471,19 @@ class S {
   }
 
   /// `Request Permission`
-  String get permission {
+  String get RequestPermission {
     return Intl.message(
       'Request Permission',
+      name: 'RequestPermission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Permission`
+  String get permission {
+    return Intl.message(
+      'Permission',
       name: 'permission',
       desc: '',
       args: [],

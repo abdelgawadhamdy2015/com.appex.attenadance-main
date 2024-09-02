@@ -23,61 +23,64 @@ class DeparturesScreen extends StatelessWidget {
         child: MyDrawer(),
       ),
       body: Container(
-          padding: SizeConfig().getScreenPadding(),
-          child: ListView.builder(
-              itemCount: 15,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: ColorManger.morelightGray,
-                  child: ListTile(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+        padding: SizeConfig().getScreenPadding(),
+        child: ListView.separated(
+          separatorBuilder: (context, index) => const Divider(),
+          itemCount: 15,
+          itemBuilder: (context, index) {
+            return Card(
+              color: ColorManger.lightGray,
+              child: ListTile(
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "request number : 22288272",
+                      textAlign: TextAlign.center,
+                      style: TextStyles.font12black54Reguler,
+                    ),
+                    const Spacer(),
+                    Text(
+                      "Status",
+                      style: TextStyles.font12black54Reguler,
+                      textScaler: MediaQuery.textScalerOf(context),
+                    ),
+                  ],
+                ),
+                subtitle: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "date : from date to date ",
+                      style: TextStyles.font12black54Reguler,
+                    ),
+                    Text(
+                      " duration : one day",
+                      style: TextStyles.font12black54Reguler,
+                    ),
+                    Row(
                       children: [
                         Text(
-                          "request number : 22288272",
-                          textAlign: TextAlign.center,
+                          "Request Date:14-10-2023",
                           style: TextStyles.font12black54Reguler,
                         ),
                         const Spacer(),
                         Text(
-                          "Status",
+                          maxLines: 2,
+                          "annual leave",
                           style: TextStyles.font12black54Reguler,
-                          textScaler: MediaQuery.textScalerOf(context),
                         ),
                       ],
                     ),
-                    subtitle: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "date : from date to date ",
-                          style: TextStyles.font12black54Reguler,
-                        ),
-                        Text(
-                          " duration : one day",
-                          style: TextStyles.font12black54Reguler,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Request Date:14-10-2023",
-                              style: TextStyles.font12black54Reguler,
-                            ),
-                            const Spacer(),
-                            Text(
-                              maxLines: 2,
-                              "annual leave",
-                              style: TextStyles.font12black54Reguler,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              })),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

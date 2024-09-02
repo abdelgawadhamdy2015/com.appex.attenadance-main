@@ -5,7 +5,7 @@ import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
-import 'package:ttech_attendance/core/widgets/arrow_back_widget.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/arrow_back_widget.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/bottom_app_bar_tablet.dart';
 import '../../helpers/helper_methods.dart';
 
