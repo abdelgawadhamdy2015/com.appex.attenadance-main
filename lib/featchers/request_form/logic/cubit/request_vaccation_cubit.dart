@@ -15,28 +15,21 @@ class RequestVaccationCubit extends Cubit<RequestVaccationState> {
       : super(const RequestVaccationState.initial());
 
   final formKey = GlobalKey<FormState>();
-
-  void emitRequestVaccationState(
-      RequestVaccation requestVaccation) async {
-    emit(const RequestVaccationState.loading());
-    final response =
-        await requestVaccationRepo.addVaccation(requestVaccation);
+  bool loading = false;
+  void emitRequestVaccationState(RequestVaccation requestVaccation) async {
+    emit(const RequestVaccationState.requestLoading());
+    loading = true;
+    final response = await requestVaccationRepo.addVaccation(requestVaccation);
 
     response.when(success: (requestVaccationResponse) async {
-      emit(RequestVaccationState.success(requestVaccationResponse));
+      emit(RequestVaccationState.requestSuccess(requestVaccationResponse));
+      loading = false;
     }, failure: (error) {
-      emit(RequestVaccationState.error(error: Intl.defaultLocale== english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
+      emit(RequestVaccationState.requestError(
+          error: Intl.defaultLocale == MyConstants.english
+              ? error.apiErrorModel.errorMessageEn!
+              : error.apiErrorModel.errorMessageAr!));
+      loading = false;
     });
   }
-
-  // void emitAllVaccationsState(String token) async {
-  //   emit(const AllVaccationsState.loading());
-  //   final response = await allVaccationsRepo.getVaccations(token);
-
-  //   response.when(success: (allVaccationsModel) async {
-  //     emit(AllVaccationsState.success(allVaccationsModel));
-  //   }, failure: (error) {
-  //     emit(AllVaccationsState.error(error: error.apiErrorModel.message));
-  //   });
-  // }
 }

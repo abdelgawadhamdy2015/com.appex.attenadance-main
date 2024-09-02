@@ -1,6 +1,4 @@
-
-     
-    {
+{
     "login":"Login",
     "logout": "Log out ",
     "dbName": "DataBase Name",
@@ -19,9 +17,9 @@
     "myRequests":"My requests",
     "quickAccessList": "Quick access list",
     "eventsApprovals": "Events and approvals",
-        "attendance": "Attendance",
-        "leaving": "Leaving",
-        "holiday": "Holiday",
+    "attendance": "Attendance",
+    "leaving": "Leaving",
+    "holiday": "Holiday",
     "recordPresenceAndLeave": "ٌRecord presence and leave",
     "attendanceRecord": "Attendance recorded at ",
     "leaveRecord": "Leave recorded at ",
@@ -43,7 +41,7 @@
     "annualLeave":"Annual leave",
     "sickLeave": "Sick leave",
     "emergencyLeave":"Emergency leave",
-    "permission":"Permission",
+    "permission":"Request Permission",
     "cancel": "Cancel",
     "dateWarning": "The start date must be before the end date",
     "from": "from",
@@ -51,7 +49,7 @@
     "attendanceTime":"Attendance Time",
     "leaveTime":"Leave Time",
     "workHours": "Work Hours",
-    "noDateFound" : "please choose start date and end date ",
+    "noDateFound" : "No Data Found",
     "performancePanel": "Performance Panel",
     "days": "Days",
     "am": "A.M",
@@ -70,11 +68,17 @@
     "temporary":"temporary",
     "fullDay":"Full Day",
     "date": "Date",
-    "permissionType": "Permission Type"
-
-
-    
-
+    "permissionType": "Permission Type",
+    "name":"Name",
+    "matchTimeFormat": " time format (7:00 , 12:30)",
+    "shiftToSecondDay": "The shift extends to the next day",
+    "duration": "Duration",
+    "okDialog":"OK",
+    "holidayNotSelected": "Please select your holiday type ",
+    "noInternet": " No internet , check your connection and try again",
+    "needSignOut" :"Are you shure you need log signOut? ",
+    "lateTime": "Late time ",
+    "extraTime": "Extra Time"
 
 
 }

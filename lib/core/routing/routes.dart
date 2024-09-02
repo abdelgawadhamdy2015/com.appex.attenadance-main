@@ -11,5 +11,5 @@ class Routes {
   static const String departuresScreen = 'departuresScreen';
   static const String performancePanelScreen = "performancePanelScreen";
   static const String permissionScreen = "permissionScreen";
-
+  static const String dayPanelScreen= "dayPanelScreen";
 }

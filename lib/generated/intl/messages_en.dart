@@ -51,20 +51,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "days": MessageLookupByLibrary.simpleMessage("Days"),
         "dbName": MessageLookupByLibrary.simpleMessage("DataBase Name"),
         "departures": MessageLookupByLibrary.simpleMessage("Departures"),
+        "duration": MessageLookupByLibrary.simpleMessage("Duration"),
         "email": MessageLookupByLibrary.simpleMessage(" Email"),
         "emergencyLeave":
             MessageLookupByLibrary.simpleMessage("Emergency leave"),
         "eventsApprovals":
             MessageLookupByLibrary.simpleMessage("Events and approvals"),
+        "extraTime": MessageLookupByLibrary.simpleMessage("Extra Time"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password?"),
         "from": MessageLookupByLibrary.simpleMessage("from"),
         "fromDate": MessageLookupByLibrary.simpleMessage("From Date "),
         "fullDay": MessageLookupByLibrary.simpleMessage("Full Day"),
         "holiday": MessageLookupByLibrary.simpleMessage("Holiday"),
+        "holidayNotSelected": MessageLookupByLibrary.simpleMessage(
+            "Please select your holiday type "),
         "hours": MessageLookupByLibrary.simpleMessage("Hour"),
         "kindOfHoliday":
             MessageLookupByLibrary.simpleMessage("Kind Of Holiday"),
+        "lateTime": MessageLookupByLibrary.simpleMessage("Late time "),
         "leaveForReset":
             MessageLookupByLibrary.simpleMessage("Leave for reset"),
         "leaveRecord":
@@ -74,17 +79,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out "),
+        "matchTimeFormat":
+            MessageLookupByLibrary.simpleMessage(" time format (7:00 , 12:30)"),
         "myRequests": MessageLookupByLibrary.simpleMessage("My requests"),
-        "noDateFound": MessageLookupByLibrary.simpleMessage(
-            "please choose start date and end date "),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "needSignOut": MessageLookupByLibrary.simpleMessage(
+            "Are you shure you need log signOut? "),
+        "noDateFound": MessageLookupByLibrary.simpleMessage("No Data Found"),
+        "noInternet": MessageLookupByLibrary.simpleMessage(
+            " No internet , check your connection and try again"),
         "notAttendance":
             MessageLookupByLibrary.simpleMessage(" you not signIn yet"),
         "notLeave": MessageLookupByLibrary.simpleMessage("you not signOut yet"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
+        "okDialog": MessageLookupByLibrary.simpleMessage("OK"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "performancePanel":
             MessageLookupByLibrary.simpleMessage("Performance Panel"),
-        "permission": MessageLookupByLibrary.simpleMessage("Permission"),
+        "permission":
+            MessageLookupByLibrary.simpleMessage("Request Permission"),
         "permissionType":
             MessageLookupByLibrary.simpleMessage("Permission Type"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("please fill "),
@@ -102,6 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shift2": MessageLookupByLibrary.simpleMessage("second shift"),
         "shift3": MessageLookupByLibrary.simpleMessage("third shift"),
         "shift4": MessageLookupByLibrary.simpleMessage("fourth shift"),
+        "shiftToSecondDay": MessageLookupByLibrary.simpleMessage(
+            "The shift extends to the next day"),
         "sickLeave": MessageLookupByLibrary.simpleMessage("Sick leave"),
         "signIn": MessageLookupByLibrary.simpleMessage("Check-in "),
         "signOut": MessageLookupByLibrary.simpleMessage("Check-out "),

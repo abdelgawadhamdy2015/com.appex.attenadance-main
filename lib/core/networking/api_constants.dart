@@ -13,8 +13,10 @@ class ApiConstants {
       "api/HR/AttendLeavingDashboard/MobileHeader";
   static const String sendAttendance =
       "api/HR/EmployeeFingerprints/CheckValidEmployeeFingerprint";
-  // static  String authToken = "authToken";
+  static const String addPermission =
+      "api/HR/AttendancePermission/AddAttendancePermission";
   static DioExceptionType dioExceptionType = DioExceptionType.unknown;
+  static bool shift1Checked = false;
 }
 
 class ApiErrors {

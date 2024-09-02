@@ -4,6 +4,7 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/bottom_app_bar.dart';
 
@@ -21,7 +22,7 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => title.isEmpty
-      ? Size.fromHeight(SizeConfig.screenHeight! * .05)
+      ? Size.fromHeight(SizeConfig.screenHeight! * .07)
       : Size.fromHeight(SizeConfig.screenHeight! * .12);
 
   @override
@@ -39,7 +40,7 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   void initState() {
     super.initState();
-    if (Intl.defaultLocale == english) {
+    if (Intl.defaultLocale == MyConstants.english) {
       language = "English";
     } else {
       language = "العربية";
@@ -49,7 +50,7 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.blue,
+      backgroundColor: ColorManger.darkBlue,
       iconTheme: const IconThemeData(color: Colors.white),
       bottom: widget.title.isNotEmpty
           ? MyBottomAppBar(title: widget.title, context: context)
@@ -63,7 +64,7 @@ class _MyAppBarState extends State<MyAppBar> {
               color: Colors.white,
             ),
             Image.asset(
-              "images/smaller_apex.png",
+              "images/small_apex.png",
               width: SizeConfig.screenWidth! * .15,
             ),
             const Spacer(),

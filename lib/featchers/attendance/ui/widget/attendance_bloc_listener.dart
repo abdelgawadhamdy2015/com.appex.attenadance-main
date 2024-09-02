@@ -7,6 +7,7 @@ import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cub
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_state.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 
 class AttendanceBlocListener extends StatefulWidget {
@@ -48,16 +49,16 @@ class _AttendanceBlocListenerState extends State<AttendanceBlocListener> {
               } else {
                 setupDialogState(
                     context,
-                    Intl.defaultLocale == arabic
+                    Intl.defaultLocale == MyConstants.arabic
                         ? response.errorMessageAr!
                         : response.errorMessageEn!,
-                    true,
+                    [S.of(context).okDialog], true
                     );
               }
             },
             error: (error) {
 
-                setupDialogState(context, error, true, );
+                setupDialogState(context, error, [S.of(context).okDialog],true, );
 
             },
           );

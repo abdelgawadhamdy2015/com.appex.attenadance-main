@@ -8,6 +8,7 @@ import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/request_form/date/models/add_vaccation_response.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/request_vaccation_state.dart';
+import 'package:ttech_attendance/generated/l10n.dart';
 
 class RequestBlockListener extends StatefulWidget {
   const RequestBlockListener({super.key});
@@ -21,36 +22,44 @@ class _RequestBlockListenerState extends State<RequestBlockListener> {
   Widget build(BuildContext context) {
     return BlocListener<RequestVaccationCubit, RequestVaccationState>(
       listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
+          current is RequestLoading ||
+          current is RequestSuccess ||
+          current is RequestError,
       listener: (context, state) {
         state.whenOrNull(
-          loading: () {
+          requestLoading: () {
             const Center(
                 child: CircularProgressIndicator(
               color: Colors.blue,
             ));
           },
-          success: (addVaccationResponse) async {
+          requestSuccess: (addVaccationResponse) async {
             AddVaccationResponse response = addVaccationResponse;
 
             response.result == 1
                 ? setupDialogState(
                     context,
-                    Intl.defaultLocale == arabic
+                    Intl.defaultLocale == MyConstants.arabic
                         ? response.alart!.messageAr!
                         : response.alart!.messageEn!,
+                    [S.of(context).okDialog],
                     false,
-                    )
+                  )
                 : setupDialogState(
                     context,
-                    Intl.defaultLocale == arabic
+                    Intl.defaultLocale == MyConstants.arabic
                         ? response.alart!.messageAr!
                         : response.alart!.messageEn!,
-                    true,
-                    );
+                    [S.of(context).okDialog],
+                    true);
           },
-          error: (error) {
-            setupDialogState(context, error, true, );
+          requestError: (error) {
+            setupDialogState(
+              context,
+              error,
+              [S.of(context).okDialog],
+              true,
+            );
           },
         );
       },

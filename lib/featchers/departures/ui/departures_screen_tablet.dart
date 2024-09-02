@@ -13,9 +13,8 @@ class DeparturesScreenTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManger.morelightGray,
       appBar: MyAppBarTablet(
-        tiltle: mydepatures,
+        tiltle: MyConstants.mydepatures,
         context: context,
         changeLanguage: changeLanguage,
       ),

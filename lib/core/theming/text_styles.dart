@@ -1,18 +1,21 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'font_weight_helper.dart';
 
 class TextStyles {
-
-
   static TextStyle font22BlueBold = TextStyle(
       fontSize: 22.sp, fontWeight: FontWeightHelper.bold, color: Colors.blue);
 
-  static TextStyle font16BlueBold = TextStyle(
-      fontSize: 16.sp, fontWeight: FontWeightHelper.bold, color: Colors.blue);
+  static TextStyle font15BlueBold = TextStyle(
+      fontSize: 15.sp,
+      fontWeight: FontWeightHelper.bold,
+      color: ColorManger.darkBlue);
+
+  static TextStyle font20BlueBold = TextStyle(
+      fontSize: 20.sp,
+      fontWeight: FontWeightHelper.bold,
+      color: ColorManger.darkBlue);
 
   static TextStyle font15WhiteBold = TextStyle(
       fontSize: 15.sp, fontWeight: FontWeightHelper.bold, color: Colors.white);
@@ -28,6 +31,11 @@ class TextStyles {
       fontWeight: FontWeightHelper.bold,
       color: ColorManger.lightGray);
 
+      static TextStyle font14blueNormal = TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeightHelper.bold,
+      color: ColorManger.darkBlue);
+
   static TextStyle font14blackReguler = TextStyle(
       fontSize: 14.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);
   static TextStyle font30BlackBold = TextStyle(
@@ -39,6 +47,18 @@ class TextStyles {
       fontSize: 15.sp,
       fontWeight: FontWeightHelper.reguler,
       color: Colors.black54);
+  static TextStyle font15lightGreen54reguler = TextStyle(
+      fontSize: 15.sp,
+      fontWeight: FontWeightHelper.reguler,
+      color: ColorManger.lightGreen);
+       static TextStyle font15lightred54reguler = TextStyle(
+      fontSize: 15.sp,
+      fontWeight: FontWeightHelper.reguler,
+      color: ColorManger.lightred);
+  static TextStyle font15Red54reguler = TextStyle(
+      fontSize: 15.sp,
+      fontWeight: FontWeightHelper.reguler,
+      color: ColorManger.lightred);
 
   static TextStyle font16BlackBold = TextStyle(
       fontSize: 16.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);

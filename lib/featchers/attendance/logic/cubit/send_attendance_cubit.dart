@@ -28,7 +28,7 @@ class SendAttendanceCubit extends Cubit<SendAttendanceState> {
     response.when(success: (attendanceResponse) async {
       emit(SendAttendanceState.sendSuccess(attendanceResponse));
     }, failure: (error) async {
-      emit(SendAttendanceState.sendError(error: Intl.defaultLocale== english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
+      emit(SendAttendanceState.sendError(error: Intl.defaultLocale== MyConstants.english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
     });
   }
 }

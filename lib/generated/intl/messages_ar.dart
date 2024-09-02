@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "attendanceTime": MessageLookupByLibrary.simpleMessage("وقت الحضور"),
         "badeResponse": MessageLookupByLibrary.simpleMessage(
             "حدث خطأ يرجى تسجيل الدخول مرة أخرى"),
-        "cancel": MessageLookupByLibrary.simpleMessage(" الغاء"),
+        "cancel": MessageLookupByLibrary.simpleMessage(" إلغاء"),
         "comeFromReset":
             MessageLookupByLibrary.simpleMessage("العودة من الراحة"),
         "controlBoard": MessageLookupByLibrary.simpleMessage("لوحة التحكم"),
@@ -44,21 +44,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "dailyWorkingHours": MessageLookupByLibrary.simpleMessage(
             "من 9:00 صباحًا الي 6:00 مساءً"),
         "date": MessageLookupByLibrary.simpleMessage("التاريخ"),
+        "dateWarning": MessageLookupByLibrary.simpleMessage(
+            "يجب أن يكون تاريخ البدء قبل تاريخ الانتهاء"),
         "day": MessageLookupByLibrary.simpleMessage("اليوم"),
         "days": MessageLookupByLibrary.simpleMessage("ايام"),
         "dbName": MessageLookupByLibrary.simpleMessage("اسم قاعدة البيانات"),
         "departures": MessageLookupByLibrary.simpleMessage("المغادرات"),
+        "duration": MessageLookupByLibrary.simpleMessage("المدة"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
         "emergencyLeave": MessageLookupByLibrary.simpleMessage("إجازة طارئة"),
         "eventsApprovals":
             MessageLookupByLibrary.simpleMessage("الأحداث والموافقات"),
+        "extraTime": MessageLookupByLibrary.simpleMessage("وقت إضافي "),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "from": MessageLookupByLibrary.simpleMessage("من"),
         "fromDate": MessageLookupByLibrary.simpleMessage("من تاريخ"),
         "fullDay": MessageLookupByLibrary.simpleMessage("يوم كامل"),
         "holiday": MessageLookupByLibrary.simpleMessage("الإجازة"),
+        "holidayNotSelected":
+            MessageLookupByLibrary.simpleMessage("برجاء اختيار نوع الإجازة"),
         "hours": MessageLookupByLibrary.simpleMessage("ساعة"),
+        "kindOfHoliday": MessageLookupByLibrary.simpleMessage("نوع الإجازة"),
+        "lateTime": MessageLookupByLibrary.simpleMessage("وقت التأخير "),
         "leaveForReset": MessageLookupByLibrary.simpleMessage("خروج للراحة"),
         "leaveRecord":
             MessageLookupByLibrary.simpleMessage("تم تسجيل الانصراف في  "),
@@ -67,17 +75,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "matchTimeFormat":
+            MessageLookupByLibrary.simpleMessage("تنسيق الوقت، 7:00، 12:30"),
         "myRequests": MessageLookupByLibrary.simpleMessage("طلباتي"),
-        "noDateFound": MessageLookupByLibrary.simpleMessage(
-            "الرجاء اختيار تاريخ البدء وتاريخ الانتهاء "),
+        "name": MessageLookupByLibrary.simpleMessage("الاسم"),
+        "needSignOut": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك بحاجة إلى تسجيل الخروج"),
+        "noDateFound": MessageLookupByLibrary.simpleMessage("لا يوجد بيانات"),
+        "noInternet": MessageLookupByLibrary.simpleMessage(
+            "لا يوجد اتصال بالإنترنت، تحقق من الاتصال وحاول مرة أخرى."),
         "notAttendance":
             MessageLookupByLibrary.simpleMessage(" لم تقم بتسجيل الحضور بعد"),
         "notLeave":
             MessageLookupByLibrary.simpleMessage("لم تقم بتسجيل الانصراف بعد"),
         "notes": MessageLookupByLibrary.simpleMessage("ملاحظات"),
+        "okDialog": MessageLookupByLibrary.simpleMessage("موافق"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "performancePanel": MessageLookupByLibrary.simpleMessage("لوحة الأداء"),
-        "permission": MessageLookupByLibrary.simpleMessage("إذن"),
+        "permission": MessageLookupByLibrary.simpleMessage("طلب إذن"),
         "permissionType": MessageLookupByLibrary.simpleMessage("نوع الإذن"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("يرجى ملء"),
         "pm": MessageLookupByLibrary.simpleMessage("مساءً"),
@@ -89,16 +104,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestLeave": MessageLookupByLibrary.simpleMessage("طلب إجازة"),
         "restMinutes": MessageLookupByLibrary.simpleMessage("راحة 60 دقيقة"),
         "salaries": MessageLookupByLibrary.simpleMessage("الرواتب"),
-        "send": MessageLookupByLibrary.simpleMessage("إرسال"),
+        "send": MessageLookupByLibrary.simpleMessage("إضافة"),
         "shift1": MessageLookupByLibrary.simpleMessage("الورديّة الأولى"),
         "shift2": MessageLookupByLibrary.simpleMessage("الورديّة الثانية"),
         "shift3": MessageLookupByLibrary.simpleMessage("الورديّة الثالثة"),
         "shift4": MessageLookupByLibrary.simpleMessage("الورديّة الرابعة"),
+        "shiftToSecondDay":
+            MessageLookupByLibrary.simpleMessage("الشفت ممتد لليوم التالي"),
         "sickLeave": MessageLookupByLibrary.simpleMessage("إجازة مرضية"),
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل الحضور"),
         "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الانصراف"),
         "temporary": MessageLookupByLibrary.simpleMessage("مؤقت"),
-        "timesOfWork": MessageLookupByLibrary.simpleMessage("أوقات الدوام"),
+        "timesOfWork": MessageLookupByLibrary.simpleMessage("مواعيد الدوام"),
         "to": MessageLookupByLibrary.simpleMessage("الي"),
         "toDate": MessageLookupByLibrary.simpleMessage("إلى تاريخ"),
         "transaction": MessageLookupByLibrary.simpleMessage(" الحضور "),

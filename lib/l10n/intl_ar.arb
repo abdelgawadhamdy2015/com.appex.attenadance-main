@@ -12,7 +12,7 @@
     "transaction": " الحضور ",
     "credits": "الاعتمادات",
     "salaries": "الرواتب",
-    "timesOfWork": "أوقات الدوام",
+    "timesOfWork": "مواعيد الدوام",
     "attendanceAndDepartureReports": "تقارير ",
     "myRequests": "طلباتي",
     "quickAccessList": "قائمة الوصول السريع",
@@ -33,7 +33,7 @@
     "location": "الموقع",
     "dailyWorkingHours": "من 9:00 صباحًا الي 6:00 مساءً",
     "restMinutes": "راحة 60 دقيقة",
-    "send": "إرسال",
+    "send": "إضافة",
     "pleaseFill": "يرجى ملء",
     "requestLeave": "طلب إجازة",
     "fromDate": "من تاريخ",
@@ -42,15 +42,15 @@
     "annualLeave": "إجازة سنوية",
     "sickLeave": "إجازة مرضية",
     "emergencyLeave": "إجازة طارئة",
-    "permission": "إذن",
-    "cancel": " الغاء",
-    "dateWarrning":"يجب أن يكون تاريخ البدء قبل تاريخ الانتهاء",
+    "permission": "طلب إذن",
+    "cancel": " إلغاء",
+    "dateWarning":"يجب أن يكون تاريخ البدء قبل تاريخ الانتهاء",
     "from": "من",
     "to": "الي",
     "attendanceTime":"وقت الحضور",
     "leaveTime":"وقت الانصراف",
     "workHours": "ساعات الدوام",
-    "noDateFound" : "الرجاء اختيار تاريخ البدء وتاريخ الانتهاء ",
+    "noDateFound" : "لا يوجد بيانات",
     "performancePanel": "لوحة الأداء",
     "days":"ايام",
     "am": "صباحا",
@@ -69,6 +69,26 @@
     "temporary": "مؤقت",
     "fullDay": "يوم كامل",
     "date": "التاريخ",
-    "permissionType": "نوع الإذن"
+    "permissionType": "نوع الإذن",
+    "name":"الاسم",
+    "matchTimeFormat": "تنسيق الوقت، 7:00، 12:30",
+    "shiftToSecondDay": "الشفت ممتد لليوم التالي",
+    "duration": "المدة",
+    "kindOfHoliday": "نوع الإجازة",
+    "okDialog":"موافق",
+    "holidayNotSelected": "برجاء اختيار نوع الإجازة",
+    "noInternet": "لا يوجد اتصال بالإنترنت، تحقق من الاتصال وحاول مرة أخرى.",
+    "needSignOut":"هل أنت متأكد أنك بحاجة إلى تسجيل الخروج",
+    "lateTime": "وقت التأخير ",
+    "extraTime": "وقت إضافي "
+
+
+
+
+
+
+
+
     
+
 }

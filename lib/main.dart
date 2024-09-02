@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/networking/signal_r_service.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
+import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
@@ -15,10 +20,12 @@ import 'package:ttech_attendance/featchers/home/ui/home_screen.dart';
 import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel.dart';
+import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/permission/permission_screen.dart';
+import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
-import 'package:ttech_attendance/featchers/splash_screen/splash_screen.dart';
+import 'package:ttech_attendance/featchers/splash/splash_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 import 'core/di/dependancy_injection.dart';
 import 'core/routing/routes.dart';
@@ -47,7 +54,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale = const Locale(arabic);
+  Locale _locale = Locale(Intl.defaultLocale ?? MyConstants.arabic);
 
   _MyAppState();
 
@@ -60,21 +67,25 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      child: MaterialApp(
-        builder: DevicePreview.appBuilder,
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        debugShowCheckedModeBanner: false,
-        locale: _locale,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        onGenerateRoute: generateRoute,
-        initialRoute: Routes.splashScreen,
+      child: OfflineBuilderWidget(
+        materialApp: MaterialApp(
+          themeMode: ThemeMode.light,
+          navigatorKey: navigatorKey,
+          builder: DevicePreview.appBuilder,
+          theme: ThemeData(scaffoldBackgroundColor: ColorManger.backGroundGray),
+          darkTheme: ThemeData.dark(),
+          debugShowCheckedModeBanner: false,
+          locale: _locale,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          onGenerateRoute: generateRoute,
+          initialRoute: Routes.splashScreen,
+        ),
       ),
     );
   }
@@ -150,10 +161,10 @@ class _MyAppState extends State<MyApp> {
                 ));
       case Routes.permissionScreen:
         return MaterialPageRoute(
-          builder: (_) => PermissionScreen(
-              changeLanguage: _changeLanguage,
-              ),
-        );
+            builder: (_) => MultiBlocProvider(providers: [
+                  BlocProvider(create: (context) => getIt<PermissionCubit>()),
+                  ChangeNotifierProvider(create: (context) => CheckboxState()),
+                ], child: PermissionScreen(changeLanguage: _changeLanguage)));
 
       default:
         return MaterialPageRoute(

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar_tablet.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
-import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/request_form/date/models/request_model.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_state.dart';
@@ -65,12 +63,10 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
     }
   }
 
-  String token = "";
   @override
   void initState() {
     super.initState();
     //get Token from shared preferance
-    getToken();
   }
 
   @override
@@ -79,10 +75,10 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
       appBar: MyAppBarTablet(
           changeLanguage: widget.changeLanguage,
           context: context,
-          tiltle: myRequests),
+          tiltle: MyConstants.myRequests),
       drawer: const Drawer(child: MyDrawer()),
-      body: OfflineBuilderWidget(
-        child: SafeArea(
+      body: 
+     SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Form(
@@ -162,7 +158,7 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
                     onTap: () => _pickDate(context, true),
                     controller: TextEditingController(
                       text: _startDate != null
-                          ? Intl.defaultLocale == english
+                          ? Intl.defaultLocale == MyConstants.english
                               ? DateFormat('yyyy-MM-dd').format(_startDate!)
                               : DateFormat("dd-MM-yyyy").format(_startDate!)
                           : '',
@@ -184,7 +180,7 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
                     onTap: () => _pickDate(context, false),
                     controller: TextEditingController(
                       text: _endDate != null
-                          ? Intl.defaultLocale == english
+                          ? Intl.defaultLocale == MyConstants.english
                               ? DateFormat('yyyy-MM-dd').format(_endDate!)
                               : DateFormat("dd-MM-yyyy").format(_endDate!)
                           : '',
@@ -240,18 +236,11 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
             ),
           ),
         ),
-      ),
-    );
+      )
+    ;
   }
 
-  getToken() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    token = preferences.getString(myToken)!;
-    setState(() {
-      //get vaccations types from data base
-      getAllVaccations(context);
-    });
-  }
+  
 
   getAllVaccations(BuildContext context) {
     context

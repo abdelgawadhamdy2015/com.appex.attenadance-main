@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
@@ -21,7 +22,7 @@ class _AttendanceLogState extends State<AttendanceLog> {
   Widget transactionWidget(String shift, DateTime date, String transaction,
       Color textColor, BuildContext context) {
     if (shift != "____") {
-      formattedTimeOfDay = getFormattedTimeOfDay(shift, context);
+      formattedTimeOfDay = getFormattedTimeOfDay(shift, context)!;
     }
 
     return RichText(
@@ -34,9 +35,13 @@ class _AttendanceLogState extends State<AttendanceLog> {
           ),
           TextSpan(
             text: "$formattedTimeOfDay  ",
-            style: TextStyles.font16BlackBold,
+            style: TextStyles.font15Black54reguler,
           ),
-          TextSpan(text: transaction, style: TextStyles.font15Black54reguler)
+          TextSpan(
+              text: transaction,
+              style: textColor == ColorManger.lightred
+                  ? TextStyles.font15lightred54reguler
+                  : TextStyles.font15lightGreen54reguler)
         ],
       ),
     );
@@ -44,57 +49,56 @@ class _AttendanceLogState extends State<AttendanceLog> {
 
   @override
   Widget build(BuildContext context) {
-
-        return SizedBox(
-          width: double.infinity,
-          child: Card(
-            color: Colors.white,
-            child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    S.of(context).attendanceMovementsToday,
-                    style: TextStyles.font12blackBold,
-                  ),
-                  verticalSpacing(SizeConfig.screenHeight!* .01),
-                  context.read<HomeCubit>().data.shift1_TimeIn != "____" &&
-                          context.read<HomeCubit>().data.shift1_TimeIn != null
-                      ? transactionWidget(
-                          context.read<HomeCubit>().data.shift1_TimeIn!,
-                          context.read<HomeCubit>().data.date!,
-                          S.of(context).attendance,
-                          Colors.green,
-                          context)
-                      : Center(
-                          child: Text(
-                            S.of(context).notAttendance,
-                            style: TextStyles.font12black54Reguler,
-                          ),
-                        ),
-                  verticalSpacing(SizeConfig.screenHeight!* .01),
-                  context.read<HomeCubit>().data.shift1_TimeOut != "____" &&
-                          context.read<HomeCubit>().data.shift1_TimeOut != null
-                      ? transactionWidget(
-                          context.read<HomeCubit>().data.shift1_TimeOut!,
-                          context.read<HomeCubit>().data.date!,
-                          S.of(context).leaving,
-                          Colors.red,
-                          context)
-                      : Center(
-                          child: Text(
-                            S.of(context).notLeave,
-                            style: TextStyles.font12black54Reguler,
-                          ),
-                        ),
-                ],
+    return SizedBox(
+      width: double.infinity,
+      child: Card(
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.screenWidth! * .016,
+              vertical: SizeConfig.screenHeight! * .016),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                S.of(context).attendanceMovementsToday,
+                style: TextStyles.font15BlueBold,
               ),
-            ),
+              verticalSpacing(SizeConfig.screenHeight! * .01),
+              context.read<HomeCubit>().data.shift1_TimeIn != "____" &&
+                      context.read<HomeCubit>().data.shift1_TimeIn != null
+                  ? transactionWidget(
+                      context.read<HomeCubit>().data.shift1_TimeIn!,
+                      context.read<HomeCubit>().data.date!,
+                      S.of(context).attendance,
+                      ColorManger.lightGreen,
+                      context)
+                  : Center(
+                      child: Text(
+                        S.of(context).notAttendance,
+                        style: TextStyles.font12black54Reguler,
+                      ),
+                    ),
+              verticalSpacing(SizeConfig.screenHeight! * .01),
+              context.read<HomeCubit>().data.shift1_TimeOut != "____" &&
+                      context.read<HomeCubit>().data.shift1_TimeOut != null
+                  ? transactionWidget(
+                      context.read<HomeCubit>().data.shift1_TimeOut!,
+                      context.read<HomeCubit>().data.date!,
+                      S.of(context).leaving,
+                      ColorManger.lightred,
+                      context)
+                  : Center(
+                      child: Text(
+                        S.of(context).notLeave,
+                        style: TextStyles.font12black54Reguler,
+                      ),
+                    ),
+            ],
           ),
-        );
-
-
+        ),
+      ),
+    );
   }
 }

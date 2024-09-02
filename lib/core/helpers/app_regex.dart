@@ -33,4 +33,8 @@ class AppRegex {
   static bool hasMinLength(String password) {
     return RegExp(r'^(?=.{8,})').hasMatch(password);
   }
+
+  static bool hasMatchesTimeFormat(String time) {
+    return RegExp(r'^(?:[0-1]?[0-9]|2[0-3]):[0-5][0-9]$').hasMatch(time);
+  }
 }

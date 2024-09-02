@@ -11,17 +11,16 @@ class WelcomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return RichText(
       text: TextSpan(children: [
         TextSpan(
             text: "${S.of(context).welcome} , ",
             style: TextStyles.font16BlackBold),
         TextSpan(
-            text: Intl.defaultLocale == arabic
+            text: Intl.defaultLocale == MyConstants.arabic
                 ? context.read<HomeCubit>().data.empArabicName
                 : context.read<HomeCubit>().data.empLatinName,
-            style: TextStyles.font16BlueBold)
+            style: TextStyles.font16BlackBold)
       ]),
     );
   }

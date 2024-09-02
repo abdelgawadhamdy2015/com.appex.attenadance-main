@@ -30,14 +30,14 @@ class _MyBottomAppBarTabletState extends State<MyBottomAppBarTablet> {
 
   String getTitle() {
     switch (widget.title) {
-      case myRequests:
+      case MyConstants.myRequests:
         return S.of(context).requestLeave;
 
-      case myTransactions:
+      case MyConstants.myTransactions:
         return S.of(context).transaction;
-      case attendanceAndDepartureReports:
+      case MyConstants.attendanceAndDepartureReports:
         return S.of(context).performancePanel;
-      case mydepatures:
+      case MyConstants.mydepatures:
         return S.of(context).departures;
 
       default:

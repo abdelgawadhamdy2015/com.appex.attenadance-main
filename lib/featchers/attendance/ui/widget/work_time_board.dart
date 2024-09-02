@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/core/widgets/app_text_button.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
@@ -20,37 +22,49 @@ class WorkTimeBoard extends StatelessWidget {
     return Column(children: [
       !checkIfNull([data.date, data.dayAr, data.dayEn])
           ? Text(
-              "${Intl.defaultLocale == arabic ? data.dayAr : data.dayEn}  ${DateFormat(' dd , MMMM , yyyy ').format(data.date!)}",
+              "${Intl.defaultLocale == MyConstants.arabic ? data.dayAr : data.dayEn}  ${DateFormat(' dd , MMMM , yyyy ').format(data.date!)}",
               style: TextStyles.font12black54Reguler,
             )
           : Container(),
       IntrinsicHeight(
         child: Card(
-          color: Colors.grey,
+          color: ColorManger.darkBlue,
           child: Container(
             width: double.infinity,
             padding: EdgeInsets.only(
-                right: SizeConfig.screenWidth! * .01,
-                left: SizeConfig.screenWidth! * .01,
+                right: SizeConfig.screenWidth! * .05,
+                left: SizeConfig.screenWidth! * .05,
                 top: SizeConfig.screenHeight! * .01,
                 bottom: SizeConfig.screenHeight! * .01),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: EdgeInsets.only(
-                      right: SizeConfig.screenWidth! * .05,
-                      left: SizeConfig.screenWidth! * .05,
-                      top: SizeConfig.screenHeight! * .005,
-                      bottom: SizeConfig.screenHeight! * .005),
-                  decoration: BoxDecoration(
-                    color: Colors.blueGrey,
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Text(
-                    S.of(context).timesOfWork,
-                    style: TextStyles.font15WhiteBold,
-                  ),
+                AppButtonText(
+                  verticalPadding: SizeConfig.screenHeight! * .0,
+                  buttonHeight: SizeConfig.screenHeight! * .01,
+                  buttonWidth: SizeConfig.screenWidth! * .3,
+                  backGroundColor: ColorManger.mutedBlue,
+                  textStyle: TextStyles.font12WhiteBold,
+                  butonText: S.of(context).timesOfWork,
+                  borderRadius: 20.r,
+                  onPressed: () {},
                 ),
+                // Container(
+                //   padding: EdgeInsets.only(
+                //       right: SizeConfig.screenWidth! * .05,
+                //       left: SizeConfig.screenWidth! * .05,
+                //       top: SizeConfig.screenHeight! * .005,
+                //       bottom: SizeConfig.screenHeight! * .005),
+                //   decoration: BoxDecoration(
+                //     color: ColorManger.buttonGreen,
+                //     borderRadius: BorderRadius.circular(20.r),
+                //   ),
+                //   child: Text(
+                //     S.of(context).timesOfWork,
+                //     style: TextStyles.font15WhiteBold,
+                //   ),
+                // ),
                 verticalSpacing(SizeConfig.screenHeight! * .01),
                 data.shiftType == 1
                     ? Text(
@@ -60,8 +74,8 @@ class WorkTimeBoard extends StatelessWidget {
                         style: TextStyles.font12black54Reguler,
                       )
                     : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           for (int i = 1; i <= 4; i++)
                             if (!checkIfNull([
@@ -71,7 +85,7 @@ class WorkTimeBoard extends StatelessWidget {
                                 (i == 1 || map['hasShift$i']))
                               Text(
                                 "${getShift(i, context)} ${S.of(context).from} ${getFormattedTimeOfDay(map['shift${i}_Start']!, context)} ${S.of(context).to} ${getFormattedTimeOfDay(map['shift${i}_End']!, context)}",
-                                style: TextStyles.font12black54Reguler,
+                                style: TextStyles.font12WhiteBold,
                               ),
 
                           // !checkIfNull([data.shift1_Start, data.shift1_End])
@@ -100,10 +114,12 @@ class WorkTimeBoard extends StatelessWidget {
                           //         "${S.of(context).shift4} ${S.of(context).from} ${getFormattedTimeOfDay(data.shift4_Start!, context)} ${S.of(context).to} ${getFormattedTimeOfDay(data.shift4_End!, context)}",
                           //         style: TextStyles.font12black54Reguler,
                           //       )
-                          //     : Container(),
+                          //
+                          //   : Container(),
+                          verticalSpacing(SizeConfig.screenHeight! * .01),
                           Text(
                             S.of(context).restMinutes,
-                            style: TextStyles.font12black54Reguler,
+                            style: TextStyles.font12WhiteBold,
                           ),
                         ],
                       ),

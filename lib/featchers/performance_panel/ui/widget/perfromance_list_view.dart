@@ -3,18 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/departures_shimmer.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_state.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/widget/day_panel.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 // ignore: must_be_immutable
 class PerfromanceListView extends StatelessWidget {
   PerfromanceListView({super.key});
-  List days=[];
+  List<Day> days = [];
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +44,84 @@ class PerfromanceListView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: DayPanel(day: days[index]),
+                              actions: [
+                                Row(
+                                  mainAxisAlignment:
+                                      Intl.defaultLocale == MyConstants.arabic
+                                          ? MainAxisAlignment.start
+                                          : MainAxisAlignment.end,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () async {
+                                        context.pop();
+                                      },
+                                      child: Text(
+                                        textAlign: TextAlign.center,
+                                        S
+                                            .of(navigatorKey.currentContext!)
+                                            .okDialog,
+                                        style: TextStyles.font16BlackBold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          });
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => DayPanel(
+                      //       day: days[index],
+                      //     ),
+                      //   ),
+                      // );
+                    },
                     title: Row(
                       children: [
-                        Text(getFormattedTimeOfDay("04:20", context)),
-                        const Spacer(),
-                        Container(
-                          width: SizeConfig.screenWidth! * .4,
-                          height: SizeConfig.screenHeight! * .01,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: SizeConfig.screenWidth! * .3),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.r),
-                            color: Colors.black,
+                        getFormattedTimeOfDay(
+                                    days[index].shift1TimeIn!, context) !=
+                                null
+                            ? Expanded(
+                                flex: 3,
+                                child: Text(
+                                  getFormattedTimeOfDay(
+                                      days[index].shift1TimeIn!, context)!,
+                                  style: TextStyles.font14blueNormal,
+                                ),
+                              )
+                            : Container(),
+                        horizontalSpacing(SizeConfig.screenWidth! * .1),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            width: SizeConfig.screenWidth! * .4,
+                            height: SizeConfig.screenHeight! * .01,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.screenWidth! * .3),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.r),
+                              color: ColorManger.lighterGreen,
+                            ),
                           ),
                         ),
-                        const Spacer(),
-                        Text(
-                          days[index].date != null
-                              ? Intl.defaultLocale == arabic
-                                  ? "${days[index].date!.day} ${days[index].dayAr!}"
-                                  : "${days[index].date!.day} ${days[index].dayEn!}"
-                              : "",
-                          style: TextStyles.font12black54Reguler,
+                        horizontalSpacing(SizeConfig.screenWidth! * .1),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            days[index].date != null
+                                ? Intl.defaultLocale == MyConstants.arabic
+                                    ? "${days[index].date!.day} ${days[index].dayAr!}"
+                                    : "${days[index].date!.day} ${days[index].dayEn!}"
+                                : "",
+                            style: TextStyles.font14blueNormal,
+                          ),
                         ),
                       ],
                     ),

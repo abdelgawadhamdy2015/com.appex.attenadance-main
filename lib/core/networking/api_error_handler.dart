@@ -139,9 +139,9 @@ extension DataSourceExtension on DataSource {
             errorMessageEn: ResponseMessage.NO_INTERNET_CONNECTION);
       case DataSource.DEFAULT:
         return ApiErrorModel(
-            errorMessageEn: ResponseMessage.DEFAULT,
-            code: ResponseCode.DEFAULT,
-            errorMessageAr: ResponseMessage.DEFAULT,
+          errorMessageEn: ResponseMessage.DEFAULT,
+          code: ResponseCode.DEFAULT,
+          errorMessageAr: ResponseMessage.DEFAULT,
         );
     }
   }
@@ -154,7 +154,6 @@ class ErrorHandler implements Exception {
     if (error is DioException) {
       // dio error so its an error from response of the API or from dio itself
       apiErrorModel = _handleError(error);
-      //apiErrorModel = DataSource.DEFAULT.getFailure();
     } else {
       // default error
       apiErrorModel = DataSource.DEFAULT.getFailure();
@@ -174,7 +173,10 @@ ApiErrorModel _handleError(DioException error) {
       if (error.response != null &&
           error.response?.statusCode != null &&
           error.response?.statusMessage != null) {
-          ApiConstants.dioExceptionType=DioExceptionType.badResponse;
+        if (error.response!.statusCode == ResponseCode.UNAUTORISED ||
+            error.response!.statusCode == ResponseCode.CONFLICT) {
+          ApiConstants.dioExceptionType = DioExceptionType.badResponse;
+        }
         return ApiErrorModel.fromJson(error.response!.data);
       } else {
         return DataSource.DEFAULT.getFailure();

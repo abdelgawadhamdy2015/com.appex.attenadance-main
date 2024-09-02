@@ -25,7 +25,7 @@ class PerformanceEmployeeCubit extends Cubit<PerformanceEmployeeState> {
     response.when(success: (performanceEmployeeResponse) async {
       emit(PerformanceEmployeeState.success(performanceEmployeeResponse));
     }, failure: (error) {
-      emit(PerformanceEmployeeState.error(error: Intl.defaultLocale== english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
+      emit(PerformanceEmployeeState.error(error: Intl.defaultLocale== MyConstants.english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
     });
   }
 }

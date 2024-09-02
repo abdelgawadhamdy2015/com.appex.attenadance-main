@@ -43,9 +43,11 @@ class PrintTransactions {
     final fontData = await rootBundle.load('fonts/Amiri-Regular.ttf');
     final ttf = pw.Font.ttf(fontData);
 
-    pw.TextStyle pdfFontStyle =
-        pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold, font: ttf);
-    const int itemsPerPage = 16; // Adjust this value as needed
+    pw.TextStyle pdfFontStyle = pw.TextStyle(
+        fontSize: 24,
+        fontWeight: pw.FontWeight.bold,
+        font: Intl.defaultLocale == MyConstants.arabic ? ttf : null);
+    const int itemsPerPage = 10; // Adjust this value as needed
     final int pageCount = (days.length / itemsPerPage).ceil();
 
     for (int page = 0; page < pageCount; page++) {
@@ -54,125 +56,132 @@ class PrintTransactions {
 
       pdf.addPage(
         pw.Page(
+          
+          margin:const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          textDirection: Intl.defaultLocale == MyConstants.arabic
+              ? pw.TextDirection.rtl
+              : pw.TextDirection.ltr,
           build: (pw.Context context) {
-            return pw.Directionality(
-                textDirection: Intl.defaultLocale == arabic
-                    ? pw.TextDirection.rtl
-                    : pw.TextDirection.ltr,
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: [
-                    pw.Text(S.of(buildContext).attendanceReports,
-                        style: pdfFontStyle),
-                    pw.SizedBox(height: 20),
-                    pw.Directionality(
-                        textDirection: Intl.defaultLocale == arabic
-                            ? pw.TextDirection.rtl
-                            : pw.TextDirection.ltr,
-                        child: pw.Table(
-                          border: pw.TableBorder.all(),
+            return pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.center,
+              children: [
+                
+                pw.Text(S.of(buildContext).attendanceReports,
+                    style: pdfFontStyle),
+                pw.SizedBox(height: 20),
+                pw.Directionality(
+                    textDirection: Intl.defaultLocale == MyConstants.arabic
+                        ? pw.TextDirection.rtl
+                        : pw.TextDirection.ltr,
+                    child: pw.Table(
+                      border: pw.TableBorder.all(),
+                      children: [
+                        pw.TableRow(
                           children: [
-                            pw.TableRow(
-                              children: [
-                                pw.Padding(
-                                    padding: const pw.EdgeInsets.all(8),
-                                    child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
-                                      child: pw.Text(
-                                          S.of(buildContext).workHours,
-                                          style: pdfFontStyle),
-                                    )),
-                                pw.Padding(
-                                    padding: const pw.EdgeInsets.all(8),
-                                    child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
-                                      child: pw.Text(
-                                          S.of(buildContext).leaveTime,
-                                          style: pdfFontStyle),
-                                    )),
-                                pw.Padding(
-                                    padding: const pw.EdgeInsets.all(8),
-                                    child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
-                                      child: pw.Text(
-                                          S.of(buildContext).attendanceTime,
-                                          style: pdfFontStyle),
-                                    )),
-                                pw.Padding(
-                                    padding: const pw.EdgeInsets.all(8),
-                                    child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
-                                      child: pw.Text(S.of(buildContext).day,
-                                          style: pdfFontStyle),
-                                    )),
-                              ],
-                            ),
-                            ...pageEmployees.map(
-                              (e) => pw.TableRow(
-                                children: [
-                                  pw.Padding(
-                                    padding: const pw.EdgeInsets.all(8),
-                                    child: pw.Directionality(
-                                      textDirection:
-                                          Intl.defaultLocale == arabic
-                                              ? pw.TextDirection.rtl
-                                              : pw.TextDirection.ltr,
-                                      child: pw.Text(
-                                        style: pdfFontStyle,
-                                        e.workingTime!,
-                                      ),
-                                    ),
-                                  ),
-                                  pw.Padding(
-                                      padding: const pw.EdgeInsets.all(8),
-                                      child: pw.Directionality(
-                                        textDirection:
-                                            Intl.defaultLocale == arabic
-                                                ? pw.TextDirection.rtl
-                                                : pw.TextDirection.ltr,
-                                        child: pw.Text(
-                                          style: pdfFontStyle,
-                                          e.shift1TimeOut?? "",
-                                        ),
-                                      )),
-                                  pw.Padding(
-                                      padding: const pw.EdgeInsets.all(8),
-                                      child: pw.Directionality(
-                                        textDirection:
-                                            Intl.defaultLocale == arabic
-                                                ? pw.TextDirection.rtl
-                                                : pw.TextDirection.ltr,
-                                        child: pw.Text(
-                                          style: pdfFontStyle,
-                                          e.shift1TimeIn??"",
-                                        ),
-                                      )),
-                                  pw.Padding(
-                                    padding: const pw.EdgeInsets.all(8),
-                                    child: pw.Text(
-                                      style: pdfFontStyle,
-                                      "${Intl.defaultLocale == arabic ? e.dayAr : e.dayEn!}  ${e.date!.day}-${e.date!.month}",
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            pw.Padding(
+                                padding: const pw.EdgeInsets.all(4),
+                                child: pw.Directionality(
+                                  textDirection:
+                                      Intl.defaultLocale == MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
+                                  child: pw.Text(S.of(buildContext).workHours,
+                                      style: pdfFontStyle),
+                                )),
+                            pw.Padding(
+                                padding: const pw.EdgeInsets.all(4),
+                                child: pw.Directionality(
+                                  textDirection:
+                                      Intl.defaultLocale == MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
+                                  child: pw.Text(S.of(buildContext).leaveTime,
+                                      style: pdfFontStyle),
+                                )),
+                            pw.Padding(
+                                padding: const pw.EdgeInsets.all(4),
+                                child: pw.Directionality(
+                                  textDirection:
+                                      Intl.defaultLocale == MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
+                                  child: pw.Text(
+                                      S.of(buildContext).attendanceTime,
+                                      style: pdfFontStyle),
+                                )),
+                            pw.Padding(
+                                padding: const pw.EdgeInsets.all(4),
+                                child: pw.Directionality(
+                                  textDirection:
+                                      Intl.defaultLocale == MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
+                                  child: pw.Text(S.of(buildContext).day,
+                                      style: pdfFontStyle),
+                                )),
                           ],
-                        )),
-                  ],
-                ));
+                        ),
+                        ...pageEmployees.map(
+                          (e) => pw.TableRow(
+                            children: [
+                              pw.Expanded(
+                                  child: pw.Padding(
+                                padding: const pw.EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 3),
+                                child: pw.Directionality(
+                                  textDirection:
+                                      Intl.defaultLocale == MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
+                                  child: pw.Text(
+                                    style: pdfFontStyle,
+                                    e.workingTime!,
+                                  ),
+                                ),
+                              )),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 3),
+                                child: pw.Directionality(
+                                  textDirection:
+                                      Intl.defaultLocale == MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
+                                  child: pw.Text(
+                                    style: pdfFontStyle,
+                                    e.shift1TimeOut ?? "",
+                                  ),
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 3),
+                                child: pw.Directionality(
+                                  textDirection:
+                                      Intl.defaultLocale == MyConstants.arabic
+                                          ? pw.TextDirection.rtl
+                                          : pw.TextDirection.ltr,
+                                  child: pw.Text(
+                                    style: pdfFontStyle,
+                                    e.shift1TimeIn ?? "",
+                                  ),
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.symmetric(
+                                    horizontal: 7, vertical: 3),
+                                child: pw.Text(
+                                  style: pdfFontStyle,
+                                  "${Intl.defaultLocale == MyConstants.arabic ? e.dayAr : e.dayEn!}  ${e.date!.day}-${e.date!.month}",
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    )),
+              ],
+            );
           },
         ),
       );

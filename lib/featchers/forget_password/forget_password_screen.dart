@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 //import 'passwordtext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 import '../../core/helpers/size_config.dart';
@@ -32,13 +31,11 @@ class ForgetPasswordState extends State<ForgetPassword> {
     var textField = _alltextfiled(sendButton);
 
     return Scaffold(
-      backgroundColor: const Color(0xffffffff),
       appBar: AppBar(),
       // drawer: Drawer(
       //   surfaceTintColor:Colors.red ,
       // ),
-      body: OfflineBuilderWidget(
-        child: Padding(
+      body:  Padding(
           padding: SizeConfig().getScreenPadding(),
           child: SingleChildScrollView(
             child: Column(
@@ -59,7 +56,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
             ),
           ),
         ),
-      ),
+      
     );
   }
 
@@ -115,7 +112,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
         MyTextForm(
             hint: S.of(context).dbName,
             excep: S.of(context).dbName,
-            control: companyText),
+            controller: companyText),
         Container(
           padding: const EdgeInsets.only(top: 25, bottom: 20),
           child: Text(S.of(context).email),
@@ -123,7 +120,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
         MyTextForm(
           hint: S.of(context).email,
           excep: S.of(context).email,
-          control: emailText,
+          controller: emailText,
         ),
         Container(
           padding: const EdgeInsets.only(top: 20),

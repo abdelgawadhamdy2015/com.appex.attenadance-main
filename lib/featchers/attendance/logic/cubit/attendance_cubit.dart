@@ -27,7 +27,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
       emit(AttendanceState.success(headerResponse));
     }, failure: (error) async {
       emit(AttendanceState.error(
-          error: Intl.defaultLocale == english
+          error: Intl.defaultLocale == MyConstants.english
               ? error.apiErrorModel.errorMessageEn!
               : error.apiErrorModel.errorMessageAr!));
     });

@@ -7,8 +7,6 @@ import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/arrow_back_widget.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/bottom_app_bar_tablet.dart';
-import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
-
 import '../../helpers/helper_methods.dart';
 
 class MyAppBarTablet extends StatefulWidget implements PreferredSizeWidget {
@@ -40,7 +38,7 @@ class _MyAppBarState extends State<MyAppBarTablet> {
   @override
   void initState() {
     super.initState();
-    if (Intl.defaultLocale == english) {
+    if (Intl.defaultLocale == MyConstants.english) {
       language = "English";
     } else {
       language = "العربية";
@@ -85,7 +83,6 @@ class _MyAppBarState extends State<MyAppBarTablet> {
                 const Spacer(),
                 IconButton(
                   onPressed: () {
-                    setupDialogState(context, "this notify you", false);
                     context.pushNamed(Routes.departuresScreen);
                   },
                   icon: Icon(

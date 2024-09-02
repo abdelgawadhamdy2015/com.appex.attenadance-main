@@ -15,36 +15,47 @@ class QuickAccess extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .016,vertical: SizeConfig.screenHeight! * .016),
+        padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.screenWidth! * .016,
+            vertical: SizeConfig.screenHeight! * .016),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               S.of(context).quickAccessList,
-              style: TextStyles.font12blackBold,
+              style: TextStyles.font15BlueBold,
             ),
-            verticalSpacing(SizeConfig.screenHeight!* .016),
+            verticalSpacing(SizeConfig.screenHeight! * .016),
             GridView.count(
               crossAxisCount: 3,
               shrinkWrap: true,
               mainAxisSpacing: 10,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                _buildQuickAccessButton("assets/out_in.png",
-                    S.of(context).transaction, context, myTransactions),
+                _buildQuickAccessButton(
+                    "assets/out_in.png",
+                    S.of(context).transaction,
+                    context,
+                    MyConstants.myTransactions),
                 _buildQuickAccessButton("assets/credit.png",
-                    S.of(context).credits, context, credits),
-                _buildQuickAccessButton("assets/sallary.png",
-                    S.of(context).salaries, context, salaries),
-                _buildQuickAccessButton("assets/work-time.png",
-                    S.of(context).timesOfWork, context, timesOfWork),
+                    S.of(context).credits, context, MyConstants.credits),
+                _buildQuickAccessButton(
+                    "assets/sallary.png",
+                    S.of(context).permission,
+                    context,
+                    MyConstants.myPermission),
+                _buildQuickAccessButton(
+                    "assets/work-time.png",
+                    S.of(context).timesOfWork,
+                    context,
+                    MyConstants.timesOfWork),
                 _buildQuickAccessButton(
                     "assets/reports.png",
                     S.of(context).attendanceAndDepartureReports,
                     context,
-                    attendanceAndDepartureReports),
+                    MyConstants.attendanceAndDepartureReports),
                 _buildQuickAccessButton("assets/request.png",
-                    S.of(context).myRequests, context, myRequests),
+                    S.of(context).myRequests, context, MyConstants.myRequests),
               ],
             ),
           ],
@@ -58,25 +69,31 @@ class QuickAccess extends StatelessWidget {
     return Card(
       color: Colors.white,
       child: Container(
-        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .005,vertical: SizeConfig.screenHeight! * .005),
+        padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.screenWidth! * .005,
+            vertical: SizeConfig.screenHeight! * .005),
         child: Column(
           children: [
             ElevatedButton(
               onPressed: () {
                 switch (id) {
-                  case myTransactions:
+                  case MyConstants.myTransactions:
                     context.pushReplacementNamed(Routes.attendaceScreen);
-                  case myRequests:
+                  case MyConstants.myRequests:
                     context.pushReplacementNamed(Routes.requestFormScreen);
-                  case attendanceAndDepartureReports:
+                  case MyConstants.attendanceAndDepartureReports:
                     context.pushReplacementNamed(Routes.performancePanelScreen);
-                  case credits:
+                  case MyConstants.credits:
                     context.pushReplacementNamed(Routes.departuresScreen);
+                  case MyConstants.myPermission:
+                    context.pushReplacementNamed(Routes.permissionScreen);
                 }
               },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                padding:  EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .01,vertical: SizeConfig.screenHeight! * .01),
+                padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.screenWidth! * .01,
+                    vertical: SizeConfig.screenHeight! * .01),
               ),
               child: Image.asset(
                 icon,
@@ -91,11 +108,12 @@ class QuickAccess extends StatelessWidget {
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyles.font12black54Reguler,
+                style: TextStyles.font12blackBold,
               ),
             ),
           ],
         ),
       ),
     );
-  }}
+  }
+}

@@ -1,6 +1,7 @@
 {
     "configurations": [
     
+    
         {
             "name": "Flutter",
             "type": "dart",

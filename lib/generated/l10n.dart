@@ -470,10 +470,10 @@ class S {
     );
   }
 
-  /// `Permission`
+  /// `Request Permission`
   String get permission {
     return Intl.message(
-      'Permission',
+      'Request Permission',
       name: 'permission',
       desc: '',
       args: [],
@@ -550,10 +550,10 @@ class S {
     );
   }
 
-  /// `please choose start date and end date `
+  /// `No Data Found`
   String get noDateFound {
     return Intl.message(
-      'please choose start date and end date ',
+      'No Data Found',
       name: 'noDateFound',
       desc: '',
       args: [],
@@ -745,6 +745,106 @@ class S {
     return Intl.message(
       'Permission Type',
       name: 'permissionType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` time format (7:00 , 12:30)`
+  String get matchTimeFormat {
+    return Intl.message(
+      ' time format (7:00 , 12:30)',
+      name: 'matchTimeFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The shift extends to the next day`
+  String get shiftToSecondDay {
+    return Intl.message(
+      'The shift extends to the next day',
+      name: 'shiftToSecondDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duration`
+  String get duration {
+    return Intl.message(
+      'Duration',
+      name: 'duration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get okDialog {
+    return Intl.message(
+      'OK',
+      name: 'okDialog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select your holiday type `
+  String get holidayNotSelected {
+    return Intl.message(
+      'Please select your holiday type ',
+      name: 'holidayNotSelected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` No internet , check your connection and try again`
+  String get noInternet {
+    return Intl.message(
+      ' No internet , check your connection and try again',
+      name: 'noInternet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you shure you need log signOut? `
+  String get needSignOut {
+    return Intl.message(
+      'Are you shure you need log signOut? ',
+      name: 'needSignOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Late time `
+  String get lateTime {
+    return Intl.message(
+      'Late time ',
+      name: 'lateTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Extra Time`
+  String get extraTime {
+    return Intl.message(
+      'Extra Time',
+      name: 'extraTime',
       desc: '',
       args: [],
     );

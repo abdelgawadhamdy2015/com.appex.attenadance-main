@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 class PasswordText extends StatefulWidget {
   final String hint;
   final bool obsecur;
+  final Color? fillColor;
   final TextEditingController control;
   const PasswordText(
       {super.key,
       required this.hint,
       required this.obsecur,
-      required this.control});
+      required this.control,
+      this.fillColor});
   @override
   State<PasswordText> createState() => _PasswordTextState();
 }
 
 class _PasswordTextState extends State<PasswordText> {
-  var myHint="";
+  var myHint = "";
   var obsecured = true;
   //_PasswordTextState(this.hint);
   @override
@@ -36,7 +39,8 @@ class _PasswordTextState extends State<PasswordText> {
       controller: widget.control,
       obscureText: obsecured,
       decoration: InputDecoration(
-          //hintText: 'Password' ,
+          fillColor: widget.fillColor ?? ColorManger.morelightGray,
+          filled: true, //hintText: 'Password' ,
           hintText: widget.hint,
           hintStyle: TextStyle(
             fontSize: 10.sp,
@@ -55,6 +59,7 @@ class _PasswordTextState extends State<PasswordText> {
           ),
           errorStyle: TextStyle(fontSize: 15.sp),
           suffixIcon: IconButton(
+            color: ColorManger.loginButtonColorBlue,
             icon: obsecured
                 ? const Icon(Icons.visibility)
                 : const Icon(Icons.visibility_off),

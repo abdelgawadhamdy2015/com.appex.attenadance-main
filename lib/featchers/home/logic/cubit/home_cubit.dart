@@ -26,7 +26,7 @@ class HomeCubit extends Cubit<HomeState> {
       },
       failure: (error) async {
 
-        emit(HomeState.error(error: Intl.defaultLocale== english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
+        emit(HomeState.error(error: Intl.defaultLocale== MyConstants.english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
       },
     );
   }
