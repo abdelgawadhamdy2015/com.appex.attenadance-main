@@ -93,9 +93,7 @@ class TextStyles {
       fontSize: 18.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);
 
   static TextStyle font30BlackBold = TextStyle(
-      fontSize: 30.sp,
-      fontWeight: FontWeightHelper.bold,
-      color: Colors.black54);
+      fontSize: 30.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);
 
   static TextStyle font20BlackBold = TextStyle(
       fontSize: 20.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);

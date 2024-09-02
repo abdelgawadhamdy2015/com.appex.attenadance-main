@@ -9,7 +9,7 @@ import 'package:ttech_attendance/core/networking/dio_factory.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
-import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
+import 'package:ttech_attendance/featchers/login/ui/widget/login_screen.dart';
 
 setupDialogState(
     BuildContext context, String data, List<String> actions, bool isError) {

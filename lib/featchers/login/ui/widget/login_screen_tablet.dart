@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/core/widgets/app_text_button.dart';
+import 'package:ttech_attendance/core/widgets/indicator/my_progress_indicator.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/core/widgets/passwordtext.dart';
 import 'package:ttech_attendance/featchers/login/logic/cubit/login_cubit.dart';
+import 'package:ttech_attendance/featchers/login/logic/cubit/login_state.dart';
 import 'package:ttech_attendance/featchers/login/ui/widget/login_bloc_listener.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
+import '../../../../core/helpers/helper_methods.dart';
 
 class LoginScreenTablet extends StatefulWidget {
   final Function(Locale) changeLanguage;
@@ -16,32 +25,39 @@ class LoginScreenTablet extends StatefulWidget {
   const LoginScreenTablet({super.key, required this.changeLanguage});
 
   @override
-  LoginScreenState createState() =>
-      // ignore: no_logic_in_create_state
-      LoginScreenState(changeLanguage: changeLanguage);
+  LoginScreenTabletState createState() => // ignore: no_logic_in_create_state
+      LoginScreenTabletState();
 }
 
-class LoginScreenState extends State<LoginScreenTablet> {
+class LoginScreenTabletState extends State<LoginScreenTablet> {
   bool rememberMe = false;
-  String selectedLanguage = 'English';
-  bool circaleLoadFlag = false;
-  bool lang = true;
-  bool languageButtonPressed = false;
-  final Function(Locale) changeLanguage;
-  LoginScreenState({required this.changeLanguage});
+  String selectedLanguage =
+      Intl.defaultLocale == MyConstants.arabic ? "Arabic" : "English";
+
+  @override
+  void initState() {
+    super.initState();
+    // delete token from shared preference
+    clearToken();
+  }
+
+  clearToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffffffff),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
+        child: Container(
+          padding: SizeConfig().getScreenPadding(),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 50.h,
+                  height: SizeConfig.screenHeight! * .07,
                   width: double.infinity,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,28 +71,27 @@ class LoginScreenState extends State<LoginScreenTablet> {
                           if (selectedLanguage == "English") {
                             setState(() {
                               selectedLanguage = "Arabic";
-                              changeLanguage(const Locale("ar"));
+                              widget.changeLanguage(const Locale("ar"));
                             });
                           } else {
                             setState(() {
                               selectedLanguage = "English";
-                              changeLanguage(const Locale("en"));
+                              widget.changeLanguage(const Locale("en"));
                             });
                           }
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.r)),
-                          fixedSize:
-                              Size(100.w, 110.h), //Size.fromWidth(110.w),
+                          //Size.fromWidth(110.w),
 
                           backgroundColor: Colors.white,
                         ),
                         child: FittedBox(
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                           child: Text(
                             selectedLanguage,
-                            style: TextStyles.font22BlueBold,
+                            style: TextStyles.font30BlueBold,
                           ),
                         ),
                       ),
@@ -85,15 +100,10 @@ class LoginScreenState extends State<LoginScreenTablet> {
                 ),
                 Center(
                   child: Container(
-                    padding: EdgeInsets.only(top: 10.h),
-                    child: Text(
-                      S.of(context).login,
-                      style: TextStyle(
-                        fontSize: 30.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
+                    padding:
+                        EdgeInsets.only(top: SizeConfig.screenHeight! * .01),
+                    child: Text(S.of(context).login,
+                        style: TextStyles.font30BlackBold),
                   ),
                 ),
                 Form(
@@ -102,55 +112,83 @@ class LoginScreenState extends State<LoginScreenTablet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.only(top: 25, bottom: 20),
-                        child: Text(S.of(context).dbName),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.screenWidth! * .016,
+                            vertical: SizeConfig.screenHeight! * .016),
+                        child: Text(
+                          S.of(context).dbName,
+                          style: TextStyles.font28Blackreguler,
+                        ),
                       ),
                       MyTextForm(
+                          inputTextStyle: TextStyles.font20Black54reguler,
+                          hintStyle: TextStyles.font20Black54reguler,
+                          fillColor: ColorManger.lightGray,
                           hint: S.of(context).dbName,
                           excep: S.of(context).dbName,
                           controller: context.read<LoginCubit>().dbController),
                       Container(
-                        padding: const EdgeInsets.only(top: 25, bottom: 20),
-                        child: Text(S.of(context).email),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.screenWidth! * .016,
+                            vertical: SizeConfig.screenHeight! * .016),
+                        child: Text(
+                          S.of(context).email,
+                          style: TextStyles.font28Blackreguler,
+                        ),
                       ),
                       MyTextForm(
+                        inputTextStyle: TextStyles.font20Black54reguler,
+                        hintStyle: TextStyles.font20Black54reguler,
+                        fillColor: ColorManger.lightGray,
                         hint: S.of(context).email,
                         excep: S.of(context).email,
                         controller: context.read<LoginCubit>().emailController,
                       ),
                       Container(
-                        padding: const EdgeInsets.only(top: 25, bottom: 20),
-                        child: Text(S.of(context).password),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.screenWidth! * .016,
+                            vertical: SizeConfig.screenHeight! * .016),
+                        child: Text(
+                          S.of(context).password,
+                          style: TextStyles.font28Blackreguler,
+                        ),
                       ),
                       PasswordText(
+                          inputTextStyle: TextStyles.font20Black54reguler,
+                          hintStyle: TextStyles.font20Black54reguler,
+                          fillColor: ColorManger.lightGray,
                           hint: S.of(context).password,
                           obsecur: true,
                           control:
                               context.read<LoginCubit>().passwordController),
-                      SizedBox(
-                        height: 50.h,
-                      ),
+                      verticalSpacing(SizeConfig.screenHeight! * .05),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Text(S.of(context).rememberMe),
-                              Checkbox(
-                                  value: rememberMe,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      rememberMe = val!;
-                                    });
-                                  }),
-                            ],
+                          Text(
+                            S.of(context).rememberMe,
+                            style: TextStyles.font20BlackBold,
                           ),
+                          horizontalSpacing(SizeConfig.screenWidth! * .07),
+                          Transform.scale(
+                            scale: 2,
+                            child: Checkbox(
+                                activeColor: ColorManger.radioButtonBlue,
+                                value: rememberMe,
+                                onChanged: (val) {
+                                  setState(() {
+                                    rememberMe = val!;
+                                  });
+                                }),
+                          ),
+                          Spacer(),
                           InkWell(
                             child: Text(
                               S.of(context).forgetPassword,
-                              style: const TextStyle(
-                                  color: Colors.blue,
-                                  decoration: TextDecoration.underline),
+                              style: TextStyle(
+                                  color: ColorManger.forgetPassswordTextColor,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 25.sp),
                             ),
                             onTap: () {
                               context
@@ -163,27 +201,29 @@ class LoginScreenState extends State<LoginScreenTablet> {
                           ),
                         ],
                       ),
-                      Container(
-                        padding: EdgeInsets.only(top: 10.h),
-                        width: double.infinity,
-                        height: 60.h,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            setState(() {
-                              // context.read<LoginCubit>().circaleLoadFlag =
-                              //     true;
-                            });
-                            validateThenDoLogin(context);
-                          },
-                          style: ElevatedButton.styleFrom(),
-                          child: FittedBox(
-                            fit: BoxFit.cover,
-                            child: Text(
-                              S.of(context).login,
-                              style: TextStyles.font22BlueBold,
-                            ),
-                          ),
-                        ),
+                      verticalSpacing(SizeConfig.screenHeight! * .05),
+                      BlocBuilder<LoginCubit, LoginState>(
+                        builder: (context, state) {
+                          return !context.read<LoginCubit>().loadingLogin
+                              ? Container(
+                                  padding: EdgeInsets.only(
+                                      top: SizeConfig.screenHeight! * .01),
+                                  width: double.infinity,
+                                  height: SizeConfig.screenHeight! * .08,
+                                  child: AppButtonText(
+                                    backGroundColor:
+                                        ColorManger.loginButtonColorBlue,
+                                    butonText: S.of(context).login,
+                                    onPressed: () async {
+                                      validateThenDoLogin(context);
+                                    },
+                                    textStyle: TextStyles.font25WhiteBold,
+                                  ),
+                                )
+                              : MyProgressIndicator(
+                                  hight: SizeConfig.screenHeight! * .08,
+                                  width: SizeConfig.screenWidth! * .08);
+                        },
                       ),
                       LoginBlocListener(
                         rememberMe: rememberMe,
@@ -198,18 +238,18 @@ class LoginScreenState extends State<LoginScreenTablet> {
         ),
       ),
     );
+    // : LoginScreenTablet(changeLanguage: changeLanguage);
   }
 
   void validateThenDoLogin(BuildContext context) {
     if (context.read<LoginCubit>().formKey.currentState!.validate()) {
       context.read<LoginCubit>().emitLoginStates();
-      setState(() {
-        //  context.read<LoginCubit>().circaleLoadFlag = false;
-      });
-    } else {
-      setState(() {
-        // context.read<LoginCubit>().circaleLoadFlag = false;
-      });
     }
+  }
+
+  @override
+  void dispose() {
+    //context.read<LoginCubit>().close();
+    super.dispose();
   }
 }

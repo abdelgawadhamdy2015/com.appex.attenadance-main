@@ -18,7 +18,8 @@ import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart'
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
 import 'package:ttech_attendance/featchers/forget_password/forget_password_screen.dart';
 import 'package:ttech_attendance/featchers/home/ui/home.dart';
-import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
+import 'package:ttech_attendance/featchers/login/ui/login.dart';
+import 'package:ttech_attendance/featchers/login/ui/widget/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel.dart';
 import 'package:ttech_attendance/featchers/request/permission/logic/cubit/permission_cubit.dart';
@@ -124,7 +125,7 @@ class _MyAppState extends State<MyApp> {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<LoginCubit>(),
-            child: LoginScreen(
+            child: Login(
               changeLanguage: _changeLanguage,
             ),
           ),

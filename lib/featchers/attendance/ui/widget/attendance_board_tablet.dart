@@ -6,7 +6,6 @@ import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cub
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_state.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_state.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_list_item.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_list_item_tablet.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/send_attendance_block_listener.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';

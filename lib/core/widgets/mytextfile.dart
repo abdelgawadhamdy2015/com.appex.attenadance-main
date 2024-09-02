@@ -56,7 +56,8 @@ class MyTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        maxLines: maxLines?? 1,
+        style: inputTextStyle,
+        maxLines: maxLines ?? 1,
         enabled: enabled ?? true,
         onEditingComplete: onEditingComplete,
         onSaved: onSaved,
