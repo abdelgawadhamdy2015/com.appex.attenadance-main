@@ -15,7 +15,7 @@ class EventsApprovalsTablet extends StatelessWidget {
           children: [
             Text(
               S.of(context).eventsApprovals,
-              style: TextStyles.font30BlackBold,
+              style: TextStyles.font30BlueBold,
             ),
             const SizedBox(height: 16),
             // هنا يمكنك إضافة منطق عرض التنبيهات الحية من الباك اند
@@ -29,10 +29,10 @@ class EventsApprovalsTablet extends StatelessWidget {
                   return ListTile(
                     leading: const Icon(Icons.notification_important),
                     title: Text('تنبيه ${index + 1}',
-                        style: TextStyles.font16BlackBold),
+                        style: TextStyles.font28BlackBold),
                     subtitle: Text(
                       'تفاصيل التنبيه',
-                      style: TextStyles.font15Black54reguler,
+                      style: TextStyles.font28Blackreguler,
                     ),
                   );
                 },

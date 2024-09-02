@@ -15,12 +15,12 @@ class WelcomeWidgetTablet extends StatelessWidget {
       text: TextSpan(children: [
         TextSpan(
             text: "${S.of(context).welcome} , ",
-            style: TextStyles.font30BlackBold),
+            style: TextStyles.font28BlackBold),
         TextSpan(
             text: Intl.defaultLocale == MyConstants.arabic
                 ? context.read<HomeCubit>().data.empArabicName
                 : context.read<HomeCubit>().data.empLatinName,
-            style: TextStyles.font30BlackBold)
+            style: TextStyles.font28BlackBold)
       ]),
     );
   }

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_state.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_state.dart';
-import 'package:ttech_attendance/generated/l10n.dart';
-
-import '../../../../core/helpers/helper_methods.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_list_item.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_list_item_tablet.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/widget/send_attendance_block_listener.dart';
+import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 
 class AttendanceBoardTablet extends StatefulWidget {
   const AttendanceBoardTablet({super.key});
@@ -18,117 +19,89 @@ class AttendanceBoardTablet extends StatefulWidget {
 }
 
 class _AttendanceBoard extends State<AttendanceBoardTablet> {
+  bool isAttendance = true;
+  HeaderData data = HeaderData();
+  // Map<String, dynamic> map = {};
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AttendanceCubit, AttendanceState>(
-      builder: (context, state) {
-        if (state is Loading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        return SizedBox(
-          // key: context.read<AttendanceCubit>().formKey,
-          width: double.infinity,
-          child: Card(
-            child: Column(
-              children: [
-                Text(
-                  '${S
-                      .of(context)
-                      .attendanceRecord}  ${context
-                      .read<AttendanceCubit>()
-                      .data
-                      .shift1_TimeIn == "____" || context
-                      .read<AttendanceCubit>()
-                      .data
-                      .shift1_TimeIn == null ? "____" : getFormattedTimeOfDay(
-                      context
-                          .read<AttendanceCubit>()
-                          .data
-                          .shift1_TimeIn!, context)}',
-                  style: TextStyle(fontSize: 16.sp),
-                  textAlign: TextAlign.start,
-                ),
-                Text(
-                  '${S
-                      .of(context)
-                      .leaveRecord}  ${context
-                      .read<AttendanceCubit>()
-                      .data
-                      .shift1_TimeIn == "____" || context
-                      .read<AttendanceCubit>()
-                      .data
-                      .shift1_TimeOut == null ? "____" : getFormattedTimeOfDay(
-                      context
-                          .read<AttendanceCubit>()
-                          .data
-                          .shift1_TimeOut!, context)}',
-                  style: TextStyle(fontSize: 16.sp),
-                  textAlign: TextAlign.start,
-                ),
-                BlocBuilder<SendAttendanceCubit, SendAttendanceState>(
+    context.read<SendAttendanceCubit>().attendanceTime = DateTime(0);
+    return Padding(
+      padding: SizeConfig().getScreenPadding(),
+      child: Column(
+        children: [
+          const SendAttendanceBlockListener(),
+          BlocBuilder<AttendanceCubit, AttendanceState>(
+            builder: (context, state) {
+              data = context.read<SendAttendanceCubit>().data;
+              return BlocBuilder<SendAttendanceCubit, SendAttendanceState>(
                   builder: (context, state) {
-                    return Container(
-                      height: 60.h,
-                      width: double.infinity,
-                      margin: EdgeInsets.symmetric(
-                          vertical: 10.h, horizontal: 10.w),
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.h, horizontal: 10.w),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {});
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.r)),
-                          fixedSize: Size(100.w, 110.h),
-                          backgroundColor: Colors.blueGrey,
-                        ),
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: Text(
-                            context
-                                .read<AttendanceCubit>()
-                                .data
-                                .shift1_TimeIn ==
-                                "____" &&
-                                context
-                                    .read<AttendanceCubit>()
-                                    .data
-                                    .shift1_TimeIn !=
-                                    null
-                                ? S
-                                .of(context)
-                                .signIn
-                                : context
-                                .read<AttendanceCubit>()
-                                .data
-                                .shift1_TimeOut ==
-                                "____" &&
-                                context
-                                    .read<AttendanceCubit>()
-                                    .data
-                                    .shift1_TimeOut !=
-                                    null
-                                ? S
-                                .of(context)
-                                .signOut
-                                : S
-                                .of(context)
-                                .signIn,
-                            style: TextStyles.font25WhiteBold,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+                //map = data.toJson();
+                return IntrinsicHeight(
+                  child: Column(
+                    children: [
+                      AttendanceListItemTablet(
+                          shiftTimeIn: data.shift1_TimeIn,
+                          shiftTimeOut: data.shift1_TimeOut,
+                          shift: 1,
+                          shiftType: data.shiftType),
+                      !checkIfNull([
+                                data.shift1_TimeIn,
+                                data.shift1_TimeOut,
+                                data.hasShift2
+                              ]) &&
+                              (data.hasShift2! || data.shiftType == 1)
+                          ? AttendanceListItemTablet(
+                              shiftTimeIn: data.shift2_TimeIn,
+                              shiftTimeOut: data.shift2_TimeOut,
+                              shift1Complete: true,
+                              shift: 2,
+                              shiftType: data.shiftType!,
+                            )
+                          : Container(),
+                      !checkIfNull([
+                                data.shift1_TimeIn,
+                                data.shift1_TimeOut,
+                                data.shift2_TimeIn,
+                                data.shift2_TimeOut,
+                                data.hasShift3
+                              ]) &&
+                              (data.hasShift3! || data.shiftType == 1)
+                          ? AttendanceListItemTablet(
+                              shiftTimeIn: data.shift3_TimeIn,
+                              shiftTimeOut: data.shift3_TimeOut,
+                              shift1Complete: true,
+                              shift2Complete: true,
+                              shift: 3,
+                              shiftType: data.shiftType!)
+                          : Container(),
+                      !checkIfNull([
+                                data.shift1_TimeIn,
+                                data.shift1_TimeOut,
+                                data.shift2_TimeIn,
+                                data.shift2_TimeOut,
+                                data.shift3_TimeIn,
+                                data.shift3_TimeOut,
+                                data.hasShift4
+                              ]) &&
+                              (data.hasShift4! || data.shiftType == 1)
+                          ? AttendanceListItemTablet(
+                              shiftTimeIn: data.shift4_TimeIn,
+                              shiftTimeOut: data.shift4_TimeOut,
+                              shift1Complete: true,
+                              shift2Complete: true,
+                              shift3Complete: true,
+                              shift: 4,
+                              shiftType: data.shiftType!)
+                          : Container()
+                    ],
+                  ),
+                );
+              });
+            },
+          )
+        ],
+      ),
     );
-  }}
+  }
+}

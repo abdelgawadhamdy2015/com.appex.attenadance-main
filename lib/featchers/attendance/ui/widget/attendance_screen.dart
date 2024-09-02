@@ -18,7 +18,7 @@ import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bord.
 import 'package:ttech_attendance/featchers/attendance/ui/widget/work_time_board.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
-import '../logic/cubit/attendance_state.dart';
+import '../../logic/cubit/attendance_state.dart';
 
 class AttendanceScreen extends StatefulWidget {
   final Function(Locale) changeLanguage;

@@ -3,28 +3,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
+import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer_tablet.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
-import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar_tablet.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/my_drower_tablet.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_state.dart';
+import 'package:ttech_attendance/featchers/home/ui/widgets/attendance_log_tablet.dart';
+import 'package:ttech_attendance/featchers/home/ui/widgets/events_approvals_tablet.dart';
 import 'package:ttech_attendance/featchers/home/ui/widgets/header_block_listener.dart';
-import 'package:ttech_attendance/featchers/home/ui/widgets/welcome_widget.dart';
+import 'package:ttech_attendance/featchers/home/ui/widgets/quick_access_tablet.dart';
+import 'package:ttech_attendance/featchers/home/ui/widgets/welcome_widget_tablet.dart';
 
-import 'widgets/attendance_log.dart';
-import 'widgets/events_approvals.dart';
-import 'widgets/quick_access.dart';
-
-class HomeScreen extends StatefulWidget {
+class HomeScreenTablet extends StatefulWidget {
   final Function(Locale) changeLanguage;
 
-  const HomeScreen({super.key, required this.changeLanguage});
+  const HomeScreenTablet({super.key, required this.changeLanguage});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreenTablet> createState() => _HomeScreenTabletState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenTabletState extends State<HomeScreenTablet> {
   String token = '';
 
   @override
@@ -45,9 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(
-          changeLanguage: widget.changeLanguage, context: context, title: ""),
-      drawer: const Drawer(child: MyDrawer()),
+      appBar: MyAppBarTablet(
+        changeLanguage: widget.changeLanguage,
+        context: context,
+        title: "",
+      ),
+      drawer: const Drawer(
+        child: MyDrowerTablet(),
+      ),
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: _refreshData,
@@ -59,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
                   if (state is Loading) {
-                    return const HomeShimmer();
+                    return const HomeShimmerTablet();
                   }
                   return Padding(
                     key: context.read<HomeCubit>().formKey,
@@ -67,13 +73,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       children: [
                         verticalSpacing(SizeConfig.screenHeight! * .01),
-                        const WelcomeWidget(),
+                        const WelcomeWidgetTablet(),
                         verticalSpacing(SizeConfig.screenHeight! * .01),
-                        const AttendanceLog(),
+                        const AttendanceLogTablet(),
                         verticalSpacing(SizeConfig.screenHeight! * .01),
-                        const QuickAccess(),
+                        const QuickAccessTablet(),
                         verticalSpacing(SizeConfig.screenHeight! * .01),
-                        const EventsApprovals(),
+                        const EventsApprovalsTablet(),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

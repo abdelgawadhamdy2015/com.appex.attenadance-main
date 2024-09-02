@@ -12,11 +12,12 @@ import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/attendance.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_screen.dart';
 import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart';
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
 import 'package:ttech_attendance/featchers/forget_password/forget_password_screen.dart';
-import 'package:ttech_attendance/featchers/home/ui/home_screen.dart';
+import 'package:ttech_attendance/featchers/home/ui/home.dart';
 import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel.dart';
@@ -113,7 +114,7 @@ class _MyAppState extends State<MyApp> {
               BlocProvider(create: (context) => getIt<AttendanceCubit>()),
               BlocProvider(create: (context) => getIt<SendAttendanceCubit>())
             ],
-            child: AttendanceScreen(
+            child: Attendance(
               changeLanguage: _changeLanguage,
             ),
           ),
@@ -142,7 +143,7 @@ class _MyAppState extends State<MyApp> {
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(providers: [
                   BlocProvider(create: (context) => getIt<HomeCubit>()),
-                ], child: HomeScreen(changeLanguage: _changeLanguage)));
+                ], child: Home(changeLanguage: _changeLanguage)));
 
       case Routes.performancePanelScreen:
         return MaterialPageRoute(

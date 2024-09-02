@@ -41,10 +41,10 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           horizontalSpacing(SizeConfig.screenWidth! * .1),
-          const Icon(
+          Icon(
             Icons.logout_outlined,
             color: ColorManger.darkBlue,
-            size: 32,
+            size: SizeConfig.screenWidth! * .05,
           ),
         ]),
       ],

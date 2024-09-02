@@ -31,29 +31,55 @@ class TextStyles {
       fontWeight: FontWeightHelper.bold,
       color: ColorManger.lightGray);
 
-      static TextStyle font14blueNormal = TextStyle(
+  static TextStyle font14blueNormal = TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeightHelper.bold,
       color: ColorManger.darkBlue);
 
-  static TextStyle font14blackReguler = TextStyle(
-      fontSize: 14.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);
-  static TextStyle font30BlackBold = TextStyle(
+  static TextStyle font30BlueBold = TextStyle(
       fontSize: 30.sp,
       fontWeight: FontWeightHelper.reguler,
+      color: Colors.blue);
+
+  static TextStyle font14blackReguler = TextStyle(
+      fontSize: 14.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);
+
+  static TextStyle font28BlackBold = TextStyle(
+      fontSize: 28.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);
+
+  static TextStyle font28Blackreguler = TextStyle(
+      fontSize: 28.sp,
+      fontWeight: FontWeightHelper.reguler,
       color: Colors.black);
+
+  static TextStyle font28whiteReguler = TextStyle(
+      fontSize: 28.sp,
+      fontWeight: FontWeightHelper.reguler,
+      color: Colors.white);
 
   static TextStyle font15Black54reguler = TextStyle(
       fontSize: 15.sp,
       fontWeight: FontWeightHelper.reguler,
       color: Colors.black54);
+
   static TextStyle font15lightGreen54reguler = TextStyle(
       fontSize: 15.sp,
       fontWeight: FontWeightHelper.reguler,
       color: ColorManger.lightGreen);
-       static TextStyle font15lightred54reguler = TextStyle(
+
+  static TextStyle font28lightGreenBold = TextStyle(
+      fontSize: 28.sp,
+      fontWeight: FontWeightHelper.bold,
+      color: ColorManger.lightGreen);
+
+  static TextStyle font15lightred54reguler = TextStyle(
       fontSize: 15.sp,
       fontWeight: FontWeightHelper.reguler,
+      color: ColorManger.lightred);
+
+  static TextStyle font28lightredBold = TextStyle(
+      fontSize: 28.sp,
+      fontWeight: FontWeightHelper.bold,
       color: ColorManger.lightred);
   static TextStyle font15Red54reguler = TextStyle(
       fontSize: 15.sp,
@@ -66,15 +92,13 @@ class TextStyles {
   static TextStyle font18BlackBold = TextStyle(
       fontSize: 18.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);
 
-  static TextStyle font35BlackBold = TextStyle(
-      fontSize: 35.sp,
+  static TextStyle font30BlackBold = TextStyle(
+      fontSize: 30.sp,
       fontWeight: FontWeightHelper.bold,
       color: Colors.black54);
 
   static TextStyle font20BlackBold = TextStyle(
-      fontSize: 20.sp,
-      fontWeight: FontWeightHelper.bold,
-      color: Colors.black54);
+      fontSize: 20.sp, fontWeight: FontWeightHelper.bold, color: Colors.black);
   static TextStyle font20Black54reguler = TextStyle(
       fontSize: 20.sp,
       fontWeight: FontWeightHelper.reguler,

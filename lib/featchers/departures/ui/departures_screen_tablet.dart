@@ -14,7 +14,7 @@ class DeparturesScreenTablet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBarTablet(
-        tiltle: MyConstants.mydepatures,
+        title: MyConstants.mydepatures,
         context: context,
         changeLanguage: changeLanguage,
       ),

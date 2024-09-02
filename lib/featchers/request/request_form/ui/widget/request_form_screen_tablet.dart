@@ -75,177 +75,171 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
       appBar: MyAppBarTablet(
           changeLanguage: widget.changeLanguage,
           context: context,
-          tiltle: MyConstants.myRequests),
+          title: MyConstants.myRequests),
       drawer: const Drawer(child: MyDrawer()),
-      body: 
-     SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: context.read<RequestVaccationCubit>().formKey,
-              child: Column(
-                children: [
-                  BlocBuilder<AllVaccationsCubit, AllVaccationsState>(
-                    builder: (context, state) {
-                      if (state is Loading) {
-                        return const CircularProgressIndicator();
-                      } else if (state is Success) {
-                        return DropdownButton<String>(
-                          isExpanded: true,
-                          padding: EdgeInsets.symmetric(
-                            vertical: MediaQuery.of(context).size.height * .03,
-                            horizontal: MediaQuery.of(context).size.width * .04,
-                          ),
-                          key: context.read<AllVaccationsCubit>().formKey,
-                          // decoration: InputDecoration(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: context.read<RequestVaccationCubit>().formKey,
+            child: Column(
+              children: [
+                BlocBuilder<AllVaccationsCubit, AllVaccationsState>(
+                  builder: (context, state) {
+                    if (state is Loading) {
+                      return const CircularProgressIndicator();
+                    } else if (state is Success) {
+                      return DropdownButton<String>(
+                        isExpanded: true,
+                        padding: EdgeInsets.symmetric(
+                          vertical: MediaQuery.of(context).size.height * .03,
+                          horizontal: MediaQuery.of(context).size.width * .04,
+                        ),
+                        key: context.read<AllVaccationsCubit>().formKey,
+                        // decoration: InputDecoration(
 
-                          //   labelText: S.of(context).kindOfHolidy,
-                          //   labelStyle: TextStyles.font20Black54reguler,
-                          //   border: const OutlineInputBorder(),
-                          //   contentPadding: EdgeInsets.symmetric(
-                          //     vertical:
-                          //         MediaQuery.of(context).size.height * .03,
-                          //     horizontal:
-                          //         MediaQuery.of(context).size.width * .04,
-                          //   ),
-                          // ),
-                          value: _selectedLeaveType,
-                          items: context
+                        //   labelText: S.of(context).kindOfHolidy,
+                        //   labelStyle: TextStyles.font20Black54reguler,
+                        //   border: const OutlineInputBorder(),
+                        //   contentPadding: EdgeInsets.symmetric(
+                        //     vertical:
+                        //         MediaQuery.of(context).size.height * .03,
+                        //     horizontal:
+                        //         MediaQuery.of(context).size.width * .04,
+                        //   ),
+                        // ),
+                        value: _selectedLeaveType,
+                        items: context
+                            .read<AllVaccationsCubit>()
+                            .vacctionsName
+                            .toSet()
+                            .map((type) {
+                              return DropdownMenuItem<String>(
+                                value: type,
+                                child: Text(
+                                  type,
+                                  style: TextStyles.font20BlackBold,
+                                ),
+                              );
+                            })
+                            .toSet()
+                            .toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedLeaveType = newValue;
+                          });
+
+                          vaccationId = context
                               .read<AllVaccationsCubit>()
-                              .vacctionsName
-                              .toSet()
-                              .map((type) {
-                                return DropdownMenuItem<String>(
-                                  value: type,
-                                  child: Text(
-                                    type,
-                                    style: TextStyles.font20BlackBold,
-                                  ),
-                                );
-                              })
-                              .toSet()
-                              .toList(),
-                          onChanged: (newValue) {
-                            setState(() {
-                              _selectedLeaveType = newValue;
-                            });
-
-                            vaccationId = context
-                                .read<AllVaccationsCubit>()
-                                .vaccations
-                                .where((v) => v.arabicName == newValue)
-                                .first
-                                .id!;
-                          },
-                        );
-                      } else {
-                        return Text(S.of(context).noDateFound);
-                      }
-                    },
-                  ),
-                  const AllVaccationsListener(),
-                  verticalSpacing(MediaQuery.of(context).size.height * .05),
-                  TextFormField(
-                    readOnly: true,
-                    decoration: InputDecoration(
-                        labelText: S.of(context).fromDate,
-                        labelStyle: TextStyles.font20Black54reguler,
-                        border: const OutlineInputBorder(),
-                        suffixIcon: Icon(
-                          Icons.calendar_month_outlined,
-                          size: MediaQuery.of(context).size.width * .1,
-                        )),
-                    onTap: () => _pickDate(context, true),
-                    controller: TextEditingController(
-                      text: _startDate != null
-                          ? Intl.defaultLocale == MyConstants.english
-                              ? DateFormat('yyyy-MM-dd').format(_startDate!)
-                              : DateFormat("dd-MM-yyyy").format(_startDate!)
-                          : '',
-                    ),
-                    style: TextStyles.font20Black54reguler,
-                  ),
-                  verticalSpacing(MediaQuery.of(context).size.height * .05),
-                  TextFormField(
-                    style: TextStyles.font20Black54reguler,
-                    readOnly: true,
-                    decoration: InputDecoration(
-                        labelText: S.of(context).toDate,
-                        labelStyle: TextStyles.font20Black54reguler,
-                        border: const OutlineInputBorder(),
-                        suffixIcon: Icon(
-                          Icons.calendar_month_outlined,
-                          size: MediaQuery.of(context).size.width * .1,
-                        )),
-                    onTap: () => _pickDate(context, false),
-                    controller: TextEditingController(
-                      text: _endDate != null
-                          ? Intl.defaultLocale == MyConstants.english
-                              ? DateFormat('yyyy-MM-dd').format(_endDate!)
-                              : DateFormat("dd-MM-yyyy").format(_endDate!)
-                          : '',
-                    ),
-                  ),
-                  verticalSpacing(MediaQuery.of(context).size.height * .05),
-                  Text(
-                    "$_duration  ${S.of(context).days}",
-                    style: TextStyles.font20Black54reguler,
-                  ),
-                  verticalSpacing(MediaQuery.of(context).size.height * .05),
-                  TextField(
-                    controller: notesController,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).notes,
+                              .vaccations
+                              .where((v) => v.arabicName == newValue)
+                              .first
+                              .id!;
+                        },
+                      );
+                    } else {
+                      return Text(S.of(context).noDateFound);
+                    }
+                  },
+                ),
+                const AllVaccationsListener(),
+                verticalSpacing(MediaQuery.of(context).size.height * .05),
+                TextFormField(
+                  readOnly: true,
+                  decoration: InputDecoration(
+                      labelText: S.of(context).fromDate,
                       labelStyle: TextStyles.font20Black54reguler,
                       border: const OutlineInputBorder(),
-                    ),
-                    maxLines: 3,
+                      suffixIcon: Icon(
+                        Icons.calendar_month_outlined,
+                        size: MediaQuery.of(context).size.width * .1,
+                      )),
+                  onTap: () => _pickDate(context, true),
+                  controller: TextEditingController(
+                    text: _startDate != null
+                        ? Intl.defaultLocale == MyConstants.english
+                            ? DateFormat('yyyy-MM-dd').format(_startDate!)
+                            : DateFormat("dd-MM-yyyy").format(_startDate!)
+                        : '',
                   ),
-                  verticalSpacing(MediaQuery.of(context).size.height * .02),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        vertical: MediaQuery.of(context).size.height * .05,
-                        horizontal: MediaQuery.of(context).size.width * .05),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            validateThenAddVaccation(context);
-                          },
-                          child: Text(
-                            S.of(context).send,
-                            style: TextStyles.font22BlueBold,
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            context.pop();
-                          },
-                          child: Text(
-                            S.of(context).cancel,
-                            style: TextStyles.font22BlueBold,
-                          ),
-                        ),
-                      ],
-                    ),
+                  style: TextStyles.font20Black54reguler,
+                ),
+                verticalSpacing(MediaQuery.of(context).size.height * .05),
+                TextFormField(
+                  style: TextStyles.font20Black54reguler,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                      labelText: S.of(context).toDate,
+                      labelStyle: TextStyles.font20Black54reguler,
+                      border: const OutlineInputBorder(),
+                      suffixIcon: Icon(
+                        Icons.calendar_month_outlined,
+                        size: MediaQuery.of(context).size.width * .1,
+                      )),
+                  onTap: () => _pickDate(context, false),
+                  controller: TextEditingController(
+                    text: _endDate != null
+                        ? Intl.defaultLocale == MyConstants.english
+                            ? DateFormat('yyyy-MM-dd').format(_endDate!)
+                            : DateFormat("dd-MM-yyyy").format(_endDate!)
+                        : '',
                   ),
-                  const RequestBlockListener()
-                ],
-              ),
+                ),
+                verticalSpacing(MediaQuery.of(context).size.height * .05),
+                Text(
+                  "$_duration  ${S.of(context).days}",
+                  style: TextStyles.font20Black54reguler,
+                ),
+                verticalSpacing(MediaQuery.of(context).size.height * .05),
+                TextField(
+                  controller: notesController,
+                  decoration: InputDecoration(
+                    labelText: S.of(context).notes,
+                    labelStyle: TextStyles.font20Black54reguler,
+                    border: const OutlineInputBorder(),
+                  ),
+                  maxLines: 3,
+                ),
+                verticalSpacing(MediaQuery.of(context).size.height * .02),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.height * .05,
+                      horizontal: MediaQuery.of(context).size.width * .05),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          validateThenAddVaccation(context);
+                        },
+                        child: Text(
+                          S.of(context).send,
+                          style: TextStyles.font22BlueBold,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.pop();
+                        },
+                        child: Text(
+                          S.of(context).cancel,
+                          style: TextStyles.font22BlueBold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const RequestBlockListener()
+              ],
             ),
           ),
         ),
-      )
-    ;
+      ),
+    );
   }
 
-  
-
   getAllVaccations(BuildContext context) {
-    context
-        .read<AllVaccationsCubit>()
-        .emitAllVaccationsState();
+    context.read<AllVaccationsCubit>().emitAllVaccationsState();
   }
 
   void validateThenAddVaccation(BuildContext context) {
@@ -255,12 +249,12 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
         .currentState!
         .validate()) {
       context.read<RequestVaccationCubit>().emitRequestVaccationState(
-          RequestVaccation(
-              vaccationId: vaccationId,
-              isMobile: true,
-              dateFrom: _startDate.toString(),
-              dateTo: _endDate.toString(),
-              note: notesController.text),
+            RequestVaccation(
+                vaccationId: vaccationId,
+                isMobile: true,
+                dateFrom: _startDate.toString(),
+                dateTo: _endDate.toString(),
+                note: notesController.text),
           );
     }
   }
@@ -268,4 +262,6 @@ class RequestFormScreenState extends State<RequestFormScreenTablet> {
   void clear() {
     setState(() {
       notesController.clear();
-    });}}
+    });
+  }
+}
