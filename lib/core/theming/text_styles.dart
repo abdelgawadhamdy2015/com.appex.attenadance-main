@@ -100,7 +100,7 @@ class TextStyles {
   static TextStyle font20Black54reguler = TextStyle(
       fontSize: 20.sp,
       fontWeight: FontWeightHelper.reguler,
-      color: Colors.black54);
+      color: Colors.black);
 
   static TextStyle font12black54Reguler = TextStyle(
       fontSize: 12.sp,

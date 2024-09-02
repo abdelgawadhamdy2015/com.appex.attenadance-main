@@ -6,8 +6,8 @@ import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
-class ShiftWidget extends StatelessWidget {
-  const ShiftWidget({
+class ShiftWidgetTablet extends StatelessWidget {
+  const ShiftWidgetTablet({
     super.key,
     required this.shift,
     required this.shiftTimeIn,
@@ -40,15 +40,20 @@ class ShiftWidget extends StatelessWidget {
                       children: [
                         Expanded(
                             flex: 1,
-                            child: Text(S
-                                .of(navigatorKey.currentContext!)
-                                .attendanceTime)),
+                            child: Text(
+                                S
+                                    .of(navigatorKey.currentContext!)
+                                    .attendanceTime,
+                                style: TextStyles.font28Blackreguler)),
                         horizontalSpacing(SizeConfig.screenWidth! * .04),
                         const Expanded(
                             flex: 1, child: Icon(Icons.move_down_sharp))
                       ],
                     ),
-                    Text(shiftTimeIn ?? ""),
+                    Text(
+                      shiftTimeIn ?? "",
+                      style: TextStyles.font28Blackreguler,
+                    ),
                     verticalSpacing(SizeConfig.screenHeight! * .005),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -56,12 +61,14 @@ class ShiftWidget extends StatelessWidget {
                         Expanded(
                             flex: 1,
                             child: Text(
-                                S.of(navigatorKey.currentContext!).leaveTime)),
+                                S.of(navigatorKey.currentContext!).leaveTime,
+                                style: TextStyles.font28Blackreguler)),
                         horizontalSpacing(SizeConfig.screenWidth! * .04),
                         const Expanded(flex: 1, child: Icon(Icons.move_up))
                       ],
                     ),
-                    Text(shiftTimeOut ?? ""),
+                    Text(shiftTimeOut ?? "",
+                        style: TextStyles.font28Blackreguler),
                     verticalSpacing(SizeConfig.screenHeight! * .005),
                   ],
                 ),
@@ -70,10 +77,12 @@ class ShiftWidget extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.screenWidth! * .005,
+                      vertical: SizeConfig.screenHeight! * .005),
                   child: Text(
                     getShift(shift, navigatorKey.currentContext!),
-                    style: TextStyles.font12black54Reguler,
+                    style: TextStyles.font28Blackreguler,
                   ),
                 ),
               )

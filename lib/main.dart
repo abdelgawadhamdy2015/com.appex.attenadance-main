@@ -21,7 +21,8 @@ import 'package:ttech_attendance/featchers/home/ui/home.dart';
 import 'package:ttech_attendance/featchers/login/ui/login.dart';
 import 'package:ttech_attendance/featchers/login/ui/widget/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/performance.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_panel.dart';
 import 'package:ttech_attendance/featchers/request/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/request/permission/ui/widgets/check_box_state.dart';
 import 'package:ttech_attendance/featchers/request/request_screen.dart';
@@ -150,7 +151,7 @@ class _MyAppState extends State<MyApp> {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<PerformanceEmployeeCubit>(),
-                  child: PerformancePanel(
+                  child: Performance(
                     changeLanguage: _changeLanguage,
                   ),
                 ));

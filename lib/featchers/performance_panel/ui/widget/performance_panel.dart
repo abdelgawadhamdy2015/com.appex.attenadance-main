@@ -14,7 +14,7 @@ import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/perform
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_block_listener.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/perfromance_list_view.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
-import '../../../core/helpers/helper_methods.dart';
+import '../../../../core/helpers/helper_methods.dart';
 
 class PerformancePanel extends StatefulWidget {
   final Function(Locale) changeLanguage;
