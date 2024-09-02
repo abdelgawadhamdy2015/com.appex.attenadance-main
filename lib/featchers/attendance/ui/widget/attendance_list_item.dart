@@ -59,7 +59,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
     checkIfNull([widget.shiftTimeIn])
         ? isAttendance = true
         : isAttendance = false;
-    return Padding(
+    return Container(
       padding: SizeConfig().getScreenPadding(),
       child: SizedBox(
         width: double.infinity,
@@ -211,10 +211,11 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
       setState(() {
         _isButtonVisible = false;
       });
-    }
-
-    Future.delayed(const Duration(seconds: 2), () {
+       Future.delayed(const Duration(seconds: 2), () {
       checkTime();
     });
+    }
+
+   
   }
 }

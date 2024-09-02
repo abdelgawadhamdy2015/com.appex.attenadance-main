@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
+import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/departures_shimmer.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
@@ -43,14 +45,43 @@ class PerfromanceListView extends StatelessWidget {
                 return Card(
                   child: ListTile(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DayPanel(
-                            day: days[index],
-                          ),
-                        ),
-                      );
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: DayPanel(day: days[index]),
+                              actions: [
+                                Row(
+                                  mainAxisAlignment:
+                                      Intl.defaultLocale == MyConstants.arabic
+                                          ? MainAxisAlignment.start
+                                          : MainAxisAlignment.end,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () async {
+                                        context.pop();
+                                      },
+                                      child: Text(
+                                        textAlign: TextAlign.center,
+                                        S
+                                            .of(navigatorKey.currentContext!)
+                                            .okDialog,
+                                        style: TextStyles.font16BlackBold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          });
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => DayPanel(
+                      //       day: days[index],
+                      //     ),
+                      //   ),
+                      // );
                     },
                     title: Row(
                       children: [

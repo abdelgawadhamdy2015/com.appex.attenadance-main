@@ -50,34 +50,5 @@ class MyDrawer extends StatelessWidget {
     );
   }
 
-  void showAlertDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Confirmation'),
-          content:
-              const Text('Are you sure you want to go to the login screen?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-                SharedPrefHelper.clearAllData();
-                SharedPrefHelper.clearAllSecuredData();
-                context.pushReplacementNamed("/");
-                // .pushNamed("/"); // Navigate to login screen
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  
 }
