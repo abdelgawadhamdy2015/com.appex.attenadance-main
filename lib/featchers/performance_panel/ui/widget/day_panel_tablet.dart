@@ -8,7 +8,6 @@ import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/widget/shift_widget.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/shift_widget_tablet.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 

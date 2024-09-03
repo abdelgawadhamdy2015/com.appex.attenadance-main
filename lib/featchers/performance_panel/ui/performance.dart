@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_screen.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_screen_tablet.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_panel.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_panel_tablet.dart';
 

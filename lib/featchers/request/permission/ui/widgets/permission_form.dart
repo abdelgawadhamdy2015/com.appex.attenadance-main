@@ -19,16 +19,16 @@ import 'package:ttech_attendance/featchers/request/permission/ui/widgets/check_b
 import 'package:ttech_attendance/featchers/request/permission/ui/widgets/list_shift_item.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
-class PermissionScreen extends StatefulWidget {
-  const PermissionScreen({
+class PermissionForm extends StatefulWidget {
+  const PermissionForm({
     super.key,
   });
 
   @override
-  State<PermissionScreen> createState() => _PermissionScreenState();
+  State<PermissionForm> createState() => _PermissionFormState();
 }
 
-class _PermissionScreenState extends State<PermissionScreen> {
+class _PermissionFormState extends State<PermissionForm> {
   String? _selectedEmployee;
   DateTime _selectedDate = DateTime.now();
   String _permissionType = MyConstants.temporary;

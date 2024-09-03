@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
@@ -20,18 +21,16 @@ import 'package:ttech_attendance/featchers/request/request_form/ui/widget/all_va
 import 'package:ttech_attendance/featchers/request/request_form/ui/widget/request_block_listener.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
-import '../../../../core/helpers/size_config.dart';
-
-class RequestFormScreen extends StatefulWidget {
-  const RequestFormScreen({
+class RequestFormScreenTablet extends StatefulWidget {
+  const RequestFormScreenTablet({
     super.key,
   });
 
   @override
-  RequestFormScreenState createState() => RequestFormScreenState();
+  RequestFormScreenTabletState createState() => RequestFormScreenTabletState();
 }
 
-class RequestFormScreenState extends State<RequestFormScreen> {
+class RequestFormScreenTabletState extends State<RequestFormScreenTablet> {
   String? _selectedLeaveType;
   DateTime? _startDate;
   DateTime? _endDate;
@@ -96,50 +95,57 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                     if (state is Loading) {
                       return const CircularProgressIndicator();
                     } else if (state is Success) {
-                      return DropdownButtonFormField(
-                        onSaved: (newValue) => _selectedLeaveType = newValue,
-                        validator: (value) {
-                          return value == null || value.isEmpty
-                              ? S.of(context).holidayNotSelected
-                              : null;
-                        },
-                        borderRadius: BorderRadius.all(Radius.circular(.8.r)),
-                        key: context.read<AllVaccationsCubit>().formKey,
-                        decoration: InputDecoration(
-                          labelText: S.of(context).kindOfHoliday,
-                          labelStyle: TextStyles.font14blackReguler,
-                          border: const OutlineInputBorder(),
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: SizeConfig.screenWidth! * .02,
-                              vertical: SizeConfig.screenHeight! * .01),
+                      return Transform.scale(
+                        scaleY: 1.5,
+                        child: DropdownButtonFormField(
+                          onSaved: (newValue) => _selectedLeaveType = newValue,
+                          validator: (value) {
+                            return value == null || value.isEmpty
+                                ? S.of(context).holidayNotSelected
+                                : null;
+                          },
+                          borderRadius: BorderRadius.all(Radius.circular(.8.r)),
+                          key: context.read<AllVaccationsCubit>().formKey,
+                          decoration: InputDecoration(
+                            hintStyle: TextStyles.font28Blackreguler,
+                            labelText: S.of(context).kindOfHoliday,
+                            labelStyle: TextStyles.font20Black54reguler,
+                            border: const OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.screenWidth! * .02,
+                                vertical: SizeConfig.screenHeight! * .01),
+                          ),
+                          value: _selectedLeaveType,
+                          items: context
+                              .read<AllVaccationsCubit>()
+                              .vacctionsName
+                              .map((String type) {
+                            return DropdownMenuItem<String>(
+                              value: type,
+                              child: Text(
+                                type,
+                                style: TextStyles.font20Black54reguler,
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedLeaveType = newValue;
+                              vaccationId = context
+                                  .read<AllVaccationsCubit>()
+                                  .vaccations
+                                  .where((v) => v.arabicName == newValue)
+                                  .first
+                                  .id!;
+                            });
+                          },
                         ),
-                        value: _selectedLeaveType,
-                        items: context
-                            .read<AllVaccationsCubit>()
-                            .vacctionsName
-                            .map((String type) {
-                          return DropdownMenuItem<String>(
-                            value: type,
-                            child: Text(
-                              type,
-                              style: TextStyles.font14blackReguler,
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedLeaveType = newValue;
-                            vaccationId = context
-                                .read<AllVaccationsCubit>()
-                                .vaccations
-                                .where((v) => v.arabicName == newValue)
-                                .first
-                                .id!;
-                          });
-                        },
                       );
                     } else {
-                      return Text(S.of(context).noDateFound);
+                      return Text(
+                        S.of(context).noDateFound,
+                        style: TextStyles.font28Blackreguler,
+                      );
                     }
                   },
                 ),
@@ -149,6 +155,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                   fillColor: Colors.transparent,
                   readOnly: true,
                   labelText: S.of(context).fromDate,
+                  hintStyle: TextStyles.font28Blackreguler,
                   suffixIcon: Container(
                     color: ColorManger.moreMutedBlue,
                     height: SizeConfig.screenHeight! * .07,
@@ -166,7 +173,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                             : DateFormat("dd-MM-yyyy").format(_startDate!)
                         : '',
                   ),
-                  inputTextStyle: TextStyles.font12black54Reguler,
+                  inputTextStyle: TextStyles.font28Blackreguler,
                 ),
                 verticalSpacing(SizeConfig.screenHeight! * .02),
                 MyTextForm(
@@ -174,6 +181,8 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                   fillColor: Colors.transparent,
                   readOnly: true,
                   labelText: S.of(context).toDate,
+                  hintStyle: TextStyles.font28Blackreguler,
+                  inputTextStyle: TextStyles.font28Blackreguler,
                   suffixIcon: Container(
                     color: ColorManger.moreMutedBlue,
                     height: SizeConfig.screenHeight! * .07,
@@ -201,14 +210,16 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                   readOnly: true,
                   hint:
                       " ${_duration.isNotEmpty ? "  $_duration " : S.of(context).duration}",
-                  hintStyle: TextStyles.font14blackReguler,
+                  hintStyle: TextStyles.font28Blackreguler,
+                  inputTextStyle: TextStyles.font28Blackreguler,
                 ),
                 verticalSpacing(SizeConfig.screenHeight! * .02),
                 MyTextForm(
                   fillColor: Colors.transparent,
                   controller: notesController,
                   labelText: S.of(context).notes,
-                  hintStyle: TextStyles.font15Black54reguler,
+                  hintStyle: TextStyles.font28Blackreguler,
+                  inputTextStyle: TextStyles.font28Blackreguler,
                   maxLines: 3,
                   validator: (p0) => null,
                 ),
@@ -226,7 +237,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                                 backGroundColor: ColorManger.lighterGreen,
                                 buttonWidth: SizeConfig.screenWidth! * .3,
                                 butonText: S.of(context).send,
-                                textStyle: TextStyles.font15WhiteBold,
+                                textStyle: TextStyles.font28whiteReguler,
                                 onPressed: () {
                                   validateThenAddVaccation(context);
                                 },
@@ -237,7 +248,7 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                       backGroundColor: ColorManger.darkRed,
                       buttonWidth: SizeConfig.screenWidth! * .3,
                       butonText: S.of(context).cancel,
-                      textStyle: TextStyles.font15WhiteBold,
+                      textStyle: TextStyles.font28whiteReguler,
                       onPressed: () {
                         context.pushReplacementNamed(Routes.homeScreen);
                       },

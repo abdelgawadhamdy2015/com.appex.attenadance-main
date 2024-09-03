@@ -13,7 +13,6 @@ import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_state.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/widget/day_panel.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/day_panel_tablet.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 

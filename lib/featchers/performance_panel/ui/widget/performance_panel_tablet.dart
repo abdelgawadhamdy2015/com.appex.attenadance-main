@@ -5,9 +5,7 @@ import 'package:ttech_attendance/core/helpers/print_transactions.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
-import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar_tablet.dart';
-import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drower_tablet.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_model.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
@@ -15,7 +13,6 @@ import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/perform
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_state.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_block_listener.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_list_view_tablet.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/widget/perfromance_list_view.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 import '../../../../core/helpers/helper_methods.dart';
 

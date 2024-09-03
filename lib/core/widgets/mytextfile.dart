@@ -69,6 +69,7 @@ class MyTextForm extends StatelessWidget {
             },
         controller: controller,
         decoration: InputDecoration(
+          labelStyle: hintStyle,
           labelText: labelText,
           fillColor: fillColor ?? ColorManger.morelightGray,
           filled: true,

@@ -13,19 +13,16 @@ import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/attendance.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_screen.dart';
 import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart';
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
 import 'package:ttech_attendance/featchers/forget_password/forget_password_screen.dart';
 import 'package:ttech_attendance/featchers/home/ui/home.dart';
 import 'package:ttech_attendance/featchers/login/ui/login.dart';
-import 'package:ttech_attendance/featchers/login/ui/widget/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/performance.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_panel.dart';
+import 'package:ttech_attendance/featchers/request/my_requests.dart';
 import 'package:ttech_attendance/featchers/request/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/request/permission/ui/widgets/check_box_state.dart';
-import 'package:ttech_attendance/featchers/request/request_screen.dart';
 import 'package:ttech_attendance/featchers/request/request_form/logic/cubit/all_vaccations_cubit.dart';
 import 'package:ttech_attendance/featchers/splash/splash_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
@@ -165,7 +162,7 @@ class _MyAppState extends State<MyApp> {
                       create: (context) => getIt<AllVaccationsCubit>()),
                   BlocProvider(create: (context) => getIt<PermissionCubit>()),
                   ChangeNotifierProvider(create: (context) => CheckboxState()),
-                ], child: RequestScreen(changeLanguage: _changeLanguage)));
+                ], child: MyRequests(changeLanguage: _changeLanguage)));
 
       // case Routes.permissionScreen:
       //   return MaterialPageRoute(
