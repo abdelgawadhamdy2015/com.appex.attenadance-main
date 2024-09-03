@@ -23,7 +23,7 @@ class QuickAccess extends StatelessWidget {
           children: [
             Text(
               S.of(context).quickAccessList,
-              style: TextStyles.font15BlueBold,
+              style: TextStyles.darkBlueBoldStyle(SizeConfig.fontSize4!),
             ),
             verticalSpacing(SizeConfig.screenHeight! * .016),
             GridView.count(
@@ -65,51 +65,45 @@ class QuickAccess extends StatelessWidget {
       String icon, String label, BuildContext context, String id) {
     return Card(
       color: Colors.white,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-            horizontal: SizeConfig.screenWidth! * .005,
-            vertical: SizeConfig.screenHeight! * .005),
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                switch (id) {
-                  case MyConstants.myTransactions:
-                    context.pushReplacementNamed(Routes.attendaceScreen);
-                  case MyConstants.myRequests:
-                    context.pushReplacementNamed(Routes.requestFormScreen);
-                  case MyConstants.attendanceAndDepartureReports:
-                    context.pushReplacementNamed(Routes.performancePanelScreen);
-                  case MyConstants.credits:
-                  //context.pushReplacementNamed(Routes.departuresScreen);
-                  case MyConstants.salaries:
-                  //context.pushReplacementNamed(Routes.permissionScreen);
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.screenWidth! * .01,
-                    vertical: SizeConfig.screenHeight! * .01),
-              ),
-              child: Image.asset(
-                icon,
-                height: SizeConfig.screenHeight! * .04,
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              switch (id) {
+                case MyConstants.myTransactions:
+                  context.pushReplacementNamed(Routes.attendaceScreen);
+                case MyConstants.myRequests:
+                  context.pushReplacementNamed(Routes.requestFormScreen);
+                case MyConstants.attendanceAndDepartureReports:
+                  context.pushReplacementNamed(Routes.performancePanelScreen);
+                case MyConstants.credits:
+                //context.pushReplacementNamed(Routes.departuresScreen);
+                case MyConstants.salaries:
+                //context.pushReplacementNamed(Routes.permissionScreen);
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
+              padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.screenWidth! * .01,
+                  vertical: SizeConfig.screenHeight! * .005),
             ),
-            const Spacer(),
-            FittedBox(
-              fit: BoxFit.cover,
-              child: Text(
-                label,
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyles.font12blackBold,
-              ),
+            child: Image.asset(
+              icon,
+              height: SizeConfig.screenHeight! * .07,
             ),
-          ],
-        ),
+          ),
+          FittedBox(
+            fit: BoxFit.cover,
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+            ),
+          ),
+        ],
       ),
     );
   }

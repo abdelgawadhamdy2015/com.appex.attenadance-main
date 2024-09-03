@@ -22,16 +22,16 @@ import 'package:ttech_attendance/generated/l10n.dart';
 
 import '../../../../../core/helpers/size_config.dart';
 
-class RequestFormScreen extends StatefulWidget {
-  const RequestFormScreen({
+class RequestForm extends StatefulWidget {
+  const RequestForm({
     super.key,
   });
 
   @override
-  RequestFormScreenState createState() => RequestFormScreenState();
+  RequestFormState createState() => RequestFormState();
 }
 
-class RequestFormScreenState extends State<RequestFormScreen> {
+class RequestFormState extends State<RequestForm> {
   String? _selectedLeaveType;
   DateTime? _startDate;
   DateTime? _endDate;
@@ -97,17 +97,18 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                       return const CircularProgressIndicator();
                     } else if (state is Success) {
                       return DropdownButtonFormField(
-                        onSaved: (newValue) => _selectedLeaveType = newValue,
                         validator: (value) {
                           return value == null || value.isEmpty
                               ? S.of(context).holidayNotSelected
                               : null;
                         },
+                        iconSize: SizeConfig.iconSize5!,
                         borderRadius: BorderRadius.all(Radius.circular(.8.r)),
                         key: context.read<AllVaccationsCubit>().formKey,
                         decoration: InputDecoration(
                           labelText: S.of(context).kindOfHoliday,
-                          labelStyle: TextStyles.font14blackReguler,
+                          labelStyle:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                           border: const OutlineInputBorder(),
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: SizeConfig.screenWidth! * .02,
@@ -122,7 +123,8 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                             value: type,
                             child: Text(
                               type,
-                              style: TextStyles.font14blackReguler,
+                              style: TextStyles.blackBoldStyle(
+                                  SizeConfig.fontSize3!),
                             ),
                           );
                         }).toList(),
@@ -139,12 +141,18 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                         },
                       );
                     } else {
-                      return Text(S.of(context).noDateFound);
+                      return Text(S.of(context).noDateFound,
+                          style:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize3!));
                     }
                   },
                 ),
                 verticalSpacing(20),
                 MyTextForm(
+                  hintStyle:
+                      TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                  inputTextStyle:
+                      TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                   excep: S.of(context).fromDate,
                   fillColor: Colors.transparent,
                   readOnly: true,
@@ -166,10 +174,13 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                             : DateFormat("dd-MM-yyyy").format(_startDate!)
                         : '',
                   ),
-                  inputTextStyle: TextStyles.font12black54Reguler,
                 ),
                 verticalSpacing(SizeConfig.screenHeight! * .02),
                 MyTextForm(
+                  hintStyle:
+                      TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                  inputTextStyle:
+                      TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                   excep: S.of(context).toDate,
                   fillColor: Colors.transparent,
                   readOnly: true,
@@ -201,14 +212,20 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                   readOnly: true,
                   hint:
                       " ${_duration.isNotEmpty ? "  $_duration " : S.of(context).duration}",
-                  hintStyle: TextStyles.font14blackReguler,
+                  hintStyle:
+                      TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                  inputTextStyle:
+                      TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                 ),
                 verticalSpacing(SizeConfig.screenHeight! * .02),
                 MyTextForm(
                   fillColor: Colors.transparent,
                   controller: notesController,
                   labelText: S.of(context).notes,
-                  hintStyle: TextStyles.font15Black54reguler,
+                  hintStyle:
+                      TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                  inputTextStyle:
+                      TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                   maxLines: 3,
                   validator: (p0) => null,
                 ),
@@ -225,8 +242,10 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                             : AppButtonText(
                                 backGroundColor: ColorManger.lighterGreen,
                                 buttonWidth: SizeConfig.screenWidth! * .3,
+                                buttonHeight: SizeConfig.screenHeight! * .07,
                                 butonText: S.of(context).send,
-                                textStyle: TextStyles.font15WhiteBold,
+                                textStyle: TextStyles.whiteRegulerStyle(
+                                    SizeConfig.fontSize4!),
                                 onPressed: () {
                                   validateThenAddVaccation(context);
                                 },
@@ -236,8 +255,10 @@ class RequestFormScreenState extends State<RequestFormScreen> {
                     AppButtonText(
                       backGroundColor: ColorManger.darkRed,
                       buttonWidth: SizeConfig.screenWidth! * .3,
+                      buttonHeight: SizeConfig.screenHeight! * .07,
                       butonText: S.of(context).cancel,
-                      textStyle: TextStyles.font15WhiteBold,
+                      textStyle:
+                          TextStyles.whiteRegulerStyle(SizeConfig.fontSize4!),
                       onPressed: () {
                         context.pushReplacementNamed(Routes.homeScreen);
                       },

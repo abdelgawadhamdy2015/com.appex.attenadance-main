@@ -31,17 +31,17 @@ class _AttendanceLogState extends State<AttendanceLog> {
         children: [
           TextSpan(
             text: "${DateFormat('dd -MMMM -yyyy').format(date)}- ",
-            style: TextStyles.font15Black54reguler,
+            style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
           ),
           TextSpan(
             text: "$formattedTimeOfDay  ",
-            style: TextStyles.font15Black54reguler,
+            style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
           ),
           TextSpan(
               text: transaction,
               style: textColor == ColorManger.lightred
-                  ? TextStyles.font15lightred54reguler
-                  : TextStyles.font15lightGreen54reguler)
+                  ? TextStyles.lightRedRegulerStyle(SizeConfig.fontSize3!)
+                  : TextStyles.lightGreenRegulerStyle(SizeConfig.fontSize3!))
         ],
       ),
     );
@@ -63,23 +63,26 @@ class _AttendanceLogState extends State<AttendanceLog> {
             children: [
               Text(
                 S.of(context).attendanceMovementsToday,
-                style: TextStyles.font15BlueBold,
+                style: TextStyles.darkBlueBoldStyle(SizeConfig.fontSize4!),
               ),
               verticalSpacing(SizeConfig.screenHeight! * .01),
-              context.read<HomeCubit>().data.shift1_TimeIn != "____" &&
-                      context.read<HomeCubit>().data.shift1_TimeIn != null
-                  ? transactionWidget(
-                      context.read<HomeCubit>().data.shift1_TimeIn!,
-                      context.read<HomeCubit>().data.date!,
-                      S.of(context).attendance,
-                      ColorManger.lightGreen,
-                      context)
-                  : Center(
-                      child: Text(
-                        S.of(context).notAttendance,
-                        style: TextStyles.font12black54Reguler,
+              Center(
+                child: context.read<HomeCubit>().data.shift1_TimeIn != "____" &&
+                        context.read<HomeCubit>().data.shift1_TimeIn != null
+                    ? transactionWidget(
+                        context.read<HomeCubit>().data.shift1_TimeIn!,
+                        context.read<HomeCubit>().data.date!,
+                        S.of(context).attendance,
+                        ColorManger.lightGreen,
+                        context)
+                    : Center(
+                        child: Text(
+                          S.of(context).notAttendance,
+                          style:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+                        ),
                       ),
-                    ),
+              ),
               verticalSpacing(SizeConfig.screenHeight! * .01),
               context.read<HomeCubit>().data.shift1_TimeOut != "____" &&
                       context.read<HomeCubit>().data.shift1_TimeOut != null
@@ -92,7 +95,7 @@ class _AttendanceLogState extends State<AttendanceLog> {
                   : Center(
                       child: Text(
                         S.of(context).notLeave,
-                        style: TextStyles.font12black54Reguler,
+                        style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                       ),
                     ),
             ],

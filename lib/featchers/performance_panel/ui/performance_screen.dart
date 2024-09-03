@@ -5,34 +5,35 @@ import 'package:ttech_attendance/core/helpers/print_transactions.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
-import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar_tablet.dart';
-import 'package:ttech_attendance/core/widgets/app_bar/my_drower_tablet.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
+import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_model.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_state.dart';
 import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_block_listener.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/widget/performance_list_view_tablet.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/widget/perfromance_list_view.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
-import '../../../../core/helpers/helper_methods.dart';
+import '../../../core/helpers/helper_methods.dart';
 
-class PerformancePanelTablet extends StatefulWidget {
+class PerformanceScreen extends StatefulWidget {
   final Function(Locale) changeLanguage;
 
-  const PerformancePanelTablet({super.key, required this.changeLanguage});
+  const PerformanceScreen({super.key, required this.changeLanguage});
 
   @override
-  State<PerformancePanelTablet> createState() => _PerformancePanelTablet();
+  State<PerformanceScreen> createState() => _PerformancePanel();
 }
 
-class _PerformancePanelTablet extends State<PerformancePanelTablet> {
+class _PerformancePanel extends State<PerformanceScreen> {
   TextEditingController notesController = TextEditingController();
   DateTime? _startDate;
   DateTime? _endDate;
   List<Day>? days = [];
 
   Future<void> _selectDate(BuildContext context, bool isStart) async {
-    final DateTime? picked = await showDatePicker(
+    final DateTime? picked = await  showDatePicker(
+      
       context: context,
       initialDate:
           isStart ? _startDate ?? DateTime.now() : _endDate ?? DateTime.now(),
@@ -80,13 +81,13 @@ class _PerformancePanelTablet extends State<PerformancePanelTablet> {
             .days
         : [];
     return Scaffold(
-      appBar: MyAppBarTablet(
+      appBar: MyAppBar(
         changeLanguage: widget.changeLanguage,
         context: context,
         title: MyConstants.attendanceAndDepartureReports,
       ),
       drawer: const Drawer(
-        child: MyDrowerTablet(),
+        child: MyDrawer(),
       ),
       backgroundColor: ColorManger.lightGray,
       body: SafeArea(
@@ -103,7 +104,8 @@ class _PerformancePanelTablet extends State<PerformancePanelTablet> {
                       onTap: () => _selectDate(context, true),
                       child: AbsorbPointer(
                         child: TextFormField(
-                          style: TextStyles.font28Blackreguler,
+                          style: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                           controller: TextEditingController(
                             text: _startDate != null
                                 ? MyConstants.dateFormat.format(_startDate!)
@@ -114,8 +116,10 @@ class _PerformancePanelTablet extends State<PerformancePanelTablet> {
                               hintText: _startDate != null
                                   ? MyConstants.dateFormat.format(_startDate!)
                                   : S.of(context).fromDate,
-                              hintStyle: TextStyles.font28Blackreguler,
-                              labelStyle: TextStyles.font28Blackreguler),
+                              hintStyle: TextStyles.blackRegulerStyle(
+                                  SizeConfig.fontSize3!),
+                              labelStyle: TextStyles.blackRegulerStyle(
+                                  SizeConfig.fontSize3!)),
                         ),
                       ),
                     ),
@@ -127,7 +131,8 @@ class _PerformancePanelTablet extends State<PerformancePanelTablet> {
                       onTap: () => _selectDate(context, false),
                       child: AbsorbPointer(
                         child: TextFormField(
-                          style: TextStyles.font28Blackreguler,
+                          style: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                           controller: TextEditingController(
                             text: _endDate != null
                                 ? MyConstants.dateFormat.format(_endDate!)
@@ -138,8 +143,10 @@ class _PerformancePanelTablet extends State<PerformancePanelTablet> {
                               hintText: _endDate != null
                                   ? MyConstants.dateFormat.format(_endDate!)
                                   : S.of(context).toDate,
-                              hintStyle: TextStyles.font28Blackreguler,
-                              labelStyle: TextStyles.font28Blackreguler),
+                              hintStyle: TextStyles.blackRegulerStyle(
+                                  SizeConfig.fontSize3!),
+                              labelStyle: TextStyles.blackRegulerStyle(
+                                  SizeConfig.fontSize3!)),
                         ),
                       ),
                     ),
@@ -175,26 +182,32 @@ class _PerformancePanelTablet extends State<PerformancePanelTablet> {
                                     context);
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(" no data ", style: TextStyles.font28Blackreguler,)));
+                                  const  SnackBar(content: Text(" no data ")));
                               }
                             },
-                            icon: const Icon(Icons.print)),
+                            icon:  Icon(Icons.print,size: SizeConfig.iconSize5,)),
                         const Spacer(),
                         IconButton(
                             onPressed: () {},
-                            icon: const Icon(Icons.filter_alt)),
+                            icon: Icon(
+                              Icons.filter_alt,
+                              size: SizeConfig.iconSize5,
+                            )),
                         const Spacer(),
                         Text(S.of(context).timesOfWork,
-                            style: TextStyles.font28Blackreguler),
+                            style: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!)),
                         const Spacer(),
-                        Text("0", style: TextStyles.font28Blackreguler),
+                        Text("0",
+                            style: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!)),
                       ],
                     );
                   },
                 ),
               ),
               verticalSpacing(SizeConfig.screenHeight! * .01),
-              PerformanceListViewTablet()
+              PerfromanceListView()
             ],
           ),
         ),

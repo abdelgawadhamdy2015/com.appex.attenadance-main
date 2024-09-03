@@ -38,12 +38,14 @@ class DeparturesScreen extends StatelessWidget {
                     Text(
                       "request number : 22288272",
                       textAlign: TextAlign.center,
-                      style: TextStyles.font12black54Reguler,
+                      style:
+                          TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                     ),
                     const Spacer(),
                     Text(
                       "Status",
-                      style: TextStyles.font12black54Reguler,
+                      style:
+                          TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                       textScaler: MediaQuery.textScalerOf(context),
                     ),
                   ],
@@ -54,23 +56,27 @@ class DeparturesScreen extends StatelessWidget {
                   children: [
                     Text(
                       "date : from date to date ",
-                      style: TextStyles.font12black54Reguler,
+                      style:
+                          TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                     ),
                     Text(
                       " duration : one day",
-                      style: TextStyles.font12black54Reguler,
+                      style:
+                          TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                     ),
                     Row(
                       children: [
                         Text(
                           "Request Date:14-10-2023",
-                          style: TextStyles.font12black54Reguler,
+                          style: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                         ),
                         const Spacer(),
                         Text(
                           maxLines: 2,
                           "annual leave",
-                          style: TextStyles.font12black54Reguler,
+                          style: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                         ),
                       ],
                     ),

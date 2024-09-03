@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 import '../theming/colors.dart';
@@ -54,7 +55,8 @@ class AppFormTextFeild extends StatelessWidget {
         labelText: labelText ?? "",
         fillColor: fillColor ?? ColorManger.morelightGray,
         filled: true,
-        hintStyle: hintStyle ?? TextStyles.font14LightGrayNormal,
+        hintStyle:
+            hintStyle ?? TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
         hintText: hintText,
         suffixIcon: suffixIcon,
         //isDense: true,

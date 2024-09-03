@@ -12,18 +12,18 @@ import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/attendance.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
 import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart';
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
 import 'package:ttech_attendance/featchers/forget_password/forget_password_screen.dart';
-import 'package:ttech_attendance/featchers/home/ui/home.dart';
-import 'package:ttech_attendance/featchers/login/ui/login.dart';
+import 'package:ttech_attendance/featchers/home/ui/home_screen.dart';
+import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/performance.dart';
-import 'package:ttech_attendance/featchers/request/my_requests.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/performance_screen.dart';
 import 'package:ttech_attendance/featchers/request/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/request/permission/ui/widgets/check_box_state.dart';
 import 'package:ttech_attendance/featchers/request/request_form/logic/cubit/all_vaccations_cubit.dart';
+import 'package:ttech_attendance/featchers/request/request_screen.dart';
 import 'package:ttech_attendance/featchers/splash/splash_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 import 'core/di/dependancy_injection.dart';
@@ -113,7 +113,7 @@ class _MyAppState extends State<MyApp> {
               BlocProvider(create: (context) => getIt<AttendanceCubit>()),
               BlocProvider(create: (context) => getIt<SendAttendanceCubit>())
             ],
-            child: Attendance(
+            child: AttendanceScreen(
               changeLanguage: _changeLanguage,
             ),
           ),
@@ -123,7 +123,7 @@ class _MyAppState extends State<MyApp> {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<LoginCubit>(),
-            child: Login(
+            child: LoginScreen(
               changeLanguage: _changeLanguage,
             ),
           ),
@@ -142,13 +142,13 @@ class _MyAppState extends State<MyApp> {
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(providers: [
                   BlocProvider(create: (context) => getIt<HomeCubit>()),
-                ], child: Home(changeLanguage: _changeLanguage)));
+                ], child: HomeScreen(changeLanguage: _changeLanguage)));
 
       case Routes.performancePanelScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<PerformanceEmployeeCubit>(),
-                  child: Performance(
+                  child: PerformanceScreen(
                     changeLanguage: _changeLanguage,
                   ),
                 ));
@@ -162,7 +162,7 @@ class _MyAppState extends State<MyApp> {
                       create: (context) => getIt<AllVaccationsCubit>()),
                   BlocProvider(create: (context) => getIt<PermissionCubit>()),
                   ChangeNotifierProvider(create: (context) => CheckboxState()),
-                ], child: MyRequests(changeLanguage: _changeLanguage)));
+                ], child: RequestScreen(changeLanguage: _changeLanguage)));
 
       // case Routes.permissionScreen:
       //   return MaterialPageRoute(

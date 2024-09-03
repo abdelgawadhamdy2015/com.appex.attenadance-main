@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
+import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/featchers/request/permission/logic/cubit/permission_cubit.dart';
 import 'package:ttech_attendance/featchers/request/permission/logic/cubit/permission_state.dart';
@@ -74,35 +75,45 @@ class _ListShiftItemState extends State<ListShiftItem> {
         builder: (context, state) {
           return Column(
             children: [
-              Row(children: [
-                Checkbox(
-                  fillColor: WidgetStatePropertyAll(
-                      widget.enabled ? null : ColorManger.morelightGray),
-                  activeColor: ColorManger.checkBoxGreen,
-                  value: getCheckBoxId(widget.shift, checkboxState),
-                  onChanged: (bool? value) {
-                    widget.enabled
-                        ? setState(() {
-                            switch (widget.shift) {
-                              case 1:
-                                checkboxState.isChecked1 = value!;
-                                break;
-                              case 2:
-                                checkboxState.isChecked2 = value!;
-                                break;
-                              case 3:
-                                checkboxState.isChecked3 = value!;
-                                break;
-                              case 4:
-                                checkboxState.isChecked4 = value!;
-                                break;
-                              default:
-                            }
-                          })
-                        : null;
-                  },
+              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Transform.scale(
+                  scale: 2,
+                  child: Checkbox(
+                    fillColor: WidgetStatePropertyAll(
+                        widget.enabled ? null : ColorManger.morelightGray),
+                    activeColor: ColorManger.checkBoxGreen,
+                    value: getCheckBoxId(widget.shift, checkboxState),
+                    onChanged: (bool? value) {
+                      widget.enabled
+                          ? setState(() {
+                              switch (widget.shift) {
+                                case 1:
+                                  checkboxState.isChecked1 = value!;
+                                  break;
+                                case 2:
+                                  checkboxState.isChecked2 = value!;
+                                  break;
+                                case 3:
+                                  checkboxState.isChecked3 = value!;
+                                  break;
+                                case 4:
+                                  checkboxState.isChecked4 = value!;
+                                  break;
+                                default:
+                              }
+                            })
+                          : null;
+                    },
+                  ),
                 ),
-                Text(getShift(widget.shift, context)),
+                horizontalSpacing(SizeConfig.screenWidth! * .04),
+                Text(
+                  getShift(
+                    widget.shift,
+                    context,
+                  ),
+                  style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
+                ),
               ]),
               getCheckBoxId(widget.shift, checkboxState)
                   ? Container(
@@ -113,6 +124,10 @@ class _ListShiftItemState extends State<ListShiftItem> {
                         children: [
                           verticalSpacing(SizeConfig.screenHeight! * .02),
                           MyTextForm(
+                            hintStyle: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!),
+                            inputTextStyle: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!),
                             fillColor: ColorManger.lightGray,
                             excep: S.of(context).attendanceTime,
                             onChanged: (value) {
@@ -120,7 +135,10 @@ class _ListShiftItemState extends State<ListShiftItem> {
                             },
                             controller: getController(widget.shift, true),
                             labelText: S.of(context).attendanceTime,
-                            suffixIcon: const Icon(Icons.access_time),
+                            suffixIcon: Icon(
+                              Icons.access_time,
+                              size: SizeConfig.iconSize5,
+                            ),
                             readOnly: true,
                             onTab: () {
                               selectTime(context, true);
@@ -132,11 +150,18 @@ class _ListShiftItemState extends State<ListShiftItem> {
                           ),
                           verticalSpacing(SizeConfig.screenHeight! * .02),
                           MyTextForm(
+                            hintStyle: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!),
+                            inputTextStyle: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!),
                             fillColor: ColorManger.lightGray,
                             excep: S.of(context).leaveTime,
                             controller: getController(widget.shift, false),
                             labelText: S.of(context).leaveTime,
-                            suffixIcon: const Icon(Icons.access_time),
+                            suffixIcon: Icon(
+                              Icons.access_time,
+                              size: SizeConfig.iconSize5,
+                            ),
                             readOnly: true,
                             onTab: () {
                               selectTime(context, false);
@@ -175,7 +200,11 @@ class _ListShiftItemState extends State<ListShiftItem> {
                                     },
                                   );
                                 }),
-                            Text(S.of(context).shiftToSecondDay),
+                            Text(
+                              S.of(context).shiftToSecondDay,
+                              style: TextStyles.blackRegulerStyle(
+                                  SizeConfig.fontSize3!),
+                            ),
                           ])
                         ],
                       ),

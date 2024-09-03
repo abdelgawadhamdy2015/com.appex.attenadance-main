@@ -14,13 +14,14 @@ class MyBottomAppBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   State<MyBottomAppBar> createState() => BottomAppBarState();
   @override
-  Size get preferredSize => Size.fromHeight(SizeConfig.screenHeight! * .01);
+  Size get preferredSize => Size.fromHeight(SizeConfig.screenHeight! * .1);
 }
 
 class BottomAppBarState extends State<MyBottomAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      toolbarHeight: SizeConfig.screenWidth! * .1,
       backgroundColor: ColorManger.backGroundGray,
       leading: const ArrowBackWidget(),
       title: Row(
@@ -30,7 +31,7 @@ class BottomAppBarState extends State<MyBottomAppBar> {
           Center(
             child: Text(
               getTitle(),
-              style: TextStyles.font20BlueBold,
+              style: TextStyles.darkBlueBoldStyle(SizeConfig.fontSize5!),
             ),
           ),
         ],

@@ -8,7 +8,7 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/networking/api_error_model.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
-import 'package:ttech_attendance/featchers/login/ui/widget/login_screen.dart';
+import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

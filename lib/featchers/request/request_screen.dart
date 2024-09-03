@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
@@ -35,39 +34,46 @@ class _RequestScreenState extends State<RequestScreen> {
           child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Expanded(
                     child: ListTile(
                       title: Text(
                         S.of(context).permission,
-                        style: TextStyles.font18BlackBold,
+                        style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
                       ),
-                      leading: Radio<String>(
-                        activeColor: ColorManger.mainBlue,
-                        value: MyConstants.permission,
-                        groupValue: requestType,
-                        onChanged: (String? value) {
-                          setState(() {
-                            requestType = value!;
-                          });
-                        },
+                      leading: Transform.scale(
+                        scale: 2,
+                        child: Radio<String>(
+                          activeColor: ColorManger.mainBlue,
+                          value: MyConstants.permission,
+                          groupValue: requestType,
+                          onChanged: (String? value) {
+                            setState(() {
+                              requestType = value!;
+                            });
+                          },
+                        ),
                       ),
                     ),
                   ),
-                  verticalSpacing(SizeConfig.screenHeight! * .02),
                   Expanded(
                     child: ListTile(
                       title: Text(S.of(context).annual,
-                          style: TextStyles.font18BlackBold),
-                      leading: Radio<String>(
-                        activeColor: ColorManger.mainBlue,
-                        value: MyConstants.request,
-                        groupValue: requestType,
-                        onChanged: (String? value) {
-                          setState(() {
-                            requestType = value!;
-                          });
-                        },
+                          style:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize4!)),
+                      leading: Transform.scale(
+                        scale: 2,
+                        child: Radio<String>(
+                          activeColor: ColorManger.mainBlue,
+                          value: MyConstants.request,
+                          groupValue: requestType,
+                          onChanged: (String? value) {
+                            setState(() {
+                              requestType = value!;
+                            });
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -75,7 +81,7 @@ class _RequestScreenState extends State<RequestScreen> {
               ),
               requestType == MyConstants.permission
                   ? const PermissionForm()
-                  : const RequestFormScreen()
+                  : const RequestForm()
             ],
           ),
         ),

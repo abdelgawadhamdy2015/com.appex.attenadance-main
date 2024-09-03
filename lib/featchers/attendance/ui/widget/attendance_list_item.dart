@@ -77,7 +77,8 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                           widget.shiftTimeIn != null
                               ? '${S.of(context).attendanceRecord}  ${getFormattedTimeOfDay(widget.shiftTimeIn!, context)}'
                               : "",
-                          style: TextStyles.font12black54Reguler,
+                          style: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -87,7 +88,8 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                           widget.shiftTimeOut != null
                               ? '${S.of(context).leaveRecord}  ${getFormattedTimeOfDay(widget.shiftTimeOut!, context)}'
                               : "",
-                          style: TextStyles.font12black54Reguler,
+                          style: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -100,7 +102,8 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                           horizontal: SizeConfig.screenHeight! * .01),
                       child: Text(
                         getShift(widget.shift, context),
-                        style: TextStyles.font12black54Reguler,
+                        style:
+                            TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                       ))
                 ],
               ),
@@ -135,7 +138,8 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                                         checkIfNull([widget.shiftTimeOut])
                                     ? S.of(context).signOut
                                     : S.of(context).signIn,
-                                textStyle: TextStyles.font15WhiteBold,
+                                textStyle: TextStyles.whiteRegulerStyle(
+                                    SizeConfig.fontSize3!),
                               )
                             : Center(child: Text(_formatTime(_remainingTime))),
                       ),

@@ -88,6 +88,10 @@ class _PermissionFormState extends State<PermissionForm> {
                 ),
                 verticalSpacing(SizeConfig.screenHeight! * .02),
                 MyTextForm(
+                    hintStyle:
+                        TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                    inputTextStyle:
+                        TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                     fillColor: ColorManger.lightGray,
                     readOnly: true,
                     labelText: S.of(context).date,
@@ -114,43 +118,55 @@ class _PermissionFormState extends State<PermissionForm> {
 
                 Text(
                   S.of(context).permissionType,
-                  style: TextStyles.font16BlackBold,
+                  style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
                 ),
                 verticalSpacing(SizeConfig.screenHeight! * .02),
 
                 // Radio buttons for permission type
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: ListTile(
-                        title: FittedBox(child: Text(S.of(context).temporary)),
-                        leading: Radio<String>(
-                          activeColor: ColorManger.mainBlue,
-                          value: MyConstants.temporary,
-                          groupValue: _permissionType,
-                          onChanged: (String? value) {
-                            setState(() {
-                              _permissionType = value!;
-                            });
-                          },
+                        title: Text(
+                          S.of(context).temporary,
+                          style:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
+                        ),
+                        leading: Transform.scale(
+                          scale: 2,
+                          child: Radio<String>(
+                            activeColor: ColorManger.mainBlue,
+                            value: MyConstants.temporary,
+                            groupValue: _permissionType,
+                            onChanged: (String? value) {
+                              setState(() {
+                                _permissionType = value!;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ),
-                    verticalSpacing(SizeConfig.screenHeight! * .02),
                     Expanded(
                       child: ListTile(
-                        title: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(S.of(context).fullDay)),
-                        leading: Radio<String>(
-                          activeColor: ColorManger.mainBlue,
-                          value: MyConstants.fullDay,
-                          groupValue: _permissionType,
-                          onChanged: (String? value) {
-                            setState(() {
-                              _permissionType = value!;
-                            });
-                          },
+                        title: Text(
+                          S.of(context).fullDay,
+                          style:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
+                        ),
+                        leading: Transform.scale(
+                          scale: 2,
+                          child: Radio<String>(
+                            activeColor: ColorManger.mainBlue,
+                            value: MyConstants.fullDay,
+                            groupValue: _permissionType,
+                            onChanged: (String? value) {
+                              setState(() {
+                                _permissionType = value!;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -208,6 +224,10 @@ class _PermissionFormState extends State<PermissionForm> {
                               horizontalSpacing(SizeConfig.screenWidth! * .02),
                               Expanded(
                                 child: MyTextForm(
+                                  hintStyle: TextStyles.blackRegulerStyle(
+                                      SizeConfig.fontSize3!),
+                                  inputTextStyle: TextStyles.blackRegulerStyle(
+                                      SizeConfig.fontSize3!),
                                   fillColor: ColorManger.lightGray,
                                   controller:
                                       permissionCubit.totalHoursController,
@@ -233,7 +253,10 @@ class _PermissionFormState extends State<PermissionForm> {
                   fillColor: ColorManger.lightGray,
                   controller: permissionCubit.noteController,
                   labelText: S.of(context).notes,
-                  hintStyle: TextStyles.font12black54Reguler,
+                  inputTextStyle:
+                      TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                  hintStyle:
+                      TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                   maxLines: 3,
                   validator: (p0) => null,
                 ),
@@ -252,9 +275,12 @@ class _PermissionFormState extends State<PermissionForm> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   AppButtonText(
+                                    buttonHeight:
+                                        SizeConfig.screenHeight! * .07,
                                     buttonWidth: SizeConfig.screenWidth! * .3,
                                     backGroundColor: ColorManger.buttonGreen,
-                                    textStyle: TextStyles.font15WhiteBold,
+                                    textStyle: TextStyles.whiteRegulerStyle(
+                                        SizeConfig.fontSize4!),
                                     onPressed: () {
                                       validateThenAddAttendancePermission(
                                           context, checkboxState);
