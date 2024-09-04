@@ -41,7 +41,7 @@ class ShiftWidget extends StatelessWidget {
                         Text(S.of(navigatorKey.currentContext!).attendanceTime,
                             style: TextStyles.blackRegulerStyle(
                                 SizeConfig.fontSize3!)),
-                        Icon(Icons.move_down_sharp)
+                      const   Icon(Icons.move_down_sharp)
                       ],
                     ),
                     Text(shiftTimeIn ?? "",
@@ -54,7 +54,7 @@ class ShiftWidget extends StatelessWidget {
                         Text(S.of(navigatorKey.currentContext!).leaveTime,
                             style: TextStyles.blackRegulerStyle(
                                 SizeConfig.fontSize3!)),
-                        Icon(Icons.move_up)
+                      const  Icon(Icons.move_up)
                       ],
                     ),
                     Text(shiftTimeOut ?? "",

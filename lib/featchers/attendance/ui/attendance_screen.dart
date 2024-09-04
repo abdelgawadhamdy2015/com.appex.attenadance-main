@@ -12,7 +12,6 @@ import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
-import 'package:ttech_attendance/core/widgets/app_text_button.dart';
 import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bloc_listener.dart';
@@ -108,11 +107,9 @@ class _AttendanceScreen extends State<AttendanceScreen> {
   }
 
   void _goToMyLocation() {
-    setState(() {
-      controller.animateCamera(
-        CameraUpdate.newLatLng(context.read<AttendanceCubit>().currentPosition),
-      );
-    });
+    controller.animateCamera(
+      CameraUpdate.newLatLng(context.read<AttendanceCubit>().currentPosition),
+    );
   }
 
   void _zoomIn() {

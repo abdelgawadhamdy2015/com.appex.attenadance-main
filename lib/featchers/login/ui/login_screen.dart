@@ -92,13 +92,10 @@ class LoginScreenState extends State<LoginScreen> {
 
                           backgroundColor: Colors.white,
                         ),
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            selectedLanguage,
-                            style: TextStyles.darkBlueBoldStyle(
-                                SizeConfig.fontSize5!),
-                          ),
+                        child: Text(
+                          selectedLanguage,
+                          style: TextStyles.darkBlueBoldStyle(
+                              SizeConfig.fontSize4!),
                         ),
                       ),
                     ],
@@ -110,7 +107,7 @@ class LoginScreenState extends State<LoginScreen> {
                         EdgeInsets.only(top: SizeConfig.screenHeight! * .01),
                     child: Text(S.of(context).login,
                         style:
-                            TextStyles.blackBoldStyle(SizeConfig.fontSize3!)),
+                            TextStyles.blackBoldStyle(SizeConfig.fontSize4!)),
                   ),
                 ),
                 Form(
@@ -190,7 +187,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     SizeConfig.fontSize3!),
                               ),
                               Transform.scale(
-                                scale: 1.5,
+                                scale: SizeConfig.screenWidth! * .003,
                                 child: Checkbox(
                                     activeColor: ColorManger.radioButtonBlue,
                                     value: rememberMe,

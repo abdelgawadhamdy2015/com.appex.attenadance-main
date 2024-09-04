@@ -71,7 +71,9 @@ class _MyAppState extends State<MyApp> {
           themeMode: ThemeMode.light,
           navigatorKey: navigatorKey,
           builder: DevicePreview.appBuilder,
-          theme: ThemeData(scaffoldBackgroundColor: ColorManger.backGroundGray),
+          theme: ThemeData(
+              fontFamily: MyConstants.libreCaslonText,
+              scaffoldBackgroundColor: ColorManger.backGroundGray),
           darkTheme: ThemeData.dark(),
           debugShowCheckedModeBanner: false,
           locale: _locale,

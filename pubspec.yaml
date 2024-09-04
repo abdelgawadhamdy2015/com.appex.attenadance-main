@@ -113,6 +113,23 @@ flutter:
         - asset: fonts/Amiri-Italic.ttf
         - asset: fonts/Amiri-Bold.ttf
         - asset: fonts/Amiri-BoldItalic.ttf
+    - family: SpaceGrotesk
+      fonts:
+        - asset: fonts/SpaceGrotesk-Regular.ttf
+        - asset: fonts/SpaceGrotesk-Light.ttf
+        - asset: fonts/SpaceGrotesk-Bold.ttf
+        - asset: fonts/SpaceGrotesk-SemiBold.ttf
+    - family: Crimson
+      fonts:
+        - asset: fonts/Crimson-Roman.ttf
+        - asset: fonts/Crimson-Italic.ttf
+        - asset: fonts/Crimson-Bold.ttf
+        - asset: fonts/Crimson-BoldItalic.ttf
+    - family: LibreCaslonText
+      fonts:
+        - asset: fonts/LibreCaslonText-Regular.ttf
+        - asset: fonts/LibreCaslonText-Italic.ttf
+        - asset: fonts/LibreCaslonText-Bold.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

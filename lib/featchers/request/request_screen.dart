@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
@@ -34,49 +35,46 @@ class _RequestScreenState extends State<RequestScreen> {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: ListTile(
-                      title: Text(
-                        S.of(context).permission,
-                        style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
-                      ),
-                      leading: Transform.scale(
-                        scale: 2,
-                        child: Radio<String>(
-                          activeColor: ColorManger.mainBlue,
-                          value: MyConstants.permission,
-                          groupValue: requestType,
-                          onChanged: (String? value) {
-                            setState(() {
-                              requestType = value!;
-                            });
-                          },
-                        ),
+                  Row(children: [
+                    Transform.scale(
+                      scale: SizeConfig.screenWidth! * .003,
+                      child: Radio<String>(
+                        activeColor: ColorManger.mainBlue,
+                        value: MyConstants.permission,
+                        groupValue: requestType,
+                        onChanged: (String? value) {
+                          setState(() {
+                            requestType = value!;
+                          });
+                        },
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: ListTile(
-                      title: Text(S.of(context).annual,
-                          style:
-                              TextStyles.blackBoldStyle(SizeConfig.fontSize4!)),
-                      leading: Transform.scale(
-                        scale: 2,
-                        child: Radio<String>(
-                          activeColor: ColorManger.mainBlue,
-                          value: MyConstants.request,
-                          groupValue: requestType,
-                          onChanged: (String? value) {
-                            setState(() {
-                              requestType = value!;
-                            });
-                          },
-                        ),
+                    horizontalSpacing(SizeConfig.screenWidth! * .02),
+                    Text(
+                      S.of(context).permission,
+                      style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
+                    ),
+                    horizontalSpacing(SizeConfig.screenWidth! * .15),
+                    Transform.scale(
+                      scale: SizeConfig.screenWidth! * .003,
+                      child: Radio<String>(
+                        activeColor: ColorManger.mainBlue,
+                        value: MyConstants.request,
+                        groupValue: requestType,
+                        onChanged: (String? value) {
+                          setState(() {
+                            requestType = value!;
+                          });
+                        },
                       ),
                     ),
-                  ),
+                    horizontalSpacing(SizeConfig.screenWidth! * .02),
+                    Text(S.of(context).annual,
+                        style:
+                            TextStyles.blackBoldStyle(SizeConfig.fontSize4!)),
+                  ]),
                 ],
               ),
               requestType == MyConstants.permission

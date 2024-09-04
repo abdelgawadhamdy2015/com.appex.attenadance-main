@@ -58,243 +58,230 @@ class _PermissionFormState extends State<PermissionForm> {
   Widget build(BuildContext context) {
     final checkboxState = Provider.of<CheckboxState>(context);
 
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: SizeConfig().getScreenPadding(),
-          child: Form(
-            key: permissionCubit.formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Dropdown for employee names
-                Visibility(
-                  visible: false,
-                  child: DropdownButtonFormField<String>(
-                    hint: Text(S.of(context).name),
-                    value: _selectedEmployee,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedEmployee = newValue;
-                      });
-                    },
-                    items: _employees.map((String employee) {
-                      return DropdownMenuItem<String>(
-                        value: employee,
-                        child: Text(employee),
-                      );
-                    }).toList(),
-                  ),
-                ),
-                verticalSpacing(SizeConfig.screenHeight! * .02),
-                MyTextForm(
-                    hintStyle:
-                        TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-                    inputTextStyle:
-                        TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-                    fillColor: ColorManger.lightGray,
-                    readOnly: true,
-                    labelText: S.of(context).date,
-                    //hint: S.of(context).date,
-                    excep: S.of(context).date,
-                    suffixIcon: const Icon(Icons.calendar_today),
-                    controller: context.read<PermissionCubit>().dayController,
-                    onTab: () async {
-                      final DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: _selectedDate,
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2101),
-                      );
-                      if (pickedDate != null && pickedDate != _selectedDate) {
-                        setState(() {
-                          _selectedDate = pickedDate;
-                          permissionCubit.dayController.text =
-                              _selectedDate.toLocal().toString().split(' ')[0];
-                        });
-                      }
-                    }),
-                verticalSpacing(SizeConfig.screenHeight! * .02),
-
-                Text(
-                  S.of(context).permissionType,
-                  style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
-                ),
-                verticalSpacing(SizeConfig.screenHeight! * .02),
-
-                // Radio buttons for permission type
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          S.of(context).temporary,
-                          style:
-                              TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
-                        ),
-                        leading: Transform.scale(
-                          scale: 2,
-                          child: Radio<String>(
-                            activeColor: ColorManger.mainBlue,
-                            value: MyConstants.temporary,
-                            groupValue: _permissionType,
-                            onChanged: (String? value) {
-                              setState(() {
-                                _permissionType = value!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          S.of(context).fullDay,
-                          style:
-                              TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
-                        ),
-                        leading: Transform.scale(
-                          scale: 2,
-                          child: Radio<String>(
-                            activeColor: ColorManger.mainBlue,
-                            value: MyConstants.fullDay,
-                            groupValue: _permissionType,
-                            onChanged: (String? value) {
-                              setState(() {
-                                _permissionType = value!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                verticalSpacing(SizeConfig.screenHeight! * .02),
-
-                _permissionType == MyConstants.temporary
-                    ? shiftType != 1
-                        ? BlocBuilder<PermissionCubit, PermissionState>(
-                            builder: (context, state) {
-                              return Column(
-                                children: [
-                                  const ListShiftItem(
-                                    shift: 1,
-                                    enabled: true,
-                                  ),
-                                  checkboxState.isChecked1 &&
-                                          !checkboxState.shifttosecond1
-                                      ? const ListShiftItem(
-                                          shift: 2,
-                                          enabled: true,
-                                        )
-                                      : const ListShiftItem(
-                                          shift: 2,
-                                          enabled: false,
-                                        ),
-                                  checkboxState.isChecked2 &&
-                                          !checkboxState.shifttosecond2
-                                      ? const ListShiftItem(
-                                          shift: 3,
-                                          enabled: true,
-                                        )
-                                      : const ListShiftItem(
-                                          shift: 3,
-                                          enabled: false,
-                                        ),
-                                  checkboxState.isChecked3 &&
-                                          !checkboxState.shifttosecond3
-                                      ? const ListShiftItem(
-                                          shift: 4,
-                                          enabled: true,
-                                        )
-                                      : const ListShiftItem(
-                                          shift: 4,
-                                          enabled: false,
-                                        )
-                                ],
-                              );
-                            },
-                          )
-                        : Row(
-                            children: [
-                              Text(S.of(context).timesOfWork),
-                              horizontalSpacing(SizeConfig.screenWidth! * .02),
-                              Expanded(
-                                child: MyTextForm(
-                                  hintStyle: TextStyles.blackRegulerStyle(
-                                      SizeConfig.fontSize3!),
-                                  inputTextStyle: TextStyles.blackRegulerStyle(
-                                      SizeConfig.fontSize3!),
-                                  fillColor: ColorManger.lightGray,
-                                  controller:
-                                      permissionCubit.totalHoursController,
-                                  labelText: S.of(context).timesOfWork,
-                                  hintText: "ex 7:30",
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "\u26A0 ${S.of(context).pleaseFill} ${S.of(context).timesOfWork} ";
-                                    } else if (!AppRegex.hasMatchesTimeFormat(
-                                        value)) {
-                                      return "\u26A0 ${S.of(context).matchTimeFormat}";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                ),
-                              ),
-                            ],
-                          )
-                    : Container(),
-                verticalSpacing(SizeConfig.screenHeight! * .02),
-                MyTextForm(
-                  fillColor: ColorManger.lightGray,
-                  controller: permissionCubit.noteController,
-                  labelText: S.of(context).notes,
-                  inputTextStyle:
-                      TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-                  hintStyle:
-                      TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-                  maxLines: 3,
-                  validator: (p0) => null,
-                ),
-                const AddPermissionListener(),
-                verticalSpacing(SizeConfig.screenHeight! * .02),
-                BlocBuilder<PermissionCubit, PermissionState>(
-                  builder: (context, state) {
-                    return context.read<PermissionCubit>().loading
-                        ? MyProgressIndicator(
-                            hight: SizeConfig.screenHeight! * .08,
-                            width: SizeConfig.screenWidth! * .08)
-                        : Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: SizeConfig.screenWidth! * .1),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  AppButtonText(
-                                    buttonHeight:
-                                        SizeConfig.screenHeight! * .07,
-                                    buttonWidth: SizeConfig.screenWidth! * .3,
-                                    backGroundColor: ColorManger.buttonGreen,
-                                    textStyle: TextStyles.whiteRegulerStyle(
-                                        SizeConfig.fontSize4!),
-                                    onPressed: () {
-                                      validateThenAddAttendancePermission(
-                                          context, checkboxState);
-                                    },
-                                    butonText: S.of(context).send,
-                                  ),
-                                ]),
-                          );
-                  },
-                ),
-              ],
+    return Form(
+      key: permissionCubit.formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Dropdown for employee names
+          Visibility(
+            visible: false,
+            child: DropdownButtonFormField<String>(
+              hint: Text(S.of(context).name),
+              value: _selectedEmployee,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedEmployee = newValue;
+                });
+              },
+              items: _employees.map((String employee) {
+                return DropdownMenuItem<String>(
+                  value: employee,
+                  child: Text(employee),
+                );
+              }).toList(),
             ),
           ),
-        ),
+          verticalSpacing(SizeConfig.screenHeight! * .02),
+          MyTextForm(
+              hintStyle: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+              inputTextStyle:
+                  TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+              fillColor: ColorManger.lightGray,
+              readOnly: true,
+              labelText: S.of(context).date,
+              //hint: S.of(context).date,
+              excep: S.of(context).date,
+              suffixIcon: const Icon(Icons.calendar_today),
+              controller: context.read<PermissionCubit>().dayController,
+              onTab: () async {
+                final DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: _selectedDate,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2101),
+                );
+                if (pickedDate != null && pickedDate != _selectedDate) {
+                  setState(() {
+                    _selectedDate = pickedDate;
+                    permissionCubit.dayController.text =
+                        _selectedDate.toLocal().toString().split(' ')[0];
+                  });
+                }
+              }),
+          verticalSpacing(SizeConfig.screenHeight! * .02),
+
+          Text(
+            S.of(context).permissionType,
+            style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
+          ),
+          verticalSpacing(SizeConfig.screenHeight! * .02),
+
+          // Radio buttons for permission type
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(children: [
+                Transform.scale(
+                  scale: SizeConfig.screenWidth! * .003,
+                  child: Radio<String>(
+                    activeColor: ColorManger.mainBlue,
+                    value: MyConstants.temporary,
+                    groupValue: _permissionType,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _permissionType = value!;
+                      });
+                    },
+                  ),
+                ),
+                horizontalSpacing(SizeConfig.screenWidth! * .02),
+                Text(
+                  S.of(context).temporary,
+                  style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
+                ),
+              ]),
+              horizontalSpacing(SizeConfig.screenWidth! * .1),
+              Transform.scale(
+                scale: SizeConfig.screenWidth! * .003,
+                child: Radio<String>(
+                  activeColor: ColorManger.mainBlue,
+                  value: MyConstants.fullDay,
+                  groupValue: _permissionType,
+                  onChanged: (String? value) {
+                    setState(() {
+                      _permissionType = value!;
+                    });
+                  },
+                ),
+              ),
+              horizontalSpacing(SizeConfig.screenWidth! * .02),
+              Text(
+                S.of(context).fullDay,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
+              ),
+            ],
+          ),
+          verticalSpacing(SizeConfig.screenHeight! * .02),
+
+          _permissionType == MyConstants.temporary
+              ? shiftType != 1
+                  ? BlocBuilder<PermissionCubit, PermissionState>(
+                      builder: (context, state) {
+                        return Column(
+                          children: [
+                            const ListShiftItem(
+                              shift: 1,
+                              enabled: true,
+                            ),
+                            checkboxState.isChecked1 &&
+                                    !checkboxState.shifttosecond1
+                                ? const ListShiftItem(
+                                    shift: 2,
+                                    enabled: true,
+                                  )
+                                : const ListShiftItem(
+                                    shift: 2,
+                                    enabled: false,
+                                  ),
+                            checkboxState.isChecked2 &&
+                                    !checkboxState.shifttosecond2
+                                ? const ListShiftItem(
+                                    shift: 3,
+                                    enabled: true,
+                                  )
+                                : const ListShiftItem(
+                                    shift: 3,
+                                    enabled: false,
+                                  ),
+                            checkboxState.isChecked3 &&
+                                    !checkboxState.shifttosecond3
+                                ? const ListShiftItem(
+                                    shift: 4,
+                                    enabled: true,
+                                  )
+                                : const ListShiftItem(
+                                    shift: 4,
+                                    enabled: false,
+                                  )
+                          ],
+                        );
+                      },
+                    )
+                  : Row(
+                      children: [
+                        Text(
+                          S.of(context).timesOfWork,
+                          style:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+                        ),
+                        horizontalSpacing(SizeConfig.screenWidth! * .02),
+                        Expanded(
+                          child: MyTextForm(
+                            hintStyle: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!),
+                            inputTextStyle: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!),
+                            fillColor: ColorManger.lightGray,
+                            controller: permissionCubit.totalHoursController,
+                            labelText: S.of(context).timesOfWork,
+                            hintText: "ex 7:30",
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "\u26A0 ${S.of(context).pleaseFill} ${S.of(context).timesOfWork} ";
+                              } else if (!AppRegex.hasMatchesTimeFormat(
+                                  value)) {
+                                return "\u26A0 ${S.of(context).matchTimeFormat}";
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    )
+              : Container(),
+          verticalSpacing(SizeConfig.screenHeight! * .02),
+          MyTextForm(
+            fillColor: ColorManger.lightGray,
+            controller: permissionCubit.noteController,
+            labelText: S.of(context).notes,
+            inputTextStyle: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+            hintStyle: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+            maxLines: 3,
+            validator: (p0) => null,
+          ),
+          const AddPermissionListener(),
+          verticalSpacing(SizeConfig.screenHeight! * .02),
+          BlocBuilder<PermissionCubit, PermissionState>(
+            builder: (context, state) {
+              return context.read<PermissionCubit>().loading
+                  ? MyProgressIndicator(
+                      hight: SizeConfig.screenHeight! * .08,
+                      width: SizeConfig.screenWidth! * .08)
+                  : Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: SizeConfig.screenWidth! * .1),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            AppButtonText(
+                              buttonHeight: SizeConfig.screenHeight! * .07,
+                              buttonWidth: SizeConfig.screenWidth! * .3,
+                              backGroundColor: ColorManger.buttonGreen,
+                              textStyle: TextStyles.whiteRegulerStyle(
+                                  SizeConfig.fontSize4!),
+                              onPressed: () {
+                                validateThenAddAttendancePermission(
+                                    context, checkboxState);
+                              },
+                              butonText: S.of(context).send,
+                            ),
+                          ]),
+                    );
+            },
+          ),
+        ],
       ),
     );
   }

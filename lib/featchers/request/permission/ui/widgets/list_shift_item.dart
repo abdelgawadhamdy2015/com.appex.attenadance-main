@@ -77,7 +77,7 @@ class _ListShiftItemState extends State<ListShiftItem> {
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Transform.scale(
-                  scale: 2,
+                  scale: SizeConfig.screenWidth! * .003,
                   child: Checkbox(
                     fillColor: WidgetStatePropertyAll(
                         widget.enabled ? null : ColorManger.morelightGray),
@@ -173,33 +173,41 @@ class _ListShiftItemState extends State<ListShiftItem> {
                           ),
                           verticalSpacing(SizeConfig.screenHeight! * .02),
                           Row(children: [
-                            Checkbox(
-                                fillColor: WidgetStatePropertyAll(
-                                    widget.enabled ? null : ColorManger.gray),
-                                activeColor: ColorManger.checkBoxGreen,
-                                value: getShiftToSecond(
-                                    widget.shift, checkboxState),
-                                onChanged: (bool? value) {
-                                  setState(
-                                    () {
-                                      switch (widget.shift) {
-                                        case 1:
-                                          checkboxState.shifttosecond1 = value!;
-                                          break;
-                                        case 2:
-                                          checkboxState.shifttosecond2 = value!;
-                                          break;
-                                        case 3:
-                                          checkboxState.shifttosecond3 = value!;
-                                          break;
-                                        case 4:
-                                          checkboxState.shifttosecond4 = value!;
-                                          break;
-                                        default:
-                                      }
-                                    },
-                                  );
-                                }),
+                            Transform.scale(
+                              scale: SizeConfig.screenWidth! * .003,
+                              child: Checkbox(
+                                  fillColor: WidgetStatePropertyAll(
+                                      widget.enabled ? null : ColorManger.gray),
+                                  activeColor: ColorManger.checkBoxGreen,
+                                  value: getShiftToSecond(
+                                      widget.shift, checkboxState),
+                                  onChanged: (bool? value) {
+                                    setState(
+                                      () {
+                                        switch (widget.shift) {
+                                          case 1:
+                                            checkboxState.shifttosecond1 =
+                                                value!;
+                                            break;
+                                          case 2:
+                                            checkboxState.shifttosecond2 =
+                                                value!;
+                                            break;
+                                          case 3:
+                                            checkboxState.shifttosecond3 =
+                                                value!;
+                                            break;
+                                          case 4:
+                                            checkboxState.shifttosecond4 =
+                                                value!;
+                                            break;
+                                          default:
+                                        }
+                                      },
+                                    );
+                                  }),
+                            ),
+                            horizontalSpacing(SizeConfig.screenWidth! * .05),
                             Text(
                               S.of(context).shiftToSecondDay,
                               style: TextStyles.blackRegulerStyle(
