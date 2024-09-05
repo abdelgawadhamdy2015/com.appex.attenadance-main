@@ -86,12 +86,14 @@ class _AttendanceLogState extends State<AttendanceLog> {
               verticalSpacing(SizeConfig.screenHeight! * .01),
               context.read<HomeCubit>().data.shift1_TimeOut != "____" &&
                       context.read<HomeCubit>().data.shift1_TimeOut != null
-                  ? transactionWidget(
-                      context.read<HomeCubit>().data.shift1_TimeOut!,
-                      context.read<HomeCubit>().data.date!,
-                      S.of(context).leaving,
-                      ColorManger.lightred,
-                      context)
+                  ? Center(
+                    child: transactionWidget(
+                        context.read<HomeCubit>().data.shift1_TimeOut!,
+                        context.read<HomeCubit>().data.date!,
+                        S.of(context).leaving,
+                        ColorManger.lightred,
+                        context),
+                  )
                   : Center(
                       child: Text(
                         S.of(context).notLeave,

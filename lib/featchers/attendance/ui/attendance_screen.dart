@@ -5,7 +5,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/attendance_shimmer.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
@@ -106,24 +105,6 @@ class _AttendanceScreen extends State<AttendanceScreen> {
     super.dispose();
   }
 
-  void _goToMyLocation() {
-    controller.animateCamera(
-      CameraUpdate.newLatLng(context.read<AttendanceCubit>().currentPosition),
-    );
-  }
-
-  void _zoomIn() {
-    controller.animateCamera(
-      CameraUpdate.zoomIn(),
-    );
-  }
-
-  void _zoomOut() {
-    controller.animateCamera(
-      CameraUpdate.zoomOut(),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     getAttendance(context);
@@ -178,7 +159,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                       target: context
                                           .read<AttendanceCubit>()
                                           .currentPosition,
-                                      zoom: SizeConfig.defaultSize! * 1.5,
+                                      zoom: SizeConfig.screenWidth! * .035,
                                     ),
                                     myLocationEnabled: true,
                                     myLocationButtonEnabled: false,
@@ -203,7 +184,8 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                             target: context
                                                 .read<AttendanceCubit>()
                                                 .currentPosition,
-                                            zoom: SizeConfig.defaultSize! * .6,
+                                            zoom:
+                                                SizeConfig.screenWidth! * .035,
                                           ),
                                         ),
                                       );
@@ -216,7 +198,6 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                 left: 0,
                                 right: 0,
                                 child: Container(
-                                  //width: double.infinity,
                                   height: SizeConfig.screenHeight! * .04,
                                   color: ColorManger.darkBlue,
                                   alignment: Alignment.center,
@@ -225,58 +206,6 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                     style: TextStyles.blackBoldStyle(
                                         SizeConfig.fontSize3!),
                                   ),
-                                ),
-                              ),
-                              Positioned(
-                                top: SizeConfig.screenHeight! * .01,
-                                right: SizeConfig.screenWidth! * .01,
-                                child: Visibility(
-                                  visible: true,
-                                  child: InkWell(
-                                    onTap: _goToMyLocation,
-                                    child: ClipOval(
-                                      child: Icon(
-                                        Icons.my_location,
-                                        color: Colors.blue,
-                                        size: SizeConfig
-                                            .iconSize5, // Size of the icon
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: SizeConfig.screenHeight! * .07,
-                                right: SizeConfig.screenWidth! * .03,
-                                child: Column(
-                                  children: <Widget>[
-                                    SizedBox(
-                                      height: SizeConfig.screenWidth! * .01,
-                                      width: SizeConfig.screenHeight! * .01,
-                                      child: FloatingActionButton(
-                                        backgroundColor: ColorManger.darkBlue,
-                                        onPressed: _zoomIn,
-                                        child: Icon(
-                                          Icons.add,
-                                          size: SizeConfig.iconSize5,
-                                        ),
-                                      ),
-                                    ),
-                                    verticalSpacing(
-                                        SizeConfig.screenHeight! * .01),
-                                    SizedBox(
-                                      height: SizeConfig.screenWidth! * .01,
-                                      width: SizeConfig.screenHeight! * .01,
-                                      child: FloatingActionButton(
-                                        backgroundColor: ColorManger.darkBlue,
-                                        onPressed: _zoomOut,
-                                        child: Icon(
-                                          Icons.minimize,
-                                          size: SizeConfig.iconSize5,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
                                 ),
                               ),
                             ],

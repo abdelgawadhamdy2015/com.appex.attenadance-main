@@ -83,11 +83,11 @@ class _MyAppBarState extends State<MyAppBar> {
               scale: 1.4,
               alignment: Alignment.center,
               child: DropdownButton(
-                  itemHeight: SizeConfig.screenHeight! * .07,
                   iconSize: SizeConfig.iconSize5!,
                   dropdownColor: Colors.blueAccent,
                   alignment: AlignmentDirectional.center,
                   style: TextStyles.whiteRegulerStyle(SizeConfig.fontSize3!),
+                  
                   items: items,
                   value: language,
                   onChanged: (value) {

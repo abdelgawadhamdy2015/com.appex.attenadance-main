@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/home_shimmer.dart';
-import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
@@ -74,29 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           const QuickAccess(),
                           verticalSpacing(SizeConfig.screenHeight! * .01),
                           const EventsApprovals(),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Spacer(),
-                                SizedBox(
-                                  height: SizeConfig.screenWidth! * .1,
-                                  width: SizeConfig.screenHeight! * .1,
-                                  child: FloatingActionButton(
-                                    backgroundColor: ColorManger.darkBlue,
-                                    onPressed: () {},
-                                    child: Icon(
-                                      Icons.add,
-                                      size: SizeConfig.screenHeight! * .05,
-                                    ),
-                                  ),
-                                ),
-                                const Spacer(),
-                                Icon(
-                                  Icons.menu_open_sharp,
-                                  size: SizeConfig.screenHeight! * .1,
-                                  color: ColorManger.darkBlue,
-                                ),
-                              ]),
                         ],
                       ),
                     );
