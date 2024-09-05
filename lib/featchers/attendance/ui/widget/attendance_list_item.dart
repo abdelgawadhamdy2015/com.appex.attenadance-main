@@ -60,11 +60,11 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
     checkIfNull([widget.shiftTimeIn])
         ? isAttendance = true
         : isAttendance = false;
-    return Container(
-      padding: SizeConfig().getScreenPadding(),
-      child: SizedBox(
-        width: double.infinity,
-        child: Card(
+    return Card(
+      child: Container(
+        padding: SizeConfig().getScreenPadding(),
+        child: SizedBox(
+          width: double.infinity,
           child: Column(
             children: [
               Row(

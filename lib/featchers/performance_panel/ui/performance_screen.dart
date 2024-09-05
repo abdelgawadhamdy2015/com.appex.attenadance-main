@@ -86,9 +86,7 @@ class _PerformancePanel extends State<PerformanceScreen> {
         context: context,
         title: MyConstants.attendanceAndDepartureReports,
       ),
-      drawer: const Drawer(
-        child: MyDrawer(),
-      ),
+      drawer: const MyDrawer(),
       backgroundColor: ColorManger.lightGray,
       body: SafeArea(
         child: Container(

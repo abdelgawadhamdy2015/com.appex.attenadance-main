@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: MyAppBar(
             changeLanguage: widget.changeLanguage, context: context, title: ""),
-        drawer: const Drawer(child: MyDrawer()),
+        drawer: const MyDrawer(),
         body: SafeArea(
           child: RefreshIndicator(
             onRefresh: _refreshData,

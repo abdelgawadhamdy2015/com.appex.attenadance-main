@@ -19,9 +19,7 @@ class DeparturesScreen extends StatelessWidget {
         context: context,
         title: MyConstants.mydepatures,
       ),
-      drawer: const Drawer(
-        child: MyDrawer(),
-      ),
+      drawer: const MyDrawer(),
       body: Container(
         padding: SizeConfig().getScreenPadding(),
         child: ListView.separated(

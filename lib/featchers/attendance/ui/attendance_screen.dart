@@ -114,7 +114,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
           changeLanguage: widget.changeLanguage,
           context: context,
           title: MyConstants.myTransactions),
-      drawer: const Drawer(child: MyDrawer()),
+      drawer: const MyDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -159,10 +159,9 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                       target: context
                                           .read<AttendanceCubit>()
                                           .currentPosition,
-                                      zoom: SizeConfig.screenWidth! * .035,
+                                      zoom: SizeConfig.screenWidth! * .025,
                                     ),
                                     myLocationEnabled: true,
-                                    myLocationButtonEnabled: false,
                                     markers: {
                                       Marker(
                                         markerId: const MarkerId('my location'),

@@ -48,6 +48,24 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: Builder(
+        builder: (BuildContext context) {
+          return Container(
+            margin: EdgeInsets.only(right: SizeConfig.screenWidth! * .01),
+            child: IconButton(
+              icon: Icon(
+                Icons.menu,
+                size:
+                    SizeConfig.screenWidth! * .035, // Changing Drawer Icon Size
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            ),
+          );
+        },
+      ),
       backgroundColor: ColorManger.darkBlue,
       iconTheme: const IconThemeData(color: Colors.white),
       toolbarHeight: widget.title.isNotEmpty
@@ -63,7 +81,7 @@ class _MyAppBarState extends State<MyAppBar> {
           children: [
             VerticalDivider(
               thickness: SizeConfig.screenWidth! * .005,
-              width: SizeConfig.screenWidth! * .005,
+              width: SizeConfig.screenWidth! * .001,
               color: Colors.white,
             ),
             Image.asset(
@@ -87,7 +105,6 @@ class _MyAppBarState extends State<MyAppBar> {
                   dropdownColor: Colors.blueAccent,
                   alignment: AlignmentDirectional.center,
                   style: TextStyles.whiteRegulerStyle(SizeConfig.fontSize3!),
-                  
                   items: items,
                   value: language,
                   onChanged: (value) {

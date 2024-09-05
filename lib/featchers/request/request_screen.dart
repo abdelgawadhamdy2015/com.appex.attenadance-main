@@ -27,7 +27,7 @@ class _RequestScreenState extends State<RequestScreen> {
           changeLanguage: widget.changeLanguage,
           context: context,
           title: MyConstants.myRequests),
-      drawer: const Drawer(child: MyDrawer()),
+      drawer: const MyDrawer(),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Container(
