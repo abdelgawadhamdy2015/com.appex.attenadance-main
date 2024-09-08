@@ -8,8 +8,6 @@ import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/bottom_app_bar.dart';
 
-import '../../helpers/helper_methods.dart';
-
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Function(Locale) changeLanguage;
   final BuildContext context;
@@ -50,67 +48,90 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: Builder(
+        builder: (BuildContext context) {
+          return Container(
+            margin: EdgeInsets.only(right: SizeConfig.screenWidth! * .01),
+            child: IconButton(
+              icon: Icon(
+                Icons.menu,
+                size:
+                    SizeConfig.screenWidth! * .035, // Changing Drawer Icon Size
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            ),
+          );
+        },
+      ),
       backgroundColor: ColorManger.darkBlue,
       iconTheme: const IconThemeData(color: Colors.white),
+      toolbarHeight: widget.title.isNotEmpty
+          ? SizeConfig.screenHeight! * .09
+          : SizeConfig.screenHeight! * .07,
       bottom: widget.title.isNotEmpty
           ? MyBottomAppBar(title: widget.title, context: context)
           : null,
       title: IntrinsicHeight(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const VerticalDivider(
-              thickness: 1.5,
-              width: 1,
+            VerticalDivider(
+              thickness: SizeConfig.screenWidth! * .005,
+              width: SizeConfig.screenWidth! * .001,
               color: Colors.white,
             ),
             Image.asset(
               "images/small_apex.png",
               width: SizeConfig.screenWidth! * .15,
             ),
-            const Spacer(),
             IconButton(
               onPressed: () {
                 context.pushNamed(Routes.departuresScreen);
               },
               icon: Icon(
                 Icons.notifications_none_outlined,
-                size: MediaQuery.of(context).size.width * .07,
+                size: SizeConfig.iconSize5,
               ),
             ),
-            horizontalSpacing(SizeConfig.screenWidth! * .05),
-            DropdownButton(
-                dropdownColor: Colors.blueAccent,
-                alignment: AlignmentDirectional.center,
-                style: TextStyles.font12WhiteBold,
-                items: items,
-                value: language,
-                onChanged: (value) {
-                  if (value == 'English') {
-                    widget.changeLanguage(const Locale('en'));
-                    setState(() {
-                      language = "English";
-                    });
-                  } else if (value == 'العربية') {
-                    widget.changeLanguage(const Locale('ar'));
+            Transform.scale(
+              scale: 1.4,
+              alignment: Alignment.center,
+              child: DropdownButton(
+                  iconSize: SizeConfig.iconSize5!,
+                  dropdownColor: Colors.blueAccent,
+                  alignment: AlignmentDirectional.center,
+                  style: TextStyles.whiteRegulerStyle(SizeConfig.fontSize3!),
+                  items: items,
+                  value: language,
+                  onChanged: (value) {
+                    if (value == 'English') {
+                      widget.changeLanguage(const Locale('en'));
+                      setState(() {
+                        language = "English";
+                      });
+                    } else if (value == 'العربية') {
+                      widget.changeLanguage(const Locale('ar'));
 
-                    setState(() {
-                      language = "العربية";
-                    });
-                  }
-                }),
-            horizontalSpacing(SizeConfig.screenWidth! * .05),
-            const VerticalDivider(
-              thickness: 1.5,
-              width: 1,
+                      setState(() {
+                        language = "العربية";
+                      });
+                    }
+                  }),
+            ),
+            VerticalDivider(
+              thickness: SizeConfig.screenWidth! * .005,
+              width: SizeConfig.screenWidth! * .005,
               color: Colors.white,
             ),
-            const Spacer(),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40), color: Colors.white),
+            ClipOval(
               child: Image.asset(
                 "assets/man.png",
-                height: SizeConfig.screenHeight! * .05,
+                width: SizeConfig.screenWidth! * .1,
+                height: SizeConfig.screenHeight! * .1,
               ),
             )
           ],

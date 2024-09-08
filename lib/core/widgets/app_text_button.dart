@@ -48,6 +48,7 @@ class AppButtonText extends StatelessWidget {
         child: Text(
           butonText,
           style: textStyle,
+          
         ));
   }
 }

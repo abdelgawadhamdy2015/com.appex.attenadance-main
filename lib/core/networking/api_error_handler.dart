@@ -177,6 +177,12 @@ ApiErrorModel _handleError(DioException error) {
             error.response!.statusCode == ResponseCode.CONFLICT) {
           ApiConstants.dioExceptionType = DioExceptionType.badResponse;
         }
+        if (error.response!.statusCode == ResponseCode.INTERNAL_SERVER_ERROR) {
+          return DataSource.INTERNAL_SERVER_ERROR.getFailure();
+        }
+        if (error.response!.statusCode == ResponseCode.NOT_FOUND) {
+          return DataSource.NOT_FOUND.getFailure();
+        }
         return ApiErrorModel.fromJson(error.response!.data);
       } else {
         return DataSource.DEFAULT.getFailure();

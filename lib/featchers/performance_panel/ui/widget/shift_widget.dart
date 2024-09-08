@@ -24,11 +24,11 @@ class ShiftWidget extends StatelessWidget {
       tileColor: ColorManger.lightGray,
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Expanded(
                 flex: 2,
@@ -36,33 +36,30 @@ class ShiftWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Expanded(
-                            flex: 1,
-                            child: Text(S
-                                .of(navigatorKey.currentContext!)
-                                .attendanceTime)),
-                        horizontalSpacing(SizeConfig.screenWidth! * .04),
-                        const Expanded(
-                            flex: 1, child: Icon(Icons.move_down_sharp))
+                        Text(S.of(navigatorKey.currentContext!).attendanceTime,
+                            style: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!)),
+                      const   Icon(Icons.move_down_sharp)
                       ],
                     ),
-                    Text(shiftTimeIn ?? ""),
+                    Text(shiftTimeIn ?? "",
+                        style: TextStyles.blackRegulerStyle(
+                            SizeConfig.fontSize3!)),
                     verticalSpacing(SizeConfig.screenHeight! * .005),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Expanded(
-                            flex: 1,
-                            child: Text(
-                                S.of(navigatorKey.currentContext!).leaveTime)),
-                        horizontalSpacing(SizeConfig.screenWidth! * .04),
-                        const Expanded(flex: 1, child: Icon(Icons.move_up))
+                        Text(S.of(navigatorKey.currentContext!).leaveTime,
+                            style: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!)),
+                      const  Icon(Icons.move_up)
                       ],
                     ),
-                    Text(shiftTimeOut ?? ""),
-                    verticalSpacing(SizeConfig.screenHeight! * .005),
+                    Text(shiftTimeOut ?? "",
+                        style: TextStyles.blackRegulerStyle(
+                            SizeConfig.fontSize3!)),
                   ],
                 ),
               ),
@@ -70,10 +67,11 @@ class ShiftWidget extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Text(
                     getShift(shift, navigatorKey.currentContext!),
-                    style: TextStyles.font12black54Reguler,
+                    style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                   ),
                 ),
               )

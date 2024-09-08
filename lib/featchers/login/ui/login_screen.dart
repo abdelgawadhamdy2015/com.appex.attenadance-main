@@ -92,12 +92,10 @@ class LoginScreenState extends State<LoginScreen> {
 
                           backgroundColor: Colors.white,
                         ),
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            selectedLanguage,
-                            style: TextStyles.font15BlueBold,
-                          ),
+                        child: Text(
+                          selectedLanguage,
+                          style: TextStyles.darkBlueBoldStyle(
+                              SizeConfig.fontSize4!),
                         ),
                       ),
                     ],
@@ -108,7 +106,8 @@ class LoginScreenState extends State<LoginScreen> {
                     padding:
                         EdgeInsets.only(top: SizeConfig.screenHeight! * .01),
                     child: Text(S.of(context).login,
-                        style: TextStyles.font18BlackBold),
+                        style:
+                            TextStyles.blackBoldStyle(SizeConfig.fontSize4!)),
                   ),
                 ),
                 Form(
@@ -122,10 +121,15 @@ class LoginScreenState extends State<LoginScreen> {
                             vertical: SizeConfig.screenHeight! * .016),
                         child: Text(
                           S.of(context).dbName,
-                          style: TextStyles.font12blackBold,
+                          style:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                         ),
                       ),
                       MyTextForm(
+                          inputTextStyle:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+                          hintStyle: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                           fillColor: ColorManger.lightGray,
                           hint: S.of(context).dbName,
                           excep: S.of(context).dbName,
@@ -136,10 +140,15 @@ class LoginScreenState extends State<LoginScreen> {
                             vertical: SizeConfig.screenHeight! * .016),
                         child: Text(
                           S.of(context).email,
-                          style: TextStyles.font12blackBold,
+                          style:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                         ),
                       ),
                       MyTextForm(
+                        inputTextStyle:
+                            TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+                        hintStyle:
+                            TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                         fillColor: ColorManger.lightGray,
                         hint: S.of(context).email,
                         excep: S.of(context).email,
@@ -151,10 +160,15 @@ class LoginScreenState extends State<LoginScreen> {
                             vertical: SizeConfig.screenHeight! * .016),
                         child: Text(
                           S.of(context).password,
-                          style: TextStyles.font12blackBold,
+                          style:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                         ),
                       ),
                       PasswordText(
+                          inputTextStyle:
+                              TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+                          hintStyle: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                           fillColor: ColorManger.lightGray,
                           hint: S.of(context).password,
                           obsecur: true,
@@ -165,24 +179,33 @@ class LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Text(S.of(context).rememberMe),
-                              Checkbox(
-                                  activeColor: ColorManger.radioButtonBlue,
-                                  value: rememberMe,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      rememberMe = val!;
-                                    });
-                                  }),
+                              Text(
+                                S.of(context).rememberMe,
+                                style: TextStyles.blackRegulerStyle(
+                                    SizeConfig.fontSize3!),
+                              ),
+                              Transform.scale(
+                                scale: SizeConfig.screenWidth! * .003,
+                                child: Checkbox(
+                                    activeColor: ColorManger.radioButtonBlue,
+                                    value: rememberMe,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        rememberMe = val!;
+                                      });
+                                    }),
+                              ),
                             ],
                           ),
                           InkWell(
                             child: Text(
                               S.of(context).forgetPassword,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: ColorManger.forgetPassswordTextColor,
-                                  decoration: TextDecoration.underline),
+                                  decoration: TextDecoration.underline,
+                                  fontSize: SizeConfig.fontSize3!),
                             ),
                             onTap: () {
                               context
@@ -199,20 +222,16 @@ class LoginScreenState extends State<LoginScreen> {
                       BlocBuilder<LoginCubit, LoginState>(
                         builder: (context, state) {
                           return !context.read<LoginCubit>().loadingLogin
-                              ? Container(
-                                  padding: EdgeInsets.only(
-                                      top: SizeConfig.screenHeight! * .01),
-                                  width: double.infinity,
-                                  height: SizeConfig.screenHeight! * .08,
-                                  child: AppButtonText(
-                                    backGroundColor:
-                                        ColorManger.loginButtonColorBlue,
-                                    butonText: S.of(context).login,
-                                    onPressed: () async {
-                                      validateThenDoLogin(context);
-                                    },
-                                    textStyle: TextStyles.font15WhiteBold,
-                                  ),
+                              ? AppButtonText(
+                                  buttonHeight: SizeConfig.screenHeight! * .08,
+                                  backGroundColor:
+                                      ColorManger.loginButtonColorBlue,
+                                  butonText: S.of(context).login,
+                                  onPressed: () async {
+                                    validateThenDoLogin(context);
+                                  },
+                                  textStyle: TextStyles.whiteRegulerStyle(
+                                      SizeConfig.fontSize4!),
                                 )
                               : MyProgressIndicator(
                                   hight: SizeConfig.screenHeight! * .08,

@@ -23,7 +23,7 @@ class WorkTimeBoard extends StatelessWidget {
       !checkIfNull([data.date, data.dayAr, data.dayEn])
           ? Text(
               "${Intl.defaultLocale == MyConstants.arabic ? data.dayAr : data.dayEn}  ${DateFormat(' dd , MMMM , yyyy ').format(data.date!)}",
-              style: TextStyles.font12black54Reguler,
+              style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
             )
           : Container(),
       IntrinsicHeight(
@@ -37,41 +37,27 @@ class WorkTimeBoard extends StatelessWidget {
                 top: SizeConfig.screenHeight! * .01,
                 bottom: SizeConfig.screenHeight! * .01),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppButtonText(
                   verticalPadding: SizeConfig.screenHeight! * .0,
-                  buttonHeight: SizeConfig.screenHeight! * .01,
+                  buttonHeight: SizeConfig.screenHeight! * .06,
                   buttonWidth: SizeConfig.screenWidth! * .3,
                   backGroundColor: ColorManger.mutedBlue,
-                  textStyle: TextStyles.font12WhiteBold,
+                  textStyle:
+                      TextStyles.whiteRegulerStyle(SizeConfig.fontSize4!),
                   butonText: S.of(context).timesOfWork,
                   borderRadius: 20.r,
                   onPressed: () {},
                 ),
-                // Container(
-                //   padding: EdgeInsets.only(
-                //       right: SizeConfig.screenWidth! * .05,
-                //       left: SizeConfig.screenWidth! * .05,
-                //       top: SizeConfig.screenHeight! * .005,
-                //       bottom: SizeConfig.screenHeight! * .005),
-                //   decoration: BoxDecoration(
-                //     color: ColorManger.buttonGreen,
-                //     borderRadius: BorderRadius.circular(20.r),
-                //   ),
-                //   child: Text(
-                //     S.of(context).timesOfWork,
-                //     style: TextStyles.font15WhiteBold,
-                //   ),
-                // ),
-                verticalSpacing(SizeConfig.screenHeight! * .01),
                 data.shiftType == 1
                     ? Text(
                         "${S.of(context).workHours} : ${!checkIfNull([
                               data.totalDayHours
                             ]) ? getHours(data.totalDayHours!, context) : "no data "} ",
-                        style: TextStyles.font12black54Reguler,
+                        style:
+                            TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                       )
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,41 +71,13 @@ class WorkTimeBoard extends StatelessWidget {
                                 (i == 1 || map['hasShift$i']))
                               Text(
                                 "${getShift(i, context)} ${S.of(context).from} ${getFormattedTimeOfDay(map['shift${i}_Start']!, context)} ${S.of(context).to} ${getFormattedTimeOfDay(map['shift${i}_End']!, context)}",
-                                style: TextStyles.font12WhiteBold,
+                                style: TextStyles.whiteRegulerStyle(
+                                    SizeConfig.fontSize4!),
                               ),
-
-                          // !checkIfNull([data.shift1_Start, data.shift1_End])
-                          //     ? Text(
-                          //         "${S.of(context).shift1} ${S.of(context).from} ${getFormattedTimeOfDay(data.shift1_Start!, context)} ${S.of(context).to} ${getFormattedTimeOfDay(data.shift1_End!, context)}",
-                          //         style: TextStyles.font12black54Reguler,
-                          //       )
-                          //     : Container(),
-                          // !checkIfNull([data.shift2_Start, data.shift2_End]) &&
-                          //         data.hasShift2!
-                          //     ? Text(
-                          //         "${S.of(context).shift2} ${S.of(context).from} ${getFormattedTimeOfDay(data.shift2_Start!, context)} ${S.of(context).to} ${getFormattedTimeOfDay(data.shift2_End!, context)}",
-                          //         style: TextStyles.font12black54Reguler,
-                          //       )
-                          //     : Container(),
-                          // !checkIfNull([data.shift3_Start, data.shift3_End]) &&
-                          //         data.hasShift3!
-                          //     ? Text(
-                          //         "${S.of(context).shift3} ${S.of(context).from} ${getFormattedTimeOfDay(data.shift3_Start!, context)} ${S.of(context).to} ${getFormattedTimeOfDay(data.shift3_End!, context)}",
-                          //         style: TextStyles.font12black54Reguler,
-                          //       )
-                          //     : Container(),
-                          // !checkIfNull([data.shift4_Start, data.shift4_End]) &&
-                          //         data.hasShift4!
-                          //     ? Text(
-                          //         "${S.of(context).shift4} ${S.of(context).from} ${getFormattedTimeOfDay(data.shift4_Start!, context)} ${S.of(context).to} ${getFormattedTimeOfDay(data.shift4_End!, context)}",
-                          //         style: TextStyles.font12black54Reguler,
-                          //       )
-                          //
-                          //   : Container(),
-                          verticalSpacing(SizeConfig.screenHeight! * .01),
                           Text(
                             S.of(context).restMinutes,
-                            style: TextStyles.font12WhiteBold,
+                            style: TextStyles.whiteRegulerStyle(
+                                SizeConfig.fontSize4!),
                           ),
                         ],
                       ),

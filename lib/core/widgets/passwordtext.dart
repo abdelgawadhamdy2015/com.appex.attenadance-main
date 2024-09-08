@@ -7,13 +7,18 @@ class PasswordText extends StatefulWidget {
   final String hint;
   final bool obsecur;
   final Color? fillColor;
+  final TextStyle? hintStyle;
+  final TextStyle? inputTextStyle;
+
   final TextEditingController control;
   const PasswordText(
       {super.key,
       required this.hint,
       required this.obsecur,
       required this.control,
-      this.fillColor});
+      this.fillColor,
+      this.hintStyle,
+      this.inputTextStyle});
   @override
   State<PasswordText> createState() => _PasswordTextState();
 }
@@ -36,15 +41,18 @@ class _PasswordTextState extends State<PasswordText> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: widget.inputTextStyle,
+
       controller: widget.control,
       obscureText: obsecured,
       decoration: InputDecoration(
           fillColor: widget.fillColor ?? ColorManger.morelightGray,
           filled: true, //hintText: 'Password' ,
           hintText: widget.hint,
-          hintStyle: TextStyle(
-            fontSize: 10.sp,
-          ),
+          hintStyle: widget.hintStyle ??
+              TextStyle(
+                fontSize: 10.sp,
+              ),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black26),
           ),

@@ -41,37 +41,27 @@ class DayPanel extends StatelessWidget {
 
   Widget _buildHeader(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         getFormattedTimeOfDay(day.shift1TimeIn!, context) != null
-            ? Expanded(
-                flex: 2,
-                child: Text(
-                  getFormattedTimeOfDay(day.shift1TimeIn!, context)!,
-                  style: TextStyles.font15BlueBold,
-                ),
+            ? Text(
+                getFormattedTimeOfDay(day.shift1TimeIn!, context)!,
+                style: TextStyles.darkBlueBoldStyle(SizeConfig.fontSize3!),
               )
-            : Expanded(flex: 2, child: Container()),
-        horizontalSpacing(5),
-        Expanded(
-          flex: 2,
-          child: Container(
-            // width: SizeConfig.screenWidth! * .4,
-            height: SizeConfig.screenHeight! * .01,
-            padding:
-                EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .3),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.r),
-              color: ColorManger.lighterGreen,
-            ),
+            : Container(),
+        Container(
+          width: SizeConfig.screenWidth! * .4,
+          height: SizeConfig.screenHeight! * .01,
+          padding:
+              EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth! * .3),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.r),
+            color: ColorManger.lighterGreen,
           ),
         ),
-        horizontalSpacing(5),
-        Expanded(
-          flex: 2,
-          child: Text(
-            day.date != null ? _formatDate(day.date!) : "",
-            style: TextStyles.font15BlueBold,
-          ),
+        Text(
+          day.date != null ? _formatDate(day.date!) : "",
+          style: TextStyles.darkBlueBoldStyle(SizeConfig.fontSize3!),
         ),
       ],
     );
@@ -122,12 +112,14 @@ class DayPanel extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(label),
+            Text(label,
+                style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!)),
             horizontalSpacing(SizeConfig.screenWidth! * .04),
             Icon(icon),
           ],
         ),
-        Text(value ?? "", style: TextStyles.font12black54Reguler),
+        Text(value ?? "",
+            style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!)),
         verticalSpacing(SizeConfig.screenHeight! * .005)
       ],
     );

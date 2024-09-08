@@ -66,7 +66,8 @@ class PerfromanceListView extends StatelessWidget {
                                         S
                                             .of(navigatorKey.currentContext!)
                                             .okDialog,
-                                        style: TextStyles.font16BlackBold,
+                                        style: TextStyles.blackBoldStyle(
+                                            SizeConfig.fontSize3!),
                                       ),
                                     ),
                                   ],
@@ -74,93 +75,89 @@ class PerfromanceListView extends StatelessWidget {
                               ],
                             );
                           });
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => DayPanel(
-                      //       day: days[index],
-                      //     ),
-                      //   ),
-                      // );
                     },
                     title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         getFormattedTimeOfDay(
                                     days[index].shift1TimeIn!, context) !=
                                 null
-                            ? Expanded(
-                                flex: 3,
-                                child: Text(
-                                  getFormattedTimeOfDay(
-                                      days[index].shift1TimeIn!, context)!,
-                                  style: TextStyles.font14blueNormal,
-                                ),
+                            ? Text(
+                                getFormattedTimeOfDay(
+                                    days[index].shift1TimeIn!, context)!,
+                                style: TextStyles.darkBlueBoldStyle(
+                                    SizeConfig.fontSize3!),
                               )
                             : Container(),
-                        horizontalSpacing(SizeConfig.screenWidth! * .1),
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            width: SizeConfig.screenWidth! * .4,
-                            height: SizeConfig.screenHeight! * .01,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: SizeConfig.screenWidth! * .3),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.r),
-                              color: ColorManger.lighterGreen,
-                            ),
+                        Container(
+                          width: SizeConfig.screenWidth! * .4,
+                          height: SizeConfig.screenHeight! * .01,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.screenWidth! * .3),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.r),
+                            color: ColorManger.lighterGreen,
                           ),
                         ),
-                        horizontalSpacing(SizeConfig.screenWidth! * .1),
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            days[index].date != null
-                                ? Intl.defaultLocale == MyConstants.arabic
-                                    ? "${days[index].date!.day} ${days[index].dayAr!}"
-                                    : "${days[index].date!.day} ${days[index].dayEn!}"
-                                : "",
-                            style: TextStyles.font14blueNormal,
-                          ),
+                        Text(
+                          days[index].date != null
+                              ? Intl.defaultLocale == MyConstants.arabic
+                                  ? "${days[index].date!.day} ${days[index].dayAr!}"
+                                  : "${days[index].date!.day} ${days[index].dayEn!}"
+                              : "",
+                          style: TextStyles.darkBlueRegulerStyle(
+                              SizeConfig.fontSize3!),
                         ),
                       ],
                     ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         verticalSpacing(SizeConfig.screenHeight! * .005),
                         verticalSpacing(SizeConfig.screenHeight! * .005),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(S.of(context).attendanceTime),
+                            Text(S.of(context).attendanceTime,
+                                style: TextStyles.blackRegulerStyle(
+                                    SizeConfig.fontSize3!)),
                             horizontalSpacing(SizeConfig.screenWidth! * .04),
-                            const Icon(Icons.move_down_sharp)
+                            Icon(Icons.move_down_sharp,
+                                size: SizeConfig.iconSize5)
                           ],
                         ),
-                        Text(days[index].shift1TimeIn ?? ""),
+                        Text(days[index].shift1TimeIn ?? "",
+                            style: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!)),
                         verticalSpacing(SizeConfig.screenHeight! * .005),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(S.of(context).leaveTime),
+                            Text(S.of(context).leaveTime,
+                                style: TextStyles.blackRegulerStyle(
+                                    SizeConfig.fontSize3!)),
                             horizontalSpacing(SizeConfig.screenWidth! * .04),
-                            const Icon(Icons.move_up)
+                            Icon(Icons.move_up, size: SizeConfig.iconSize5)
                           ],
                         ),
-                        Text(days[index].shift1TimeOut ?? ""),
+                        Text(days[index].shift1TimeOut ?? "",
+                            style: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!)),
                         verticalSpacing(SizeConfig.screenHeight! * .005),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(S.of(context).workHours),
+                            Text(S.of(context).workHours,
+                                style: TextStyles.blackRegulerStyle(
+                                    SizeConfig.fontSize3!)),
                             horizontalSpacing(SizeConfig.screenWidth! * .04),
-                            const Icon(Icons.timer)
+                            Icon(Icons.timer, size: SizeConfig.iconSize5)
                           ],
                         ),
                         Text(days[index].workingTime ?? "",
-                            style: TextStyles.font12black54Reguler),
+                            style: TextStyles.blackRegulerStyle(
+                                SizeConfig.fontSize3!)),
                       ],
                     ),
                   ),
@@ -170,7 +167,7 @@ class PerfromanceListView extends StatelessWidget {
           } else {
             return Text(
               S.of(context).noDateFound,
-              style: TextStyles.font12black54Reguler,
+              style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
             );
           }
         },

@@ -17,10 +17,8 @@ class HomeShimmer extends StatelessWidget {
           child: Column(
         children: [
           verticalSpacing(SizeConfig.screenHeight! * .03),
-          Text(
-            S.of(context).attendanceMovementsToday,
-            style: TextStyles.font15BlueBold,
-          ),
+          Text(S.of(context).attendanceMovementsToday,
+              style: TextStyles.darkBlueBoldStyle(SizeConfig.fontSize4!)),
           ShimmerWidget.rectangular(height: SizeConfig.screenWidth! * .1),
           verticalSpacing(SizeConfig.screenHeight! * .01),
           Card(
@@ -31,10 +29,9 @@ class HomeShimmer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    S.of(context).quickAccessList,
-                    style: TextStyles.font15BlueBold,
-                  ),
+                  Text(S.of(context).quickAccessList,
+                      style:
+                          TextStyles.darkBlueBoldStyle(SizeConfig.fontSize4!)),
                   verticalSpacing(16),
                   GridView.count(
                     crossAxisCount: 3,
@@ -86,10 +83,9 @@ class HomeShimmer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    S.of(context).eventsApprovals,
-                    style: TextStyles.font15BlueBold,
-                  ),
+                  Text(S.of(context).eventsApprovals,
+                      style:
+                          TextStyles.darkBlueBoldStyle(SizeConfig.fontSize4!)),
                   SizedBox(height: SizeConfig.screenHeight! * .05),
                   Card(
                     color: Colors.white,

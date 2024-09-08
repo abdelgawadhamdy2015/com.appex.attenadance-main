@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/departures_shimmer.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
@@ -26,7 +25,7 @@ class _PerformanceBlockListener extends State<PerformanceBlockListener> {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-          const  DeparturesShimmer();
+            const DeparturesShimmer();
           },
           success: (performanceResponse) async {
             PerformanceEmployeeResponse response = performanceResponse;
@@ -38,11 +37,11 @@ class _PerformanceBlockListener extends State<PerformanceBlockListener> {
                     Intl.defaultLocale == MyConstants.arabic
                         ? response.errorMessageAr!
                         : response.errorMessageEn!,
-                   [S.of(context).okDialog], true);
+                    [S.of(context).okDialog],
+                    true);
           },
           error: (error) {
-            context.pop();
-            setupDialogState(context, error,[S.of(context).okDialog], true);
+            setupDialogState(context, error, [S.of(context).okDialog], true);
           },
         );
       },

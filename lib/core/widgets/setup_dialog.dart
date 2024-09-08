@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
+import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/networking/dio_factory.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
@@ -14,7 +15,7 @@ import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 setupDialogState(
     BuildContext context, String data, List<String> actions, bool isError) {
   showDialog(
-    context: navigatorKey.currentContext!,
+    context: context,
     builder: (context) => AlertDialog(
       icon: Icon(
         isError ? Icons.error : Icons.done,
@@ -26,7 +27,7 @@ setupDialogState(
           flex: 1,
           child: Text(
             data,
-            style: TextStyles.font16BlackBold,
+            style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
             textAlign: TextAlign.center,
           ),
         )
@@ -53,7 +54,7 @@ setupDialogState(
               child: Text(
                 textAlign: TextAlign.center,
                 actions[0],
-                style: TextStyles.font16BlackBold,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
             ),
           ],
@@ -79,7 +80,7 @@ setupLogOutDialogState(
       content: Text(
         textAlign: TextAlign.center,
         data,
-        style: TextStyles.font16BlackBold,
+        style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
       ),
       actions: [
         Row(
@@ -95,7 +96,7 @@ setupLogOutDialogState(
                     child: Text(
                       //cancel
                       actions[1],
-                      style: TextStyles.font16BlackBold,
+                      style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                     ),
                   )
                 : Container(),
@@ -116,7 +117,7 @@ setupLogOutDialogState(
               child: Text(
                 //"ok",
                 actions[0],
-                style: TextStyles.font16BlackBold,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
             ),
           ],

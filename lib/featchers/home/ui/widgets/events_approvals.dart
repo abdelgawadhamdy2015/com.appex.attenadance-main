@@ -20,7 +20,7 @@ class EventsApprovals extends StatelessWidget {
           children: [
             Text(
               S.of(context).eventsApprovals,
-              style: TextStyles.font15BlueBold,
+              style: TextStyles.darkBlueBoldStyle(SizeConfig.fontSize4!),
             ),
             verticalSpacing(SizeConfig.screenWidth! * .016),
             Card(
@@ -33,10 +33,12 @@ class EventsApprovals extends StatelessWidget {
                   return ListTile(
                     leading: const Icon(Icons.notification_important),
                     title: Text('تنبيه ${index + 1}',
-                        style: TextStyles.font12blackBold),
+                        style:
+                            TextStyles.blackBoldStyle(SizeConfig.fontSize3!)),
                     subtitle: Text(
                       'تفاصيل التنبيه',
-                      style: TextStyles.font12black54Reguler,
+                      style:
+                          TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                     ),
                   );
                 },

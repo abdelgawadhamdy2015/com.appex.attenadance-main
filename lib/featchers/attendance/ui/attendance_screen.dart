@@ -5,13 +5,13 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/shimmer_widgets/attendance_shimmer.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
+import 'package:ttech_attendance/core/widgets/mytextfile.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bloc_listener.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/attendance_bord.dart';
@@ -114,10 +114,11 @@ class _AttendanceScreen extends State<AttendanceScreen> {
           changeLanguage: widget.changeLanguage,
           context: context,
           title: MyConstants.myTransactions),
-      drawer: const Drawer(child: MyDrawer()),
+      drawer: const MyDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               const AttendanceBlocListener(),
               BlocBuilder<AttendanceCubit, AttendanceState>(
@@ -129,21 +130,20 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                     key: context.read<AttendanceCubit>().formKey,
                     padding: SizeConfig().getScreenPadding(),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const AttendanceBord(),
-                        verticalSpacing(SizeConfig.screenHeight! * .01),
-                        TextField(
-                          mouseCursor: SystemMouseCursors.basic,
+                        MyTextForm(
+                          fillColor: ColorManger.lightGray,
                           maxLines: 3,
                           controller: _notesController,
-                          decoration: InputDecoration(
-                            labelStyle: TextStyles.font12black54Reguler,
-                            labelText: S.of(context).notes,
-                            border: const OutlineInputBorder(),
-                          ),
+                          inputTextStyle: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
+                          hintStyle: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
+                          labelText: S.of(context).notes,
                         ),
-                        verticalSpacing(SizeConfig.screenHeight! * .005),
                         WorkTimeBoard(
                             data: context.read<AttendanceCubit>().data),
                         Container(
@@ -153,39 +153,43 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                           child: Stack(
                             children: [
                               Card(
-                                child: GoogleMap(
-                                  initialCameraPosition: CameraPosition(
-                                    target: context
-                                        .read<AttendanceCubit>()
-                                        .currentPosition,
-                                    zoom: 14,
-                                  ),
-                                  myLocationEnabled: true,
-                                  markers: {
-                                    Marker(
-                                      markerId: const MarkerId('my location'),
-                                      position: context
+                                child: Expanded(
+                                  child: GoogleMap(
+                                    initialCameraPosition: CameraPosition(
+                                      target: context
                                           .read<AttendanceCubit>()
                                           .currentPosition,
-                                      infoWindow: const InfoWindow(
-                                        title: 'My Marker',
-                                        snippet: 'This is a snippet',
-                                      ),
+                                      zoom: SizeConfig.screenWidth! * .025,
                                     ),
-                                  },
-                                  onMapCreated:
-                                      (GoogleMapController controller) {
-                                    this.controller = controller;
-                                    controller.animateCamera(
-                                      CameraUpdate.newCameraPosition(
-                                        CameraPosition(
+                                    myLocationEnabled: true,
+                                    markers: {
+                                      Marker(
+                                        markerId: const MarkerId('my location'),
+                                        position: context
+                                            .read<AttendanceCubit>()
+                                            .currentPosition,
+                                        infoWindow: const InfoWindow(
+                                          title: 'My Marker',
+                                          snippet: 'This is my location',
+                                        ),
+                                      ),
+                                    },
+                                    onMapCreated:
+                                        (GoogleMapController controller) {
+                                      this.controller = controller;
+                                      controller.animateCamera(
+                                        CameraUpdate.newCameraPosition(
+                                          CameraPosition(
                                             target: context
                                                 .read<AttendanceCubit>()
                                                 .currentPosition,
-                                            zoom: 14),
-                                      ),
-                                    );
-                                  },
+                                            zoom:
+                                                SizeConfig.screenWidth! * .035,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                               Positioned(
@@ -193,13 +197,16 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                                 left: 0,
                                 right: 0,
                                 child: Container(
-                                  //width: double.infinity,
-                                  height: SizeConfig.screenHeight! * .03,
+                                  height: SizeConfig.screenHeight! * .04,
                                   color: ColorManger.darkBlue,
                                   alignment: Alignment.center,
-                                  child: Text(S.of(context).location),
+                                  child: Text(
+                                    S.of(context).location,
+                                    style: TextStyles.blackBoldStyle(
+                                        SizeConfig.fontSize3!),
+                                  ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         )

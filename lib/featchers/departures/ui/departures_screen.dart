@@ -19,65 +19,72 @@ class DeparturesScreen extends StatelessWidget {
         context: context,
         title: MyConstants.mydepatures,
       ),
-      drawer: const Drawer(
-        child: MyDrawer(),
-      ),
+      drawer: const MyDrawer(),
       body: Container(
-          padding: SizeConfig().getScreenPadding(),
-          child: ListView.builder(
-              itemCount: 15,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: ColorManger.morelightGray,
-                  child: ListTile(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+        padding: SizeConfig().getScreenPadding(),
+        child: ListView.separated(
+          separatorBuilder: (context, index) => const Divider(),
+          itemCount: 15,
+          itemBuilder: (context, index) {
+            return Card(
+              color: ColorManger.lightGray,
+              child: ListTile(
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "request number : 22288272",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                    ),
+                    const Spacer(),
+                    Text(
+                      "Status",
+                      style:
+                          TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                      textScaler: MediaQuery.textScalerOf(context),
+                    ),
+                  ],
+                ),
+                subtitle: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "date : from date to date ",
+                      style:
+                          TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                    ),
+                    Text(
+                      " duration : one day",
+                      style:
+                          TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                    ),
+                    Row(
                       children: [
                         Text(
-                          "request number : 22288272",
-                          textAlign: TextAlign.center,
-                          style: TextStyles.font12black54Reguler,
+                          "Request Date:14-10-2023",
+                          style: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                         ),
                         const Spacer(),
                         Text(
-                          "Status",
-                          style: TextStyles.font12black54Reguler,
-                          textScaler: MediaQuery.textScalerOf(context),
+                          maxLines: 2,
+                          "annual leave",
+                          style: TextStyles.blackRegulerStyle(
+                              SizeConfig.fontSize3!),
                         ),
                       ],
                     ),
-                    subtitle: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "date : from date to date ",
-                          style: TextStyles.font12black54Reguler,
-                        ),
-                        Text(
-                          " duration : one day",
-                          style: TextStyles.font12black54Reguler,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Request Date:14-10-2023",
-                              style: TextStyles.font12black54Reguler,
-                            ),
-                            const Spacer(),
-                            Text(
-                              maxLines: 2,
-                              "annual leave",
-                              style: TextStyles.font12black54Reguler,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              })),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -13,22 +13,27 @@ class SendAttendanceCubit extends Cubit<SendAttendanceState> {
   SendAttendanceCubit(this.sendAttendanceRepo)
       : super(const SendAttendanceState.initial());
   SendAttendanceRepo sendAttendanceRepo;
-  bool attendanceRecorded = false;
+  bool attendanceLoading = false;
 
   Location location = Location();
   LocationData? locationData = LocationData.fromMap({});
   GlobalKey formKey = GlobalKey<FormState>();
   DateTime attendanceTime = DateTime(0);
   HeaderData data = HeaderData();
-  emiteAttendanceRecord(
-       AttendanceRequest attendanceRequest) async {
+  emiteAttendanceRecord(AttendanceRequest attendanceRequest) async {
     emit(const SendAttendanceState.sendLoading());
+    attendanceLoading = true;
     final response =
-        await sendAttendanceRepo.sendAttendanceRecord( attendanceRequest);
+        await sendAttendanceRepo.sendAttendanceRecord(attendanceRequest);
     response.when(success: (attendanceResponse) async {
       emit(SendAttendanceState.sendSuccess(attendanceResponse));
+      attendanceLoading = false;
     }, failure: (error) async {
-      emit(SendAttendanceState.sendError(error: Intl.defaultLocale== MyConstants.english?error.apiErrorModel.errorMessageEn!: error.apiErrorModel.errorMessageAr!));
+      emit(SendAttendanceState.sendError(
+          error: Intl.defaultLocale == MyConstants.english
+              ? error.apiErrorModel.errorMessageEn!
+              : error.apiErrorModel.errorMessageAr!));
+      attendanceLoading = false;
     });
   }
 }

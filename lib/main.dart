@@ -19,19 +19,18 @@ import 'package:ttech_attendance/featchers/forget_password/forget_password_scree
 import 'package:ttech_attendance/featchers/home/ui/home_screen.dart';
 import 'package:ttech_attendance/featchers/login/ui/login_screen.dart';
 import 'package:ttech_attendance/featchers/performance_panel/logic/cubit/performance_employee_cubit.dart';
-import 'package:ttech_attendance/featchers/performance_panel/ui/performance_panel.dart';
-import 'package:ttech_attendance/featchers/permission/logic/cubit/permission_cubit.dart';
-import 'package:ttech_attendance/featchers/permission/permission_screen.dart';
-import 'package:ttech_attendance/featchers/permission/ui/widgets/check_box_state.dart';
-import 'package:ttech_attendance/featchers/request_form/logic/cubit/all_vaccations_cubit.dart';
-import 'package:ttech_attendance/featchers/request_form/ui/request_form_screen.dart';
+import 'package:ttech_attendance/featchers/performance_panel/ui/performance_screen.dart';
+import 'package:ttech_attendance/featchers/request/permission/logic/cubit/permission_cubit.dart';
+import 'package:ttech_attendance/featchers/request/permission/ui/widgets/check_box_state.dart';
+import 'package:ttech_attendance/featchers/request/request_form/logic/cubit/all_vaccations_cubit.dart';
+import 'package:ttech_attendance/featchers/request/request_screen.dart';
 import 'package:ttech_attendance/featchers/splash/splash_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 import 'core/di/dependancy_injection.dart';
 import 'core/routing/routes.dart';
 import 'featchers/home/logic/cubit/home_cubit.dart';
 import 'featchers/login/logic/cubit/login_cubit.dart';
-import 'featchers/request_form/logic/cubit/request_vaccation_cubit.dart';
+import 'featchers/request/request_form/logic/cubit/request_vaccation_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +71,9 @@ class _MyAppState extends State<MyApp> {
           themeMode: ThemeMode.light,
           navigatorKey: navigatorKey,
           builder: DevicePreview.appBuilder,
-          theme: ThemeData(scaffoldBackgroundColor: ColorManger.backGroundGray),
+          theme: ThemeData(
+              fontFamily: MyConstants.libreCaslonText,
+              scaffoldBackgroundColor: ColorManger.backGroundGray),
           darkTheme: ThemeData.dark(),
           debugShowCheckedModeBanner: false,
           locale: _locale,
@@ -119,13 +120,6 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         );
-      case Routes.requestFormScreen:
-        return MaterialPageRoute(
-            builder: (_) => MultiBlocProvider(providers: [
-                  BlocProvider(
-                      create: (context) => getIt<RequestVaccationCubit>()),
-                  BlocProvider(create: (context) => getIt<AllVaccationsCubit>())
-                ], child: RequestFormScreen(changeLanguage: _changeLanguage)));
 
       case Routes.loginScreen:
         return MaterialPageRoute(
@@ -136,6 +130,16 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         );
+
+      case Routes.forgetPasswordSccreen:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<FrogetPasswordCubit>(),
+                  child: ForgetPassword(
+                    changeLanguage: _changeLanguage,
+                  ),
+                ));
+
       case Routes.homeScreen:
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(providers: [
@@ -146,25 +150,28 @@ class _MyAppState extends State<MyApp> {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<PerformanceEmployeeCubit>(),
-                  child: PerformancePanel(
+                  child: PerformanceScreen(
                     changeLanguage: _changeLanguage,
                   ),
                 ));
 
-      case Routes.forgetPasswordSccreen:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => getIt<FrogetPasswordCubit>(),
-                  child: ForgetPassword(
-                    changeLanguage: _changeLanguage,
-                  ),
-                ));
-      case Routes.permissionScreen:
+      case Routes.requestFormScreen:
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(providers: [
+                  BlocProvider(
+                      create: (context) => getIt<RequestVaccationCubit>()),
+                  BlocProvider(
+                      create: (context) => getIt<AllVaccationsCubit>()),
                   BlocProvider(create: (context) => getIt<PermissionCubit>()),
                   ChangeNotifierProvider(create: (context) => CheckboxState()),
-                ], child: PermissionScreen(changeLanguage: _changeLanguage)));
+                ], child: RequestScreen(changeLanguage: _changeLanguage)));
+
+      // case Routes.permissionScreen:
+      //   return MaterialPageRoute(
+      //       builder: (_) => MultiBlocProvider(providers: [
+      //             BlocProvider(create: (context) => getIt<PermissionCubit>()),
+      //             ChangeNotifierProvider(create: (context) => CheckboxState()),
+      //           ], child: PermissionScreen(changeLanguage: _changeLanguage)));
 
       default:
         return MaterialPageRoute(
