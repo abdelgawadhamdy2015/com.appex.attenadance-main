@@ -17,54 +17,57 @@ class MyDrawer extends StatelessWidget {
     return Container(
       color: ColorManger.darkBlue,
       width: SizeConfig.screenWidth! * .5,
-      child: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
+      child: SafeArea(
+        child: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
 
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.screenWidth! * .01,
-                  vertical: SizeConfig.screenHeight! * .01),
-              width: SizeConfig.screenWidth! * .4,
-              height: SizeConfig.screenHeight! * .1,
-              decoration: const BoxDecoration(
-                color: ColorManger.darkBlue,
-              ),
-              child: Text(
-                'Apex Attendance',
-                style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
-              ),
-            ),
-            verticalSpacing(SizeConfig.screenHeight! * .03),
-            Padding(
-              padding: SizeConfig().getScreenPadding(),
-              child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                InkWell(
-                  child: Text(
-                    S.of(navigatorKey.currentContext!).logout,
-                    style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
-                  ),
-                  onTap: () {
-                    setupLogOutDialogState(context, S.of(context).needSignOut, [
-                      S.of(navigatorKey.currentContext!).okDialog,
-                      S.of(navigatorKey.currentContext!).cancel
-                    ]);
-                  },
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.screenWidth! * .01,
+                    vertical: SizeConfig.screenHeight! * .01),
+                width: SizeConfig.screenWidth! * .4,
+                height: SizeConfig.screenHeight! * .1,
+                decoration: const BoxDecoration(
+                  color: ColorManger.darkBlue,
                 ),
-                horizontalSpacing(SizeConfig.screenWidth! * .01),
-                Expanded(
-                  child: Icon(
-                    Icons.logout_outlined,
-                    color: ColorManger.darkBlue,
-                    size: SizeConfig.screenWidth! * .05,
-                  ),
+                child: Text(
+                  'Apex Attendance',
+                  style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
                 ),
-              ]),
-            ),
-          ],
+              ),
+              verticalSpacing(SizeConfig.screenHeight! * .03),
+              Padding(
+                padding: SizeConfig().getScreenPadding(),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  InkWell(
+                    child: Text(
+                      S.of(navigatorKey.currentContext!).logout,
+                      style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+                    ),
+                    onTap: () {
+                      setupLogOutDialogState(
+                          context, S.of(context).needSignOut, [
+                        S.of(navigatorKey.currentContext!).okDialog,
+                        S.of(navigatorKey.currentContext!).cancel
+                      ]);
+                    },
+                  ),
+                  horizontalSpacing(SizeConfig.screenWidth! * .01),
+                  Expanded(
+                    child: Icon(
+                      Icons.logout_outlined,
+                      color: ColorManger.darkBlue,
+                      size: SizeConfig.screenWidth! * .05,
+                    ),
+                  ),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );
