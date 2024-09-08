@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:ttech_attendance/featchers/departures/data/models/departure_model.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/request/permission/data/models/permission_model.dart';
@@ -55,6 +56,15 @@ abstract class ApiService {
   @POST(ApiConstants.addPermission)
   Future<AddVaccationResponse> addAttendancePermission(
     @Body() PermissionModel permissionModel,
+  );
+
+  @GET("departure")
+  Future<AddVaccationResponse> getDeparture(
+      );
+
+     @POST("departure")
+  Future<AddVaccationResponse> reactWithdeparture(
+    @Body() DepartureModel departureModel,
   );
 
   // x

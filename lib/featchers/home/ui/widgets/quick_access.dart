@@ -39,13 +39,6 @@ class QuickAccess extends StatelessWidget {
                     MyConstants.myTransactions),
                 _buildQuickAccessButton("assets/credit.png",
                     S.of(context).credits, context, MyConstants.credits),
-                _buildQuickAccessButton("assets/sallary.png",
-                    S.of(context).salaries, context, MyConstants.permission),
-                _buildQuickAccessButton(
-                    "assets/work-time.png",
-                    S.of(context).timesOfWork,
-                    context,
-                    MyConstants.timesOfWork),
                 _buildQuickAccessButton(
                     "assets/reports.png",
                     S.of(context).attendanceAndDepartureReports,
@@ -78,7 +71,7 @@ class QuickAccess extends StatelessWidget {
                 case MyConstants.attendanceAndDepartureReports:
                   context.pushReplacementNamed(Routes.performancePanelScreen);
                 case MyConstants.credits:
-                //context.pushReplacementNamed(Routes.departuresScreen);
+                  context.pushReplacementNamed(Routes.departuresScreen);
                 case MyConstants.salaries:
                 //context.pushReplacementNamed(Routes.permissionScreen);
               }
