@@ -152,44 +152,45 @@ class _AttendanceScreen extends State<AttendanceScreen> {
                               vertical: SizeConfig.screenHeight! * .01),
                           child: Stack(
                             children: [
-                              Card(
-                                child: Expanded(
-                                  child: GoogleMap(
-                                    initialCameraPosition: CameraPosition(
-                                      target: context
+                              Positioned(
+                                bottom: SizeConfig.screenHeight! * .04,
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                child: GoogleMap(
+                                  initialCameraPosition: CameraPosition(
+                                    target: context
+                                        .read<AttendanceCubit>()
+                                        .currentPosition,
+                                    zoom: SizeConfig.screenWidth! * .025,
+                                  ),
+                                  myLocationEnabled: true,
+                                  markers: {
+                                    Marker(
+                                      markerId: const MarkerId('my location'),
+                                      position: context
                                           .read<AttendanceCubit>()
                                           .currentPosition,
-                                      zoom: SizeConfig.screenWidth! * .025,
+                                      infoWindow: const InfoWindow(
+                                        title: 'My Marker',
+                                        snippet: 'This is my location',
+                                      ),
                                     ),
-                                    myLocationEnabled: true,
-                                    markers: {
-                                      Marker(
-                                        markerId: const MarkerId('my location'),
-                                        position: context
-                                            .read<AttendanceCubit>()
-                                            .currentPosition,
-                                        infoWindow: const InfoWindow(
-                                          title: 'My Marker',
-                                          snippet: 'This is my location',
+                                  },
+                                  onMapCreated:
+                                      (GoogleMapController controller) {
+                                    this.controller = controller;
+                                    controller.animateCamera(
+                                      CameraUpdate.newCameraPosition(
+                                        CameraPosition(
+                                          target: context
+                                              .read<AttendanceCubit>()
+                                              .currentPosition,
+                                          zoom: SizeConfig.screenWidth! * .035,
                                         ),
                                       ),
-                                    },
-                                    onMapCreated:
-                                        (GoogleMapController controller) {
-                                      this.controller = controller;
-                                      controller.animateCamera(
-                                        CameraUpdate.newCameraPosition(
-                                          CameraPosition(
-                                            target: context
-                                                .read<AttendanceCubit>()
-                                                .currentPosition,
-                                            zoom:
-                                                SizeConfig.screenWidth! * .035,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
+                                    );
+                                  },
                                 ),
                               ),
                               Positioned(

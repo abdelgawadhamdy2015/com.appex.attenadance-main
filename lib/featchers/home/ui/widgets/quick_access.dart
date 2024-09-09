@@ -3,6 +3,7 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
@@ -25,11 +26,11 @@ class QuickAccess extends StatelessWidget {
               S.of(context).quickAccessList,
               style: TextStyles.darkBlueBoldStyle(SizeConfig.fontSize4!),
             ),
-            verticalSpacing(SizeConfig.screenHeight! * .016),
+            verticalSpacing(SizeConfig.screenHeight! * .01),
             GridView.count(
-              crossAxisCount: 3,
+              crossAxisCount: 2,
               shrinkWrap: true,
-              mainAxisSpacing: 10,
+              mainAxisSpacing: 5,
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 _buildQuickAccessButton(
@@ -57,9 +58,9 @@ class QuickAccess extends StatelessWidget {
   Widget _buildQuickAccessButton(
       String icon, String label, BuildContext context, String id) {
     return Card(
-      color: Colors.white,
+      color: ColorManger.lightGray,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ElevatedButton(
             onPressed: () {
@@ -84,7 +85,7 @@ class QuickAccess extends StatelessWidget {
             ),
             child: Image.asset(
               icon,
-              height: SizeConfig.screenHeight! * .07,
+              height: SizeConfig.screenHeight! * .06,
             ),
           ),
           FittedBox(

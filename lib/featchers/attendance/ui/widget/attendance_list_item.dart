@@ -138,7 +138,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                                         checkIfNull([widget.shiftTimeOut])
                                     ? S.of(context).signOut
                                     : S.of(context).signIn,
-                                textStyle: TextStyles.whiteRegulerStyle(
+                                textStyle: TextStyles.whiteBoldStyle(
                                     SizeConfig.fontSize3!),
                               )
                             : Center(child: Text(_formatTime(_remainingTime))),

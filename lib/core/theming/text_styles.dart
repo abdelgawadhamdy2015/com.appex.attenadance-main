@@ -38,6 +38,13 @@ class TextStyles {
         color: Colors.white);
   }
 
+  static TextStyle whiteBoldStyle(double fontSize) {
+    return TextStyle(
+        fontSize: fontSize,
+        fontWeight: FontWeightHelper.bold,
+        color: Colors.white);
+  }
+
   static TextStyle darkBlueRegulerStyle(double fontSize) {
     return TextStyle(
         fontSize: fontSize,

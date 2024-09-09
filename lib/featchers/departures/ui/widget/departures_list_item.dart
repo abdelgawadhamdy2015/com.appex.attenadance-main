@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
-import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 
 class DeparturesListItem extends StatelessWidget {
@@ -8,57 +7,109 @@ class DeparturesListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: SizedBox(
-            child: Card(
-      color: ColorManger.lightGray,
-      child: ListTile(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "request number : 22288272",
-              textAlign: TextAlign.center,
-              style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-            ),
-            const Spacer(),
-            Text(
-              "Status",
-              style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-              textScaler: MediaQuery.textScalerOf(context),
-            ),
-          ],
-        ),
-        subtitle: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "date : from date to date ",
-              style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-            ),
-            Text(
-              " duration : one day",
-              style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-            ),
-            Row(
-              children: [
-                Text(
-                  "Request Date:14-10-2023",
-                  style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-                ),
-                const Spacer(),
-                Text(
-                  maxLines: 2,
-                  "annual leave",
-                  style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-                ),
-              ],
-            ),
-          ],
-        ),
+    return IntrinsicHeight(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "request number : ",
+                textAlign: TextAlign.center,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+              ),
+              Text(
+                "0000000",
+                style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                textScaler: MediaQuery.textScalerOf(context),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "from: ",
+                textAlign: TextAlign.center,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+              ),
+              Text(
+                "12/5/2024",
+                style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                textScaler: MediaQuery.textScalerOf(context),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "to: ",
+                textAlign: TextAlign.center,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+              ),
+              Text(
+                "14/5/2024",
+                style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                textScaler: MediaQuery.textScalerOf(context),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "duration : ",
+                textAlign: TextAlign.center,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+              ),
+              Text(
+                "3 days",
+                style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                textScaler: MediaQuery.textScalerOf(context),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "request date : ",
+                textAlign: TextAlign.center,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+              ),
+              Text(
+                "11/4/2024",
+                style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                textScaler: MediaQuery.textScalerOf(context),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "status : ",
+                textAlign: TextAlign.center,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+              ),
+              Text(
+                "11/4/2024",
+                style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                textScaler: MediaQuery.textScalerOf(context),
+              ),
+            ],
+          ),
+        ],
       ),
-    )));
+    );
   }
 }
