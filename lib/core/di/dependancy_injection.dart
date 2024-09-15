@@ -4,6 +4,8 @@ import 'package:ttech_attendance/featchers/attendance/data/repo/attendance_repo.
 import 'package:ttech_attendance/featchers/attendance/data/repo/send_attendance_repo.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
+import 'package:ttech_attendance/featchers/departures/data/repo/depatrure_repo.dart';
+import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_cubit.dart';
 import 'package:ttech_attendance/featchers/home/data/repo/header_repo.dart';
 import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/repo/performance_employee_repo.dart';
@@ -70,7 +72,14 @@ Future<void> setupGetIt() async {
     () => PermissionRepo(getIt()),
   );
   getIt.registerFactory<PermissionCubit>(
-    () => PermissionCubit(permissionRepo: getIt()),
+    () => PermissionCubit(getIt()),
+  );
+
+  getIt.registerLazySingleton<DepatrureRepo>(
+    () => DepatrureRepo(getIt()),
+  );
+  getIt.registerFactory<DepartureCubit>(
+    () => DepartureCubit(getIt()),
   );
 
   // getIt.registerSingleton<SignalRService>(SignalRService());

@@ -8,18 +8,18 @@ part of 'request_model.dart';
 
 RequestVaccation _$RequestVaccationFromJson(Map<String, dynamic> json) =>
     RequestVaccation(
-      vaccationId: (json['vaccationId'] as num?)?.toInt(),
+      vaccationId: (json['VaccationId'] as num?)?.toInt(),
       isMobile: json['isMobile'] as bool?,
-      dateFrom: json['dateFrom'] as String?,
-      dateTo: json['dateTo'] as String?,
-      note: json['note'] as String?,
+      dateFrom: json['DateFrom'] as String?,
+      dateTo: json['DateTo'] as String?,
+      note: json['Note'] as String?,
     );
 
 Map<String, dynamic> _$RequestVaccationToJson(RequestVaccation instance) =>
     <String, dynamic>{
-      'vaccationId': instance.vaccationId,
+      'VaccationId': instance.vaccationId,
       'isMobile': instance.isMobile,
-      'dateFrom': instance.dateFrom,
-      'dateTo': instance.dateTo,
-      'note': instance.note,
+      'DateFrom': instance.dateFrom,
+      'DateTo': instance.dateTo,
+      'Note': instance.note,
     };

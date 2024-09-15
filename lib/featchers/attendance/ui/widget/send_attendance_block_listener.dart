@@ -44,14 +44,14 @@ class _SendAttendanceBlockListenerState
 
               if (response.result == 1) {
                 context.read<AttendanceCubit>().shifts = [
-                  data.shift1_TimeIn,
-                  data.shift1_TimeOut,
-                  data.shift2_TimeIn,
-                  data.shift2_TimeOut,
-                  data.shift3_TimeIn,
-                  data.shift3_TimeOut,
-                  data.shift4_TimeIn,
-                  data.shift4_TimeOut
+                  data.shift1TimeIn,
+                  data.shift1TimeOut,
+                  data.shift2TimeIn,
+                  data.shift2TimeOut,
+                  data.shift3TimeIn,
+                  data.shift3TimeOut,
+                  data.shift4TimeIn,
+                  data.shift4TimeOut
                 ];
                 for (int i = 0;
                     i < context.read<AttendanceCubit>().shifts.length;
@@ -72,14 +72,14 @@ class _SendAttendanceBlockListenerState
                 }
 
                 // Update the original data object with the modified shift times
-                data.shift1_TimeIn = context.read<AttendanceCubit>().shifts[0];
-                data.shift1_TimeOut = context.read<AttendanceCubit>().shifts[1];
-                data.shift2_TimeIn = context.read<AttendanceCubit>().shifts[2];
-                data.shift2_TimeOut = context.read<AttendanceCubit>().shifts[3];
-                data.shift3_TimeIn = context.read<AttendanceCubit>().shifts[4];
-                data.shift3_TimeOut = context.read<AttendanceCubit>().shifts[5];
-                data.shift4_TimeIn = context.read<AttendanceCubit>().shifts[6];
-                data.shift4_TimeOut = context.read<AttendanceCubit>().shifts[7];
+                data.shift1TimeIn = context.read<AttendanceCubit>().shifts[0];
+                data.shift1TimeOut = context.read<AttendanceCubit>().shifts[1];
+                data.shift2TimeIn = context.read<AttendanceCubit>().shifts[2];
+                data.shift2TimeOut = context.read<AttendanceCubit>().shifts[3];
+                data.shift3TimeIn = context.read<AttendanceCubit>().shifts[4];
+                data.shift3TimeOut = context.read<AttendanceCubit>().shifts[5];
+                data.shift4TimeIn = context.read<AttendanceCubit>().shifts[6];
+                data.shift4TimeOut = context.read<AttendanceCubit>().shifts[7];
 
                 setupDialogState(
                   context,
