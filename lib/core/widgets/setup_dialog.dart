@@ -34,9 +34,7 @@ setupDialogState(
       ]),
       actions: [
         Row(
-          mainAxisAlignment: Intl.defaultLocale == MyConstants.arabic
-              ? MainAxisAlignment.start
-              : MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
               onPressed: () async {
@@ -84,9 +82,9 @@ setupLogOutDialogState(
       ),
       actions: [
         Row(
-          mainAxisAlignment: Intl.defaultLocale == MyConstants.arabic
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end
+          //   : MainAxisAlignment.start,
+          ,
           children: [
             actions.length > 1
                 ? TextButton(

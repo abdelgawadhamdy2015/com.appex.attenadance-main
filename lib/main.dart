@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
-import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
@@ -67,8 +66,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      child: OfflineBuilderWidget(
-        materialApp: MaterialApp(
+
+        child: MaterialApp(
           themeMode: ThemeMode.light,
           navigatorKey: navigatorKey,
           builder: DevicePreview.appBuilder,
@@ -88,7 +87,7 @@ class _MyAppState extends State<MyApp> {
           onGenerateRoute: generateRoute,
           initialRoute: Routes.splashScreen,
         ),
-      ),
+    
     );
   }
 

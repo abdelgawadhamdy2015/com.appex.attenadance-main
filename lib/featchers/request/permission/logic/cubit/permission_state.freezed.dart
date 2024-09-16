@@ -84,6 +84,9 @@ class _$PermissionStateCopyWithImpl<T, $Res, $Val extends PermissionState<T>>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of PermissionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -100,6 +103,9 @@ class __$$InitialImplCopyWithImpl<T, $Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl<T> _value, $Res Function(_$InitialImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of PermissionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -214,6 +220,9 @@ class __$$PermissionLoadingImplCopyWithImpl<T, $Res>
   __$$PermissionLoadingImplCopyWithImpl(_$PermissionLoadingImpl<T> _value,
       $Res Function(_$PermissionLoadingImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of PermissionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -332,6 +341,8 @@ class __$$PermissionSuccessImplCopyWithImpl<T, $Res>
       $Res Function(_$PermissionSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of PermissionState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -371,7 +382,9 @@ class _$PermissionSuccessImpl<T> implements PermissionSuccess<T> {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PermissionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PermissionSuccessImplCopyWith<T, _$PermissionSuccessImpl<T>>
@@ -458,7 +471,10 @@ abstract class PermissionSuccess<T> implements PermissionState<T> {
   const factory PermissionSuccess(final T data) = _$PermissionSuccessImpl<T>;
 
   T get data;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PermissionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PermissionSuccessImplCopyWith<T, _$PermissionSuccessImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -480,6 +496,8 @@ class __$$PermissionErrorImplCopyWithImpl<T, $Res>
       $Res Function(_$PermissionErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of PermissionState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -518,7 +536,9 @@ class _$PermissionErrorImpl<T> implements PermissionError<T> {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PermissionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PermissionErrorImplCopyWith<T, _$PermissionErrorImpl<T>> get copyWith =>
@@ -605,7 +625,10 @@ abstract class PermissionError<T> implements PermissionState<T> {
       _$PermissionErrorImpl<T>;
 
   String get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PermissionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PermissionErrorImplCopyWith<T, _$PermissionErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

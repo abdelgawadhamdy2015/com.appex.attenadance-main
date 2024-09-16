@@ -84,6 +84,9 @@ class _$DepartureStateCopyWithImpl<T, $Res, $Val extends DepartureState<T>>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of DepartureState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -100,6 +103,9 @@ class __$$InitialImplCopyWithImpl<T, $Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl<T> _value, $Res Function(_$InitialImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of DepartureState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -214,6 +220,9 @@ class __$$DepartureLoadingImplCopyWithImpl<T, $Res>
   __$$DepartureLoadingImplCopyWithImpl(_$DepartureLoadingImpl<T> _value,
       $Res Function(_$DepartureLoadingImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of DepartureState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -332,6 +341,8 @@ class __$$DepartureSuccessImplCopyWithImpl<T, $Res>
       $Res Function(_$DepartureSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepartureState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -371,7 +382,9 @@ class _$DepartureSuccessImpl<T> implements DepartureSuccess<T> {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepartureState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DepartureSuccessImplCopyWith<T, _$DepartureSuccessImpl<T>> get copyWith =>
@@ -457,7 +470,10 @@ abstract class DepartureSuccess<T> implements DepartureState<T> {
   const factory DepartureSuccess(final T data) = _$DepartureSuccessImpl<T>;
 
   T get data;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DepartureState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DepartureSuccessImplCopyWith<T, _$DepartureSuccessImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -479,6 +495,8 @@ class __$$DepartureErrorImplCopyWithImpl<T, $Res>
       $Res Function(_$DepartureErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepartureState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -517,7 +535,9 @@ class _$DepartureErrorImpl<T> implements DepartureError<T> {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepartureState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DepartureErrorImplCopyWith<T, _$DepartureErrorImpl<T>> get copyWith =>
@@ -604,7 +624,10 @@ abstract class DepartureError<T> implements DepartureState<T> {
       _$DepartureErrorImpl<T>;
 
   String get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DepartureState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DepartureErrorImplCopyWith<T, _$DepartureErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

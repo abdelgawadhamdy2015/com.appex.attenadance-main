@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
@@ -32,9 +30,9 @@ class PrintTransactions {
     await file.writeAsBytes(await pdf.save());
 
     // Print the PDF document
-    await Printing.layoutPdf(
-      onLayout: (PdfPageFormat format) async => pdf.save(),
-    );
+    // await Printing.layoutPdf(
+    //   onLayout: (PdfPageFormat format) async => pdf.save(),
+    // );
   }
 
   static Future<void> printEmployeeAttendanceList(
@@ -187,8 +185,8 @@ class PrintTransactions {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/$pdfName.pdf');
     await file.writeAsBytes(await pdf.save());
-    await Printing.layoutPdf(
-      onLayout: (PdfPageFormat format) async => pdf.save(),
-    );
+    // await Printing.layoutPdf(
+    //   onLayout: (PdfPageFormat format) async => pdf.save(),
+    // );
   }
 }
