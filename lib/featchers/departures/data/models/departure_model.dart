@@ -4,10 +4,16 @@ part 'departure_model.g.dart';
 
 @JsonSerializable()
 class DepartureModel {
-  String? name;
-  String? status;
+  String? requestNumber;
+  String? requestgDate;
 
-  DepartureModel(this.name, this.status);
+  String? status;
+  int? type;
+  String? from;
+  String? to;
+
+  DepartureModel(this.requestNumber, this.status, this.type, this.from, this.to,
+      this.requestgDate);
 
   factory DepartureModel.fromJson(Map<String, dynamic> json) =>
       _$DepartureModelFromJson(json);

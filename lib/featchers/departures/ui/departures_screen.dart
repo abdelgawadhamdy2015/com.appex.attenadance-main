@@ -9,6 +9,7 @@ import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_app_bar.dart';
 import 'package:ttech_attendance/core/widgets/app_bar/my_drawer.dart';
+import 'package:ttech_attendance/featchers/departures/data/models/departure_model.dart';
 import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_cubit.dart';
 import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_state.dart';
 import 'package:ttech_attendance/featchers/departures/ui/widget/departure_bloc_listener.dart';
@@ -26,6 +27,26 @@ class DeparturesScreen extends StatefulWidget {
 
 class _DeparturesScreenState extends State<DeparturesScreen> {
   String departureType = MyConstants.permission;
+  List<DepartureModel> departures = [];
+  List<DepartureModel> departuresByType = <DepartureModel>[];
+  @override
+  void initState() {
+    super.initState();
+    departures = [
+      DepartureModel("1", "pinding", 1, "1-2-2024", "2-2-2024", "10-1-2024"),
+      DepartureModel("2", "pinding", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
+      DepartureModel("3", "accepted", 1, "1-2-2024", "2-2-2024", "10-1-2024"),
+      DepartureModel("4", "refused", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
+      DepartureModel("5", "pinding", 1, "1-2-2024", "2-2-2024", "10-1-2024"),
+      DepartureModel("6", "accepted", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
+      DepartureModel("7", "refused", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
+      DepartureModel("8", "refused", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
+      DepartureModel("9", "pinding", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
+      DepartureModel("10", "refused", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
+    ];
+
+    getDeparture(1, context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +74,7 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                       onChanged: (String? value) {
                         setState(() {
                           departureType = value!;
+                          getDeparture(1, context);
                         });
                       },
                     ),
@@ -72,6 +94,7 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                       onChanged: (String? value) {
                         setState(() {
                           departureType = value!;
+                          getDeparture(2, context);
                         });
                       },
                     ),
@@ -88,7 +111,7 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                 builder: (context, state) {
                   return ListView.separated(
                     separatorBuilder: (context, index) => const Divider(),
-                    itemCount: 15,
+                    itemCount: departuresByType.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -96,7 +119,9 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  content: const DeparturesListItem(),
+                                  content: DeparturesListItem(
+                                    departureModel: departuresByType[index],
+                                  ),
                                   actions: [
                                     Row(
                                       mainAxisAlignment: Intl.defaultLocale ==
@@ -151,14 +176,14 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "request number : 22288272",
+                                  "request number : ${departuresByType[index].requestNumber}",
                                   textAlign: TextAlign.center,
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                 ),
                                 const Spacer(),
                                 Text(
-                                  "Status",
+                                  "Status : ${departuresByType[index].status} ",
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                   textScaler: MediaQuery.textScalerOf(context),
@@ -170,26 +195,21 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "date : from date to date ",
-                                  style: TextStyles.blackRegulerStyle(
-                                      SizeConfig.fontSize3!),
-                                ),
-                                Text(
-                                  " duration : one day",
+                                  "date : from ${departuresByType[index].from} to ${departuresByType[index].to} ",
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                 ),
                                 Row(
                                   children: [
                                     Text(
-                                      "Request Date:14-10-2023",
+                                      "Request Date:${departuresByType[index].requestgDate}",
                                       style: TextStyles.blackRegulerStyle(
                                           SizeConfig.fontSize3!),
                                     ),
                                     const Spacer(),
                                     Text(
                                       maxLines: 2,
-                                      "annual leave",
+                                      getType(departuresByType[index].type),
                                       style: TextStyles.blackRegulerStyle(
                                           SizeConfig.fontSize3!),
                                     ),
@@ -211,7 +231,19 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
     );
   }
 
-  getDeparture(String type, BuildContext context) {
-    
+  getDeparture(int type, BuildContext context) {
+    departuresByType =
+        departures.where((departure) => departure.type == type).toList();
+  }
+
+  String getType(int? type) {
+    switch (type) {
+      case 1:
+        return S.of(context).permission;
+      case 2:
+        return S.of(context).annual;
+      default:
+        return "";
+    }
   }
 }

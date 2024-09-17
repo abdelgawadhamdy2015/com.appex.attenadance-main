@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/featchers/departures/data/models/departure_model.dart';
 
 class DeparturesListItem extends StatelessWidget {
-  const DeparturesListItem({super.key});
+  const DeparturesListItem({super.key, required this.departureModel});
+  final DepartureModel departureModel;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                "0000000",
+                departureModel.requestNumber!,
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
@@ -38,7 +40,7 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                "12/5/2024",
+                departureModel.from!,
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
@@ -54,28 +56,13 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                "14/5/2024",
+                departureModel.to!,
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "duration : ",
-                textAlign: TextAlign.center,
-                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
-              ),
-              Text(
-                "3 days",
-                style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
-                textScaler: MediaQuery.textScalerOf(context),
-              ),
-            ],
-          ),
+          
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +73,7 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                "11/4/2024",
+                departureModel.requestgDate!,
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
@@ -102,7 +89,7 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                "11/4/2024",
+                departureModel.status!,
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
