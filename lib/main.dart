@@ -9,10 +9,10 @@ import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
-import 'package:ttech_attendance/core/widgets/offline_builder_widget.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
+import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_cubit.dart';
 import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart';
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
 import 'package:ttech_attendance/featchers/forget_password/forget_password_screen.dart';
@@ -66,8 +66,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      child: OfflineBuilderWidget(
-        materialApp: MaterialApp(
+
+        child: MaterialApp(
           themeMode: ThemeMode.light,
           navigatorKey: navigatorKey,
           builder: DevicePreview.appBuilder,
@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
           onGenerateRoute: generateRoute,
           initialRoute: Routes.splashScreen,
         ),
-      ),
+    
     );
   }
 
@@ -104,8 +104,11 @@ class _MyAppState extends State<MyApp> {
         );
       case Routes.departuresScreen:
         return MaterialPageRoute(
-          builder: (_) => DeparturesScreen(
-            changeLanguage: _changeLanguage,
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<DepartureCubit>(),
+            child: DeparturesScreen(
+              changeLanguage: _changeLanguage,
+            ),
           ),
         );
       case Routes.attendaceScreen:
@@ -144,6 +147,7 @@ class _MyAppState extends State<MyApp> {
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(providers: [
                   BlocProvider(create: (context) => getIt<HomeCubit>()),
+                  BlocProvider(create: (context) => getIt<DepartureCubit>()),
                 ], child: HomeScreen(changeLanguage: _changeLanguage)));
 
       case Routes.performancePanelScreen:

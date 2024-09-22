@@ -37,27 +37,26 @@ class WorkTimeBoard extends StatelessWidget {
                 top: SizeConfig.screenHeight! * .01,
                 bottom: SizeConfig.screenHeight! * .01),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppButtonText(
                   verticalPadding: SizeConfig.screenHeight! * .0,
                   buttonHeight: SizeConfig.screenHeight! * .06,
-                  buttonWidth: SizeConfig.screenWidth! * .3,
+                  buttonWidth: SizeConfig.screenWidth! * .4,
                   backGroundColor: ColorManger.mutedBlue,
-                  textStyle:
-                      TextStyles.whiteRegulerStyle(SizeConfig.fontSize4!),
+                  textStyle: TextStyles.whiteBoldStyle(SizeConfig.fontSize4!),
                   butonText: S.of(context).timesOfWork,
                   borderRadius: 20.r,
                   onPressed: () {},
                 ),
+                verticalSpacing(SizeConfig.screenHeight! * .01),
                 data.shiftType == 1
                     ? Text(
                         "${S.of(context).workHours} : ${!checkIfNull([
                               data.totalDayHours
                             ]) ? getHours(data.totalDayHours!, context) : "no data "} ",
-                        style:
-                            TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
+                        style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
                       )
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

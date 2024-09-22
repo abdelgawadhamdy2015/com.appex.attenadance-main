@@ -85,6 +85,9 @@ class _$RequestVaccationStateCopyWithImpl<T, $Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of RequestVaccationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -101,6 +104,9 @@ class __$$InitialImplCopyWithImpl<T, $Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl<T> _value, $Res Function(_$InitialImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of RequestVaccationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -216,6 +222,9 @@ class __$$RequestLoadingImplCopyWithImpl<T, $Res>
   __$$RequestLoadingImplCopyWithImpl(_$RequestLoadingImpl<T> _value,
       $Res Function(_$RequestLoadingImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of RequestVaccationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -334,6 +343,8 @@ class __$$RequestSuccessImplCopyWithImpl<T, $Res>
       $Res Function(_$RequestSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of RequestVaccationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -373,7 +384,9 @@ class _$RequestSuccessImpl<T> implements RequestSuccess<T> {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RequestVaccationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RequestSuccessImplCopyWith<T, _$RequestSuccessImpl<T>> get copyWith =>
@@ -459,7 +472,10 @@ abstract class RequestSuccess<T> implements RequestVaccationState<T> {
   const factory RequestSuccess(final T data) = _$RequestSuccessImpl<T>;
 
   T get data;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RequestVaccationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RequestSuccessImplCopyWith<T, _$RequestSuccessImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -481,6 +497,8 @@ class __$$RequestErrorImplCopyWithImpl<T, $Res>
       _$RequestErrorImpl<T> _value, $Res Function(_$RequestErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of RequestVaccationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -519,7 +537,9 @@ class _$RequestErrorImpl<T> implements RequestError<T> {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RequestVaccationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RequestErrorImplCopyWith<T, _$RequestErrorImpl<T>> get copyWith =>
@@ -606,7 +626,10 @@ abstract class RequestError<T> implements RequestVaccationState<T> {
       _$RequestErrorImpl<T>;
 
   String get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RequestVaccationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RequestErrorImplCopyWith<T, _$RequestErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

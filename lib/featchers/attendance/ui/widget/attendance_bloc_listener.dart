@@ -9,7 +9,6 @@ import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendanc
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
-
 class AttendanceBlocListener extends StatefulWidget {
   const AttendanceBlocListener({super.key});
 
@@ -35,15 +34,15 @@ class _AttendanceBlocListenerState extends State<AttendanceBlocListener> {
               HeaderResponse response = headerResponse;
               if (response.result == 1) {
                 context.read<AttendanceCubit>().data = response.data!;
-                context.read<AttendanceCubit>().shifts=[
-                  response.data!.shift1_TimeIn,
-                  response.data!.shift1_TimeOut,
-                  response.data!.shift2_TimeIn,
-                  response.data!.shift2_TimeOut,
-                  response.data!.shift3_TimeIn,
-                  response.data!.shift3_TimeOut,
-                  response.data!.shift4_TimeIn,
-                  response.data!.shift4_TimeOut,
+                context.read<AttendanceCubit>().shifts = [
+                  response.data!.shift1TimeIn,
+                  response.data!.shift1TimeOut,
+                  response.data!.shift2TimeIn,
+                  response.data!.shift2TimeOut,
+                  response.data!.shift3TimeIn,
+                  response.data!.shift3TimeOut,
+                  response.data!.shift4TimeIn,
+                  response.data!.shift4TimeOut,
                 ];
                 context.read<SendAttendanceCubit>().data = response.data!;
               } else {
@@ -52,14 +51,17 @@ class _AttendanceBlocListenerState extends State<AttendanceBlocListener> {
                     Intl.defaultLocale == MyConstants.arabic
                         ? response.errorMessageAr!
                         : response.errorMessageEn!,
-                    [S.of(context).okDialog], true
-                    );
+                    [S.of(context).okDialog],
+                    true);
               }
             },
             error: (error) {
-
-                setupDialogState(context, error, [S.of(context).okDialog],true, );
-
+              setupDialogState(
+                context,
+                error,
+                [S.of(context).okDialog],
+                true,
+              );
             },
           );
         });

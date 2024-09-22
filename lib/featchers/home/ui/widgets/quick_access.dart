@@ -3,6 +3,7 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
+import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
@@ -25,11 +26,11 @@ class QuickAccess extends StatelessWidget {
               S.of(context).quickAccessList,
               style: TextStyles.darkBlueBoldStyle(SizeConfig.fontSize4!),
             ),
-            verticalSpacing(SizeConfig.screenHeight! * .016),
+            verticalSpacing(SizeConfig.screenHeight! * .01),
             GridView.count(
-              crossAxisCount: 3,
+              crossAxisCount: 2,
               shrinkWrap: true,
-              mainAxisSpacing: 10,
+              mainAxisSpacing: 5,
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 _buildQuickAccessButton(
@@ -39,13 +40,6 @@ class QuickAccess extends StatelessWidget {
                     MyConstants.myTransactions),
                 _buildQuickAccessButton("assets/credit.png",
                     S.of(context).credits, context, MyConstants.credits),
-                _buildQuickAccessButton("assets/sallary.png",
-                    S.of(context).salaries, context, MyConstants.permission),
-                _buildQuickAccessButton(
-                    "assets/work-time.png",
-                    S.of(context).timesOfWork,
-                    context,
-                    MyConstants.timesOfWork),
                 _buildQuickAccessButton(
                     "assets/reports.png",
                     S.of(context).attendanceAndDepartureReports,
@@ -64,9 +58,9 @@ class QuickAccess extends StatelessWidget {
   Widget _buildQuickAccessButton(
       String icon, String label, BuildContext context, String id) {
     return Card(
-      color: Colors.white,
+      color: ColorManger.lightGray,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ElevatedButton(
             onPressed: () {
@@ -78,7 +72,7 @@ class QuickAccess extends StatelessWidget {
                 case MyConstants.attendanceAndDepartureReports:
                   context.pushReplacementNamed(Routes.performancePanelScreen);
                 case MyConstants.credits:
-                //context.pushReplacementNamed(Routes.departuresScreen);
+                  context.pushReplacementNamed(Routes.departuresScreen);
                 case MyConstants.salaries:
                 //context.pushReplacementNamed(Routes.permissionScreen);
               }
@@ -91,7 +85,7 @@ class QuickAccess extends StatelessWidget {
             ),
             child: Image.asset(
               icon,
-              height: SizeConfig.screenHeight! * .07,
+              height: SizeConfig.screenHeight! * .06,
             ),
           ),
           FittedBox(

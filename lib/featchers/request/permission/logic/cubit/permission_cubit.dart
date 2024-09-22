@@ -9,8 +9,7 @@ import 'package:ttech_attendance/featchers/request/permission/logic/cubit/permis
 
 class PermissionCubit extends Cubit<PermissionState> {
   final PermissionRepo permissionRepo;
-  PermissionCubit({required this.permissionRepo})
-      : super(const PermissionState.initial());
+  PermissionCubit(this.permissionRepo) : super(const PermissionState.initial());
   List<ShiftModel> shiftChecks = [];
   final formKey = GlobalKey<FormState>();
   bool loading = false;

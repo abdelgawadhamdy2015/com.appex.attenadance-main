@@ -1,17 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'request_model.g.dart';
 
 @JsonSerializable()
 class RequestVaccation {
-  @Key("VaccationId")
+  @JsonKey(name: "VaccationId")
   int? vaccationId;
   bool? isMobile;
-  @Key("DateFrom")
+  @JsonKey(name: "DateFrom")
   String? dateFrom;
-  @Key("DateTo")
+  @JsonKey(name: "DateTo")
   String? dateTo;
-  @Key("Note")
+  @JsonKey(name: "Note")
   String? note;
 
   RequestVaccation(

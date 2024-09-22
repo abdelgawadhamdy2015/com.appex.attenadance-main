@@ -85,6 +85,9 @@ class _$SendAttendanceStateCopyWithImpl<T, $Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SendAttendanceState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -101,6 +104,9 @@ class __$$InitialImplCopyWithImpl<T, $Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl<T> _value, $Res Function(_$InitialImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of SendAttendanceState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -215,6 +221,9 @@ class __$$SendLoadingImplCopyWithImpl<T, $Res>
   __$$SendLoadingImplCopyWithImpl(
       _$SendLoadingImpl<T> _value, $Res Function(_$SendLoadingImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of SendAttendanceState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -332,6 +341,8 @@ class __$$SendSuccessImplCopyWithImpl<T, $Res>
       _$SendSuccessImpl<T> _value, $Res Function(_$SendSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of SendAttendanceState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -371,7 +382,9 @@ class _$SendSuccessImpl<T> implements SendSuccess<T> {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SendAttendanceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SendSuccessImplCopyWith<T, _$SendSuccessImpl<T>> get copyWith =>
@@ -457,7 +470,10 @@ abstract class SendSuccess<T> implements SendAttendanceState<T> {
   const factory SendSuccess(final T data) = _$SendSuccessImpl<T>;
 
   T get data;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SendAttendanceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SendSuccessImplCopyWith<T, _$SendSuccessImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -479,6 +495,8 @@ class __$$SendErrorImplCopyWithImpl<T, $Res>
       _$SendErrorImpl<T> _value, $Res Function(_$SendErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of SendAttendanceState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -517,7 +535,9 @@ class _$SendErrorImpl<T> implements SendError<T> {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SendAttendanceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SendErrorImplCopyWith<T, _$SendErrorImpl<T>> get copyWith =>
@@ -602,7 +622,10 @@ abstract class SendError<T> implements SendAttendanceState<T> {
   const factory SendError({required final String error}) = _$SendErrorImpl<T>;
 
   String get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SendAttendanceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SendErrorImplCopyWith<T, _$SendErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

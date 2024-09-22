@@ -40,53 +40,53 @@ class _AttendanceBoard extends State<AttendanceBord> {
                   child: Column(
                     children: [
                       AttendanceListItem(
-                          shiftTimeIn: data.shift1_TimeIn,
-                          shiftTimeOut: data.shift1_TimeOut,
+                          shiftTimeIn: data.shift1TimeIn,
+                          shiftTimeOut: data.shift1TimeOut,
                           shift: 1,
                           shiftType: data.shiftType),
                       !checkIfNull([
-                                data.shift1_TimeIn,
-                                data.shift1_TimeOut,
+                                data.shift1TimeIn,
+                                data.shift1TimeOut,
                                 data.hasShift2
                               ]) &&
                               (data.hasShift2! || data.shiftType == 1)
                           ? AttendanceListItem(
-                              shiftTimeIn: data.shift2_TimeIn,
-                              shiftTimeOut: data.shift2_TimeOut,
+                              shiftTimeIn: data.shift2TimeIn,
+                              shiftTimeOut: data.shift2TimeOut,
                               shift1Complete: true,
                               shift: 2,
                               shiftType: data.shiftType!,
                             )
                           : Container(),
                       !checkIfNull([
-                                data.shift1_TimeIn,
-                                data.shift1_TimeOut,
-                                data.shift2_TimeIn,
-                                data.shift2_TimeOut,
+                                data.shift1TimeIn,
+                                data.shift1TimeOut,
+                                data.shift2TimeIn,
+                                data.shift2TimeOut,
                                 data.hasShift3
                               ]) &&
                               (data.hasShift3! || data.shiftType == 1)
                           ? AttendanceListItem(
-                              shiftTimeIn: data.shift3_TimeIn,
-                              shiftTimeOut: data.shift3_TimeOut,
+                              shiftTimeIn: data.shift3TimeIn,
+                              shiftTimeOut: data.shift3TimeOut,
                               shift1Complete: true,
                               shift2Complete: true,
                               shift: 3,
                               shiftType: data.shiftType!)
                           : Container(),
                       !checkIfNull([
-                                data.shift1_TimeIn,
-                                data.shift1_TimeOut,
-                                data.shift2_TimeIn,
-                                data.shift2_TimeOut,
-                                data.shift3_TimeIn,
-                                data.shift3_TimeOut,
+                                data.shift1TimeIn,
+                                data.shift1TimeOut,
+                                data.shift2TimeIn,
+                                data.shift2TimeOut,
+                                data.shift3TimeIn,
+                                data.shift3TimeOut,
                                 data.hasShift4
                               ]) &&
                               (data.hasShift4! || data.shiftType == 1)
                           ? AttendanceListItem(
-                              shiftTimeIn: data.shift4_TimeIn,
-                              shiftTimeOut: data.shift4_TimeOut,
+                              shiftTimeIn: data.shift4TimeIn,
+                              shiftTimeOut: data.shift4TimeOut,
                               shift1Complete: true,
                               shift2Complete: true,
                               shift3Complete: true,

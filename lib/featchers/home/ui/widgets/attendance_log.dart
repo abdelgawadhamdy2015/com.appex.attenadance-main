@@ -67,10 +67,10 @@ class _AttendanceLogState extends State<AttendanceLog> {
               ),
               verticalSpacing(SizeConfig.screenHeight! * .01),
               Center(
-                child: context.read<HomeCubit>().data.shift1_TimeIn != "____" &&
-                        context.read<HomeCubit>().data.shift1_TimeIn != null
+                child: context.read<HomeCubit>().data.shift1TimeIn != "____" &&
+                        context.read<HomeCubit>().data.shift1TimeIn != null
                     ? transactionWidget(
-                        context.read<HomeCubit>().data.shift1_TimeIn!,
+                        context.read<HomeCubit>().data.shift1TimeIn!,
                         context.read<HomeCubit>().data.date!,
                         S.of(context).attendance,
                         ColorManger.lightGreen,
@@ -84,16 +84,16 @@ class _AttendanceLogState extends State<AttendanceLog> {
                       ),
               ),
               verticalSpacing(SizeConfig.screenHeight! * .01),
-              context.read<HomeCubit>().data.shift1_TimeOut != "____" &&
-                      context.read<HomeCubit>().data.shift1_TimeOut != null
+              context.read<HomeCubit>().data.shift1TimeOut != "____" &&
+                      context.read<HomeCubit>().data.shift1TimeOut != null
                   ? Center(
-                    child: transactionWidget(
-                        context.read<HomeCubit>().data.shift1_TimeOut!,
-                        context.read<HomeCubit>().data.date!,
-                        S.of(context).leaving,
-                        ColorManger.lightred,
-                        context),
-                  )
+                      child: transactionWidget(
+                          context.read<HomeCubit>().data.shift1TimeOut!,
+                          context.read<HomeCubit>().data.date!,
+                          S.of(context).leaving,
+                          ColorManger.lightred,
+                          context),
+                    )
                   : Center(
                       child: Text(
                         S.of(context).notLeave,

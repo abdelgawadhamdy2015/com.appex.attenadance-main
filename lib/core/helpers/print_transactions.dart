@@ -56,8 +56,7 @@ class PrintTransactions {
 
       pdf.addPage(
         pw.Page(
-          
-          margin:const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          margin: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           textDirection: Intl.defaultLocale == MyConstants.arabic
               ? pw.TextDirection.rtl
               : pw.TextDirection.ltr,
@@ -65,7 +64,6 @@ class PrintTransactions {
             return pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.center,
               children: [
-                
                 pw.Text(S.of(buildContext).attendanceReports,
                     style: pdfFontStyle),
                 pw.SizedBox(height: 20),
