@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           verticalSpacing(SizeConfig.screenHeight! * .01),
                           const QuickAccess(),
                           verticalSpacing(SizeConfig.screenHeight! * .01),
-                          const EventsApprovals(),
+                           EventsApprovals(),
                         ],
                       ),
                     );

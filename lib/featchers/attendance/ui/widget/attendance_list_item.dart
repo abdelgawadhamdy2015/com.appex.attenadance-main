@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
@@ -75,7 +76,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                         visible: widget.shiftTimeIn != null,
                         child: Text(
                           widget.shiftTimeIn != null
-                              ? '${S.of(context).attendanceRecord}  ${getFormattedTimeOfDay(widget.shiftTimeIn!, context)}'
+                              ? '${S.of(context).attendanceRecord}  ${DateFormat("hh:mm a").format(getFormattedTimeOfDay1(widget.shiftTimeIn!, context)!)}'
                               : "",
                           style: TextStyles.blackRegulerStyle(
                               SizeConfig.fontSize3!),
@@ -86,7 +87,7 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                         visible: widget.shiftTimeOut != null,
                         child: Text(
                           widget.shiftTimeOut != null
-                              ? '${S.of(context).leaveRecord}  ${getFormattedTimeOfDay(widget.shiftTimeOut!, context)}'
+                              ? '${S.of(context).leaveRecord}  ${DateFormat("hh:mm a").format(getFormattedTimeOfDay1(widget.shiftTimeOut!, context)!)}'
                               : "",
                           style: TextStyles.blackRegulerStyle(
                               SizeConfig.fontSize3!),
@@ -199,7 +200,9 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
   String _formatTime(int seconds) {
     int minutes = seconds ~/ 60;
     int secs = seconds % 60;
-    return '$minutes:${secs.toString().padLeft(2, '0')}';
+
+    return DateFormat('h:mm ').format(getFormattedTimeOfDay1(
+        '$minutes:${secs.toString().padLeft(2, '0')}', context)!);
   }
 
   void validateThenRecordAttendance() {
