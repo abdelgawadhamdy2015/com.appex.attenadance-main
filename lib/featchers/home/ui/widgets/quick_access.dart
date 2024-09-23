@@ -17,8 +17,8 @@ class QuickAccess extends StatelessWidget {
     return Card(
       child: Container(
         padding: EdgeInsets.symmetric(
-            horizontal: SizeConfig.screenWidth! * .016,
-            vertical: SizeConfig.screenHeight! * .016),
+            horizontal: SizeConfig.screenWidth! * .05,
+            vertical: SizeConfig.screenHeight! * .01),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -30,7 +30,6 @@ class QuickAccess extends StatelessWidget {
             GridView.count(
               crossAxisCount: 2,
               shrinkWrap: true,
-              mainAxisSpacing: 5,
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 _buildQuickAccessButton(
@@ -80,12 +79,12 @@ class QuickAccess extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
               padding: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.screenWidth! * .01,
+                  horizontal: SizeConfig.screenWidth! * .005,
                   vertical: SizeConfig.screenHeight! * .005),
             ),
             child: Image.asset(
               icon,
-              height: SizeConfig.screenHeight! * .06,
+              height: SizeConfig.screenHeight! * .05,
             ),
           ),
           FittedBox(

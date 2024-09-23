@@ -29,6 +29,7 @@ class _DepartureBlocListenerState extends State<DepartureBlocListener> {
               );
             },
             departureSuccess: (departureREsponse) {
+              
               // DepartureResponse response = departureREsponse;
               // if (response.result == 1) {
               //   context.read<AttendanceCubit>().data = response.data!;

@@ -1,7 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/featchers/departures/data/models/departure_model.dart';
 import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_cubit.dart';
 import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_state.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
@@ -9,13 +12,15 @@ import 'package:ttech_attendance/generated/l10n.dart';
 import '../../../../core/helpers/size_config.dart';
 
 class EventsApprovals extends StatelessWidget {
-  const EventsApprovals({super.key});
+  EventsApprovals({super.key});
+  List<DepartureModel> departure = [];
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: BlocBuilder<DepartureCubit, DepartureState>(
         builder: (context, state) {
+          departure = context.read<DepartureCubit>().departures;
           return Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: SizeConfig.screenWidth! * .016,
@@ -33,15 +38,16 @@ class EventsApprovals extends StatelessWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 2, // هنا يمكنك وضع عدد التنبيهات الفعلية
+                    itemCount: 5, // هنا  عدد التنبيهات الفعلية
                     itemBuilder: (context, index) {
                       return ListTile(
                         leading: const Icon(Icons.notification_important),
-                        title: Text('تنبيه ${index + 1}',
+                        title: Text(
+                            ' ${getRequestType(departure[index].type, context)}',
                             style: TextStyles.blackBoldStyle(
                                 SizeConfig.fontSize3!)),
                         subtitle: Text(
-                          'تفاصيل التنبيه',
+                          '${departure[index].requestNumber} is ${departure[index].status} ',
                           style: TextStyles.blackRegulerStyle(
                               SizeConfig.fontSize3!),
                         ),

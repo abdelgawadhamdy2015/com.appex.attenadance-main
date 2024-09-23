@@ -6,7 +6,6 @@ part 'departure_model.g.dart';
 class DepartureModel {
   String? requestNumber;
   String? requestgDate;
-
   String? status;
   int? type;
   String? from;

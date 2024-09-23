@@ -32,19 +32,9 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
   @override
   void initState() {
     super.initState();
-    departures = [
-      DepartureModel("1", "pinding", 1, "1-2-2024", "2-2-2024", "10-1-2024"),
-      DepartureModel("2", "pinding", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
-      DepartureModel("3", "accepted", 1, "1-2-2024", "2-2-2024", "10-1-2024"),
-      DepartureModel("4", "refused", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
-      DepartureModel("5", "pinding", 1, "1-2-2024", "2-2-2024", "10-1-2024"),
-      DepartureModel("6", "accepted", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
-      DepartureModel("7", "refused", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
-      DepartureModel("8", "refused", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
-      DepartureModel("9", "pinding", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
-      DepartureModel("10", "refused", 2, "1-2-2024", "2-2-2024", "10-1-2024"),
-    ];
 
+    
+    departures = context.read<DepartureCubit>().departures;
     getDeparture(1, context);
   }
 
@@ -209,7 +199,7 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                                     const Spacer(),
                                     Text(
                                       maxLines: 2,
-                                      getType(departuresByType[index].type),
+                                      getRequestType(departuresByType[index].type,context),
                                       style: TextStyles.blackRegulerStyle(
                                           SizeConfig.fontSize3!),
                                     ),
@@ -236,14 +226,5 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
         departures.where((departure) => departure.type == type).toList();
   }
 
-  String getType(int? type) {
-    switch (type) {
-      case 1:
-        return S.of(context).permission;
-      case 2:
-        return S.of(context).annual;
-      default:
-        return "";
-    }
-  }
+  
 }

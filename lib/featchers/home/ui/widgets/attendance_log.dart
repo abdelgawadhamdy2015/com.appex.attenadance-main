@@ -18,11 +18,11 @@ class AttendanceLog extends StatefulWidget {
 
 class _AttendanceLogState extends State<AttendanceLog> {
   String formattedTimeOfDay = "____";
-
+  DateTime shiftTime = DateTime(0);
   Widget transactionWidget(String shift, DateTime date, String transaction,
       Color textColor, BuildContext context) {
     if (shift != "____") {
-      formattedTimeOfDay = getFormattedTimeOfDay(shift, context)!;
+      shiftTime = getFormattedTimeOfDay1(shift, context)!;
     }
 
     return RichText(
@@ -34,7 +34,7 @@ class _AttendanceLogState extends State<AttendanceLog> {
             style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
           ),
           TextSpan(
-            text: "$formattedTimeOfDay  ",
+            text: "${DateFormat("hh:mm a").format(shiftTime)}  ",
             style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
           ),
           TextSpan(

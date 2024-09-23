@@ -10,6 +10,17 @@ bool checkIfNull(List list) {
   return isNull;
 }
 
+String getRequestType(int? type,BuildContext context) {
+    switch (type) {
+      case 1:
+        return S.of(context).permission;
+      case 2:
+        return S.of(context).annual;
+      default:
+        return "";
+    }
+  }
+
 SizedBox verticalSpacing(double height) => SizedBox(
       height: height.h,
     );
@@ -25,6 +36,18 @@ String? getFormattedTimeOfDay(String shift, BuildContext context) {
     final localizations = MaterialLocalizations.of(context);
     String formattedTimeOfDay = localizations.formatTimeOfDay(shiftTime);
     return formattedTimeOfDay;
+  } else {
+    return null;
+  }
+}
+
+DateTime? getFormattedTimeOfDay1(String shift, BuildContext context) {
+  if (shift.isNotEmpty && shift != "____") {
+    TimeOfDay shiftTime = TimeOfDay(
+        hour: int.parse(shift.split(":")[0].padLeft(2, "0")),
+        minute: int.parse(shift.split(":")[1].padLeft(2, "0")));
+
+    return DateTime(0, 0, 0, shiftTime.hour, shiftTime.minute);
   } else {
     return null;
   }
