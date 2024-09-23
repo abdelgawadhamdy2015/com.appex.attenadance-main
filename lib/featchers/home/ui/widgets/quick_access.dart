@@ -56,47 +56,49 @@ class QuickAccess extends StatelessWidget {
 
   Widget _buildQuickAccessButton(
       String icon, String label, BuildContext context, String id) {
-    return Card(
-      color: ColorManger.lightGray,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              switch (id) {
-                case MyConstants.myTransactions:
-                  context.pushReplacementNamed(Routes.attendaceScreen);
-                case MyConstants.myRequests:
-                  context.pushReplacementNamed(Routes.requestFormScreen);
-                case MyConstants.attendanceAndDepartureReports:
-                  context.pushReplacementNamed(Routes.performancePanelScreen);
-                case MyConstants.credits:
-                  context.pushReplacementNamed(Routes.departuresScreen);
-                case MyConstants.salaries:
-                //context.pushReplacementNamed(Routes.permissionScreen);
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              shape: const CircleBorder(),
-              padding: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.screenWidth! * .005,
-                  vertical: SizeConfig.screenHeight! * .005),
+    return InkWell(
+      onTap: () {
+        switch (id) {
+          case MyConstants.myTransactions:
+            context.pushReplacementNamed(Routes.attendaceScreen);
+          case MyConstants.myRequests:
+            context.pushReplacementNamed(Routes.requestFormScreen);
+          case MyConstants.attendanceAndDepartureReports:
+            context.pushReplacementNamed(Routes.performancePanelScreen);
+          case MyConstants.credits:
+            context.pushReplacementNamed(Routes.departuresScreen);
+          // case MyConstants.salaries:
+          //context.pushReplacementNamed(Routes.permissionScreen);
+        }
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(
+            vertical: SizeConfig.screenHeight! * .01,
+            horizontal: SizeConfig.screenWidth! * .01),
+        decoration: BoxDecoration(
+            color: ColorManger.lightGray,
+            borderRadius: BorderRadius.circular(40)),
+        //color: ColorManger.lightGray,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            FittedBox(
+              child: Image.asset(
+                icon,
+                height: SizeConfig.screenHeight! * .05,
+              ),
             ),
-            child: Image.asset(
-              icon,
-              height: SizeConfig.screenHeight! * .05,
+            FittedBox(
+              fit: BoxFit.cover,
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
+              ),
             ),
-          ),
-          FittedBox(
-            fit: BoxFit.cover,
-            child: Text(
-              label,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
