@@ -207,8 +207,10 @@ class _ApiService implements ApiService {
     bool? isShift1Complete,
     bool? isShift2Complete,
     bool? isShift3Complete,
-    bool? isShift4Complete,
-  ) async {
+    bool? isShift4Complete, {
+    File? audioFile,
+    File? imageFile,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'x': x,
@@ -221,11 +223,30 @@ class _ApiService implements ApiService {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = FormData();
+    if (audioFile != null) {
+      _data.files.add(MapEntry(
+        'audio',
+        MultipartFile.fromFileSync(
+          audioFile.path,
+          filename: audioFile.path.split(Platform.pathSeparator).last,
+        ),
+      ));
+    }
+    if (imageFile != null) {
+      _data.files.add(MapEntry(
+        'image',
+        MultipartFile.fromFileSync(
+          imageFile.path,
+          filename: imageFile.path.split(Platform.pathSeparator).last,
+        ),
+      ));
+    }
     final _options = _setStreamType<AttendanceResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'multipart/form-data',
     )
         .compose(
           _dio.options,
@@ -350,103 +371,6 @@ class _ApiService implements ApiService {
       rethrow;
     }
     return _value;
-  }
-
-  @override
-  Future<AttendanceResponse> uploadAudio(MultipartFile file) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<AttendanceResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-      contentType: 'multipart/form-data',
-    )
-        .compose(
-          _dio.options,
-          '/upload',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AttendanceResponse _value;
-    try {
-      _value = AttendanceResponse.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<void> uploadData({
-    File? audioFile,
-    File? imageFile,
-    double? x,
-    double? y,
-    bool? isAttendFingerprint,
-    bool? isShift1Complete,
-    bool? isShift2Complete,
-    bool? isShift3Complete,
-    bool? isShift4Complete,
-  }) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'x': x,
-      r'y': y,
-      r'isAttendFingerprint': isAttendFingerprint,
-      r'isShift1Complete': isShift1Complete,
-      r'isShift2Complete': isShift2Complete,
-      r'isShift3Complete': isShift3Complete,
-      r'isShift4Complete': isShift4Complete,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final _data = FormData();
-    if (audioFile != null) {
-      _data.files.add(MapEntry(
-        'audio',
-        MultipartFile.fromFileSync(
-          audioFile.path,
-          filename: audioFile.path.split(Platform.pathSeparator).last,
-        ),
-      ));
-    }
-    if (imageFile != null) {
-      _data.files.add(MapEntry(
-        'image',
-        MultipartFile.fromFileSync(
-          imageFile.path,
-          filename: imageFile.path.split(Platform.pathSeparator).last,
-        ),
-      ));
-    }
-    final _options = _setStreamType<void>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-      contentType: 'multipart/form-data',
-    )
-        .compose(
-          _dio.options,
-          '/upload',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

@@ -18,7 +18,9 @@ class AudioRepository {
         filename: fileName,
       );
 
-      final response = await apiService.uploadAudio(multipartFile);
+      final response = await apiService.sendAttendanceRecord(
+          0, 0, false, false, false, false, false,
+          audioFile: File(audioFile.path), imageFile: File(audioFile.path));
       return ApiResult.success(response);
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));

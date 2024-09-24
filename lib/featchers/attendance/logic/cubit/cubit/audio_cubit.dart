@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 import 'package:ttech_attendance/featchers/attendance/data/repo/audio_repo.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/audio_state.dart';
 
@@ -23,10 +22,5 @@ class AudioCubit extends Cubit<AudioState> {
     } catch (e) {
       emit(AudioState.error(error: "Error uploading audio: $e"));
     }
-  }
-
-  Future<String> _getAudioFilePath() async {
-    Directory directory = await getApplicationDocumentsDirectory();
-    return "${directory.path}/audio.aac";
   }
 }
