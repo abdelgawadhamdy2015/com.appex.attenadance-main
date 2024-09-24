@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,8 +11,10 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
+import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/audio_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/attendance.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/widget/audio_screen.dart';
 import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_cubit.dart';
 import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart';
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
@@ -34,7 +37,7 @@ import 'featchers/request/request_form/logic/cubit/request_vaccation_cubit.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   setupGetIt();
   runApp(
     DevicePreview(
@@ -66,28 +69,26 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-
-        child: MaterialApp(
-          themeMode: ThemeMode.light,
-          navigatorKey: navigatorKey,
-          builder: DevicePreview.appBuilder,
-          theme: ThemeData(
-              fontFamily: MyConstants.libreCaslonText,
-              scaffoldBackgroundColor: ColorManger.backGroundGray),
-          darkTheme: ThemeData.dark(),
-          debugShowCheckedModeBanner: false,
-          locale: _locale,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          onGenerateRoute: generateRoute,
-          initialRoute: Routes.splashScreen,
-        ),
-    
+      child: MaterialApp(
+        themeMode: ThemeMode.light,
+        navigatorKey: navigatorKey,
+        builder: DevicePreview.appBuilder,
+        theme: ThemeData(
+            fontFamily: MyConstants.libreCaslonText,
+            scaffoldBackgroundColor: ColorManger.backGroundGray),
+        darkTheme: ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        locale: _locale,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        onGenerateRoute: generateRoute,
+        initialRoute: Routes.splashScreen,
+      ),
     );
   }
 
@@ -116,9 +117,10 @@ class _MyAppState extends State<MyApp> {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => getIt<AttendanceCubit>()),
-              BlocProvider(create: (context) => getIt<SendAttendanceCubit>())
+              BlocProvider(create: (context) => getIt<SendAttendanceCubit>()),
+              BlocProvider(create: (context) => getIt<AudioCubit>()),
             ],
-            child: AttendanceScreen(
+            child: Attendance(
               changeLanguage: _changeLanguage,
             ),
           ),
@@ -170,12 +172,12 @@ class _MyAppState extends State<MyApp> {
                   ChangeNotifierProvider(create: (context) => CheckboxState()),
                 ], child: RequestScreen(changeLanguage: _changeLanguage)));
 
-      // case Routes.permissionScreen:
-      //   return MaterialPageRoute(
-      //       builder: (_) => MultiBlocProvider(providers: [
-      //             BlocProvider(create: (context) => getIt<PermissionCubit>()),
-      //             ChangeNotifierProvider(create: (context) => CheckboxState()),
-      //           ], child: PermissionScreen(changeLanguage: _changeLanguage)));
+      case Routes.audioRecorderScreen:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<AudioCubit>(),
+                  child: const AudioRecorderScreen(),
+                ));
 
       default:
         return MaterialPageRoute(

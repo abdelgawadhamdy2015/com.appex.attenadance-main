@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     getSavedValue();
     Future.delayed(const Duration(seconds: 3)).whenComplete(() {
-      // context.pushReplacementNamed(Routes.permissionScreen);
+      // context.pushReplacementNamed(Routes.audioRecorderScreen);
       if (!checkIfNull([token]) && login) {
         context.pushReplacementNamed(Routes.homeScreen);
       } else {
@@ -40,9 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void getSavedValue() async {
-    login = await SharedPrefHelper.getBool(
-      MyConstants.isLoggedIn
-    );
+    login = await SharedPrefHelper.getBool(MyConstants.isLoggedIn);
     token = await SharedPrefHelper.getSecuredString(MyConstants.myToken);
   }
 

@@ -79,7 +79,16 @@
     "noInternet": " No internet , check your connection and try again",
     "needSignOut" :"Are you shure you need log signOut? ",
     "lateTime": "Late time ",
-    "extraTime": "Extra Time"
+    "extraTime": "Extra Time",
+
+    "map": "Map",
+    "microfone": "Microfone",
+    "camera": "Camera",
+    "readSentance":"please ,read below line in correct way to accept attendance ",
+    "record":"Record",
+    "stop":"Stop",
+    "play":"Play"
+
 
 
 }

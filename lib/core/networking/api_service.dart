@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:ttech_attendance/featchers/departures/data/models/departure_model.dart';
@@ -59,14 +61,30 @@ abstract class ApiService {
   );
 
   @GET("departure")
-  Future<AddVaccationResponse> getDeparture(
-      );
+  Future<AddVaccationResponse> getDeparture();
 
-     @POST("departure")
+  @POST("departure")
   Future<AddVaccationResponse> reactWithdeparture(
     @Body() DepartureModel departureModel,
   );
 
+  @POST("/upload")
+  @MultiPart()
+  Future<AttendanceResponse> uploadAudio(MultipartFile file);
+
+  @POST("/upload")
+  @MultiPart()
+  Future<void> uploadData({
+    @Part(name: 'audio') File? audioFile,
+    @Part(name: 'image') File? imageFile,
+    @Query('x') double? x,
+    @Query('y') double? y,
+    @Query("isAttendFingerprint") bool? isAttendFingerprint,
+    @Query("isShift1Complete") bool? isShift1Complete,
+    @Query("isShift2Complete") bool? isShift2Complete,
+    @Query("isShift3Complete") bool? isShift3Complete,
+    @Query("isShift4Complete") bool? isShift4Complete,
+  });
   // x
   // @POST(ApiConstants.signup)
   // Future<SignUpResponse> signUp(

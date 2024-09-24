@@ -859,6 +859,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Map`
+  String get map {
+    return Intl.message(
+      'Map',
+      name: 'map',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Microfone`
+  String get microfone {
+    return Intl.message(
+      'Microfone',
+      name: 'microfone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `please ,read below line in correct way to accept attendance `
+  String get readSentance {
+    return Intl.message(
+      'please ,read below line in correct way to accept attendance ',
+      name: 'readSentance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Record`
+  String get record {
+    return Intl.message(
+      'Record',
+      name: 'record',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stop`
+  String get stop {
+    return Intl.message(
+      'Stop',
+      name: 'stop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Play`
+  String get play {
+    return Intl.message(
+      'Play',
+      name: 'play',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

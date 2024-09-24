@@ -16,7 +16,11 @@ class MyConstants {
   static const String fullDay = "Full Day";
 
   static const String permission = "Permission";
-  static const String request = "REquese";
+  static const String request = "Requeset";
+  static const String camera = "camera";
+  static const String map = "map";
+  static const String mic = "mic";
+
 
   static const String myTransactions = "transaction";
   static const String credits = "credits";

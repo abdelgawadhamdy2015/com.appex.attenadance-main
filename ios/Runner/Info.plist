@@ -76,5 +76,7 @@
 	<string>development</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+<string>We need access to your microphone</string>
 </dict>
 </plist>
