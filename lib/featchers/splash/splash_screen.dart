@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   void getSavedValue() async {
     login = await SharedPrefHelper.getBool(MyConstants.isLoggedIn);
-    token = await SharedPrefHelper.getSecuredString(MyConstants.myToken);
+    token = await SharedPrefHelper.getString(MyConstants.myToken);
   }
 
   @override

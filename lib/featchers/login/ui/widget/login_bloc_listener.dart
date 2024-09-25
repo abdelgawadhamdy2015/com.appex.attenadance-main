@@ -50,7 +50,7 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
             if (response.result == 1) {
               SignalRService()
                   .startConnection(response.data!.authToken!.token!);
-              await SharedPrefHelper.setSecuredString(
+              await SharedPrefHelper.setData(
                   MyConstants.myToken, loginResponse.data!.authToken!.token!);
               DioFactory.setTokenToHeaderAfterLogin(
                   loginResponse.data!.authToken!.token!);
