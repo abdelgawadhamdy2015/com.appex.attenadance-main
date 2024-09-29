@@ -14,7 +14,7 @@ class _ApiService implements ApiService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://erptestback.apex-program.com/';
+    baseUrl ??= 'http://192.168.1.253:9090/';
   }
 
   final Dio _dio;

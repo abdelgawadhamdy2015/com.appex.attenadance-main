@@ -11,6 +11,7 @@ import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart'
 import 'package:ttech_attendance/featchers/attendance/ui/widget/audio_screen.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/widget/camera_screen.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class Attendance extends StatefulWidget {
   final Function(Locale) changeLanguage;
@@ -25,6 +26,8 @@ class AttendanceState extends State<Attendance> {
   String requestType = MyConstants.map;
 
   late CameraDescription firstCamera;
+
+  late IosDeviceInfo iosInfo;
 
   @override
   void initState() {

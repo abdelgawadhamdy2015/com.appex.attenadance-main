@@ -13,6 +13,7 @@ class AudioRepository {
   Future<ApiResult<AttendanceResponse>> uploadAudio(File audioFile) async {
     try {
       String fileName = audioFile.path.split('/').last;
+      // ignore: unused_local_variable
       MultipartFile multipartFile = await MultipartFile.fromFile(
         audioFile.path,
         filename: fileName,

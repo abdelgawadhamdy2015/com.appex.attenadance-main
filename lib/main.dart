@@ -39,6 +39,19 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   setupGetIt();
+  // try {
+  //   await dotenv.load(
+  //       fileName: ".env"); // Ensure you're loading from the correct file
+  // } catch (e) {
+  //   print('Error loading .env file: $e');
+  // }
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Make status bar transparent
+      statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+      statusBarBrightness: Brightness.light, // For iOS (light background)
+    ),
+  );
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
@@ -57,13 +70,37 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale _locale = Locale(Intl.defaultLocale ?? MyConstants.arabic);
-
+  static const platform = MethodChannel("com.ttech.attendance/api");
   _MyAppState();
 
   void _changeLanguage(Locale locale) {
     setState(() {
       _locale = locale;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Enable system UI overlay (status and navigation bars)
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    _passApiKeysToNative();
+  }
+
+  Future<void> _passApiKeysToNative() async {
+    try {
+      const String iosApiKey = "AIzaSyDcOtmHQ11CTjw_s6DFXH8dwFCOux6CYr8";
+      // dotenv.env['GOOGLE_MAPS_API_KEY'] ?? '';
+      //final String androidApiKey = dotenv.env['ANDROID_API_KEY'] ?? '';
+
+      if (iosApiKey.isNotEmpty) {
+        await platform.invokeMethod("setApiKeys", {
+          "iosApiKey": iosApiKey,
+        });
+      }
+    } catch (e) {
+      print('Failed to pass API keys to native platforms: $e');
+    }
   }
 
   @override

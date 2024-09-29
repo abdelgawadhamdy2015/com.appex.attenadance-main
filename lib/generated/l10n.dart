@@ -380,10 +380,10 @@ class S {
     );
   }
 
-  /// `Snd`
+  /// `Send`
   String get send {
     return Intl.message(
-      'Snd',
+      'Send',
       name: 'send',
       desc: '',
       args: [],
@@ -720,10 +720,10 @@ class S {
     );
   }
 
-  /// `temporary`
+  /// `Temporary`
   String get temporary {
     return Intl.message(
-      'temporary',
+      'Temporary',
       name: 'temporary',
       desc: '',
       args: [],
