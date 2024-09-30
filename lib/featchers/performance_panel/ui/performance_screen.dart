@@ -32,8 +32,7 @@ class _PerformancePanel extends State<PerformanceScreen> {
   List<Day>? days = [];
 
   Future<void> _selectDate(BuildContext context, bool isStart) async {
-    final DateTime? picked = await  showDatePicker(
-      
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate:
           isStart ? _startDate ?? DateTime.now() : _endDate ?? DateTime.now(),
@@ -106,7 +105,8 @@ class _PerformancePanel extends State<PerformanceScreen> {
                               SizeConfig.fontSize3!),
                           controller: TextEditingController(
                             text: _startDate != null
-                                ? MyConstants.dateFormat.format(_startDate!)
+                                ? MyConstants.dateFormat
+                                    .format(_startDate!.toLocal())
                                 : S.of(context).fromDate,
                           ),
                           decoration: InputDecoration(
@@ -139,7 +139,8 @@ class _PerformancePanel extends State<PerformanceScreen> {
                           decoration: InputDecoration(
                               labelText: S.of(context).toDate,
                               hintText: _endDate != null
-                                  ? MyConstants.dateFormat.format(_endDate!)
+                                  ? MyConstants.dateFormat
+                                      .format(_endDate!.toLocal())
                                   : S.of(context).toDate,
                               hintStyle: TextStyles.blackRegulerStyle(
                                   SizeConfig.fontSize3!),
@@ -180,10 +181,13 @@ class _PerformancePanel extends State<PerformanceScreen> {
                                     context);
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const  SnackBar(content: Text(" no data ")));
+                                    const SnackBar(content: Text(" no data ")));
                               }
                             },
-                            icon:  Icon(Icons.print,size: SizeConfig.iconSize5,)),
+                            icon: Icon(
+                              Icons.print,
+                              size: SizeConfig.iconSize5,
+                            )),
                         const Spacer(),
                         IconButton(
                             onPressed: () {},

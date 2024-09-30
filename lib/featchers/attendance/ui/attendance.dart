@@ -124,7 +124,7 @@ class _AttendanceState extends State<Attendance> {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       } else {
                         // Otherwise, display a loading indicator while waiting for the camera
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                     },
                   ),
