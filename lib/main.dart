@@ -11,10 +11,8 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
-import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/audio_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/ui/attendance.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/widget/audio_screen.dart';
 import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_cubit.dart';
 import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart';
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
@@ -155,7 +153,6 @@ class _MyAppState extends State<MyApp> {
             providers: [
               BlocProvider(create: (context) => getIt<AttendanceCubit>()),
               BlocProvider(create: (context) => getIt<SendAttendanceCubit>()),
-              BlocProvider(create: (context) => getIt<AudioCubit>()),
             ],
             child: Attendance(
               changeLanguage: _changeLanguage,
@@ -208,13 +205,6 @@ class _MyAppState extends State<MyApp> {
                   BlocProvider(create: (context) => getIt<PermissionCubit>()),
                   ChangeNotifierProvider(create: (context) => CheckboxState()),
                 ], child: RequestScreen(changeLanguage: _changeLanguage)));
-
-      case Routes.audioRecorderScreen:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => getIt<AudioCubit>(),
-                  child: const AudioRecorderScreen(),
-                ));
 
       default:
         return MaterialPageRoute(

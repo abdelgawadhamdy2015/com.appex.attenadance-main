@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:json_annotation/json_annotation.dart';
 part 'attendance_request.g.dart';
 
@@ -10,10 +12,19 @@ class AttendanceRequest {
   bool? isShift2Complete;
   bool? isShift3Complete;
   bool? isShift4Complete;
-
+  File? imageFile;
+  File? audioFile;
 
   AttendanceRequest(
-      {required this.x, required this.y,  this.isAttendFingerprint,  this.isShift1Complete, this.isShift2Complete, this.isShift3Complete, this.isShift4Complete});
+      {required this.x,
+      required this.y,
+      this.isAttendFingerprint,
+      this.isShift1Complete,
+      this.isShift2Complete,
+      this.isShift3Complete,
+      this.isShift4Complete,
+      this.audioFile,
+      this.imageFile});
 
   factory AttendanceRequest.fromJson(Map<String, dynamic> json) =>
       _$AttendanceRequestFromJson(json);

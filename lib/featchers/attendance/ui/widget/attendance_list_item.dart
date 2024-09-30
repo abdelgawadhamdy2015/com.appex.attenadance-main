@@ -142,9 +142,13 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                                 textStyle: TextStyles.whiteBoldStyle(
                                     SizeConfig.fontSize3!),
                               )
-                            : Center(child: Text(_formatTime(_remainingTime))),
+                            : Center(
+                                child: Text(
+                                  _formatTime(_remainingTime),
+                                ),
+                              ),
                       ),
-              )
+              ),
             ],
           ),
         ),
@@ -211,14 +215,29 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
               ? AttendanceRequest(
                   x: context.read<AttendanceCubit>().currentPosition.latitude,
                   y: context.read<AttendanceCubit>().currentPosition.longitude,
-                )
+                  imageFile:
+                      context.read<AttendanceCubit>().imageFile.path.isNotEmpty
+                          ? context.read<AttendanceCubit>().imageFile
+                          : null,
+                  audioFile:
+                      context.read<AttendanceCubit>().audioFile.path.isNotEmpty
+                          ? context.read<AttendanceCubit>().audioFile
+                          : null)
               : AttendanceRequest(
                   x: context.read<AttendanceCubit>().currentPosition.latitude,
                   y: context.read<AttendanceCubit>().currentPosition.longitude,
                   isAttendFingerprint: isAttendance,
                   isShift1Complete: widget.shift1Complete,
                   isShift2Complete: widget.shift2Complete,
-                  isShift3Complete: widget.shift3Complete),
+                  isShift3Complete: widget.shift3Complete,
+                  imageFile:
+                      context.read<AttendanceCubit>().imageFile.path.isNotEmpty
+                          ? context.read<AttendanceCubit>().imageFile
+                          : null,
+                  audioFile:
+                      context.read<AttendanceCubit>().audioFile.path.isNotEmpty
+                          ? context.read<AttendanceCubit>().audioFile
+                          : null),
         );
     if (widget.shiftType == 1) {
       setState(() {

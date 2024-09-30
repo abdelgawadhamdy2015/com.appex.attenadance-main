@@ -110,7 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "quickAccessList":
             MessageLookupByLibrary.simpleMessage("Quick access list"),
         "readSentance": MessageLookupByLibrary.simpleMessage(
-            "please ,read below line in correct way to accept attendance "),
+            "Please read the line below clearly to confirm attendance. "),
         "record": MessageLookupByLibrary.simpleMessage("Record"),
         "recordPresenceAndLeave":
             MessageLookupByLibrary.simpleMessage("ٌRecord presence and leave"),
@@ -118,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestLeave": MessageLookupByLibrary.simpleMessage("Request Leave"),
         "restMinutes": MessageLookupByLibrary.simpleMessage("Rest 60 minutes"),
         "salaries": MessageLookupByLibrary.simpleMessage("Salaries"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "shift1": MessageLookupByLibrary.simpleMessage("first shift"),
         "shift2": MessageLookupByLibrary.simpleMessage("second shift"),

@@ -890,10 +890,10 @@ class S {
     );
   }
 
-  /// `please ,read below line in correct way to accept attendance `
+  /// `Please read the line below clearly to confirm attendance. `
   String get readSentance {
     return Intl.message(
-      'please ,read below line in correct way to accept attendance ',
+      'Please read the line below clearly to confirm attendance. ',
       name: 'readSentance',
       desc: '',
       args: [],
@@ -925,6 +925,16 @@ class S {
     return Intl.message(
       'Play',
       name: 'play',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
       desc: '',
       args: [],
     );

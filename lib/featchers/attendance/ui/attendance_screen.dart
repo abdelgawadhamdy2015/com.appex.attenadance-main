@@ -18,9 +18,9 @@ import 'package:ttech_attendance/generated/l10n.dart';
 import '../logic/cubit/attendance_state.dart';
 
 class AttendanceScreen extends StatefulWidget {
-  final Function(Locale) changeLanguage;
+  //final Function(Locale) changeLanguage;
 
-  const AttendanceScreen({super.key, required this.changeLanguage});
+  const AttendanceScreen({super.key});
 
   @override
   State<AttendanceScreen> createState() => _AttendanceScreen();
@@ -112,7 +112,7 @@ class _AttendanceScreen extends State<AttendanceScreen> {
             const AttendanceBlocListener(),
             BlocBuilder<AttendanceCubit, AttendanceState>(
               builder: (context, state) {
-                if (state is Loading) {
+                if (state is AttendanceStateLoading) {
                   return const AttendanceShimmer();
                 }
                 return Padding(

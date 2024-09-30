@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,12 +14,14 @@ class AttendanceCubit extends Cubit<AttendanceState> {
   AttendanceRepo attendanceRepo;
   AttendanceCubit(this.attendanceRepo) : super(const AttendanceState.initial());
   LatLng currentPosition = const LatLng(45, -120);
+  File imageFile = File("");
+  File audioFile = File("");
 
   Location location = Location();
   LocationData? locationData = LocationData.fromMap({});
   GlobalKey formKey = GlobalKey<FormState>();
   HeaderData data = HeaderData();
-  List shifts= [];
+  List shifts = [];
   DateTime attendanceTime = DateTime(0);
   emitAttendanceState() async {
     emit(const AttendanceState.loading());

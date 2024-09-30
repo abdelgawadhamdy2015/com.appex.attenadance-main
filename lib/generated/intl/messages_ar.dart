@@ -104,7 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "quickAccessList":
             MessageLookupByLibrary.simpleMessage("قائمة الوصول السريع"),
         "readSentance": MessageLookupByLibrary.simpleMessage(
-            "من فضلك، اقرأ السطر أدناه بالطريقة الصحيحة لقبول الحضور"),
+            "من فضلك، اقرأ السطر أدناه بصوت واضح لقبول الحضور"),
         "record": MessageLookupByLibrary.simpleMessage("تسجيل"),
         "recordPresenceAndLeave":
             MessageLookupByLibrary.simpleMessage("تسجيل الحضور والإجازة"),
@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestLeave": MessageLookupByLibrary.simpleMessage("طلب إجازة"),
         "restMinutes": MessageLookupByLibrary.simpleMessage("راحة 60 دقيقة"),
         "salaries": MessageLookupByLibrary.simpleMessage("الرواتب"),
+        "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "send": MessageLookupByLibrary.simpleMessage("إضافة"),
         "shift1": MessageLookupByLibrary.simpleMessage("الورديّة الأولى"),
         "shift2": MessageLookupByLibrary.simpleMessage("الورديّة الثانية"),

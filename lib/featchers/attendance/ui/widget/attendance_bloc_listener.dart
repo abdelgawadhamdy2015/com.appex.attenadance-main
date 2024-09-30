@@ -22,7 +22,7 @@ class _AttendanceBlocListenerState extends State<AttendanceBlocListener> {
     return BlocListener<AttendanceCubit, AttendanceState>(
         child: const SizedBox.shrink(),
         listenWhen: (previous, current) =>
-            current is Loading || current is Success || current is Error,
+            current is AttendanceStateLoading || current is AttendanceStateSuccess || current is AttendanceStateError,
         listener: (context, state) {
           state.whenOrNull(
             loading: () {

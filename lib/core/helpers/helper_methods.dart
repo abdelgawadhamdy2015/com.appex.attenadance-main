@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,16 +11,24 @@ bool checkIfNull(List list) {
   return isNull;
 }
 
-String getRequestType(int? type,BuildContext context) {
-    switch (type) {
-      case 1:
-        return S.of(context).permission;
-      case 2:
-        return S.of(context).annual;
-      default:
-        return "";
-    }
+Future<CameraDescription> setCamera() async {
+  final cameras = await availableCameras();
+  final firstCamera = cameras.firstWhere(
+    (camera) => camera.lensDirection == CameraLensDirection.front,
+  );
+  return firstCamera;
+}
+
+String getRequestType(int? type, BuildContext context) {
+  switch (type) {
+    case 1:
+      return S.of(context).permission;
+    case 2:
+      return S.of(context).annual;
+    default:
+      return "";
   }
+}
 
 SizedBox verticalSpacing(double height) => SizedBox(
       height: height.h,

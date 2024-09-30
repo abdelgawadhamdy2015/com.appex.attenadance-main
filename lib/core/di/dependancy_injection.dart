@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ttech_attendance/featchers/attendance/data/repo/attendance_repo.dart';
-import 'package:ttech_attendance/featchers/attendance/data/repo/audio_repo.dart';
 import 'package:ttech_attendance/featchers/attendance/data/repo/send_attendance_repo.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
-import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/audio_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/departures/data/repo/depatrure_repo.dart';
 import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_cubit.dart';
@@ -84,12 +82,7 @@ Future<void> setupGetIt() async {
     () => DepartureCubit(getIt()),
   );
 
-  getIt.registerLazySingleton<AudioRepository>(
-    () => AudioRepository(getIt()),
-  );
-  getIt.registerFactory<AudioCubit>(
-    () => AudioCubit(getIt()),
-  );
+  
   // getIt.registerSingleton<SignalRService>(SignalRService());
   // getIt.registerFactory(() => AuthCubit(getIt<SignalRService>()));
 }

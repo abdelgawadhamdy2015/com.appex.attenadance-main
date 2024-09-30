@@ -84,10 +84,11 @@
     "map": "Map",
     "microfone": "Microfone",
     "camera": "Camera",
-    "readSentance":"please ,read below line in correct way to accept attendance ",
+    "readSentance":"Please read the line below clearly to confirm attendance. ",
     "record":"Record",
     "stop":"Stop",
-    "play":"Play"
+    "play":"Play",
+    "save": "Save"
 
 
 

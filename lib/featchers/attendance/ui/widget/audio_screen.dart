@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
@@ -6,23 +8,23 @@ import 'package:record/record.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
-import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/audio_cubit.dart';
-import 'package:ttech_attendance/featchers/attendance/logic/cubit/cubit/audio_state.dart';
+import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
-class AudioRecorderScreen extends StatefulWidget {
-  const AudioRecorderScreen({super.key});
+class AudioScreen extends StatefulWidget {
+  const AudioScreen({super.key});
 
   @override
-  AudioRecorderScreenState createState() => AudioRecorderScreenState();
+  AudioScreenState createState() => AudioScreenState();
 }
 
-class AudioRecorderScreenState extends State<AudioRecorderScreen> {
+class AudioScreenState extends State<AudioScreen> {
   List<String> audios = [
     "ahmed attendance",
     "you are so cute",
     "look , this is a cat"
   ];
+  String value = '';
 
   final AudioPlayer _audioPlayer = AudioPlayer();
   final AudioRecorder _recorder = AudioRecorder();
@@ -69,6 +71,7 @@ class AudioRecorderScreenState extends State<AudioRecorderScreen> {
     setState(() {
       _isRecording = false;
     });
+    context.read<AttendanceCubit>().audioFile = File(_filePath ?? "");
   }
 
   Future<void> _playRecording() async {
@@ -86,86 +89,73 @@ class AudioRecorderScreenState extends State<AudioRecorderScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    value = (audios..shuffle()).first;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(textAlign: TextAlign.center, S.of(context).readSentance),
-            Text(
-              (audios..shuffle()).first,
-              style: TextStyles.lightRedRegulerStyle(SizeConfig.fontSize3!),
-            ),
-            Icon(
-              _isRecording ? Icons.mic : Icons.mic_none,
-              size: 100,
-              color: _isRecording ? Colors.red : Colors.blue,
-            ),
-            const SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: _isRecording ? null : _startRecording,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 15),
-                  ),
-                  child: Text(S.of(context).record),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(textAlign: TextAlign.center, S.of(context).readSentance),
+          Text(
+            value,
+            style: TextStyles.lightRedRegulerStyle(SizeConfig.fontSize4!),
+          ),
+          Icon(
+            _isRecording ? Icons.mic : Icons.mic_none,
+            size: SizeConfig.screenHeight! * .05,
+            color: _isRecording ? Colors.red : Colors.blue,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: _isRecording ? null : _startRecording,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorManger.mutedBlue,
                 ),
-                const SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: _isRecording ? _stopRecording : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 15),
-                  ),
-                  child: Text(S.of(context).stop),
+                child: Text(
+                  S.of(context).record,
+                  style: TextStyles.whiteBoldStyle(SizeConfig.fontSize3!),
                 ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: !_isRecording ? _playRecording : null,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
               ),
-              child: Text(S.of(context).play),
+              const SizedBox(width: 20),
+              ElevatedButton(
+                onPressed: _isRecording ? _stopRecording : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                ),
+                child: Text(S.of(context).stop,
+                    style: TextStyles.whiteBoldStyle(SizeConfig.fontSize3!)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: !_isRecording ? _playRecording : null,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorManger.mainBlue,
             ),
-            Slider(
-              value: _currentPosition,
-              max: _totalDuration,
-              onChanged: (value) {
-                setState(() {
-                  _currentPosition = value;
-                });
-                _audioPlayer.seek(Duration(seconds: value.toInt()));
-              },
-            ),
-            BlocBuilder<AudioCubit, AudioState>(
-              builder: (context, state) {
-                return ElevatedButton(
-                  onPressed: _isRecording ? _sendRecording : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorManger.checkBoxGreen,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 15),
-                  ),
-                  child: Text(S.of(context).send),
-                );
-              },
-            ),
-          ],
-        ),
+            child: Text(S.of(context).play,
+                style: TextStyles.whiteBoldStyle(SizeConfig.fontSize3!)),
+          ),
+          Slider(
+            activeColor: ColorManger.darkBlue,
+            value: _currentPosition,
+            max: _totalDuration,
+            onChanged: (value) {
+              setState(() {
+                _currentPosition = value;
+              });
+              _audioPlayer.seek(Duration(seconds: value.toInt()));
+            },
+          ),
+        ],
       ),
     );
   }
-
-  Future<void> _sendRecording() async {}
 }
