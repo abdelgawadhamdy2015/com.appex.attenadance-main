@@ -17,10 +17,10 @@ PODS:
     - Flutter
   - flutter_native_splash (0.0.1):
     - Flutter
-  - flutter_sound (9.16.0):
+  - flutter_sound (9.16.2):
     - Flutter
-    - flutter_sound_core (= 9.16.0)
-  - flutter_sound_core (9.16.0)
+    - flutter_sound_core (= 9.16.2)
+  - flutter_sound_core (9.16.2)
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
@@ -132,8 +132,8 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_localization: f43b18844a2b3d2c71fd64f04ffd6b1e64dd54d4
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
-  flutter_sound: 2a7073dee21936d166987189b30b7009225ca502
-  flutter_sound_core: a846fcaf846c191dbbbf070945765ed6e8f49279
+  flutter_sound: a7883820151aa9b1402f61c0364cdc3341c2b210
+  flutter_sound_core: 874cadb03ba78eee8d5904a226c4a72ecfff4205
   fluttertoast: e9a18c7be5413da53898f660530c56f35edfba9c
   Google-Maps-iOS-Utils: cfe6a0239c7ca634b7e001ad059a6707143dc8dc
   google_maps_flutter_ios: e31555a04d1986ab130f2b9f24b6cdc861acc6d3
