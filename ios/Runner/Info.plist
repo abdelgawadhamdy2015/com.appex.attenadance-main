@@ -29,8 +29,6 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>GMSApiKey</key>
-	<string>AIzaSyDcOtmHQ11CTjw_s6DFXH8dwFCOux6CYr8</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>

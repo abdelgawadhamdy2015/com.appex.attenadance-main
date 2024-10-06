@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
@@ -50,69 +51,9 @@ class _AttendanceState extends State<Attendance> {
           padding: SizeConfig().getScreenPadding(),
           child: BlocBuilder<AttendanceCubit, AttendanceState>(
             builder: (context, state) {
-              return Column(
+              return  Column(
                 children: [
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     Row(children: [
-                  //       Transform.scale(
-                  //         scale: SizeConfig.screenWidth! * .003,
-                  //         child: Radio<String>(
-                  //           activeColor: ColorManger.mainBlue,
-                  //           value: MyConstants.map,
-                  //           groupValue: requestType,
-                  //           onChanged: (String? value) {
-                  //             setState(() {
-                  //               requestType = value!;
-                  //             });
-                  //           },
-                  //         ),
-                  //       ),
-                  //       horizontalSpacing(SizeConfig.screenWidth! * .01),
-                  //       Text(
-                  //         S.of(context).map,
-                  //         style: TextStyles.blackBoldStyle(SizeConfig.fontSize4!),
-                  //       ),
-                  //       horizontalSpacing(SizeConfig.screenWidth! * .05),
-                  //       Transform.scale(
-                  //         scale: SizeConfig.screenWidth! * .003,
-                  //         child: Radio<String>(
-                  //           activeColor: ColorManger.mainBlue,
-                  //           value: MyConstants.camera,
-                  //           groupValue: requestType,
-                  //           onChanged: (String? value) {
-                  //             setState(() {
-                  //               requestType = value!;
-                  //             });
-                  //           },
-                  //         ),
-                  //       ),
-                  //       horizontalSpacing(SizeConfig.screenWidth! * .01),
-                  //       Text(S.of(context).camera,
-                  //           style:
-                  //               TextStyles.blackBoldStyle(SizeConfig.fontSize4!)),
-                  //       horizontalSpacing(SizeConfig.screenWidth! * .05),
-                  //       Transform.scale(
-                  //         scale: SizeConfig.screenWidth! * .003,
-                  //         child: Radio<String>(
-                  //           activeColor: ColorManger.mainBlue,
-                  //           value: MyConstants.mic,
-                  //           groupValue: requestType,
-                  //           onChanged: (String? value) {
-                  //             setState(() {
-                  //               requestType = value!;
-                  //             });
-                  //           },
-                  //         ),
-                  //       ),
-                  //       horizontalSpacing(SizeConfig.screenWidth! * .01),
-                  //       Text(S.of(context).microfone,
-                  //           style:
-                  //               TextStyles.blackBoldStyle(SizeConfig.fontSize4!)),
-                  //     ]),
-                  //   ],
-                  // ),
+                  !kDebugMode? 
                   FutureBuilder<void>(
                     future: setCamera(),
                     builder: (context, snapshot) {
@@ -127,11 +68,10 @@ class _AttendanceState extends State<Attendance> {
                         return const Center(child: CircularProgressIndicator());
                       }
                     },
-                  ),
+                  ): Container(),
 
-                  
-                  const AudioScreen(),
-                  const AttendanceScreen(),
+                const AudioScreen(),
+                const  AttendanceScreen(),
                 ],
               );
             },

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -37,12 +38,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   setupGetIt();
-  // try {
-  //   await dotenv.load(
-  //       fileName: ".env"); // Ensure you're loading from the correct file
-  // } catch (e) {
-  //   print('Error loading .env file: $e');
-  // }
+  try {
+    await dotenv.load(fileName: ".env");
+    // Ensure you're loading from the correct file
+
+    if (kDebugMode) {
+      print("dot env is --------$dotenv");
+    }
+  } catch (e) {
+    print('Error loading .env file: $e');
+  }
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, // Make status bar transparent
@@ -67,9 +72,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  static const platform = MethodChannel("com.ttech.apex_attendance/mapsApiKey");
+
   Locale _locale = Locale(Intl.defaultLocale ?? MyConstants.arabic);
-  static const platform = MethodChannel("com.ttech.attendance/api");
-  _MyAppState();
 
   void _changeLanguage(Locale locale) {
     setState(() {
@@ -77,28 +82,21 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Future<void> sendApiKeyToNative() async {
+    String? apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'];
+    try {
+      await platform.invokeMethod('setApiKey', {"apiKey": apiKey});
+    } on PlatformException catch (e) {
+      print("Failed to send API Key: ${e.message}");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    sendApiKeyToNative();
     // Enable system UI overlay (status and navigation bars)
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    _passApiKeysToNative();
-  }
-
-  Future<void> _passApiKeysToNative() async {
-    try {
-      const String iosApiKey = "AIzaSyDcOtmHQ11CTjw_s6DFXH8dwFCOux6CYr8";
-      // dotenv.env['GOOGLE_MAPS_API_KEY'] ?? '';
-      //final String androidApiKey = dotenv.env['ANDROID_API_KEY'] ?? '';
-
-      if (iosApiKey.isNotEmpty) {
-        await platform.invokeMethod("setApiKeys", {
-          "iosApiKey": iosApiKey,
-        });
-      }
-    } catch (e) {
-      print('Failed to pass API keys to native platforms: $e');
-    }
   }
 
   @override

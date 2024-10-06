@@ -41,7 +41,7 @@ setupDialogState(
                     DioExceptionType.badResponse) {
                   ApiConstants.dioExceptionType = DioExceptionType.unknown;
                   await SharedPrefHelper.clearAllData();
-                  //await SharedPrefHelper.clearAllSecuredData();
+                  await SharedPrefHelper.cleareSecureToken();
                   DioFactory.deletTokenHeaderAfterLogOut();
                   navigatorKey.currentContext!
                       .pushReplacementNamed(Routes.loginScreen);
@@ -104,7 +104,7 @@ setupLogOutDialogState(
                 mySignalRService.stopConnection();
 
                 SharedPrefHelper.clearAllData();
-                //SharedPrefHelper.clearAllSecuredData();
+                SharedPrefHelper.cleareSecureToken();
                 DioFactory.deletTokenHeaderAfterLogOut();
 
                 navigatorKey.currentContext!

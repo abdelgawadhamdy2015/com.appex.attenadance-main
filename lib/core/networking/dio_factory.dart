@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:ttech_attendance/core/helpers/constants.dart';
 
 import '../helpers/shared_pref_helper.dart';
 
@@ -30,7 +29,7 @@ class DioFactory {
     dio?.options.headers = {
       'Accept': 'application/json',
       'Authorization':
-          'Bearer ${await SharedPrefHelper.getString(MyConstants.myToken)}',
+          'Bearer ${await SharedPrefHelper.retrieveSecureToken()}',
     };
   }
 
