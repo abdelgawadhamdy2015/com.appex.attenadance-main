@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:ttech_attendance/core/helpers/file_converter.dart';
 part 'attendance_request.g.dart';
 
 @JsonSerializable()
@@ -12,7 +13,9 @@ class AttendanceRequest {
   bool? isShift2Complete;
   bool? isShift3Complete;
   bool? isShift4Complete;
+  @FileConverter()
   File? imageFile;
+  @FileConverter()
   File? audioFile;
 
   AttendanceRequest(

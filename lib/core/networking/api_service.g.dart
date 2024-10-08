@@ -306,19 +306,27 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<AddVaccationResponse> getDeparture() async {
+  Future<DepartureResponse> getDepartures(
+    int pageNumber,
+    int pageSize,
+    bool isMobile,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'PageNumber': pageNumber,
+      r'PageSize': pageSize,
+      r'isMobile': isMobile,
+    };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<AddVaccationResponse>(Options(
+    final _options = _setStreamType<DepartureResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'departure',
+          'api/HR/VaccationEmployee/GetVaccationEmployee',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -328,44 +336,9 @@ class _ApiService implements ApiService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AddVaccationResponse _value;
+    late DepartureResponse _value;
     try {
-      _value = AddVaccationResponse.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<AddVaccationResponse> reactWithdeparture(
-      DepartureModel departureModel) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(departureModel.toJson());
-    final _options = _setStreamType<AddVaccationResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'departure',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AddVaccationResponse _value;
-    try {
-      _value = AddVaccationResponse.fromJson(_result.data!);
+      _value = DepartureResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -15,6 +15,8 @@ AttendanceRequest _$AttendanceRequestFromJson(Map<String, dynamic> json) =>
       isShift2Complete: json['isShift2Complete'] as bool?,
       isShift3Complete: json['isShift3Complete'] as bool?,
       isShift4Complete: json['isShift4Complete'] as bool?,
+      audioFile: const FileConverter().fromJson(json['audioFile'] as String?),
+      imageFile: const FileConverter().fromJson(json['imageFile'] as String?),
     );
 
 Map<String, dynamic> _$AttendanceRequestToJson(AttendanceRequest instance) =>
@@ -26,4 +28,6 @@ Map<String, dynamic> _$AttendanceRequestToJson(AttendanceRequest instance) =>
       'isShift2Complete': instance.isShift2Complete,
       'isShift3Complete': instance.isShift3Complete,
       'isShift4Complete': instance.isShift4Complete,
+      'imageFile': const FileConverter().toJson(instance.imageFile),
+      'audioFile': const FileConverter().toJson(instance.audioFile),
     };

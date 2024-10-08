@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/shared_pref_helper.dart';
+import 'package:ttech_attendance/core/networking/api_constants.dart';
 import 'package:ttech_attendance/core/networking/dio_factory.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/widgets/setup_dialog.dart';
@@ -50,10 +51,10 @@ class _LoginBlocListenerState extends State<LoginBlocListener> {
             if (response.result == 1) {
               SignalRService()
                   .startConnection(response.data!.authToken!.token!);
-              await SharedPrefHelper.storeSecureToken(
-                  loginResponse.data!.authToken!.token!);
+              biometricStorageService
+                  .storeToken(response.data!.authToken!.token!);
               DioFactory.setTokenToHeaderAfterLogin(
-                  loginResponse.data!.authToken!.token!);
+                  response.data!.authToken!.token!);
 
               context.pushReplacementNamed(Routes.homeScreen);
             } else {

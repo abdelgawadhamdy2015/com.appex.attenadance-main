@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:ttech_attendance/featchers/departures/data/models/departure_model.dart';
+import 'package:ttech_attendance/featchers/departures/data/models/departure_response.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/request/permission/data/models/permission_model.dart';
@@ -63,12 +63,11 @@ abstract class ApiService {
     @Body() PermissionModel permissionModel,
   );
 
-  @GET("departure")
-  Future<AddVaccationResponse> getDeparture();
-
-  @POST("departure")
-  Future<AddVaccationResponse> reactWithdeparture(
-    @Body() DepartureModel departureModel,
+  @GET(ApiConstants.getVaccations)
+  Future<DepartureResponse> getDepartures(
+    @Query("PageNumber") int pageNumber,
+    @Query("PageSize") int pageSize,
+    @Query("isMobile") bool isMobile,
   );
 
   // x
