@@ -4,8 +4,8 @@ import 'package:ttech_attendance/core/helpers/flutter_secure_service.dart';
 BiometricStorageService biometricStorageService = BiometricStorageService();
 
 class ApiConstants {
-  static const String apiBaseUrl = "http://192.168.1.253:9090/";
-  //static const String apiBaseUrl = "https://erptestback.apex-program.com/";
+  //static const String apiBaseUrl = "http://192.168.1.253:9090/";
+  static const String apiBaseUrl = "https://erptestback.apex-program.com/";
 
   static const String login = "api/Login";
   static const String addRequest =

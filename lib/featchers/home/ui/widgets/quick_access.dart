@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
+import 'package:ttech_attendance/featchers/home/logic/cubit/home_cubit.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
 import '../../../../core/helpers/size_config.dart';
@@ -27,15 +29,19 @@ class QuickAccess extends StatelessWidget {
             ),
             verticalSpacing(SizeConfig.screenHeight! * .01),
             GridView.count(
-              crossAxisCount: 2,
+              crossAxisCount:
+                  context.read<HomeCubit>().data.canFingerprintByMobile!
+                      ? 2
+                      : 3,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               children: <Widget>[
-                _buildQuickAccessButton(
-                    "assets/out_in.png",
-                    S.of(context).transaction,
-                    context,
-                    MyConstants.myTransactions),
+                if (context.read<HomeCubit>().data.canFingerprintByMobile!)
+                  _buildQuickAccessButton(
+                      "assets/out_in.png",
+                      S.of(context).transaction,
+                      context,
+                      MyConstants.myTransactions),
                 _buildQuickAccessButton("assets/credit.png",
                     S.of(context).credits, context, MyConstants.credits),
                 _buildQuickAccessButton(

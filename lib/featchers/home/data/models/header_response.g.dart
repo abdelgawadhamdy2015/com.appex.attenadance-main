@@ -90,6 +90,7 @@ HeaderData _$HeaderDataFromJson(Map<String, dynamic> json) => HeaderData(
       shift4Start: json['shift4_Start'] as String?,
       shift4End: json['shift4_End'] as String?,
       totalDayHours: json['totalDayHours'] as String?,
+      canFingerprintByMobile: json['canFingerprintByMobile'] as bool?,
     );
 
 Map<String, dynamic> _$HeaderDataToJson(HeaderData instance) =>
@@ -120,4 +121,5 @@ Map<String, dynamic> _$HeaderDataToJson(HeaderData instance) =>
       'hasShift3': instance.hasShift3,
       'hasShift4': instance.hasShift4,
       'shiftType': instance.shiftType,
+      'canFingerprintByMobile': instance.canFingerprintByMobile,
     };

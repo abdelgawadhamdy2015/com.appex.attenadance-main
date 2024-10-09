@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "attendanceTime": MessageLookupByLibrary.simpleMessage("وقت الحضور"),
         "badeResponse": MessageLookupByLibrary.simpleMessage(
             "حدث خطأ يرجى تسجيل الدخول مرة أخرى"),
+        "branch": MessageLookupByLibrary.simpleMessage("الفرع"),
         "camera": MessageLookupByLibrary.simpleMessage("كاميرا"),
         "cancel": MessageLookupByLibrary.simpleMessage(" إلغاء"),
         "comeFromReset":
@@ -110,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تسجيل الحضور والإجازة"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
         "requestLeave": MessageLookupByLibrary.simpleMessage("طلب إجازة"),
+        "requestNumber": MessageLookupByLibrary.simpleMessage("رقم الطلب"),
         "restMinutes": MessageLookupByLibrary.simpleMessage("راحة 60 دقيقة"),
         "salaries": MessageLookupByLibrary.simpleMessage("الرواتب"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
@@ -123,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sickLeave": MessageLookupByLibrary.simpleMessage("إجازة مرضية"),
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل الحضور"),
         "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الانصراف"),
+        "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "stop": MessageLookupByLibrary.simpleMessage("إيقاف"),
         "temporary": MessageLookupByLibrary.simpleMessage("مؤقت"),
         "timesOfWork": MessageLookupByLibrary.simpleMessage("مواعيد الدوام"),

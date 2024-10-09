@@ -28,7 +28,6 @@ class DeparturesScreen extends StatefulWidget {
 class _DeparturesScreenState extends State<DeparturesScreen> {
   String departureType = MyConstants.permission;
   List<DepartureModel> departures = [];
-  //List<DepartureModel> departuresByType = <DepartureModel>[];
   @override
   void initState() {
     super.initState();

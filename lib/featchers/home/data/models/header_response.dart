@@ -106,6 +106,7 @@ class HeaderData {
   bool? hasShift3;
   bool? hasShift4;
   int? shiftType;
+  bool? canFingerprintByMobile;
 
   HeaderData(
       {this.empArabicName,
@@ -133,7 +134,8 @@ class HeaderData {
       this.shift3End,
       this.shift4Start,
       this.shift4End,
-      this.totalDayHours});
+      this.totalDayHours,
+      this.canFingerprintByMobile});
 
   factory HeaderData.fromJson(Map<String, dynamic> json) =>
       _$HeaderDataFromJson(json);
