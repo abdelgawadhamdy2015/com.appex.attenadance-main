@@ -32,7 +32,7 @@
     "location":"Location",
     "dailyWorkingHours" : "from 9:00 A.M to 6:00 P.M",
     "restMinutes" :"Rest 60 minutes",
-    "send" : "Snd",
+    "send" : "Send",
     "pleaseFill": "please fill ",
     "requestLeave": "Request Leave",
     "fromDate": "From Date ",
@@ -66,7 +66,7 @@
     "shift3": "third shift",
     "shift4": "fourth shift",
     "hours": "Hour",
-    "temporary":"temporary",
+    "temporary":"Temporary",
     "fullDay":"Full Day",
     "date": "Date",
     "permissionType": "Permission Type",
@@ -79,7 +79,17 @@
     "noInternet": " No internet , check your connection and try again",
     "needSignOut" :"Are you shure you need log signOut? ",
     "lateTime": "Late time ",
-    "extraTime": "Extra Time"
+    "extraTime": "Extra Time",
+
+    "map": "Map",
+    "microfone": "Microfone",
+    "camera": "Camera",
+    "readSentance":"Please read the line below clearly to confirm attendance. ",
+    "record":"Record",
+    "stop":"Stop",
+    "play":"Play",
+    "save": "Save"
+
 
 
 }

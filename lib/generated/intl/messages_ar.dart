@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "attendanceTime": MessageLookupByLibrary.simpleMessage("وقت الحضور"),
         "badeResponse": MessageLookupByLibrary.simpleMessage(
             "حدث خطأ يرجى تسجيل الدخول مرة أخرى"),
+        "camera": MessageLookupByLibrary.simpleMessage("كاميرا"),
         "cancel": MessageLookupByLibrary.simpleMessage(" إلغاء"),
         "comeFromReset":
             MessageLookupByLibrary.simpleMessage("العودة من الراحة"),
@@ -76,8 +77,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "map": MessageLookupByLibrary.simpleMessage("خريطة"),
         "matchTimeFormat":
             MessageLookupByLibrary.simpleMessage("تنسيق الوقت، 7:00، 12:30"),
+        "microfone": MessageLookupByLibrary.simpleMessage("ميكروفون"),
         "myRequests": MessageLookupByLibrary.simpleMessage("طلباتي"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "needSignOut": MessageLookupByLibrary.simpleMessage(
@@ -95,16 +98,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "performancePanel": MessageLookupByLibrary.simpleMessage("لوحة الأداء"),
         "permission": MessageLookupByLibrary.simpleMessage("إذن"),
         "permissionType": MessageLookupByLibrary.simpleMessage("نوع الإذن"),
+        "play": MessageLookupByLibrary.simpleMessage("تشغيل"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("يرجى ملء"),
         "pm": MessageLookupByLibrary.simpleMessage("مساءً"),
         "quickAccessList":
             MessageLookupByLibrary.simpleMessage("قائمة الوصول السريع"),
+        "readSentance": MessageLookupByLibrary.simpleMessage(
+            "من فضلك، اقرأ السطر أدناه بصوت واضح لقبول الحضور"),
+        "record": MessageLookupByLibrary.simpleMessage("تسجيل"),
         "recordPresenceAndLeave":
             MessageLookupByLibrary.simpleMessage("تسجيل الحضور والإجازة"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
         "requestLeave": MessageLookupByLibrary.simpleMessage("طلب إجازة"),
         "restMinutes": MessageLookupByLibrary.simpleMessage("راحة 60 دقيقة"),
         "salaries": MessageLookupByLibrary.simpleMessage("الرواتب"),
+        "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "send": MessageLookupByLibrary.simpleMessage("إضافة"),
         "shift1": MessageLookupByLibrary.simpleMessage("الورديّة الأولى"),
         "shift2": MessageLookupByLibrary.simpleMessage("الورديّة الثانية"),
@@ -115,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sickLeave": MessageLookupByLibrary.simpleMessage("إجازة مرضية"),
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل الحضور"),
         "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الانصراف"),
+        "stop": MessageLookupByLibrary.simpleMessage("إيقاف"),
         "temporary": MessageLookupByLibrary.simpleMessage("مؤقت"),
         "timesOfWork": MessageLookupByLibrary.simpleMessage("مواعيد الدوام"),
         "to": MessageLookupByLibrary.simpleMessage("الي"),

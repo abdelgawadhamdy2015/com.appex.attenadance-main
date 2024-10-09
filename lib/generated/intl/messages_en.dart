@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Attendance Time"),
         "badeResponse": MessageLookupByLibrary.simpleMessage(
             "bad response please login again"),
+        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "comeFromReset":
             MessageLookupByLibrary.simpleMessage("Come from reset"),
@@ -81,8 +82,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out "),
+        "map": MessageLookupByLibrary.simpleMessage("Map"),
         "matchTimeFormat":
             MessageLookupByLibrary.simpleMessage(" time format (7:00 , 12:30)"),
+        "microfone": MessageLookupByLibrary.simpleMessage("Microfone"),
         "myRequests": MessageLookupByLibrary.simpleMessage("My requests"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "needSignOut": MessageLookupByLibrary.simpleMessage(
@@ -101,17 +104,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "permission": MessageLookupByLibrary.simpleMessage("Permission"),
         "permissionType":
             MessageLookupByLibrary.simpleMessage("Permission Type"),
+        "play": MessageLookupByLibrary.simpleMessage("Play"),
         "pleaseFill": MessageLookupByLibrary.simpleMessage("please fill "),
         "pm": MessageLookupByLibrary.simpleMessage("P.M"),
         "quickAccessList":
             MessageLookupByLibrary.simpleMessage("Quick access list"),
+        "readSentance": MessageLookupByLibrary.simpleMessage(
+            "Please read the line below clearly to confirm attendance. "),
+        "record": MessageLookupByLibrary.simpleMessage("Record"),
         "recordPresenceAndLeave":
             MessageLookupByLibrary.simpleMessage("ٌRecord presence and leave"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
         "requestLeave": MessageLookupByLibrary.simpleMessage("Request Leave"),
         "restMinutes": MessageLookupByLibrary.simpleMessage("Rest 60 minutes"),
         "salaries": MessageLookupByLibrary.simpleMessage("Salaries"),
-        "send": MessageLookupByLibrary.simpleMessage("Snd"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
         "shift1": MessageLookupByLibrary.simpleMessage("first shift"),
         "shift2": MessageLookupByLibrary.simpleMessage("second shift"),
         "shift3": MessageLookupByLibrary.simpleMessage("third shift"),
@@ -121,7 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sickLeave": MessageLookupByLibrary.simpleMessage("Sick leave"),
         "signIn": MessageLookupByLibrary.simpleMessage("Check-in "),
         "signOut": MessageLookupByLibrary.simpleMessage("Check-out "),
-        "temporary": MessageLookupByLibrary.simpleMessage("temporary"),
+        "stop": MessageLookupByLibrary.simpleMessage("Stop"),
+        "temporary": MessageLookupByLibrary.simpleMessage("Temporary"),
         "timesOfWork": MessageLookupByLibrary.simpleMessage("Times of work"),
         "to": MessageLookupByLibrary.simpleMessage("to"),
         "toDate": MessageLookupByLibrary.simpleMessage(" To Date"),

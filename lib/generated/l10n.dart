@@ -380,10 +380,10 @@ class S {
     );
   }
 
-  /// `Snd`
+  /// `Send`
   String get send {
     return Intl.message(
-      'Snd',
+      'Send',
       name: 'send',
       desc: '',
       args: [],
@@ -720,10 +720,10 @@ class S {
     );
   }
 
-  /// `temporary`
+  /// `Temporary`
   String get temporary {
     return Intl.message(
-      'temporary',
+      'Temporary',
       name: 'temporary',
       desc: '',
       args: [],
@@ -855,6 +855,86 @@ class S {
     return Intl.message(
       'Extra Time',
       name: 'extraTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Map`
+  String get map {
+    return Intl.message(
+      'Map',
+      name: 'map',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Microfone`
+  String get microfone {
+    return Intl.message(
+      'Microfone',
+      name: 'microfone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please read the line below clearly to confirm attendance. `
+  String get readSentance {
+    return Intl.message(
+      'Please read the line below clearly to confirm attendance. ',
+      name: 'readSentance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Record`
+  String get record {
+    return Intl.message(
+      'Record',
+      name: 'record',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stop`
+  String get stop {
+    return Intl.message(
+      'Stop',
+      name: 'stop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Play`
+  String get play {
+    return Intl.message(
+      'Play',
+      name: 'play',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
       desc: '',
       args: [],
     );

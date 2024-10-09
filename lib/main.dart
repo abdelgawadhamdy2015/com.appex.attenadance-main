@@ -1,7 +1,9 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -11,7 +13,7 @@ import 'package:ttech_attendance/core/networking/signal_r_service.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/attendance_cubit.dart';
 import 'package:ttech_attendance/featchers/attendance/logic/cubit/send_attendance_cubit.dart';
-import 'package:ttech_attendance/featchers/attendance/ui/attendance_screen.dart';
+import 'package:ttech_attendance/featchers/attendance/ui/attendance.dart';
 import 'package:ttech_attendance/featchers/departures/logic/cubit/departure_cubit.dart';
 import 'package:ttech_attendance/featchers/departures/ui/departures_screen.dart';
 import 'package:ttech_attendance/featchers/forget_password/cubit/froget_password_cubit.dart';
@@ -34,8 +36,25 @@ import 'featchers/request/request_form/logic/cubit/request_vaccation_cubit.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   setupGetIt();
+  try {
+    await dotenv.load(fileName: ".env");
+    // Ensure you're loading from the correct file
+
+    if (kDebugMode) {
+      print("dot env is --------$dotenv");
+    }
+  } catch (e) {
+    print('Error loading .env file: $e');
+  }
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Make status bar transparent
+      statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+      statusBarBrightness: Brightness.light, // For iOS (light background)
+    ),
+  );
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
@@ -53,9 +72,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale = Locale(Intl.defaultLocale ?? MyConstants.arabic);
+  static const platform = MethodChannel("com.ttech.apex_attendance/mapsApiKey");
 
-  _MyAppState();
+  Locale _locale = Locale(Intl.defaultLocale ?? MyConstants.arabic);
 
   void _changeLanguage(Locale locale) {
     setState(() {
@@ -63,31 +82,46 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Future<void> sendApiKeyToNative() async {
+    String? apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'];
+    try {
+      await platform.invokeMethod('setApiKey', {"apiKey": apiKey});
+    } on PlatformException catch (e) {
+      print("Failed to send API Key: ${e.message}");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    sendApiKeyToNative();
+    // Enable system UI overlay (status and navigation bars)
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-
-        child: MaterialApp(
-          themeMode: ThemeMode.light,
-          navigatorKey: navigatorKey,
-          builder: DevicePreview.appBuilder,
-          theme: ThemeData(
-              fontFamily: MyConstants.libreCaslonText,
-              scaffoldBackgroundColor: ColorManger.backGroundGray),
-          darkTheme: ThemeData.dark(),
-          debugShowCheckedModeBanner: false,
-          locale: _locale,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          onGenerateRoute: generateRoute,
-          initialRoute: Routes.splashScreen,
-        ),
-    
+      child: MaterialApp(
+        themeMode: ThemeMode.light,
+        navigatorKey: navigatorKey,
+        builder: DevicePreview.appBuilder,
+        theme: ThemeData(
+            fontFamily: MyConstants.libreCaslonText,
+            scaffoldBackgroundColor: ColorManger.backGroundGray),
+        darkTheme: ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        locale: _locale,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        onGenerateRoute: generateRoute,
+        initialRoute: Routes.splashScreen,
+      ),
     );
   }
 
@@ -116,9 +150,9 @@ class _MyAppState extends State<MyApp> {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => getIt<AttendanceCubit>()),
-              BlocProvider(create: (context) => getIt<SendAttendanceCubit>())
+              BlocProvider(create: (context) => getIt<SendAttendanceCubit>()),
             ],
-            child: AttendanceScreen(
+            child: Attendance(
               changeLanguage: _changeLanguage,
             ),
           ),
@@ -169,13 +203,6 @@ class _MyAppState extends State<MyApp> {
                   BlocProvider(create: (context) => getIt<PermissionCubit>()),
                   ChangeNotifierProvider(create: (context) => CheckboxState()),
                 ], child: RequestScreen(changeLanguage: _changeLanguage)));
-
-      // case Routes.permissionScreen:
-      //   return MaterialPageRoute(
-      //       builder: (_) => MultiBlocProvider(providers: [
-      //             BlocProvider(create: (context) => getIt<PermissionCubit>()),
-      //             ChangeNotifierProvider(create: (context) => CheckboxState()),
-      //           ], child: PermissionScreen(changeLanguage: _changeLanguage)));
 
       default:
         return MaterialPageRoute(

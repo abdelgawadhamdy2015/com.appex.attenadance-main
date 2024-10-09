@@ -24,7 +24,7 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                departureModel.requestNumber!,
+                departureModel.id!.toString(),
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
@@ -40,7 +40,7 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                departureModel.from!,
+                departureModel.startdate!,
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
@@ -56,7 +56,7 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                departureModel.to!,
+                departureModel.enddate!,
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
@@ -68,12 +68,12 @@ class DeparturesListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "request date : ",
+                "Branch : ",
                 textAlign: TextAlign.center,
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                departureModel.requestgDate!,
+                departureModel.branch!.arabicName!,
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
@@ -89,7 +89,7 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                departureModel.status!,
+                departureModel.statusArabic!,
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),

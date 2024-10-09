@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:ttech_attendance/featchers/departures/data/models/departure_model.dart';
+import 'package:ttech_attendance/featchers/departures/data/models/departure_response.dart';
 import 'package:ttech_attendance/featchers/home/data/models/header_response.dart';
 import 'package:ttech_attendance/featchers/performance_panel/data/models/performance_employee_response.dart';
 import 'package:ttech_attendance/featchers/request/permission/data/models/permission_model.dart';
@@ -43,6 +45,7 @@ abstract class ApiService {
       );
 
   @POST(ApiConstants.sendAttendance)
+  @MultiPart()
   Future<AttendanceResponse> sendAttendanceRecord(
     @Query("x") double x,
     @Query("y") double y,
@@ -50,21 +53,28 @@ abstract class ApiService {
     @Query("isShift1Complete") bool? isShift1Complete,
     @Query("isShift2Complete") bool? isShift2Complete,
     @Query("isShift3Complete") bool? isShift3Complete,
-    @Query("isShift4Complete") bool? isShift4Complete,
-  );
+    @Query("isShift4Complete") bool? isShift4Complete, {
+    @Part(name: 'audio') File? audioFile,
+    @Part(name: 'image') File? imageFile,
+  });
 
   @POST(ApiConstants.addPermission)
   Future<AddVaccationResponse> addAttendancePermission(
     @Body() PermissionModel permissionModel,
   );
 
-  @GET("departure")
-  Future<AddVaccationResponse> getDeparture(
-      );
+  @GET(ApiConstants.getVaccations)
+  Future<DepartureResponse> getDepartures(
+    @Query("PageNumber") int pageNumber,
+    @Query("PageSize") int pageSize,
+    @Query("isMobile") bool isMobile,
+  );
 
-     @POST("departure")
-  Future<AddVaccationResponse> reactWithdeparture(
-    @Body() DepartureModel departureModel,
+  @GET(ApiConstants.getPermession)
+  Future<DepartureResponse> getPermission(
+    @Query("PageNumber") int pageNumber,
+    @Query("PageSize") int pageSize,
+    @Query("isMobile") bool isMobile,
   );
 
   // x

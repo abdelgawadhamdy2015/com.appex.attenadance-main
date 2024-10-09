@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:biometric_storage/biometric_storage.dart';
+import 'package:ttech_attendance/core/helpers/constants.dart';
 
 class SharedPrefHelper {
   // private constructor as I don't want to allow creating an instance of this class itself.
@@ -70,25 +71,41 @@ class SharedPrefHelper {
     return sharedPreferences.getString(key) ?? '';
   }
 
-  /// Saves a [value] with a [key] in the FlutterSecureStorage.
-  static setSecuredString(String key, String value) async {
-    const flutterSecureStorage = FlutterSecureStorage();
-    debugPrint(
-        "FlutterSecureStorage : setSecuredString with key : $key and value : $value");
-    await flutterSecureStorage.write(key: key, value: value);
-  }
+  // Saves a [value] with a [key] in the FlutterSecureStorage.
+  // static setSecuredString(String key, String value) async {
+  //   const flutterSecureStorage = FlutterSecureStorage();
+  //   debugPrint(
+  //       "FlutterSecureStorage : setSecuredString with key : $key and value : $value");
+  //   await flutterSecureStorage.write(key: key, value: value);
+  // }
 
-  /// Gets an String value from FlutterSecureStorage with given [key].
-  static getSecuredString(String key) async {
-    const flutterSecureStorage = FlutterSecureStorage();
-    debugPrint('FlutterSecureStorage : getSecuredString with key :');
-    return await flutterSecureStorage.read(key: key) ?? '';
-  }
+  // /// Gets an String value from FlutterSecureStorage with given [key].
+  // static getSecuredString(String key) async {
+  //   const flutterSecureStorage = FlutterSecureStorage();
+  //   debugPrint('FlutterSecureStorage : getSecuredString with key :');
+  //   return await flutterSecureStorage.read(key: key) ?? '';
+  // }
 
   /// Removes all keys and values in the FlutterSecureStorage
-  static clearAllSecuredData() async {
-    const flutterSecureStorage = FlutterSecureStorage();
-    await flutterSecureStorage.deleteAll();
-    debugPrint('FlutterSecureStorage : all data has been cleared');
-  }
+  // static clearAllSecuredData() async {
+  //   const flutterSecureStorage = FlutterSecureStorage();
+  //   await flutterSecureStorage.deleteAll();
+  //   debugPrint('FlutterSecureStorage : all data has been cleared');
+  // }
+
+
+  static Future<void> storeSecureToken(String token) async {
+  final storage = await BiometricStorage().getStorage(MyConstants.myToken);
+  await storage.write(token);
+}
+
+static Future<String?> retrieveSecureToken() async {
+  final storage = await BiometricStorage().getStorage(MyConstants.myToken);
+  return await storage.read();
+}
+
+static Future<void> cleareSecureToken() async {
+  final storage = await BiometricStorage().getStorage(MyConstants.myToken);
+   await storage.delete();
+}
 }

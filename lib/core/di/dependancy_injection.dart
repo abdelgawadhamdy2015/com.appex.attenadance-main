@@ -82,6 +82,7 @@ Future<void> setupGetIt() async {
     () => DepartureCubit(getIt()),
   );
 
+  
   // getIt.registerSingleton<SignalRService>(SignalRService());
   // getIt.registerFactory(() => AuthCubit(getIt<SignalRService>()));
 }

@@ -30,14 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // get token from shared preference and set it on variable token
-    getHeader(context);
+    getData(context);
+  
   }
 
   Future<void> _refreshData() async {
     // Simulate a network request or other asynchronous task
     await Future.delayed(const Duration(seconds: 2));
     setState(() {
-      getHeader(context);
+      getData(context);
     });
   }
 
@@ -55,7 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   // set attendance data on first size box
                   const HeaderBlockListener(),
-
                   BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
                     if (state is Loading) {
                       return const HomeShimmer();
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           verticalSpacing(SizeConfig.screenHeight! * .01),
                           const QuickAccess(),
                           verticalSpacing(SizeConfig.screenHeight! * .01),
-                           EventsApprovals(),
+                          const EventsApprovals(),
                         ],
                       ),
                     );
@@ -84,7 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 
-  getHeader(BuildContext context) {
+  getData(BuildContext context) {
     context.read<HomeCubit>().emitHomeState();
+    
   }
 }

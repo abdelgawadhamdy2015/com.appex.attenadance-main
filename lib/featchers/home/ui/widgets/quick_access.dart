@@ -3,7 +3,6 @@ import 'package:ttech_attendance/core/helpers/constants.dart';
 import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/routing/routes.dart';
-import 'package:ttech_attendance/core/theming/colors.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/generated/l10n.dart';
 
@@ -31,7 +30,7 @@ class QuickAccess extends StatelessWidget {
               crossAxisCount: 2,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
+              children: <Widget>[
                 _buildQuickAccessButton(
                     "assets/out_in.png",
                     S.of(context).transaction,
@@ -56,42 +55,46 @@ class QuickAccess extends StatelessWidget {
 
   Widget _buildQuickAccessButton(
       String icon, String label, BuildContext context, String id) {
-    return InkWell(
-      onTap: () {
-        switch (id) {
-          case MyConstants.myTransactions:
-            context.pushReplacementNamed(Routes.attendaceScreen);
-          case MyConstants.myRequests:
-            context.pushReplacementNamed(Routes.requestFormScreen);
-          case MyConstants.attendanceAndDepartureReports:
-            context.pushReplacementNamed(Routes.performancePanelScreen);
-          case MyConstants.credits:
-            context.pushReplacementNamed(Routes.departuresScreen);
-          // case MyConstants.salaries:
-          //context.pushReplacementNamed(Routes.permissionScreen);
-        }
-      },
+    return Card(
+      color: Colors.white,
       child: Container(
-        margin: EdgeInsets.symmetric(
-            vertical: SizeConfig.screenHeight! * .01,
-            horizontal: SizeConfig.screenWidth! * .01),
-        decoration: BoxDecoration(
-            color: ColorManger.lightGray,
-            borderRadius: BorderRadius.circular(40)),
-        //color: ColorManger.lightGray,
+        padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.screenWidth! * .005,
+            vertical: SizeConfig.screenHeight! * .005),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            FittedBox(
+            ElevatedButton(
+              onPressed: () {
+                switch (id) {
+                  case MyConstants.myTransactions:
+                    context.pushReplacementNamed(Routes.attendaceScreen);
+                  case MyConstants.myRequests:
+                    context.pushReplacementNamed(Routes.requestFormScreen);
+                  case MyConstants.attendanceAndDepartureReports:
+                    context.pushReplacementNamed(Routes.performancePanelScreen);
+                  case MyConstants.credits:
+                    context.pushReplacementNamed(Routes.departuresScreen);
+                  // case MyConstants.permission:
+                  //   context.pushReplacementNamed(Routes.permissionScreen);
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.screenWidth! * .01,
+                    vertical: SizeConfig.screenHeight! * .01),
+              ),
               child: Image.asset(
                 icon,
-                height: SizeConfig.screenHeight! * .05,
+                height: SizeConfig.screenHeight! * .04,
               ),
             ),
             FittedBox(
               fit: BoxFit.cover,
               child: Text(
                 label,
+                maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),

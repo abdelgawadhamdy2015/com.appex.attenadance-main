@@ -28,12 +28,11 @@ class DeparturesScreen extends StatefulWidget {
 class _DeparturesScreenState extends State<DeparturesScreen> {
   String departureType = MyConstants.permission;
   List<DepartureModel> departures = [];
-  List<DepartureModel> departuresByType = <DepartureModel>[];
+  //List<DepartureModel> departuresByType = <DepartureModel>[];
   @override
   void initState() {
     super.initState();
 
-    
     departures = context.read<DepartureCubit>().departures;
     getDeparture(1, context);
   }
@@ -99,9 +98,11 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
             Expanded(
               child: BlocBuilder<DepartureCubit, DepartureState>(
                 builder: (context, state) {
+                  departures = context.read<DepartureCubit>().departures;
+
                   return ListView.separated(
                     separatorBuilder: (context, index) => const Divider(),
-                    itemCount: departuresByType.length,
+                    itemCount: departures.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -110,7 +111,7 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                               builder: (context) {
                                 return AlertDialog(
                                   content: DeparturesListItem(
-                                    departureModel: departuresByType[index],
+                                    departureModel: departures[index],
                                   ),
                                   actions: [
                                     Row(
@@ -166,14 +167,14 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "request number : ${departuresByType[index].requestNumber}",
+                                  "request number : ${departures[index].id}",
                                   textAlign: TextAlign.center,
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                 ),
                                 const Spacer(),
                                 Text(
-                                  "Status : ${departuresByType[index].status} ",
+                                  "Status : ${departures[index].statusArabic} ",
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                   textScaler: MediaQuery.textScalerOf(context),
@@ -185,21 +186,25 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "date : from ${departuresByType[index].from} to ${departuresByType[index].to} ",
+                                  "date : from ${departures[index].shiftDetails!.shift1Start!} to ${departures[index].shiftDetails!.shift1End!} ",
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                 ),
                                 Row(
                                   children: [
                                     Text(
-                                      "Request Date:${departuresByType[index].requestgDate}",
+                                      "Branch : ${departures[index].branch!.arabicName!}",
                                       style: TextStyles.blackRegulerStyle(
                                           SizeConfig.fontSize3!),
                                     ),
                                     const Spacer(),
                                     Text(
                                       maxLines: 2,
-                                      getRequestType(departuresByType[index].type,context),
+                                      departures[index].vacation == null
+                                          ? departures[index].shift!.arabicName!
+                                          : departures[index]
+                                              .vacation!
+                                              .arabicName!,
                                       style: TextStyles.blackRegulerStyle(
                                           SizeConfig.fontSize3!),
                                     ),
@@ -222,9 +227,8 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
   }
 
   getDeparture(int type, BuildContext context) {
-    departuresByType =
-        departures.where((departure) => departure.type == type).toList();
+    departureType == MyConstants.permission
+        ? context.read<DepartureCubit>().emitPermissionState(1)
+        : context.read<DepartureCubit>().emitDepartureState(1);
   }
-
-  
 }
