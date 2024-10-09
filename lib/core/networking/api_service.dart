@@ -70,6 +70,13 @@ abstract class ApiService {
     @Query("isMobile") bool isMobile,
   );
 
+  @GET(ApiConstants.getPermession)
+  Future<DepartureResponse> getPermission(
+    @Query("PageNumber") int pageNumber,
+    @Query("PageSize") int pageSize,
+    @Query("isMobile") bool isMobile,
+  );
+
   // x
   // @POST(ApiConstants.signup)
   // Future<SignUpResponse> signUp(

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ttech_attendance/core/helpers/flutter_secure_service.dart';
+
 BiometricStorageService biometricStorageService = BiometricStorageService();
 
 class ApiConstants {
@@ -19,6 +20,8 @@ class ApiConstants {
       "api/HR/AttendancePermission/AddAttendancePermission";
   static const String getVaccations =
       "api/HR/VaccationEmployee/GetVaccationEmployee";
+  static const String getPermession =
+      "api/HR/AttendancePermission/GeteAttendancePermission";
   static DioExceptionType dioExceptionType = DioExceptionType.unknown;
   static bool shift1Checked = false;
 }

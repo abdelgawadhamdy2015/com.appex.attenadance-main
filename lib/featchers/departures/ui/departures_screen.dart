@@ -186,7 +186,7 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "date : from ${departures[index].startdate} to ${departures[index].enddate} ",
+                                  "date : from ${departures[index].shiftDetails!.shift1Start!} to ${departures[index].shiftDetails!.shift1End!} ",
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                 ),
@@ -200,7 +200,11 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                                     const Spacer(),
                                     Text(
                                       maxLines: 2,
-                                      departures[index].vacation!.arabicName!,
+                                      departures[index].vacation == null
+                                          ? departures[index].shift!.arabicName!
+                                          : departures[index]
+                                              .vacation!
+                                              .arabicName!,
                                       style: TextStyles.blackRegulerStyle(
                                           SizeConfig.fontSize3!),
                                     ),
@@ -223,6 +227,8 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
   }
 
   getDeparture(int type, BuildContext context) {
-    context.read<DepartureCubit>().emitDepartureState(1);
+    departureType == MyConstants.permission
+        ? context.read<DepartureCubit>().emitPermissionState(1)
+        : context.read<DepartureCubit>().emitDepartureState(1);
   }
 }

@@ -14,7 +14,21 @@ class DepartureCubit extends Cubit<DepartureState> {
 
   emitDepartureState(int pageNumber) async {
     emit(const DepartureState.departureLoading());
-    final response = await depatrureRepo.getPage(pageNumber);
+    final response = await depatrureRepo.getVaccation(pageNumber);
+
+    response.when(success: (headerResponse) async {
+      emit(DepartureState.departureSuccess(headerResponse));
+    }, failure: (error) async {
+      emit(DepartureState.departureError(
+          error: Intl.defaultLocale == MyConstants.english
+              ? error.apiErrorModel.errorMessageEn!
+              : error.apiErrorModel.errorMessageAr!));
+    });
+  }
+
+  emitPermissionState(int pageNumber) async {
+    emit(const DepartureState.departureLoading());
+    final response = await depatrureRepo.getPermission(pageNumber);
 
     response.when(success: (headerResponse) async {
       emit(DepartureState.departureSuccess(headerResponse));

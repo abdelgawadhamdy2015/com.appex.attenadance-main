@@ -13,7 +13,7 @@ import 'package:ttech_attendance/generated/l10n.dart';
 import '../../../../core/helpers/size_config.dart';
 
 class EventsApprovals extends StatefulWidget {
-  EventsApprovals({super.key});
+  const EventsApprovals({super.key});
 
   @override
   State<EventsApprovals> createState() => _EventsApprovalsState();

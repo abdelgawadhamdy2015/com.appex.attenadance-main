@@ -7,7 +7,7 @@ class DepatrureRepo {
   ApiService apiService;
   DepatrureRepo(this.apiService);
 
-  Future<ApiResult<DepartureResponse>> getPage(int pageNumber) async {
+  Future<ApiResult<DepartureResponse>> getVaccation(int pageNumber) async {
     try {
       final response = await apiService.getDepartures(pageNumber,10,true);
       return ApiResult.success(response);
@@ -16,4 +16,15 @@ class DepatrureRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
+
+Future<ApiResult<DepartureResponse>> getPermission(int pageNumber) async {
+    try {
+      final response = await apiService.getPermission(pageNumber,10,true);
+      return ApiResult.success(response);
+    } catch (error) {
+
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
 }
