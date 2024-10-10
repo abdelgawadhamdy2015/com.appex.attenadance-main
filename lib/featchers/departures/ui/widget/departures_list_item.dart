@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/text_styles.dart';
 import 'package:ttech_attendance/featchers/departures/data/models/departure_model.dart';
@@ -42,7 +43,11 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                DateFormat("dd/mm/yyyy").format(departureModel.startdate!),
+                departureModel.startdate != null
+                    ? DateFormat("dd/mm/yyyy").format(departureModel.startdate!)
+                    : getFormattedTimeOfDay1(
+                            departureModel.shiftDetails!.shift1Start!, context)
+                        .toString(),
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
@@ -58,7 +63,11 @@ class DeparturesListItem extends StatelessWidget {
                 style: TextStyles.blackBoldStyle(SizeConfig.fontSize3!),
               ),
               Text(
-                DateFormat("dd/mm/yyyy").format(departureModel.enddate!),
+                departureModel.startdate != null
+                    ? DateFormat("dd/mm/yyyy").format(departureModel.enddate!)
+                    : getFormattedTimeOfDay1(
+                            departureModel.shiftDetails!.shift1Start!, context)
+                        .toString(),
                 style: TextStyles.blackRegulerStyle(SizeConfig.fontSize3!),
                 textScaler: MediaQuery.textScalerOf(context),
               ),
