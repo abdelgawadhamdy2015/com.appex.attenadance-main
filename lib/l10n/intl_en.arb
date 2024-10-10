@@ -88,7 +88,10 @@
     "record":"Record",
     "stop":"Stop",
     "play":"Play",
-    "save": "Save"
+    "save": "Save",
+    "branch": "Branch",
+    "status":"Status",
+    "requestNumber":"Request Number"
 
 
 

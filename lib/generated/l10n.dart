@@ -939,6 +939,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Branch`
+  String get branch {
+    return Intl.message(
+      'Branch',
+      name: 'branch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status`
+  String get status {
+    return Intl.message(
+      'Status',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Number`
+  String get requestNumber {
+    return Intl.message(
+      'Request Number',
+      name: 'requestNumber',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

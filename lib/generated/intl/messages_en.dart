@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Attendance Time"),
         "badeResponse": MessageLookupByLibrary.simpleMessage(
             "bad response please login again"),
+        "branch": MessageLookupByLibrary.simpleMessage("Branch"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "comeFromReset":
@@ -116,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ٌRecord presence and leave"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
         "requestLeave": MessageLookupByLibrary.simpleMessage("Request Leave"),
+        "requestNumber": MessageLookupByLibrary.simpleMessage("Request Number"),
         "restMinutes": MessageLookupByLibrary.simpleMessage("Rest 60 minutes"),
         "salaries": MessageLookupByLibrary.simpleMessage("Salaries"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
@@ -129,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sickLeave": MessageLookupByLibrary.simpleMessage("Sick leave"),
         "signIn": MessageLookupByLibrary.simpleMessage("Check-in "),
         "signOut": MessageLookupByLibrary.simpleMessage("Check-out "),
+        "status": MessageLookupByLibrary.simpleMessage("Status"),
         "stop": MessageLookupByLibrary.simpleMessage("Stop"),
         "temporary": MessageLookupByLibrary.simpleMessage("Temporary"),
         "timesOfWork": MessageLookupByLibrary.simpleMessage("Times of work"),

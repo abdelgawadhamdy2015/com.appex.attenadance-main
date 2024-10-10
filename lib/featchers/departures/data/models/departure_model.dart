@@ -13,8 +13,8 @@ class DepartureModel {
   ShiftDetails? shiftDetails;
   int? duration;
   String? note;
-  String? startdate;
-  String? enddate;
+  DateTime? startdate;
+  DateTime? enddate;
   bool? canDelete;
   String? statusArabic;
   String? statusEnglish;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ttech_attendance/core/helpers/constants.dart';
-import 'package:ttech_attendance/core/helpers/extensions.dart';
 import 'package:ttech_attendance/core/helpers/helper_methods.dart';
 import 'package:ttech_attendance/core/helpers/size_config.dart';
 import 'package:ttech_attendance/core/theming/colors.dart';
@@ -28,7 +27,6 @@ class DeparturesScreen extends StatefulWidget {
 class _DeparturesScreenState extends State<DeparturesScreen> {
   String departureType = MyConstants.permission;
   List<DepartureModel> departures = [];
-  //List<DepartureModel> departuresByType = <DepartureModel>[];
   @override
   void initState() {
     super.initState();
@@ -113,49 +111,6 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                                   content: DeparturesListItem(
                                     departureModel: departures[index],
                                   ),
-                                  actions: [
-                                    Row(
-                                      mainAxisAlignment: Intl.defaultLocale ==
-                                              MyConstants.arabic
-                                          ? MainAxisAlignment.start
-                                          : MainAxisAlignment.end,
-                                      children: [
-                                        TextButton(
-                                          onPressed: () async {
-                                            context.pop();
-                                          },
-                                          child: Text(
-                                            textAlign: TextAlign.center,
-                                            "Accept",
-                                            style: TextStyles.blackBoldStyle(
-                                                SizeConfig.fontSize3!),
-                                          ),
-                                        ),
-                                        TextButton(
-                                          onPressed: () async {
-                                            context.pop();
-                                          },
-                                          child: Text(
-                                            textAlign: TextAlign.center,
-                                            "Refuse",
-                                            style: TextStyles.blackBoldStyle(
-                                                SizeConfig.fontSize3!),
-                                          ),
-                                        ),
-                                        TextButton(
-                                          onPressed: () async {
-                                            context.pop();
-                                          },
-                                          child: Text(
-                                            textAlign: TextAlign.center,
-                                            "cancel",
-                                            style: TextStyles.blackBoldStyle(
-                                                SizeConfig.fontSize3!),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
                                 );
                               });
                         },
@@ -167,14 +122,14 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "request number : ${departures[index].id}",
+                                  "${S.of(context).requestNumber} : ${departures[index].id}",
                                   textAlign: TextAlign.center,
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                 ),
                                 const Spacer(),
                                 Text(
-                                  "Status : ${departures[index].statusArabic} ",
+                                  "${S.of(context).status} : ${departures[index].statusArabic} ",
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                   textScaler: MediaQuery.textScalerOf(context),
@@ -186,14 +141,16 @@ class _DeparturesScreenState extends State<DeparturesScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "date : from ${departures[index].shiftDetails!.shift1Start!} to ${departures[index].shiftDetails!.shift1End!} ",
+                                  departures[index].startdate != null
+                                      ? "${S.of(context).from} ${DateFormat("dd/mm/yyyy").format(departures[index].startdate!)} ${S.of(context).to} ${DateFormat("dd/mm/yyyy").format(departures[index].enddate!)}"
+                                      : " ${S.of(context).from} ${getFormattedTimeOfDay1(departures[index].shiftDetails!.shift1Start!, context).toString()} ${S.of(context).to} ${getFormattedTimeOfDay1(departures[index].shiftDetails!.shift1Start!, context)}",
                                   style: TextStyles.blackRegulerStyle(
                                       SizeConfig.fontSize3!),
                                 ),
                                 Row(
                                   children: [
                                     Text(
-                                      "Branch : ${departures[index].branch!.arabicName!}",
+                                      "${S.of(context).branch} : ${departures[index].branch!.arabicName!}",
                                       style: TextStyles.blackRegulerStyle(
                                           SizeConfig.fontSize3!),
                                     ),

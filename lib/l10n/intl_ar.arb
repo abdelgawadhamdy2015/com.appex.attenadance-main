@@ -88,5 +88,9 @@
     "record": "تسجيل",
     "stop": "إيقاف",
     "play": "تشغيل",
-    "save": "حفظ"
+    "save": "حفظ",
+    "branch": "الفرع",
+     "status":"الحالة",
+    "requestNumber":"رقم الطلب"
+
 }
